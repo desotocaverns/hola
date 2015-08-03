@@ -13,14 +13,16 @@ $( document ).ready( function() {
   function stripeResponseHandler(status, response) {
     var $form = $('#payment-form');
     if (response.error) {
-      alert("error");
+      alert('error');
     } else {
-      var token = response.id;
-      alert(token);
-      // var url = "http://api.desotocaves.com/purchase/" + token;
-      // $.get(url, function(response) {
-      //
-      // });
+      var stripe_token = response.id;
+      // alert(stripe_token)
+      var url = document.URL + 'purchase';
+      $.post(url, {token: stripe_token})
+        .done(function (data) {
+          window.location.href = document.URL + 'success';
+        });
+      // alert('finished')
     }
   }
 });
