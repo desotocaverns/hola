@@ -18,7 +18,7 @@ $( document ).ready( function() {
       var stripe_token = response.id;
       // alert(stripe_token)
       var url = document.URL + 'purchase';
-      $.post(url, {token: stripe_token})
+      $.post(url, {token: stripe_token, type: 'General Admission'})
         .done(function (data) {
           window.location.href = document.URL + 'success';
         });

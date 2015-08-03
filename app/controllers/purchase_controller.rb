@@ -16,6 +16,8 @@ class PurchaseController < ApplicationController
         :description => "test card charge"
       )
 
+      redirect_to "/success"
+
     rescue Stripe::CardError => e
       body = e.json_body
       error  = body[:error]
@@ -40,7 +42,5 @@ class PurchaseController < ApplicationController
     rescue => e
       puts "Something is wrong with the code! Call in the programmers."
     end
-
-    redirect_to "/success"
   end
 end

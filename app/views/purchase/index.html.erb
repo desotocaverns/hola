@@ -1,11 +1,54 @@
 <% content_for :head do %>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script type="text/javascript" src="app/assets/javascripts/jquery.js"></script>
 <% end %>
 
 <h2>Tickets</h2>
 
 <form action="" method="POST" id="payment-form">
   <span class="payment-errors"></span>
+
+  <span><b>General Admission</b></span>
+
+  <div class="form-row">
+    <label>
+      <span>Quantity:</span>
+      <select id="quantity_select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>Sub-total:</span>
+      <span id="subtotal-value">$14.99</span>
+    </label>
+  </div>
+
+  <br>
+
+  <span><b>Personal information</b></span>
+
+  <div class="form-row">
+    <label>
+      <span>Name</span>
+      <input type="text" size="20" data-stripe="name"/>
+    </label>
+  </div>
+
+  <br>
+
+  <span><b>Card information</b></span>
 
   <div class="form-row">
     <label>
@@ -17,7 +60,7 @@
   <div class="form-row">
     <label>
       <span>CVC</span>
-      <input type="text" size="4" data-stripe="cvc"/>
+      <input type="text" size="3" data-stripe="cvc"/>
     </label>
   </div>
 
@@ -30,5 +73,15 @@
     <input type="text" size="4" data-stripe="exp-year"/>
   </div>
 
+  <br>
+
   <button type="submit">Submit Payment</button>
 </form>
+
+<script>
+  $('#quantity_select').change(function () {
+    var quantity = $( '#quantity_select' ).val();
+    var subtotal = 14.99 * quantity;
+    $( "#subtotal-value" ).text('$' + subtotal);
+  });
+</script>
