@@ -8,6 +8,7 @@ $( document ).ready( function() {
 
       var package_type = $('#package-form').find('#package-select').val();
       var number_of_tickets = $('#package-form').find('#quantity-select').val();
+      var tax = $('#package-form').find('#tax-value').text();
       var total = $('#package-form').find('#total-value').text();
       var customer_name = $('#personal-info-form').find('#customer-name').val();
 
@@ -19,7 +20,7 @@ $( document ).ready( function() {
           var stripe_token = response.id;
           var url = document.URL + 'purchase';
 
-          $.post(url, {token: stripe_token, package_type: package_type, ticket_quantity: number_of_tickets, charge_amount: total, customer_name: customer_name})
+          $.post(url, {token: stripe_token, package_type: package_type, ticket_quantity: number_of_tickets, charge_amount: total, tax_amount: tax, customer_name: customer_name})
             .done(function (data) {
               window.location.href = document.URL + 'success';
             });

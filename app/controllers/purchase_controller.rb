@@ -6,7 +6,32 @@ class PurchaseController < ApplicationController
 
   def charge
     Stripe.api_key = "sk_test_eLKTszC60IfG8ZhzhNJfnSek"
+
     token = params[:token]
+    customer_name = params[:customer_name]
+    tax_amount = params[:tax_amount]
+    charge_amount = params[:charge_amount]
+    package_type = params[:package_type]
+    ticket_quantity = params[:ticket_quantity]
+
+    if package_type == 'Adult Caverns Tour ($21.99)'
+      price_sans_tax = 21.99 * ticket_quantity.to_f
+      puts price_sans_tax
+      package_id = 1
+    elsif package_type == 'Child Caverns Tour ($17.99)'
+      price_sans_tax = 17.99 * ticket_quantity.to_f
+      puts price_sans_tax
+      package_id = 2
+    else
+      price_sans_tax = 4.99 * ticket_quantity.to_f
+      puts price_sans_tax
+      package_id = 3
+    end
+
+    precise_price = price_sans_tax * 1.04
+    expected_price_string = sprintf '%.2f', precise_price
+    expected_price = expected_price_string.to_f
+    puts expected_price
 
     begin
       charge = Stripe::Charge.create(
@@ -15,6 +40,15 @@ class PurchaseController < ApplicationController
         :source => token,
         :description => "test card charge"
       )
+
+      if expected_price == charge_amount.to_f
+        purchase = Purchase.create(name: customer_name, tax: tax_amount, total_price: charge_amount)
+        purchased_package = PurchasedPackage.create(purchase_id: purchase.id, quantity: ticket_quantity, package_id: package_id)
+      else
+        puts "Could not save to database; expected price and price calculated by form were different."
+        puts "Expected price was: #{expected_price}"
+        puts "Price calculated by form was: #{charge_amount}"
+      end
 
       redirect_to "/success"
 
