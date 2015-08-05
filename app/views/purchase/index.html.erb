@@ -4,80 +4,40 @@
 
 <h2>Tickets</h2>
 
-<form action="" method="POST" id="package-form">
-  <span><b>Ticket</b></span>
+<form action="purchase" method="POST" id="package_form">
+  <span class="payment-errors"></span>
 
-  <div class="package_type">
-    <label>
-      <span>Package:</span>
-      <select id="package-select">
-        <option>Adult Caverns Tour ($21.99)</option>
-        <option>Child Caverns Tour ($17.99)</option>
-        <option>Attraction Ticket ($4.99)</option>
-      </select>
-    </label>
-  </div>
-
-  <div class="form-row">
-    <label>
-      <span>Quantity:</span>
-      <select id="quantity-select">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-    </label>
-  </div>
+  <span><b>Tickets</b></span>
 
   <br>
 
-  <div class="form-row">
-    <label>
-      <span>Sub-total:</span>
-      <span>$</span><span id="subtotal-value">21.99</span>
-    </label>
-  </div>
+  <% for p in Package.for_sale %>
+    <div class="form-row">
+      <label>
+        <%= p.title %>
+        <input type="text" size="2" name="purchase[purchased_packages_attributes][][quantity]" class="quantity_select"/>
+        <input type="hidden" name="purchase[purchased_packages_attributes][][package_id]" value="<%= p.id %>"/>
+      </label>
+    </div>
+  <% end %>
 
-  <div class="form-row">
-    <label>
-      <span>Tax:</span>
-      <span>$</span><span id="tax-value">0.88</span>
-    </label>
-  </div>
+  <br>
 
-  <div class="form-row">
-    <label>
-      <span>Total:</span>
-      <span>$</span><span id="total-value">22.87</span>
-    </label>
-  </div>
-</form>
-
-<br>
-
-<form action="" method="POST" id="personal-info-form">
   <span><b>Personal information</b></span>
 
   <div class="form-row">
     <label>
       <span>Name</span>
-      <input type="text" size="20" data-stripe="name" id="customer-name"/>
+      <input type="text" size="20" name="purchase[name]"/>
     </label>
   </div>
+
+  <input type="hidden" name="purchase[stripe_token]" id="stripe_token"/>
 </form>
 
 <br>
 
-<form action="" method="POST" id="payment-form">
-  <span class="payment-errors"></span>
-
+<form action="" method="post" id="payment_form">
   <span><b>Card information</b></span>
 
   <div class="form-row">

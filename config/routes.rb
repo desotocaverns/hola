@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   post 'purchase' => 'purchase#charge'
   get 'success' => 'purchase#success'
 
+  # For playing with form generation and processing
+  get 'form' => 'purchase#form'
+  post 'form' => 'purchase#form'
+  
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
