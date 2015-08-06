@@ -2,7 +2,9 @@ class Purchase < ActiveRecord::Base
   has_many :purchased_packages
   accepts_nested_attributes_for :purchased_packages, allow_destroy: false
 
-  before_save :calculate_prices
+  before_validation :calculate_prices
+
+  validates :name, :tax, :total_price, presence: true
 
   private
 

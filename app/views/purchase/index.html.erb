@@ -4,8 +4,19 @@
 
 <h2>Tickets</h2>
 
-<form action="purchase" method="POST" id="package_form">
-  <span class="payment-errors"></span>
+<%= form_for @purchase, :url => {action: "create"}, :html => {:id => "package_form"} do |f| %>
+  <span id="errors"></span>
+
+  <% if @purchase.errors.any? %>
+    <div id="error_explanation">
+      <span><b><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</b></span>
+      <ul>
+      <% @purchase.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <span><b>Tickets</b></span>
 
@@ -26,14 +37,12 @@
   <span><b>Personal information</b></span>
 
   <div class="form-row">
-    <label>
-      <span>Name</span>
-      <input type="text" size="20" name="purchase[name]"/>
-    </label>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, name: "purchase[name]" %>
   </div>
 
   <input type="hidden" name="purchase[stripe_token]" id="stripe_token"/>
-</form>
+<% end %>
 
 <br>
 

@@ -4,13 +4,14 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'purchase#index'
-  post 'purchase' => 'purchase#charge'
+
+  resources :purchase, only: [:create, :new]
+
+  match '/purchase/new', :to => 'purchase#index', via: [:get]
+  match '/purchase/create', :to => 'purchase#charge', :as => :charge_purchase, via: [:post]
+
   get 'success' => 'purchase#success'
 
-  # For playing with form generation and processing
-  get 'form' => 'purchase#form'
-  post 'form' => 'purchase#form'
-  
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
