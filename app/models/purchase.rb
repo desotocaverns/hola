@@ -5,6 +5,8 @@ class Purchase < ActiveRecord::Base
   before_validation :calculate_prices
 
   validates :name, :tax, :total_price, presence: true
+  validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
+  validates :total_price, numericality: { greater_than_or_equal_to: 4.99 }
 
   private
 

@@ -9,10 +9,9 @@
 
   <% if @purchase.errors.any? %>
     <div id="error_explanation">
-      <span><b><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</b></span>
       <ul>
       <% @purchase.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li style="color:red"><%= msg %></li>
       <% end %>
       </ul>
     </div>
