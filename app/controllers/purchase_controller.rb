@@ -2,13 +2,7 @@ class PurchaseController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    if session[:purchase]
-      @purchase = Purchase.new(session[:purchase])
-      session[:purchase] = nil
-      @purchase.valid?
-    else
-      @purchase = Purchase.new
-    end
+    @purchase = Purchase.new
   end
 
   def create
@@ -17,13 +11,16 @@ class PurchaseController < ApplicationController
     begin
       @purchase = Purchase.new(purchase_params)
 
-      if (@purchase.valid? and @purchase.save)
+      if @purchase.valid?
         charge = Stripe::Charge.create(
           :amount => @purchase.total_price,
           :currency => "usd",
-          :source => @purchase.stripe_token,
+          :source => params[:purchase][:stripe_token],
           :description => "test card charge"
         )
+
+        @purchase.charge_id = charge.id
+        @purchase.save
 
         redirect_to "/success"
       else
@@ -58,6 +55,6 @@ class PurchaseController < ApplicationController
   private
 
   def purchase_params
-    params[:purchase].permit(:name, :stripe_token, purchased_packages_attributes: [ [ :quantity, :package_id ] ])
+    params[:purchase].permit(:name, purchased_packages_attributes: [ [ :quantity, :package_id ] ])
   end
 end
