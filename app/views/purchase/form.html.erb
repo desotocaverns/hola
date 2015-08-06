@@ -1,15 +1,15 @@
 <form action="purchase" method="post">
-  <input type="text" size="2" name="packages[][qty]" />
+  <input type="text" size="2" name="packages[][qty]">
   <select name="packages[][id]">
     <%= options_for_select(Package.for_sale.map {|e| [e.title, e.id]}) %>
   </select>
 
-  <input type="text" size="2" name="packages[][qty]" />
+  <input type="text" size="2" name="packages[][qty]">
   <select name="packages[][id]">
     <%= options_for_select(Package.for_sale.map {|e| [e.title, e.id]}) %>
   </select>
 
-  <input type="text" size="20" name="purchases[name]" />
+  <input type="text" size="20" name="purchases[name]">
 
-  <input type="submit" />
+  <button type="submit">
 </form>
