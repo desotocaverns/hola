@@ -1,9 +1,9 @@
 <% content_for :head do %>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
-  <script type="text/javascript">
-    DCPurchase.init(<%= @ticket_pricing.html_safe %>);
-  </script>
+  <!-- <script type="text/javascript">
+    DCPurchase.init(<%# @ticket_pricing.html_safe %>);
+  </script> -->
 <% end %>
 
 <h2>Tickets</h2>
@@ -41,8 +41,13 @@
   <span><b>Personal information</b></span>
 
   <div class="form-row">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name, name: "purchase[name]" %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :email %>
+    <%= f.text_field :email, name: "purchase[email]" %>
   </div>
 
   <input type="hidden" name="purchase[stripe_token]" id="stripe_token"/>

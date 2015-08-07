@@ -61,7 +61,7 @@ class PurchaseController < ApplicationController
   end
 
   def purchase_params
-    params[:purchase].permit(:name, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
+    params[:purchase].permit(:name, :email, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
       pp[:purchased_packages_attributes].reject! {|k,v| v[:quantity].blank? || v[:quantity].to_s == "0"}
     end
   end
