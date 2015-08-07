@@ -32,7 +32,7 @@ class PurchaseController < ApplicationController
 
         CustomerMailer.receipt_email(@purchase).deliver_now
 
-        redirect_to "/purchase/success/#{@purchase.redemption_id}/#{@purchase.name}" # purchase_index_path(:redemption_id => @purchase.redemption_id, :name => @purchase.name)
+        redirect_to "/purchase/success/#{@purchase.redemption_id}/#{@purchase.name.gsub(/\s+/, "")}" # purchase_index_path(:redemption_id => @purchase.redemption_id, :name => @purchase.name)
       else
         session[:purchase] = params[:purchase]
         render :index
