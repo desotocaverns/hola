@@ -1,10 +1,15 @@
 class PurchaseController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :assign_packages
+  before_action :assign_packages, except: [:success]
 
   def index
     @purchase = Purchase.new
     @ticket_pricing = @packages.to_json(except: [:created_at, :updated_at, :for_sale])
+  end
+
+  def success
+    qrcode = RQRCode::QRCode.new('http://www.google.com/')
+    @qr = qrcode.as_svg({module_size: 5})
   end
 
   def create
@@ -24,7 +29,7 @@ class PurchaseController < ApplicationController
         @purchase.charge_id = charge.id
         @purchase.save
 
-        redirect_to "/success"
+        redirect_to purchase_success_path(:id => @purchase.id, :name => @purchase.name)
       else
         session[:purchase] = params[:purchase]
         render :index
