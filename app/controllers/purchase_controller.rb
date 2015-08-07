@@ -27,9 +27,10 @@ class PurchaseController < ApplicationController
         )
 
         @purchase.charge_id = charge.id
+        @purchase.redemption_id = rand(10 ** 8)
         @purchase.save
 
-        redirect_to purchase_success_path(:id => @purchase.id, :name => @purchase.name)
+        redirect_to "/purchase/success/#{@purchase.redemption_id}/#{@purchase.name}" # purchase_index_path(:redemption_id => @purchase.redemption_id, :name => @purchase.name)
       else
         session[:purchase] = params[:purchase]
         render :index
