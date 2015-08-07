@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= @package.title %></h2>
+
+<% if @package.description != '' %>
+  <p><%= @package.description %></p>
+<% end %>
+
+<table>
+  <tbody>
+    <tr>
+      <th>Price</th>
+      <td><%= @package.price / 100.00 %></td>
+    </tr>
+    <tr>
+      <th>Cavern Tours</th>
+      <td><%= @package.cavern_tours %></td>
+    </tr>
+    <tr>
+      <th>Attractions</th>
+      <td><%= @package.attractions %></td>
+    </tr>
+    <tr>
+      <th>For Sale</th>
+      <td><%= @package.for_sale %></td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Edit', edit_package_path(@package) %> |
+<%= link_to 'Back', packages_path %>

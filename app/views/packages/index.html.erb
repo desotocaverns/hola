@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Packages</h1>
+
+<table>
+  <tbody>
+    <% @packages.each do |package| %>
+      <tr>
+        <th><%= package.title %></th>
+        <td>For sale: <%= package.for_sale %></td>
+        <td><%= link_to 'Show', package %></td>
+        <td><%= link_to 'Edit', edit_package_path(package) %></td>
+        <td><%= link_to 'Destroy', package, :method => 'delete', data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Package', new_package_path %>

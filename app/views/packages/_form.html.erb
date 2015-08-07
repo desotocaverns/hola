@@ -1,0 +1,48 @@
+<%= form_for(@package) do |f| %>
+  <% if @package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@package.errors.count, "error") %> prohibited this package from being saved:</h2>
+
+      <ul>
+      <% @package.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :cavern_tours %>
+    <%= f.text_field :cavern_tours, type: "number", size: 2, min: 0 %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :attractions %>
+    <%= f.text_field :attractions, type: "number", size: 2, min: 0 %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :for_sale %>
+    Yes: <%= f.radio_button :for_sale, "true" %>
+    No: <%= f.radio_button :for_sale, "false" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
