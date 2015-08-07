@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   match '/purchase/new', :to => 'purchase#index', via: [:get]
   match '/purchase/create', :to => 'purchase#charge', :as => :charge_purchase, via: [:post]
 
-  get '/purchase/success/:id/:name' => 'purchase#success'
+  get '/purchase/success/:redemption_id' => 'purchase#success'
 
   # Admin package routes
 

@@ -1,15 +1,11 @@
 class PurchaseController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :assign_packages, except: [:success]
+  before_action :assign_purchase, only: [:success]
 
   def index
     @purchase = Purchase.new
     @ticket_pricing = @packages.to_json(except: [:created_at, :updated_at, :for_sale])
-  end
-
-  def success
-    qrcode = RQRCode::QRCode.new('http://www.google.com/')
-    @qr = qrcode.as_svg({module_size: 5})
   end
 
   def create
@@ -27,12 +23,11 @@ class PurchaseController < ApplicationController
         )
 
         @purchase.charge_id = charge.id
-        @purchase.redemption_id = rand(10 ** 8)
         @purchase.save
 
         CustomerMailer.receipt_email(@purchase).deliver_now
 
-        redirect_to "/purchase/success/#{@purchase.redemption_id}/#{@purchase.name.gsub(/\s+/, "")}" # purchase_index_path(:redemption_id => @purchase.redemption_id, :name => @purchase.name)
+        redirect_to "/purchase/success/#{@purchase.redemption_id}" # purchase_index_path(:redemption_id => @purchase.redemption_id, :name => @purchase.name)
       else
         session[:purchase] = params[:purchase]
         render :index
@@ -41,7 +36,7 @@ class PurchaseController < ApplicationController
 
     rescue Stripe::CardError => e
       body = e.json_body
-      error  = body[:error]
+      error = body[:error]
       puts "Status is: #{e.http_status}"
       puts "Type is: #{error[:type]}"
       puts "Code is: #{error[:code]}"
@@ -66,6 +61,10 @@ class PurchaseController < ApplicationController
 
   def assign_packages
     @packages = Package.for_sale.all
+  end
+
+  def assign_purchase
+    @purchase = Purchase.find_by_redemption_id(params[:redemption_id])
   end
 
   def purchase_params

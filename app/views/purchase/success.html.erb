@@ -1,16 +1,16 @@
 <h2>Success!</h2>
 
-<p>Thanks for investing in adventure, <%= params[:name] %>.</p>
+<p>Thanks for investing in adventure, <%= @purchase.name %>.</p>
 
 <table>
   <tbody>
     <tr>
       <th>Purchase ID:</th>
-      <td><%= params[:id] %></td>
+      <td><%= @purchase.redemption_id %></td>
     </tr>
   </tbody>
 </table>
 
 <br>
 
-<%= @qr.html_safe %>
+<%= @purchase.redemption_qrcode.as_svg({module_size: 5}).html_safe %>
