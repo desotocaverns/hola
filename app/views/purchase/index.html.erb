@@ -21,14 +21,15 @@
 
   <br>
 
-  <% for p in Package.for_sale %>
-    <div class="form-row">
-      <label>
-        <%= p.title %>
-        <input type="number" size="2" name="purchase[purchased_packages_attributes][][quantity]" class="quantity_select" min='0'>
-        <input type="hidden" name="purchase[purchased_packages_attributes][][package_id]" value="<%= p.id %>">
-      </label>
-    </div>
+  <% for package in Package.for_sale %>
+    <% purchased_package = @purchase.purchased_packages.detect {|e| e.package_id == package.id } %>
+    <%= f.fields_for(:purchased_packages, purchased_package || @purchase.purchased_packages.build) do |package_fields| %>
+        <div class="form-row">
+          <%= package.title %>
+          <%= package_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 %>
+          <%= package_fields.hidden_field :package_id, value: package.id %>
+        </div>
+    <% end %>
   <% end %>
 
   <br>

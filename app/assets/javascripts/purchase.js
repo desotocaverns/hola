@@ -10,8 +10,10 @@ $( document ).ready( function() {
       Stripe.card.createToken($form, function(status, response) {
         if (response.error) {
           $('.payment_errors').remove();
-          $('<div class="payment_errors"><span class="error_text" style="color:red"></span></div>').insertAfter('#errors');
+          $('<div class="payment_errors"><ul><li class="error_text" style="color:red"></li></ul></div>').insertAfter('#errors');
+
           $('.error_text').text(response.error.message);
+
           $form.find('button').prop('disabled', false);
         } else {
           var stripe_token = response.id;
