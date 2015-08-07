@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" content="text/html">
+  </head>
+  <body>
+    <h2>Thanks for investing in adventure, <%= @purchase.name %>!</h2>
+
+    <p>When you visit us, just give the attendant your purchase ID.</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Purchase ID:</th>
+          <td><%= @purchase.redemption_id %></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

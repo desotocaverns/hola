@@ -30,6 +30,8 @@ class PurchaseController < ApplicationController
         @purchase.redemption_id = rand(10 ** 8)
         @purchase.save
 
+        CustomerMailer.receipt_email(@purchase).deliver_now
+
         redirect_to "/purchase/success/#{@purchase.redemption_id}/#{@purchase.name}" # purchase_index_path(:redemption_id => @purchase.redemption_id, :name => @purchase.name)
       else
         session[:purchase] = params[:purchase]
