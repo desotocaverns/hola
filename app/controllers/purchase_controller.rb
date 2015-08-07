@@ -1,8 +1,10 @@
 class PurchaseController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :assign_packages
 
   def index
     @purchase = Purchase.new
+    @ticket_pricing = @packages.to_json(except: [:created_at, :updated_at, :for_sale])
   end
 
   def create
@@ -53,6 +55,10 @@ class PurchaseController < ApplicationController
   end
 
   private
+
+  def assign_packages
+    @packages = Package.for_sale.all
+  end
 
   def purchase_params
     params[:purchase].permit(:name, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|

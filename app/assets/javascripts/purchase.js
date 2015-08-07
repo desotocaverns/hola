@@ -1,3 +1,9 @@
+DCPurchase = {
+  init: function(packages) {
+    console.log(packages);
+  }
+};
+
 $( document ).ready( function() {
   Stripe.setPublishableKey('pk_test_lgoJadzJlZSpLwrY1sJPinZK'); // This is a test key. Don't deploy it to production.
 
