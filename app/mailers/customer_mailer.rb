@@ -5,12 +5,15 @@ class CustomerMailer < ApplicationMailer
 
     qr_image_path = "#{Rails.root}/app/assets/images/#{@purchase.redemption_id}.png"
 
-    begin
-      @purchase.redemption_qrcode.as_png({:file => qr_image_path})
-      attachments["qr.png"] = File.read(qr_image_path)
-      mail(to: @purchase.email, subject: 'DeSoto Caverns receipt')
-    ensure
-      File.delete(qr_image_path) if File.exist?(qr_image_path)
-    end
+    io = StringIO.new
+    @purchase.redemption_qrcode.as_png.write(io)
+    io.rewind
+
+    attachments["qr.png"] = {
+      :mime_type => 'image/png',
+      :content => io.read
+    }
+
+    mail(to: @purchase.email, subject: 'DeSoto Caverns receipt')
   end
 end
