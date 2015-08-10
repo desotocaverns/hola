@@ -3,8 +3,6 @@ class CustomerMailer < ApplicationMailer
     # TODO: Where to store images on Heroku
     @purchase = purchase
 
-    qr_image_path = "#{Rails.root}/app/assets/images/#{@purchase.redemption_id}.png"
-
     io = StringIO.new
     @purchase.redemption_qrcode.as_png.write(io)
     io.rewind

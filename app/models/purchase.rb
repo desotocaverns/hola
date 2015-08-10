@@ -15,7 +15,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def redemption_url
-    "http://localhost:3000/redeem/#{redemption_id}"
+    "http://localhost:3000/purchase/#{redemption_id}"
   end
 
   private
