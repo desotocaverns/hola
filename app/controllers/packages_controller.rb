@@ -1,5 +1,6 @@
 class PackagesController < ApplicationController
   before_action :set_package, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /packages
   # GET /packages.json

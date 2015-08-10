@@ -2,6 +2,7 @@ class PurchaseController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :assign_packages, except: [:success]
   before_action :assign_purchase, only: [:success]
+  before_action :authenticate_admin!, only: [:show, :redeem]
 
   def index
     @purchase = Purchase.new

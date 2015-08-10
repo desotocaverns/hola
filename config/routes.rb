@@ -16,4 +16,8 @@ Rails.application.routes.draw do
 
   resources :packages
 
+  # Authentication
+
+  devise_for :admins
+
 end
