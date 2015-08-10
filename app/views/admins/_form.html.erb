@@ -1,0 +1,25 @@
+<%= form_for(@admin) do |f| %>
+  <% if @admin.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @admin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :password %>
+    <%= f.text_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
