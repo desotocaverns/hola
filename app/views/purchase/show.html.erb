@@ -1,0 +1,27 @@
+<table>
+  <tbody>
+    <tr>
+      <th>Name:</th>
+      <td><%= @purchase.name %></td>
+    </tr>
+    <tr>
+      <th>Total price:</th>
+      <td>$<%= @purchase.total_price.to_int / 100.00 %></td>
+    </tr>
+    <tr>
+      <th>Email:</th>
+      <td><%= @purchase.email %></td>
+    </tr>
+    <tr>
+      <th>Redeemed at:</th>
+      <td><%= @purchase.redeemed_at %></td>
+    </tr>
+  </tbody>
+</table>
+
+<% if @purchase.redeemed_at == nil %>
+  <br>
+  <form method="post" action="/purchase/<%= @purchase.redemption_id %>/redeem">
+    <input type="submit" value="Redeem">
+  </form>
+<% end %>

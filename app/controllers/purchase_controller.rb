@@ -8,6 +8,17 @@ class PurchaseController < ApplicationController
     @ticket_pricing = @packages.to_json(except: [:created_at, :updated_at, :for_sale])
   end
 
+  def show
+    @purchase = Purchase.find_by(redemption_id: params[:id])
+  end
+
+  def redeem
+    @purchase = Purchase.find_by(redemption_id: params[:id])
+    @purchase.update_attribute(:redeemed_at, Date.today)
+
+    redirect_to "/purchase/#{@purchase.redemption_id}"
+  end
+
   def create
     Stripe.api_key = "sk_test_eLKTszC60IfG8ZhzhNJfnSek"
 
