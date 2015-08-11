@@ -1,9 +1,5 @@
 <% content_for :head do %>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-  <!-- <script type="text/javascript">
-    DCPurchase.init(<%# @ticket_pricing.html_safe %>);
-  </script> -->
 <% end %>
 
 <h2>Tickets</h2>
@@ -50,7 +46,10 @@
     <%= f.text_field :email, name: "purchase[email]" %>
   </div>
 
-  <input type="hidden" name="purchase[stripe_token]" id="stripe_token"/>
+  <%= f.hidden_field :stripe_token, name: "purchase[stripe_token]", id: "stripe_token" %>
+  <%= f.hidden_field :masked_cc_number, name: "purchase[masked_cc_number]", id: "hidden_card_number" %>
+  <%= f.hidden_field :masked_cvc, name: "purchase[masked_cvc]", id: "hidden_cvc" %>
+  <%= f.hidden_field :cc_expiration_date, name: "purchase[cc_expiration_date]", id: "hidden_exp" %>
 <% end %>
 
 <br>
@@ -61,24 +60,24 @@
   <div class="form-row">
     <label>
       <span>Card Number</span>
-      <input type="text" size="20" data-stripe="number">
+      <input type="text" size="20" data-stripe="number" id="card_number">
     </label>
   </div>
 
   <div class="form-row">
     <label>
       <span>CVC</span>
-      <input type="text" size="3" data-stripe="cvc">
+      <input type="text" size="3" data-stripe="cvc" id="cvc">
     </label>
   </div>
 
   <div class="form-row">
     <label>
       <span>Expiration (MM/YYYY)</span>
-      <input type="text" size="2" data-stripe="exp-month">
+      <input type="text" size="2" data-stripe="exp-month" id="exp_month">
     </label>
     <span> / </span>
-    <input type="text" size="4" data-stripe="exp-year">
+    <input type="text" size="4" data-stripe="exp-year" id="exp_year">
   </div>
 
   <br>

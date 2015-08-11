@@ -30,7 +30,7 @@ class PurchaseController < ApplicationController
         charge = Stripe::Charge.create(
           :amount => @purchase.total_price,
           :currency => "usd",
-          :source => params[:purchase][:stripe_token],
+          :source => @purchase.stripe_token,
           :description => "test card charge"
         )
 
@@ -79,7 +79,7 @@ class PurchaseController < ApplicationController
   end
 
   def purchase_params
-    params[:purchase].permit(:name, :email, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
+    params[:purchase].permit(:name, :email, :stripe_token, :masked_cc_number, :masked_cvc, :cc_expiration_date, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
       pp[:purchased_packages_attributes].reject! {|k,v| v[:quantity].blank? || v[:quantity].to_s == "0"}
     end
   end

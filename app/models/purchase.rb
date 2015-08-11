@@ -12,7 +12,7 @@ class Purchase < ActiveRecord::Base
   validates :name, :tax, :total_price, :email, presence: true
   validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
   validates :total_price, numericality: { greater_than_or_equal_to: 4.99 }
-  validates :email, presence: true, :email => true # {:mx => true, :message => I18n.t('validations.errors.models.user.invalid_email')}
+  validates :email, presence: true, email: true
 
   def redemption_qrcode
     RQRCode::QRCode.new(redemption_url)
