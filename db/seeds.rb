@@ -32,3 +32,13 @@ Package.create(
   attractions: 1,
   for_sale: true
 )
+
+Admin.create!(
+  email: "brandon@desotocavernspark.com",
+  password: "brandonspw"
+)
+
+Admin.create!(
+  email: "isaac@thewilliams.ws",
+  password: "isaacspw"
+)
