@@ -39,12 +39,11 @@ class PurchaseController < ApplicationController
 
         CustomerMailer.receipt_email(@purchase).deliver_now
 
-        redirect_to "/purchase/success/#{@purchase.redemption_id}" # purchase_index_path(:redemption_id => @purchase.redemption_id, :name => @purchase.name)
+        redirect_to "/purchase/success/#{@purchase.redemption_id}"
       else
         session[:purchase] = params[:purchase]
         render :index
       end
-
 
     rescue Stripe::CardError => e
       body = e.json_body

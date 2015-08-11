@@ -1,10 +1,12 @@
+require 'securerandom'
+
 class Purchase < ActiveRecord::Base
   has_many :purchased_packages
   accepts_nested_attributes_for :purchased_packages, allow_destroy: false
 
   before_validation :calculate_prices
 
-  before_save :generate_redemption_id
+  before_create :generate_redemption_id
 
   validates :name, :tax, :total_price, :email, presence: true
   validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
@@ -27,6 +29,8 @@ class Purchase < ActiveRecord::Base
   end
 
   def generate_redemption_id
-    self.redemption_id = rand(10 ** 8) # TODO: seed based on time
+    expiration_date = Time.now + 1.years
+    expiration_date_string = expiration_date.strftime("%d%m%y")
+    self.redemption_id = expiration_date_string + SecureRandom.base64(10).gsub(/=+$/,'')
   end
 end
