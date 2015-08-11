@@ -4,7 +4,6 @@
       <% if admin.activated %>
         <tr>
           <th><%= admin.email %></th>
-          <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
           <td><%= link_to 'Deactivate', admin, :method => 'delete', data: { confirm: "Are you sure?" } %></td>
         </tr>
       <% end %>
@@ -14,4 +13,4 @@
 
 <br>
 
-<%= link_to 'New admin', new_admin_path %>
+<%= link_to 'New admin', new_admin_invitation_path %>

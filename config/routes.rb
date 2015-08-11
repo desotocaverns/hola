@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
   # Authentication
 
-  devise_for :admins
+  devise_for :admins, :controllers => {:invitations => "admins/invitations"}
 
-  resources :admins, only: [:index, :edit, :destroy, :new, :create]
+  resources :admins, only: [:index, :destroy]
 
 end
