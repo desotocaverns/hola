@@ -1,7 +1,9 @@
+<h2>Existing admins</h2>
+
 <table>
   <tbody>
     <% @admins.each do |admin| %>
-      <% if admin.activated %>
+      <% if admin.activated && admin.invitation_accepted_at != nil %>
         <tr>
           <th><%= admin.email %></th>
           <td><%= link_to 'Deactivate', admin, :method => 'delete', data: { confirm: "Are you sure?" } %></td>
@@ -10,6 +12,24 @@
     <% end %>
   </tbody>
 </table>
+
+<% if [Admin.find_by(invitation_accepted_at: nil)].any? %>
+  <br>
+  
+  <h2>Invited admins</h2>
+
+  <% @admins.each do |admin| %>
+    <% if admin.invitation_accepted_at == nil %>
+      <table>
+        <tbody>
+          <tr>
+            <th><%= admin.email %></th>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+<% end %>
 
 <br>
 

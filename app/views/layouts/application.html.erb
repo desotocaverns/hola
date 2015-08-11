@@ -9,7 +9,8 @@
 </head>
 <body>
 <% if admin_signed_in? %>
-  <%= link_to "Sign Out", destroy_admin_session_path, method: :delete %>
+  <%= link_to "Sign Out", destroy_admin_session_path, method: :delete %> |
+  <span>You are currently signed in as: <%= current_admin.email %></span>
 <% end %>
 
 <p class="notice"><%= notice %></p>
