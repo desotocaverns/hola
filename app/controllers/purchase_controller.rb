@@ -15,7 +15,7 @@ class PurchaseController < ApplicationController
 
   def redeem
     @purchase = Purchase.find_by(redemption_id: params[:id])
-    @purchase.update_attribute(:redeemed_at, Date.today)
+    @purchase.update_attribute(:redeemed_on, Date.today)
 
     redirect_to "/purchase/#{@purchase.redemption_id}"
   end

@@ -6,7 +6,7 @@ class Purchase < ActiveRecord::Base
 
   before_validation :calculate_prices
 
-  before_create :generate_redemption_id
+  before_create :generate_redemption_id, :calculate_expiration_date
 
   validates :name, :tax, :total_price, :email, presence: true
   validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
@@ -26,6 +26,11 @@ class Purchase < ActiveRecord::Base
     package_price = purchased_packages.inject(0) {|total, e| total + e.total_price}
     self.tax = package_price * 0.04
     self.total_price = package_price + self.tax
+  end
+
+  def calculate_expiration_date
+    expiration_date = Time.now + 1.years
+    self.expires_on = expiration_date
   end
 
   def generate_redemption_id

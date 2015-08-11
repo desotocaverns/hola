@@ -1,3 +1,9 @@
+<% if @purchase.expires_on <= Time.now %>
+  <span style="color:red; font-size:20px">Expired!</span>
+
+  <br><br>
+<% end %>
+
 <table>
   <tbody>
     <tr>
@@ -13,13 +19,19 @@
       <td><%= @purchase.email %></td>
     </tr>
     <tr>
-      <th>Redeemed at:</th>
-      <td><%= @purchase.redeemed_at %></td>
+      <th>Expires on:</th>
+      <td><%= @purchase.expires_on %></td>
     </tr>
+    <% if @purchase.redeemed_on != nil %>
+      <tr>
+        <th>Redeemed at:</th>
+        <td><%= @purchase.redeemed_on %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
-<% if @purchase.redeemed_at == nil %>
+<% if @purchase.redeemed_on == nil && @purchase.expires_on >= Time.now %>
   <br>
   <form method="post" action="/purchase/<%= @purchase.redemption_id %>/redeem">
     <input type="submit" value="Redeem">
