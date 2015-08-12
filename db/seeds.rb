@@ -35,10 +35,12 @@ Package.create(
 
 Admin.create!(
   email: "brandon@desotocavernspark.com",
-  password: "brandonspw"
+  password: "brandonspw",
+  activated: true
 )
 
 Admin.create!(
   email: "isaac@thewilliams.ws",
-  password: "isaacspw"
+  password: "isaacspw",
+  activated: true
 )

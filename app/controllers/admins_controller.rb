@@ -1,10 +1,6 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: [:edit, :active_for_authentication?]
+  before_action :assign_admin, only: [:edit, :active_for_authentication?]
   before_action :authenticate_admin!
-
-  def index
-    @admins = Admin.all
-  end
 
   def destroy
     @admin = Admin.find(params[:id])
@@ -13,13 +9,9 @@ class AdminsController < ApplicationController
     redirect_to admins_path
   end
 
-  def show_deactivated
-
-  end
-
   private
 
-    def set_admin
+    def assign_admin
       @admin = Admin.find(params[:id])
     end
 
