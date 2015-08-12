@@ -5,6 +5,10 @@ class PurchaseController < ApplicationController
   before_action :authenticate_admin!, only: [:show, :redeem]
 
   def index
+    @purchases = Purchase.all
+  end
+
+  def new
     @purchase = Purchase.new
     @ticket_pricing = @packages.to_json(except: [:created_at, :updated_at, :for_sale])
   end
@@ -42,7 +46,7 @@ class PurchaseController < ApplicationController
         redirect_to "/purchase/success/#{@purchase.redemption_id}"
       else
         session[:purchase] = params[:purchase]
-        render :index
+        render :new
       end
 
     rescue Stripe::CardError => e

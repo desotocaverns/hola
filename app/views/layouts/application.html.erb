@@ -9,12 +9,16 @@
 </head>
 <body>
 <% if admin_signed_in? %>
+  <span>You are currently signed in as: <%= current_admin.email %></span> |
   <%= link_to "Sign Out", destroy_admin_session_path, method: :delete %> |
-  <span>You are currently signed in as: <%= current_admin.email %></span>
+  <%= link_to "Purchase Ticket", root_path %> |
+  <%= link_to "Admins", admins_path %> |
+  <%= link_to "Packages", packages_path %> |
+  <%= link_to "Purchases", purchase_index_path %>
 <% end %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<p class="notice" style="color:green"><%= notice %></p>
+<p class="alert" style="color:#FFCC00"><%= alert %></p>
 
 <%= yield %>
 

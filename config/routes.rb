@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'purchase#index'
+  root 'purchase#new'
 
   # Purchase routes
 
-  resources :purchase, only: [:create, :new, :show]
-
-  match '/purchase/new', :to => 'purchase#index', via: [:get]
-  match '/purchase/create', :to => 'purchase#charge', :as => :charge_purchase, via: [:post]
+  resources :purchase, only: [:index, :create, :new, :show]
 
   get '/purchase/success/:redemption_id' => 'purchase#success'
   post '/purchase/:id/redeem' => 'purchase#redeem'
