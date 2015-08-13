@@ -17,7 +17,7 @@
       <th>Redeemed On</th>
       <th>Expires On</th>
     </tr>
-    <% @purchases.each do |purchase| %>
+    <% Purchase.complete.each do |purchase| %>
       <tr>
         <td><%= purchase.name %></td>
         <td>$<%= purchase.tax.to_i / 100.00 %></td>

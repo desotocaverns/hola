@@ -14,6 +14,8 @@ class Purchase < ActiveRecord::Base
   # validates :total_price, numericality: { greater_than_or_equal_to: 4.99 }
   # validates :email, presence: true, email: true
 
+  scope :complete, -> { where("charge_id IS NOT NULL") }
+
   def redemption_qrcode
     RQRCode::QRCode.new(redemption_url)
   end
