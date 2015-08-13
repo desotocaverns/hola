@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/purchases/:redemption_id/success' => 'purchases#success', as: 'success'
 
+  get '/purchases/failure' => 'purchases#failure', as: 'failure'
+
   post '/purchases/:redemption_id/redeem' => 'purchases#redeem', as: 'redeem'
 
   # Admin package routes

@@ -23,6 +23,8 @@
     <%= f.text_field :email %>
   </div>
 
+
+  <input type="hidden" name="purchase[calculated_price]" id="calculated_price" value="<%= params[:purchase][:calculated_price] %>">
   <%= f.hidden_field :redemption_id %>
 
   <%= f.submit "Submit" %>

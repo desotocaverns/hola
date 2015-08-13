@@ -55,21 +55,25 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.find_by(redemption_id: params[:purchase][:redemption_id])
 
     begin
-      puts @purchase.total_price
-      puts params[:purchase][:stripe_token]
+      puts "Total price on record is: #{@purchase.total_price}"
+      puts "Total price calculated by JS is: #{(params[:purchase][:calculated_price].to_i * 1.04).round}"
 
-      charge = Stripe::Charge.create(
-        :amount => @purchase.total_price,
-        :currency => "usd",
-        :source => params[:purchase][:stripe_token],
-        :description => "test card charge"
-      )
+      if @purchase.total_price == (params[:purchase][:calculated_price].to_i * 1.04).to_i
+        charge = Stripe::Charge.create(
+          :amount => @purchase.total_price,
+          :currency => "usd",
+          :source => params[:purchase][:stripe_token],
+          :description => "test card charge"
+        )
 
-      @purchase.update_attribute(:charge_id, charge.id)
+        @purchase.update_attribute(:charge_id, charge.id)
 
-      CustomerMailer.receipt_email(@purchase).deliver_now
+        CustomerMailer.receipt_email(@purchase).deliver_now
 
-      redirect_to success_path(redemption_id: @purchase.redemption_id)
+        redirect_to success_path(redemption_id: @purchase.redemption_id)
+      else
+        redirect_to failure_path
+      end
 
     rescue Stripe::CardError => e
       body = e.json_body
@@ -115,6 +119,6 @@ class PurchasesController < ApplicationController
   end
 
   def charge_params
-    params[:purchase].permit(:stripe_token, :redemption_id)
+    params[:purchase].permit(:stripe_token, :redemption_id, :calculated_price)
   end
 end

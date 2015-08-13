@@ -15,7 +15,7 @@ $( document ).ready( function() {
   handler.open({
     name: 'DeSoto Caverns',
     description: '1 Ticket',
-    amount: 2399,
+    amount: <%= params[:purchase][:calculated_price].to_i %>,
     allowRememberMe: false
   });
   e.preventDefault();

@@ -26,7 +26,7 @@
         <td><%= purchase.redemption_id %></td>
         <td><%= purchase.redeemed_on %></td>
         <td><%= purchase.expires_on %></td>
-        <td><%= link_to "Show", "purchase/#{purchase.redemption_id}" %>
+        <td><%= link_to "Show", purchase_path(id: purchase.redemption_id) %>
     <% end %>
   </tbody>
 </table>

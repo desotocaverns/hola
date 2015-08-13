@@ -33,6 +33,25 @@
       <% end %>
     <% end %>
 
+    <input type="hidden" name="purchase[calculated_price]" id="calculated_price" value="">
+
     <%= f.submit "Submit" %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $( document ).ready( function() {
+    $("#package_form").submit(function(event) {
+      var quantities = $('.quantity_select');
+      var penny_price = 0;
+      var acc = 0;
+
+      <% @packages.each do |p| %>
+        penny_price += (quantities[acc].value * <%= p.price %>);
+        acc += 1;
+      <% end %>
+
+      $('#calculated_price').val(penny_price);
+    });
+  });
+</script>
