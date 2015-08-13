@@ -1,0 +1,38 @@
+<% content_for :head do %>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+<% end %>
+
+<h2>Tickets</h2>
+
+<div id="form">
+  <%= form_for @purchase, :remote => true, :html => {:id => "package_form"} do |f| %>
+    <span id="errors"></span>
+
+    <% if @purchase.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+        <% @purchase.errors.full_messages.each do |msg| %>
+          <li style="color:red"><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <span><b>Tickets</b></span>
+
+    <br>
+
+    <% @packages.each do |package| %>
+      <% purchased_package = @purchase.purchased_packages.detect {|e| e.package_id == package.id } %>
+      <%= f.fields_for(:purchased_packages, purchased_package || @purchase.purchased_packages.build) do |package_fields| %>
+          <div class="form-row">
+            <%= package.title %>
+            <%= package_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 %>
+            <%= package_fields.hidden_field :package_id, value: package.id %>
+          </div>
+      <% end %>
+    <% end %>
+
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>

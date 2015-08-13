@@ -1,0 +1,26 @@
+$('#form').html("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
+
+$( document ).ready( function() {
+  $('h2').hide()
+
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_lgoJadzJlZSpLwrY1sJPinZK',
+    token: function(token) {
+      payment_form = $('#payment_form');
+      payment_form.find('#stripe_token').val(token.id);
+      payment_form.submit()
+    }
+  });
+
+  handler.open({
+    name: 'DeSoto Caverns',
+    description: '1 Ticket',
+    amount: 2399,
+    allowRememberMe: false
+  });
+  e.preventDefault();
+
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+});

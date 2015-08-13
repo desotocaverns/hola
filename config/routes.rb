@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
 
-  root 'purchase#new'
+  root 'purchases#new'
 
   # Purchase routes
 
-  resources :purchase, only: [:index, :create, :new, :show]
+  resources :purchases, only: [:index, :create, :new, :show]
 
-  get '/purchase/success/:redemption_id' => 'purchase#success'
-  post '/purchase/:id/redeem' => 'purchase#redeem'
+  patch '/purchases/update_personal_info' => 'purchases#update_personal_info'
+  patch '/purchases/charge' => 'purchases#charge'
+
+  get '/purchases/:redemption_id/success' => 'purchases#success', as: 'success'
+
+  post '/purchases/:redemption_id/redeem' => 'purchases#redeem', as: 'redeem'
 
   # Admin package routes
 
