@@ -30,13 +30,10 @@ class PurchasesController < ApplicationController
           format.html { redirect_to personal_info_path(redemption_id: @purchase.redemption_id) }
           format.js { render }
           format.json { render action: "personal_info", status: :success, redemption_id: @purchase.redemption_id }
-        else
-          format.html { render action: "new" }
-          format.json { render json: @purchase.errors, status: :unprocessable_entity }
         end
       end
     else
-      @purchase = Purchase.order("created_at").last
+      @purchase = Purchase.order("created_at").last  # not ideal for lots of customers
       @purchase.purchased_packages.destroy_all
       @purchase.update_attributes(quantity_params)
     end

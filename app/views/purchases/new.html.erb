@@ -9,16 +9,6 @@
     <%= form_for @purchase, :remote => true, :html => {:id => "package_form"} do |f| %>
       <span id="errors"></span>
 
-      <% if @purchase.errors.any? %>
-        <div id="error_explanation">
-          <ul>
-          <% @purchase.errors.full_messages.each do |msg| %>
-            <li style="color:red"><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-
       <% @packages.each do |package| %>
         <% purchased_package = @purchase.purchased_packages.detect {|e| e.package_id == package.id } %>
         <%= f.fields_for(:purchased_packages, purchased_package || @purchase.purchased_packages.build) do |package_fields| %>
