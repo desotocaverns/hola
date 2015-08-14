@@ -1,5 +1,4 @@
 <%= form_for @purchase, :url => {action: "charge"}, :method => "patch", :html => {:id => "payment_form"} do |f| %>
   <input type="hidden" name="purchase[stripe_token]" id="stripe_token"/>
-  <input type="hidden" name="purchase[calculated_price]" value="<%= params[:purchase][:calculated_price] %>">
   <%= f.hidden_field :redemption_id %>
 <% end %>

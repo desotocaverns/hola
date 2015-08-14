@@ -1,8 +1,6 @@
-$('#form').html("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
+$('#outer').append("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
 
 $( document ).ready( function() {
-  $('h2').hide()
-
   var handler = StripeCheckout.configure({
     key: 'pk_test_lgoJadzJlZSpLwrY1sJPinZK',
     token: function(token) {
@@ -15,7 +13,7 @@ $( document ).ready( function() {
   handler.open({
     name: 'DeSoto Caverns',
     description: '1 Ticket',
-    amount: <%= params[:purchase][:calculated_price].to_i %>,
+    amount: <%= @purchase.js_calculated_price.to_int * 1.04 %>,
     allowRememberMe: false
   });
   e.preventDefault();

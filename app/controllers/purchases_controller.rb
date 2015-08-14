@@ -24,15 +24,21 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      if @purchase = Purchase.create(quantity_params)
-        format.html { redirect_to personal_info_path(redemption_id: @purchase.redemption_id) }
-        format.js { render }
-        format.json { render action: "personal_info", status: :success, redemption_id: @purchase.redemption_id }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
+    if params[:resubmits] == "01"
+      respond_to do |format|
+        if @purchase = Purchase.create(quantity_params)
+          format.html { redirect_to personal_info_path(redemption_id: @purchase.redemption_id) }
+          format.js { render }
+          format.json { render action: "personal_info", status: :success, redemption_id: @purchase.redemption_id }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @purchase.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      @purchase = Purchase.order("created_at").last
+      @purchase.purchased_packages.destroy_all
+      @purchase.update_attributes(quantity_params)
     end
   end
 
@@ -56,9 +62,9 @@ class PurchasesController < ApplicationController
 
     begin
       puts "Total price on record is: #{@purchase.total_price}"
-      puts "Total price calculated by JS is: #{(params[:purchase][:calculated_price].to_i * 1.04).round}"
+      puts "Total price calculated by JS is: #{(@purchase.js_calculated_price.to_i * 1.04).round}"
 
-      if @purchase.total_price == (params[:purchase][:calculated_price].to_i * 1.04).to_i
+      if @purchase.total_price == (@purchase.js_calculated_price.to_i * 1.04).to_i
         charge = Stripe::Charge.create(
           :amount => @purchase.total_price,
           :currency => "usd",
@@ -109,7 +115,7 @@ class PurchasesController < ApplicationController
   end
 
   def quantity_params
-    params[:purchase].permit(:name, :email, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
+    params[:purchase].permit(:name, :email, :js_calculated_price, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
       pp[:purchased_packages_attributes].reject! {|k,v| v[:quantity].blank? || v[:quantity].to_s == "0"}
     end
   end
@@ -119,6 +125,6 @@ class PurchasesController < ApplicationController
   end
 
   def charge_params
-    params[:purchase].permit(:stripe_token, :redemption_id, :calculated_price)
+    params[:purchase].permit(:stripe_token, :redemption_id, :js_calculated_price)
   end
 end

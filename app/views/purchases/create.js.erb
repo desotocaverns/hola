@@ -1,1 +1,9 @@
-$('#form').html("<%= escape_javascript render(partial: 'personal_info', status: :success) %>");
+if ($('#accordion #personal_info_form').length == 0) {
+  $('#accordion').append("<%= escape_javascript render(partial: 'personal_info', status: :success) %>");
+}
+
+$( document ).ready( function() {
+  $("#accordion").accordion({
+    active: 1
+  });
+});
