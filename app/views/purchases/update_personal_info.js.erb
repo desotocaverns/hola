@@ -13,6 +13,7 @@ $( document ).ready( function() {
   handler.open({
     name: 'DeSoto Caverns',
     description: '1 Ticket',
+    email: "<%= @purchase.email %>",
     amount: <%= @purchase.js_calculated_price.to_int * 1.04 %>,
     allowRememberMe: false
   });
