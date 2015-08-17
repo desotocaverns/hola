@@ -1,5 +1,4 @@
 require 'securerandom'
-# require 'mail'
 
 class Purchase < ActiveRecord::Base
   has_many :purchased_packages

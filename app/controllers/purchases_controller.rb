@@ -24,7 +24,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    puts "create"
     respond_to do |format|
       if @purchase = Purchase.create(quantity_params)
         format.html { redirect_to personal_info_path(redemption_id: @purchase.redemption_id) }
@@ -35,7 +34,6 @@ class PurchasesController < ApplicationController
   end
 
   def update_quantities
-    puts "update_quantities"
     @purchase = Purchase.find_by(redemption_id: params[:purchase][:redemption_id])
     @purchase.purchased_packages.destroy_all # TODO be a bit more selective, not destroying all, but only those that become 0 quantity
     respond_to do |format|
@@ -49,7 +47,6 @@ class PurchasesController < ApplicationController
   end
 
   def update_personal_info
-    puts "update_personal_info"
     @purchase = Purchase.find_by(redemption_id: params[:purchase][:redemption_id])
 
     respond_to do |format|

@@ -26,7 +26,6 @@
     });
   });
 <% else %>
-  alert("personal_info_errors");
   $('#personal_info_errors').html("<%= escape_javascript render(partial: 'errors') %>");
   $('#accordion').accordion("refresh");
 <% end %>

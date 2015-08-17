@@ -1,7 +1,5 @@
 <h2>Tickets</h2>
 
-<!-- TODO move the form into a partial, render it here, then you can also re-render it respond_to :js, and let the
-     browser receive the HTML and update the form -->
 <%= form_for @purchase, :remote => true, :url => collect_quantity_path, :method => collect_quantity_method, :html => {:id => "package_form"} do |f| %>
   <span id="package_quantity_errors"></span>
 
