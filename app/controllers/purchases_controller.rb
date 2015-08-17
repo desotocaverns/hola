@@ -24,22 +24,32 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    if params[:resubmits] == "01"
-      respond_to do |format|
-        if @purchase = Purchase.create(quantity_params)
-          format.html { redirect_to personal_info_path(redemption_id: @purchase.redemption_id) }
-          format.js { render }
-          format.json { render action: "personal_info", status: :success, redemption_id: @purchase.redemption_id }
-        end
+    puts "create"
+    respond_to do |format|
+      if @purchase = Purchase.create(quantity_params)
+        format.html { redirect_to personal_info_path(redemption_id: @purchase.redemption_id) }
+        format.js { render }
+        format.json { render action: "personal_info", status: :success, redemption_id: @purchase.redemption_id }
       end
-    else
-      @purchase = Purchase.order("created_at").last  # not ideal for lots of customers
-      @purchase.purchased_packages.destroy_all
-      @purchase.update_attributes(quantity_params)
     end
   end
 
+  def update_quantities
+    puts "update_quantities"
+    @purchase = Purchase.find_by(redemption_id: params[:purchase][:redemption_id])
+    @purchase.purchased_packages.destroy_all # TODO be a bit more selective, not destroying all, but only those that become 0 quantity
+    respond_to do |format|
+      if @purchase.update_attributes(quantity_params)
+        format.html { redirect_to personal_info_path(redemption_id: @purchase.redemption_id) }
+        format.js { render }
+        format.js { render action: "create" }
+      end
+    end
+
+  end
+
   def update_personal_info
+    puts "update_personal_info"
     @purchase = Purchase.find_by(redemption_id: params[:purchase][:redemption_id])
 
     respond_to do |format|
@@ -49,6 +59,7 @@ class PurchasesController < ApplicationController
         format.json { render action: "collect_card", status: :success, redemption_id: @purchase.redemption_id }
       else
         format.html { render action: "personal_info" }
+        format.js { render }
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
     end
@@ -112,7 +123,7 @@ class PurchasesController < ApplicationController
   end
 
   def quantity_params
-    params[:purchase].permit(:name, :email, :js_calculated_price, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
+    params[:purchase].permit(:name, :email, :js_calculated_price, :collecting_quantity, purchased_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
       pp[:purchased_packages_attributes].reject! {|k,v| v[:quantity].blank? || v[:quantity].to_s == "0"}
     end
   end

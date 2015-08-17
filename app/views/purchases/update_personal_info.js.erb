@@ -1,25 +1,32 @@
-$('#outer').append("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
+<% if @purchase.errors.empty? %>
+  $('#personal_info_form').html("<%= escape_javascript render(partial: 'personal_info') %>");
+  $('#outer').append("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
 
-$( document ).ready( function() {
-  var handler = StripeCheckout.configure({
-    key: 'pk_test_lgoJadzJlZSpLwrY1sJPinZK',
-    token: function(token) {
-      payment_form = $('#payment_form');
-      payment_form.find('#stripe_token').val(token.id);
-      payment_form.submit()
-    }
-  });
+  $( document ).ready( function() {
+    var handler = StripeCheckout.configure({
+      key: 'pk_test_lgoJadzJlZSpLwrY1sJPinZK',
+      token: function(token) {
+        payment_form = $('#payment_form');
+        payment_form.find('#stripe_token').val(token.id);
+        payment_form.submit()
+      }
+    });
 
-  handler.open({
-    name: 'DeSoto Caverns',
-    description: '1 Ticket',
-    email: "<%= @purchase.email %>",
-    amount: <%= @purchase.js_calculated_price.to_int * 1.04 %>,
-    allowRememberMe: false
-  });
-  e.preventDefault();
+    handler.open({
+      name: 'DeSoto Caverns',
+      description: '1 Ticket',
+      email: "<%= @purchase.email %>",
+      amount: <%= @purchase.js_calculated_price.to_int * 1.04 %>,
+      allowRememberMe: false
+    });
+    e.preventDefault();
 
-  $(window).on('popstate', function() {
-    handler.close();
+    $(window).on('popstate', function() {
+      handler.close();
+    });
   });
-});
+<% else %>
+  alert("personal_info_errors");
+  $('#personal_info_errors').html("<%= escape_javascript render(partial: 'errors') %>");
+  $('#accordion').accordion("refresh");
+<% end %>

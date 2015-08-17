@@ -9,12 +9,17 @@ class Purchase < ActiveRecord::Base
 
   before_create :generate_redemption_id, :calculate_expiration_date
 
-  # validates :name, :tax, :total_price, :email, presence: true
   validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
   validates :total_price, numericality: { greater_than_or_equal_to: 4.99 }
-  # validates :email, presence: true, email: true
+
+  validates :name, :tax, :total_price, :email, presence: true,
+            unless: :collecting_quantity
+  validates :email, presence: true, email: true,
+            unless: :collecting_quantity
 
   scope :complete, -> { where("charge_id IS NOT NULL") }
+
+  attr_accessor :collecting_quantity
 
   def redemption_qrcode
     RQRCode::QRCode.new(redemption_url)

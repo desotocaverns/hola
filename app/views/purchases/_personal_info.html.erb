@@ -1,6 +1,6 @@
 <h2>Personal Information</h2>
-<%= form_for @purchase, :remote => true, :url => '/purchases/update_personal_info', :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
-  <span id="errors"></span>
+<%= form_for @purchase, :remote => true, :url => purchases_update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
+  <span id="personal_info_errors"></span>
 
   <% if @purchase.errors.any? %>
     <div id="error_explanation">
@@ -23,6 +23,7 @@
   </div>
 
   <%= f.hidden_field :redemption_id %>
+  <%= f.hidden_field :collecting_quantity, value: false %>
 
   <br>
 

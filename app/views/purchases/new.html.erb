@@ -4,40 +4,16 @@
 
 <div id="outer">
   <div id="accordion">
-    <h2>Tickets</h2>
-
-    <%= form_for @purchase, :remote => true, :html => {:id => "package_form"} do |f| %>
-      <span id="errors"></span>
-
-      <% @packages.each do |package| %>
-        <% purchased_package = @purchase.purchased_packages.detect {|e| e.package_id == package.id } %>
-        <%= f.fields_for(:purchased_packages, purchased_package || @purchase.purchased_packages.build) do |package_fields| %>
-            <div class="form-row">
-              <%= package.title %>
-              <%= package_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 %>
-              <%= package_fields.hidden_field :package_id, value: package.id %>
-            </div>
-        <% end %>
-      <% end %>
-
-      <%= f.hidden_field :js_calculated_price, id: "js_calculated_price" %>
-      <input type="hidden" name="resubmits" id="resubmits" value="0">
-
-      <br>
-
-      <%= f.submit "Continue" %>
-    <% end %>
+    <%= render partial: "package_quantities" %>
   </div>
 </div>
 
 <script type="text/javascript">
-  $( document ).ready( function() {
+  $(document).ready(function() {
     $("#package_form").submit(function(event) {
       var quantities = $('.quantity_select');
       var penny_price = 0;
       var acc = 0;
-      var resubmits = $('#resubmits').val()
-      $('#resubmits').val(resubmits += 1)
 
       <% @packages.each do |p| %>
         penny_price += (quantities[acc].value * <%= p.price %>);

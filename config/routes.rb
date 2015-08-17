@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   # Purchase routes
 
-  resources :purchases, only: [:index, :create, :new, :show]
+  resources :purchases, only: [:index, :new, :create, :show]
 
+  patch '/purchases/update_quantities' => 'purchases#update_quantities', 'as' => 'update_purchase_quantities'
   patch '/purchases/update_personal_info' => 'purchases#update_personal_info'
   patch '/purchases/charge' => 'purchases#charge'
 
