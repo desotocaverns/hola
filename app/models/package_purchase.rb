@@ -1,0 +1,3 @@
+class PackagePurchase < Purchase
+
+end

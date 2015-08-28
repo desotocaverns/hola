@@ -1,0 +1,3 @@
+class TicketPurchase < Purchase
+
+end
