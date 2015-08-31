@@ -7,10 +7,11 @@ class Package < ActiveRecord::Base
   # Associates Tickets to this Package.
   has_many :package_tickets,
     dependent: :destroy
+  accepts_nested_attributes_for :package_tickets
 
   # Answers Tickets associated to this Package. Note that this reflects the current
-  # Ticket information! Use the #revision to obtain Ticket information at current
-  # revision of this Package.
+  # Ticket information and does not include quantity! Use the #revision to obtain
+  # Ticket information at current revision of this Package.
   has_many :tickets,
     through: :package_tickets
 
@@ -49,6 +50,6 @@ class Package < ActiveRecord::Base
   end
 
   def must_have_tickets
-    errors.add(:base, "Packages must have tickets assigned.") unless tickets.size > 0
+    errors.add(:base, "Packages must have tickets assigned.") unless package_tickets.size > 0
   end
 end

@@ -16,16 +16,19 @@ class PackagesController < ApplicationController
   # GET /packages/new
   def new
     @package = Package.new
+    @tickets = Ticket.all
   end
 
   # GET /packages/1/edit
   def edit
+    @tickets = Ticket.all
   end
 
   # POST /packages
   # POST /packages.json
   def create
     @package = Package.new(package_params)
+    @tickets = Ticket.all
 
     respond_to do |format|
       if @package.save
@@ -41,6 +44,10 @@ class PackagesController < ApplicationController
   # PATCH/PUT /packages/1
   # PATCH/PUT /packages/1.json
   def update
+    PackageTicket.where("package_id = #{@package.id}").find_each do |pt|
+      pt.delete
+    end
+
     respond_to do |format|
       if @package.update(package_params)
         format.html { redirect_to @package, notice: 'Package was successfully updated.' }
@@ -70,6 +77,7 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params[:package].permit(:title, :description, :price, :cavern_tours, :attractions, :for_sale)
+      params[:package].permit(:name, :description, :price, :for_sale, :package_tickets_attributes => [:ticket_id, :quantity])
     end
 end
+

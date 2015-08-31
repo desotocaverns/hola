@@ -4,7 +4,7 @@
   <tbody>
     <% @packages.each do |package| %>
       <tr>
-        <th><%= package.title %></th>
+        <th><%= package.name %></th>
         <td>For sale: <%= package.for_sale %></td>
         <td><%= link_to 'Show', package %></td>
         <td><%= link_to 'Edit', edit_package_path(package) %></td>

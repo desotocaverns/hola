@@ -1,0 +1,2 @@
+class PackageRevisionsController < ApplicationController
+end

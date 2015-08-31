@@ -1,0 +1,2 @@
+class PackageTicketsController < ApplicationController
+end

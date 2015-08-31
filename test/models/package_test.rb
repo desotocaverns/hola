@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PackageTest < ActiveSupport::TestCase
 
-  def build_package
+  def build_single_ticket_package
     @ticket = Ticket.create!(name: "Test", price: 2300, description: "Testing")
     @package = Package.new(price: 2300, description: "Testing")
     @package.tickets << @ticket
@@ -16,7 +16,7 @@ class PackageTest < ActiveSupport::TestCase
   end
 
   test "new record creates revision" do
-    build_package
+    build_single_ticket_package
     assert_equal 1, @package.revisions.count
     revision = @package.revisions.first
     assert_equal 1, revision.version
@@ -26,7 +26,7 @@ class PackageTest < ActiveSupport::TestCase
   end
 
   test "update record creates revision" do
-    build_package
+    build_single_ticket_package
     @package.update!(price: 7300)
     assert_equal 2, @package.revisions.count
     revision = @package.revisions.last
@@ -35,7 +35,7 @@ class PackageTest < ActiveSupport::TestCase
   end
 
   test "add ticket creates revision" do
-    build_package
+    build_single_ticket_package
     ticket = Ticket.create!(name: "Test2", price: 2300, description: "Testing 2")
     @package.tickets << ticket
     @package.save!
@@ -45,7 +45,7 @@ class PackageTest < ActiveSupport::TestCase
   end
 
   test "delete ticket creates revision" do
-    build_package
+    build_single_ticket_package
     
     ticket2 = Ticket.create!(name: "Test2", price: 2300, description: "Testing 2")
     ticket3 = Ticket.create!(name: "Test3", price: 2300, description: "Testing 3")
@@ -64,7 +64,7 @@ class PackageTest < ActiveSupport::TestCase
   end
 
   test "package.tickets reflects current ticket data" do
-    build_package
+    build_single_ticket_package
     @ticket.update_attribute(:price, 100)
 
     @package.reload
@@ -73,11 +73,22 @@ class PackageTest < ActiveSupport::TestCase
   end
 
   test "package.revision.tickets reflects ticket data at last package revision" do
-    build_package
+    build_single_ticket_package
     @ticket.update_attribute(:price, 100)
 
     @package.reload
     assert_equal 1, @package.revisions.count
     assert_equal 2300, @package.revision.tickets.first.price
+  end
+
+  test "package_tickets handles quantities" do
+    ticket = Ticket.create!(name: "Test", price: 2300, description: "Testing")
+    package = Package.new(price: 2300, description: "Testing")
+    package.package_tickets << PackageTicket.new(ticket: ticket, quantity: 3)
+
+    package.save!
+    
+    assert_equal [ticket], package.tickets
+    assert_equal package.package_tickets.first.quantity, 3
   end
 end

@@ -1,10 +1,10 @@
-<%= form_for @package, :html => {:id => "package_form"} do |f| %>
-  <% if @package.errors.any? %>
+<%= form_for(@ticket) do |f| %>
+  <% if @ticket.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@package.errors.count, "error") %> prohibited this package from being saved:</h2>
+      <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
 
       <ul>
-      <% @package.errors.full_messages.each do |message| %>
+      <% @ticket.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -25,18 +25,6 @@
     <%= f.label :price %>
     <%= f.text_field :price %>
   </div>
-
-  <br>
-
-  <div class="tickets">
-    <% @tickets.each do |ticket| %>
-      <%= f.label ticket.name %>
-      <input type="text" name="package[package_tickets_attributes][][quantity]">
-      <input type="hidden" name="package[package_tickets_attributes][][ticket_id]" value="<%= ticket.id %>"><br>
-    <% end %>
-  </div>
-
-  <br>
 
   <div class="form-row">
     <%= f.label :for_sale %>
