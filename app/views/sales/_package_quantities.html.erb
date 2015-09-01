@@ -1,16 +1,17 @@
 <h2>Tickets</h2>
 
-<%= form_for @purchase, :remote => true, :url => collect_quantity_path, :method => collect_quantity_method, :html => {:id => "package_form"} do |f| %>
-  <span id="package_quantity_errors"></span>
+<%= form_for @sale, :remote => true, :url => collect_quantity_path, :method => collect_quantity_method, :html => {:id => "ticket_form"} do |f| %>
+  <span id="ticket_quantity_errors"></span>
 
-  <% @packages.each do |package| %>
-    <% purchased_package = @purchase.purchased_packages.detect {|e| e.package_id == package.id } %>
-    <%= f.fields_for(:purchased_packages, purchased_package || @purchase.purchased_packages.build) do |package_fields| %>
-        <div class="form-row">
-          <%= package.title %>
-          <%= package_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 %>
-          <%= package_fields.hidden_field :package_id, value: package.id %>
-        </div>
+  <% @tickets.each do |current_ticket| %>
+    <% current_ticket.revisions.last.each do |ticket| %>
+      <%= f.fields_for ticket do |ticket_fields| %>
+          <div class="form-row">
+            <%= ticket.title %>
+            <%= ticket_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 %>
+            <%= ticket_fields.hidden_field :ticket_id, value: ticket.id %>
+          </div>
+      <% end %>
     <% end %>
   <% end %>
 

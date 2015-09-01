@@ -1,6 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+# Tickets and packages
 adult_tour = Ticket.create!(
 	name: "Adult Caverns Tour",
 	price: 2199,
@@ -29,6 +30,34 @@ package.package_tickets << PackageTicket.new(ticket: attraction, quantity: 5)
 
 package.save!
 
+# Sales and Purchases
+sale = Sale.new(
+  name: "Arnold",
+  email: "arnold@schwarzenegger.ws",
+  tax: 108,
+  total_price: 2698
+)
+
+attraction_purchase = Purchase.new(
+  type: "TicketPurchase",
+  sale_id: sale.id,
+  ticket_id: 3,
+  ticket_revision_id: 3
+)
+
+tour_purchase = Purchase.new(
+  type: "TicketPurchase",
+  sale_id: sale.id,
+  ticket_id: 1,
+  ticket_revision_id: 1
+)
+
+sale.purchases << attraction_purchase
+sale.purchases << tour_purchase
+
+sale.save!
+
+# Admins
 Admin.create!(
   email: "brandon@desotocavernspark.com",
   password: "brandonspw",

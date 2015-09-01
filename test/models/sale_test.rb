@@ -7,4 +7,13 @@ class SaleTest < ActiveSupport::TestCase
     @package.tickets << @ticket
     @package.save!
   end
+
+  test "purchases created with sales" do
+  	build_package
+  	sale = Sale.new(name: "Jon Claude", email: "theterminator@gmail.com", tax: 92, total_price: 2392)
+  	assert Purchase.all.empty?
+  	
+  	sale.save!
+  	assert_equal Purchase.all.empty?, false
+  end
 end

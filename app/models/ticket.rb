@@ -4,6 +4,8 @@ class Ticket < ActiveRecord::Base
     class_name: "TicketRevision",
     dependent: :destroy
 
+  scope :for_sale, -> { where(for_sale: true) }
+
   before_save :increment_version
   after_save :save_revision
 

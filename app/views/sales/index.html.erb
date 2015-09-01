@@ -17,16 +17,31 @@
       <th>Redeemed On</th>
       <th>Expires On</th>
     </tr>
-    <% Purchase.complete.each do |purchase| %>
+    <% Sale.all.each do |sale| %>
       <tr>
-        <td><%= purchase.name %></td>
-        <td>$<%= purchase.tax.to_i / 100.00 %></td>
-        <td>$<%= purchase.total_price.to_i / 100.00 %></td>
-        <td><%= purchase.email %></td>
-        <td><%= purchase.redemption_id %></td>
-        <td><%= purchase.redeemed_on %></td>
-        <td><%= purchase.expires_on %></td>
-        <td><%= link_to "Show", purchase_path(id: purchase.redemption_id) %>
+        <td><%= sale.name %></td>
+        <td>$<%= sale.tax.to_i / 100.00 %></td>
+        <td>$<%= sale.total_price.to_i / 100.00 %></td>
+        <td><%= sale.email %></td>
+        <td><%= sale.purchases.first.redemption_code %></td>
+        <td><%= sale.purchases.first.redeemed_on %></td>
+        <td><%= sale.purchases.first.expires_on %></td>
+        <td><%= link_to "Show", sale_path(id: sale.purchases.first.redemption_code) %></td> 
+      </tr>
+      <% sale.purchases.each do |purchase| %>
+        <% unless purchase == sale.purchases.first %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= purchase.redemption_code %></td>
+            <td><%= purchase.redeemed_on %></td>
+            <td><%= purchase.expires_on %></td>
+            <td><%= link_to "Show", sale_path(id: purchase.redemption_code) %></td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>

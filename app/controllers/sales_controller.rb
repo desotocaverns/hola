@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :assign_packages, except: [:success]
+  before_action :assign_tickets, except: [:success]
   before_action :assign_sale, only: [:success]
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
 
@@ -9,14 +9,15 @@ class SalesController < ApplicationController
   end
 
   def show
-    @sale = Sale.find_by(redemption_id: params[:id])
+    @purchase = Purchase.find_by(redemption_code: params[:id])
+    @sale = Sale.find_by(id: @purchase.sale_id)
   end
 
   def redeem
-    @sale = Sale.find_by(redemption_id: params[:redemption_id])
-    @sale.update_attribute(:redeemed_on, Date.today)
+    @purchase = Purchase.find_by(redemption_code: params[:redemption_id])
+    @purchase.update_attribute(:redeemed_on, Date.today)
 
-    redirect_to "/sale/#{@sale.redemption_id}"
+    redirect_to "/sales/#{@purchase.redemption_code}"
   end
 
   def new
@@ -111,8 +112,8 @@ class SalesController < ApplicationController
 
   private
 
-  def assign_packages
-    @packages = Package.for_sale.all
+  def assign_tickets
+    @tickets = Ticket.for_sale.all
   end
 
   def assign_sale

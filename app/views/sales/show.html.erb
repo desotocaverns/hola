@@ -8,15 +8,19 @@
   <tbody>
     <tr>
       <th>Name:</th>
-      <td><%= @purchase.name %></td>
+      <td><%= @sale.name %></td>
     </tr>
     <tr>
-      <th>Total price:</th>
-      <td>$<%= @purchase.total_price.to_int / 100.00 %></td>
+      <th>Total sale price:</th>
+      <td>$<%= @sale.total_price.to_int / 100.00 %></td>
+    </tr>
+    <tr>
+      <th>Purchase type:</th>
+      <td><%= @purchase.type.to_s.gsub(/(?<!^)(?=[A-Z])/, " ") %></td>
     </tr>
     <tr>
       <th>Email:</th>
-      <td><%= @purchase.email %></td>
+      <td><%= @sale.email %></td>
     </tr>
     <tr>
       <th>Expires on:</th>
@@ -33,7 +37,7 @@
 
 <% if @purchase.redeemed_on == nil && @purchase.expires_on >= Time.now %>
   <br>
-  <form method="post" action="/purchase/<%= @purchase.redemption_id %>/redeem">
+  <form method="post" action="/sales/<%= @purchase.redemption_code %>/redeem">
     <input type="submit" value="Redeem">
   </form>
 <% end %>

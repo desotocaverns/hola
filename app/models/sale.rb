@@ -2,9 +2,8 @@ require 'securerandom'
 
 class Sale < ActiveRecord::Base
   has_many :purchases
-  # accepts_nested_attributes_for :package_purchases, allow_destroy: false
 
-  before_validation :calculate_prices
+  # before_validation :calculate_prices
 
   # before_create :generate_redemption_id, :calculate_expiration_date
 
@@ -23,9 +22,9 @@ class Sale < ActiveRecord::Base
   private
 
   def calculate_prices
-    package_price = package_purchases.inject(0) {|total, e| total + e.total_price}
-    self.tax = package_price * 0.04
-    self.total_price = package_price + self.tax
+    subtotal = purchases.inject(0) {|total, e| total + e.total_price}
+    self.tax = subtotal * 0.04
+    self.total_price = subtotal + self.tax
   end
 
   def calculate_expiration_date
