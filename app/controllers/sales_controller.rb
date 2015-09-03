@@ -38,10 +38,12 @@ class SalesController < ApplicationController
     end
 
     respond_to do |format|
-      if @sale.save!
+      if @sale.save
         format.html { redirect_to personal_info_path(token: @sale.token) }
         format.js { render }
-        format.json { render action: "personal_info", status: :success, token: @sale.token}
+      else
+        format.html { redirect_to new_sale_path }
+        format.js { render }
       end
     end
   end

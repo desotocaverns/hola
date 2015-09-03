@@ -7,6 +7,8 @@ class Purchase < ActiveRecord::Base
   before_create :generate_unique_token
   before_save :generate_redemption_codes, :calculate_expiration_date
 
+  validates_numericality_of :quantity
+
   private
 
   def calculate_expiration_date
