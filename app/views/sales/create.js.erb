@@ -6,7 +6,8 @@ if ($('#accordion #personal_info_form').length == 0) {
 
     $( document ).ready( function() {
       $("#accordion").accordion({
-        heightStyle: "fill"
+        heightStyle: "content",
+        active: $('#accordion').index($('#personal_info_form'))
       });
     });
   <% else %>

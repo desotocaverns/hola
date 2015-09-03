@@ -9,15 +9,12 @@
         <div class="form-row">
           <%= ticket_revision.ticket_data["name"] %>
           <input type="text" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" class="quantity_select" type="number" size="2">
-          <%# ticket_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 <]%>
-          <%# ticket_fields.hidden_field :ticket_id, value: ticket_revision.id %>
         </div>
       <% end %>
     <% end %>
   <% end %>
 
   <div>
-    <%# f.hidden_field :js_calculated_price, id: "js_calculated_price" %>
     <%= f.hidden_field :token, value: @sale.token %>
     <%= f.submit "Continue" %>
   </div>

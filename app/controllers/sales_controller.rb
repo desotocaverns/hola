@@ -60,7 +60,6 @@ class SalesController < ApplicationController
 
   def update_personal_info
     @sale = Sale.find_by(token: params[:sale][:token])
-    puts @sale.charge_total
 
     respond_to do |format|
       if @sale.update(personal_info_params)
@@ -76,14 +75,9 @@ class SalesController < ApplicationController
   end
 
   def charge
-    @sale = Sale.find_by(token: params[:sale][:token])
+    @sale = Sale.find_by(token: sale_params[:token])
 
     begin
-      puts "Total price on record is: #{@sale.charge_total}"
-      puts "Stripe token is: #{params[:sale][:stripe_token]}"
-      # puts "Total price calculated by JS is: #{(@sale.js_calculated_price.to_i * 1.04).round}"
-
-      #if @sale.charge_total == (@sale.js_calculated_price.to_i * 1.04).to_i
       charge = Stripe::Charge.create(
         :amount => @sale.charge_total,
         :currency => "usd",
@@ -96,9 +90,6 @@ class SalesController < ApplicationController
       CustomerMailer.receipt_email(@sale).deliver_now
 
       redirect_to success_path(token: @sale.token)
-      #else
-        #redirect_to failure_path
-      #end
 
     rescue Stripe::CardError => e
       body = e.json_body
@@ -135,9 +126,6 @@ class SalesController < ApplicationController
 
   def sale_params
     params[:sale].permit(:token)
-    #params[:sale].permit(:name, :email, :js_calculated_price, :collecting_quantity, sold_packages_attributes: [ :quantity, :package_id ]).tap do |pp|
-      #pp[:sold_packages_attributes].reject! {|k,v| v[:quantity].blank? || v[:quantity].to_s == "0"}
-    #end
   end
 
   def ticket_params
@@ -147,12 +135,10 @@ class SalesController < ApplicationController
   end
 
   def personal_info_params
-    params[:sale].permit(:name, :email, :token)
-    #params[:sale].permit(:name, :email, :redemption_id)
+    params[:sale].permit(:name, :email, :token, :finalizing)
   end
 
   def charge_params
     params[:sale].permit(:stripe_token, :js_calculated_price)
-    # params[:sale].permit(:stripe_token, :redemption_id, :js_calculated_price)
   end
 end
