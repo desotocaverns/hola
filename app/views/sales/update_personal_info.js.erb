@@ -1,4 +1,4 @@
-<% if @purchase.errors.empty? %>
+<% if @sale.errors.empty? %>
   $('#personal_info_form').html("<%= escape_javascript render(partial: 'personal_info') %>");
   $('#outer').append("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
 
@@ -15,8 +15,8 @@
     handler.open({
       name: 'DeSoto Caverns',
       description: '1 Ticket',
-      email: "<%= @purchase.email %>",
-      amount: <%= @purchase.js_calculated_price.to_int * 1.04 %>,
+      email: "<%= @sale.email %>",
+      amount: 100 <%# @purchase.js_calculated_price.to_int * 1.04 %>,
       allowRememberMe: false
     });
     e.preventDefault();

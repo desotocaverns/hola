@@ -1,6 +1,9 @@
-Thanks for investing in adventure, <%= @purchase.name %>!
+Thanks for investing in adventure, <%= @sale.name %>!
 =========================================================
 
 When you visit us, just give the attendant your purchase ID.
 
-Purchase ID: <%= @purchase.redemption_id %>
+<% @sale.purchases.each do |purchase| %>
+  Purchase ID: <%= purchase.redemption_code %>
+
+<% end %>

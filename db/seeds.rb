@@ -33,28 +33,11 @@ package.save!
 # Sales and Purchases
 sale = Sale.new(
   name: "Arnold",
-  email: "arnold@schwarzenegger.ws",
-  tax: 108,
-  total_price: 2698
+  email: "arnold@schwarzenegger.ws"
 )
 
-attraction_purchase = Purchase.new(
-  type: "TicketPurchase",
-  sale_id: sale.id,
-  ticket_id: 3,
-  ticket_revision_id: 3
-)
-
-tour_purchase = Purchase.new(
-  type: "TicketPurchase",
-  sale_id: sale.id,
-  ticket_id: 1,
-  ticket_revision_id: 1
-)
-
-sale.purchases << attraction_purchase
-sale.purchases << tour_purchase
-
+sale.purchases << TicketPurchase.new(ticket: attraction)
+sale.purchases << TicketPurchase.new(ticket: adult_tour)
 sale.save!
 
 # Admins

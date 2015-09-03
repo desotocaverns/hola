@@ -6,42 +6,18 @@
   </style>
 <% end %>
 
-<table>
-  <tbody>
-    <tr>
-      <th>Name</th>
-      <th>Tax</th>
-      <th>Total Price</th>
-      <th>Email</th>
-      <th>Redemption ID</th>
-      <th>Redeemed On</th>
-      <th>Expires On</th>
-    </tr>
-    <% Sale.all.each do |sale| %>
-      <tr>
-        <td><%= sale.name %></td>
-        <td>$<%= sale.tax.to_i / 100.00 %></td>
-        <td>$<%= sale.total_price.to_i / 100.00 %></td>
-        <td><%= sale.email %></td>
-        <td><%= sale.purchases.first.redemption_code %></td>
-        <td><%= sale.purchases.first.redeemed_on %></td>
-        <td><%= sale.purchases.first.expires_on %></td>
-        <td><%= link_to "Show", sale_path(id: sale.purchases.first.redemption_code) %></td> 
-      </tr>
+<% Sale.all.each do |sale| %>
+  <div>
+    Name: <%= sale.name %><br>
+    Total Price: <%= sale.total_price %><br>
+    Tax: <%= sale.tax %><br>
+    Email: <%= sale.email %><br>
+    <ol>
       <% sale.purchases.each do |purchase| %>
-        <% unless purchase == sale.purchases.first %>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><%= purchase.redemption_code %></td>
-            <td><%= purchase.redeemed_on %></td>
-            <td><%= purchase.expires_on %></td>
-            <td><%= link_to "Show", sale_path(id: purchase.redemption_code) %></td>
-          </tr>
-        <% end %>
+        <li>Redemption Code: <%= purchase.redemption_code %>, Redeemed On: <%= purchase.redeemed_on %>, Expires On: <%= purchase.expires_on %></li>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </ol>
+  </div>
+<% end %>
+
+<hr>

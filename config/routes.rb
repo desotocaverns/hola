@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   patch '/sales/update_personal_info' => 'sales#update_personal_info'
   patch '/sales/charge' => 'sales#charge'
 
-  get '/sales/:redemption_id/success' => 'sales#success', as: 'success'
+  get '/sales/:token/success' => 'sales#success', as: 'success'
 
   get '/sales/failure' => 'sales#failure', as: 'failure'
 
-  post '/sales/:redemption_id/redeem' => 'sales#redeem', as: 'redeem'
+  post '/sales/:redemption_code/redeem' => 'sales#redeem', as: 'redeem'
 
   # Admin package and ticket routes
 

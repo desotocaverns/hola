@@ -1,16 +1,16 @@
+require 'securerandom'
+
 class Purchase < ActiveRecord::Base
   belongs_to :sales
 
-  # has_many :package_purchases, dependant: :destroy
-  # has_many :ticket_purchases, dependant: :destroy
-  before_save :generate_redemption_id, :calculate_expiration_date
+  before_save :generate_redemption_code, :calculate_expiration_date
 
   def redemption_qrcode
     RQRCode::QRCode.new(redemption_url)
   end
 
   def redemption_url
-    "http://localhost:3000/purchase/#{redemption_id}"
+    "http://localhost:3000/purchase/#{redemption_code}"
   end
 
   private
@@ -26,7 +26,7 @@ class Purchase < ActiveRecord::Base
     self.expires_on = expiration_date
   end
 
-  def generate_redemption_id
+  def generate_redemption_code
     expiration_date = Time.now + 1.years
     expiration_date_string = expiration_date.strftime("%d%m%y")
     self.redemption_code = expiration_date_string + SecureRandom.urlsafe_base64(10)

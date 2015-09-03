@@ -36,8 +36,8 @@ class CollapseMigrations < ActiveRecord::Migration
     add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
     create_table :packages do |t|
-      t.string :name
-      t.integer :price
+      t.string :name, null: false
+      t.integer :price, null: false, default: 0
       t.boolean :for_sale, default: true
       t.text :description
       t.integer :version, null: false, default: 0
@@ -48,29 +48,29 @@ class CollapseMigrations < ActiveRecord::Migration
       t.integer :package_id, null: false
       t.integer :ticket_id, null: false
       t.integer :ticket_version, null: false
-
+      t.integer :quantity, default: 1
       t.timestamps null: false
     end
 
-    create_table :purchases do |t|
-      t.string :type
-      t.integer :sale_id
-      t.date :redeemed_on
-      t.string :redemption_code
-      t.date :expires_on
-      t.integer :package_id
-      t.integer :package_revision_id
-      t.integer :ticket_id
-      t.integer :ticket_revision_id
+    add_index :package_tickets, [:package_id, :ticket_id], unique: true
 
+    create_table :purchases do |t|
+      t.string :type, null: false
+      t.integer :sale_id, null: false
+      t.date :redeemed_on
+      t.string :redemption_code, null: false
+      t.date :expires_on, null: false
+      t.integer :package_revision_id
+      t.integer :ticket_revision_id
+      t.integer :quantity, default: 1
       t.timestamps null: false
     end
 
     create_table :sales do |t|
       t.string :name
       t.string :email
-      t.integer :tax
-      t.integer :total_price
+      t.integer :tax, null: false, default: 0
+      t.integer :total_price, null: false, default: 0
       t.string :charge_id
 
       t.timestamps null: false
@@ -78,7 +78,7 @@ class CollapseMigrations < ActiveRecord::Migration
 
     create_table :tickets do |t|
       t.string :name, null: false
-      t.integer :price, null: false
+      t.integer :price, null: false, default: 0
       t.boolean :for_sale, default: true
       t.text :description
       t.integer :version, null: false, default: 0

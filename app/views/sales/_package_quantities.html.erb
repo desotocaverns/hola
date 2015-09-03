@@ -4,21 +4,21 @@
   <span id="ticket_quantity_errors"></span>
 
   <% @tickets.each do |current_ticket| %>
-    <% current_ticket.revisions.last.each do |ticket| %>
-      <%= f.fields_for ticket do |ticket_fields| %>
-          <div class="form-row">
-            <%= ticket.title %>
-            <%= ticket_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 %>
-            <%= ticket_fields.hidden_field :ticket_id, value: ticket.id %>
-          </div>
+    <% [current_ticket.revisions.last].each do |ticket_revision| %>
+      <%= f.fields_for ticket_revision do |ticket_fields| %>
+        <div class="form-row">
+          <%= ticket_revision.ticket_data["name"] %>
+          <input type="text" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" class="quantity_select" type="number" size="2">
+          <%# ticket_fields.text_field :quantity, class: "quantity_select", type: "number", size: 2, min: 0 <]%>
+          <%# ticket_fields.hidden_field :ticket_id, value: ticket_revision.id %>
+        </div>
       <% end %>
     <% end %>
   <% end %>
 
   <div>
-    <%= f.hidden_field :js_calculated_price, id: "js_calculated_price" %>
-    <%= f.hidden_field :collecting_quantity, value: true %>
-    <%= f.hidden_field :redemption_id %>
+    <%# f.hidden_field :js_calculated_price, id: "js_calculated_price" %>
+    <%= f.hidden_field :token, value: @sale.token %>
     <%= f.submit "Continue" %>
   </div>
 <% end %>

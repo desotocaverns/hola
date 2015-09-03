@@ -15,7 +15,7 @@
       var penny_price = 0;
       var acc = 0;
 
-      <% @packages.each do |p| %>
+      <% @tickets.each do |p| %>
         penny_price += (quantities[acc].value * <%= p.price %>);
         acc += 1;
       <% end %>

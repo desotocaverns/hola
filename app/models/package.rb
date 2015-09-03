@@ -9,9 +9,13 @@ class Package < ActiveRecord::Base
     dependent: :destroy
   accepts_nested_attributes_for :package_tickets
 
-  # Answers Tickets associated to this Package. Note that this reflects the current
-  # Ticket information and does not include quantity! Use the #revision to obtain
-  # Ticket information at current revision of this Package.
+  # Answers Tickets associated to this Package. Note that this reflects the associated
+  # Tickets but does not include quantity information. Obtain quantities using the
+  # package_tickets.
+  #
+  # If you add a Ticket through this association, it will default to a quantity of 1.
+  #
+  # Use the #revision to obtain Ticket information at current revision of this Package.
   has_many :tickets,
     through: :package_tickets
 

@@ -1,34 +1,32 @@
 require 'securerandom'
 
 class Sale < ActiveRecord::Base
-  has_many :purchases
-
-  # before_validation :calculate_prices
-
-  # before_create :generate_redemption_id, :calculate_expiration_date
-
-  validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
-  validates :total_price, numericality: { greater_than_or_equal_to: 4.99 }
-
-  validates :name, :tax, :total_price, :email, presence: true,
-            unless: :collecting_quantity
-  validates :email, presence: true, email: true,
-            unless: :collecting_quantity
 
   scope :complete, -> { where("charge_id IS NOT NULL") }
 
-  attr_accessor :collecting_quantity
+  has_many :purchases, dependent: :destroy
+
+  before_create :generate_unique_token
+
+  before_validation :calculate_prices
+
+  # Must be set to true when finalizing the Sale to ensure a valid Sale record.
+  attr_accessor :finalizing
+  validates :name, :tax, :charge_total, presence: true, if: :finalizing
+  validates :email, email: true, presence: true, if: :finalizing
+
+  # validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
+  # validates :charge_total, numericality: { greater_than_or_equal_to: 4.99 }
 
   private
 
   def calculate_prices
-    subtotal = purchases.inject(0) {|total, e| total + e.total_price}
+    subtotal = purchases.inject(0) {|total, e| total + e.price }
     self.tax = subtotal * 0.04
-    self.total_price = subtotal + self.tax
+    self.charge_total = subtotal + self.tax
   end
 
-  def calculate_expiration_date
-    expiration_date = Time.now + 1.years
-    self.expires_on = expiration_date
+  def generate_unique_token
+    self.token = SecureRandom.urlsafe_base64(10) + self.id.to_s
   end
 end

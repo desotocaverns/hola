@@ -3,8 +3,8 @@ require 'test_helper'
 class PackageTest < ActiveSupport::TestCase
 
   def build_single_ticket_package
-    @ticket = Ticket.create!(name: "Test", price: 2300, description: "Testing")
-    @package = Package.new(price: 2300, description: "Testing")
+    @ticket = Ticket.create!(name: "Test", price: 2300)
+    @package = Package.new(name: "Testing", price: 1300)
     @package.tickets << @ticket
     @package.save!
   end
@@ -36,7 +36,7 @@ class PackageTest < ActiveSupport::TestCase
 
   test "add ticket creates revision" do
     build_single_ticket_package
-    ticket = Ticket.create!(name: "Test2", price: 2300, description: "Testing 2")
+    ticket = Ticket.create!(name: "Test2", price: 2300)
     @package.tickets << ticket
     @package.save!
     assert_equal 2, @package.revisions.count
@@ -47,8 +47,8 @@ class PackageTest < ActiveSupport::TestCase
   test "delete ticket creates revision" do
     build_single_ticket_package
     
-    ticket2 = Ticket.create!(name: "Test2", price: 2300, description: "Testing 2")
-    ticket3 = Ticket.create!(name: "Test3", price: 2300, description: "Testing 3")
+    ticket2 = Ticket.create!(name: "Test2", price: 2300)
+    ticket3 = Ticket.create!(name: "Test3", price: 2300)
     @package.tickets << ticket2
     @package.tickets << ticket3
     @package.save!
@@ -82,13 +82,20 @@ class PackageTest < ActiveSupport::TestCase
   end
 
   test "package_tickets handles quantities" do
-    ticket = Ticket.create!(name: "Test", price: 2300, description: "Testing")
-    package = Package.new(price: 2300, description: "Testing")
+    ticket = Ticket.create!(name: "Test", price: 2300)
+    package = Package.new(name: "Testing", price: 2300)
     package.package_tickets << PackageTicket.new(ticket: ticket, quantity: 3)
 
     package.save!
     
     assert_equal [ticket], package.tickets
     assert_equal package.package_tickets.first.quantity, 3
+  end
+
+  test "a ticket can be added only once" do
+    build_single_ticket_package
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      @package.tickets << @ticket
+    end
   end
 end

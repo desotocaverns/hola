@@ -1,16 +1,19 @@
 <h2>Success!</h2>
 
-<p>Thanks for investing in adventure, <%= @purchase.name %>.</p>
+<p>Thanks for investing in adventure, <%= @sale.name %>.</p>
 
+<div><b>Your purchases:</b></div>
 <table>
   <tbody>
-    <tr>
-      <th>Purchase ID:</th>
-      <td><%= @purchase.redemption_id %></td>
-    </tr>
+    <% @sale.purchases.each do |purchase| %>
+      <tr>
+        <th>Purchase ID:</th>
+        <td><%= purchase.redemption_code %></td>
+        <th>Purchase QR:</th>
+        <td><%= purchase.redemption_qrcode.as_svg({module_size: 5}).html_safe %></td>
+      </tr>
+      <br>
+    <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= @purchase.redemption_qrcode.as_svg({module_size: 5}).html_safe %>

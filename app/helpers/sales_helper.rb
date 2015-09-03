@@ -1,6 +1,6 @@
-module PurchasesHelper
+module SalesHelper
   def collect_quantity_path
-    @sale.new_record? ? purchases_path : purchases_update_quantities_path
+    @sale.new_record? ? sales_path : sales_update_quantities_path
   end
 
   def collect_quantity_method

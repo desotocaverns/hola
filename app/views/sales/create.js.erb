@@ -1,5 +1,5 @@
 if ($('#accordion #personal_info_form').length == 0) {
-  <% if @purchase.errors.empty? %>
+  <% if @sale.errors.empty? %>
     $('#accordion').html("<%= escape_javascript render(partial: 'package_quantities') %>");
     $('#accordion').append("<%= escape_javascript render(partial: 'personal_info', status: :success) %>");
     $('#package_quantity_errors').hide();
