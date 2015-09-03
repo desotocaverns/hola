@@ -10,15 +10,17 @@ class SalesController < ApplicationController
   end
 
   def show
-    @purchase = Purchase.find_by(redemption_code: params[:id])
+    @redemption_code = RedemptionCode.find_by(code: params[:id])
+    @purchase = Purchase.find_by(id: @redemption_code.purchase_id)
     @sale = Sale.find_by(id: @purchase.sale_id)
   end
 
   def redeem
-    @purchase = Purchase.find_by(redemption_code: params[:redemption_id])
-    @purchase.update_attribute(:redeemed_on, Date.today)
+    @redemption_code = RedemptionCode.find_by(code: params[:redemption_code])
+    @purchase = Purchase.find_by(id: @redemption_code.purchase_id)
+    @redemption_code.update_attribute(:claimed_on, Date.today)
 
-    redirect_to "/sales/#{@purchase.redemption_code}"
+    redirect_to "/sales/#{@redemption_code.code}"
   end
 
   def new
@@ -30,10 +32,8 @@ class SalesController < ApplicationController
 
     ticket_params[:ticket_ids].each do |ticket_id, quantity|
       unless quantity == ""
-        quantity.to_i.times do |i|
-          purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id))
-          @sale.purchases << purchase
-        end
+        purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
+        @sale.purchases << purchase
       end
     end
 
@@ -48,14 +48,16 @@ class SalesController < ApplicationController
 
   def update_quantities
     @sale = Sale.find_by(token: params[:sale][:token])
-    # @sale.sold_packages.destroy_all # TODO be a bit more selective, not destroying all, but only those that become 0 quantity
-    respond_to do |format|
-      if @sale.update_attributes(sale_params)
-        format.html { redirect_to personal_info_path(redemption_id: @sale.redemption_id) }
-        format.js { render }
-        format.js { render action: "create" }
+    @sale.purchases.destroy_all
+
+    ticket_params[:ticket_ids].each do |ticket_id, quantity|
+      unless quantity == ""
+        purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
+        @sale.purchases << purchase
       end
     end
+
+    @sale.update_attributes(sale_params)
   end
 
   def update_personal_info

@@ -21,7 +21,7 @@ class Sale < ActiveRecord::Base
   private
 
   def calculate_prices
-    subtotal = purchases.inject(0) {|total, e| total + e.price }
+    subtotal = purchases.inject(0) {|total, e| total + e.price * e.quantity }
     self.tax = subtotal * 0.04
     self.charge_total = subtotal + self.tax
   end

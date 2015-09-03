@@ -9,12 +9,18 @@
 <% Sale.all.each do |sale| %>
   <div>
     Name: <%= sale.name %><br>
-    Total Price: <%= sale.total_price %><br>
+    Total Price: <%= sale.charge_total %><br>
     Tax: <%= sale.tax %><br>
     Email: <%= sale.email %><br>
     <ol>
       <% sale.purchases.each do |purchase| %>
-        <li>Redemption Code: <%= purchase.redemption_code %>, Redeemed On: <%= purchase.redeemed_on %>, Expires On: <%= purchase.expires_on %></li>
+        <% purchase.redemption_codes.each do |rc| %>
+          <li>Type: <%= purchase.type %>,<br>
+            Redemption Code: <%= rc.code %>,<br>
+            <% if rc.claimed_on != nil %><span style="color:red">Redeemed On: <%= rc.claimed_on %></span>,<br><% end %>
+            Expires On: <%= purchase.expires_on %><br>
+            <%= link_to "Show", "/sales/#{rc.code}" %></li>
+        <% end %>
       <% end %>
     </ol>
   </div>

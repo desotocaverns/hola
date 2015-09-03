@@ -36,8 +36,8 @@ sale = Sale.new(
   email: "arnold@schwarzenegger.ws"
 )
 
-sale.purchases << TicketPurchase.new(ticket: attraction)
-sale.purchases << TicketPurchase.new(ticket: adult_tour)
+sale.purchases << TicketPurchase.new(ticket: attraction, quantity: 2)
+sale.purchases << TicketPurchase.new(ticket: adult_tour, quantity: 1)
 sale.save!
 
 # Admins

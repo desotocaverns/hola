@@ -2,33 +2,28 @@ require 'securerandom'
 
 class Purchase < ActiveRecord::Base
   belongs_to :sales
+  has_many :redemption_codes, dependent: :destroy
 
-  before_save :generate_redemption_code, :calculate_expiration_date
-
-  def redemption_qrcode
-    RQRCode::QRCode.new(redemption_url)
-  end
-
-  def redemption_url
-    "http://localhost:3000/purchase/#{redemption_code}"
-  end
+  before_create :generate_unique_token
+  before_save :generate_redemption_codes, :calculate_expiration_date
 
   private
-
-  #def calculate_prices
-    #package_price = purchased_packages.inject(0) {|total, e| total + e.total_price}
-    #self.tax = package_price * 0.04
-    #self.total_price = package_price + self.tax
-  #end
 
   def calculate_expiration_date
     expiration_date = Time.now + 1.years
     self.expires_on = expiration_date
   end
 
-  def generate_redemption_code
-    expiration_date = Time.now + 1.years
-    expiration_date_string = expiration_date.strftime("%d%m%y")
-    self.redemption_code = expiration_date_string + SecureRandom.urlsafe_base64(10)
+  def generate_redemption_codes
+    quantity.times do |i|
+      expiration_date = Time.now + 1.years
+      expiration_date_string = expiration_date.strftime("%d%m%y")
+      code = expiration_date_string + SecureRandom.urlsafe_base64(10)
+      self.redemption_codes << RedemptionCode.create(code: code) 
+    end
+  end
+  
+  def generate_unique_token
+    self.token = SecureRandom.urlsafe_base64(10) + self.id.to_s
   end
 end
