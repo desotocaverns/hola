@@ -11,6 +11,6 @@ if ($('#accordion #personal_info_form').length == 0) {
       });
     });
   <% else %>
-    $('#package_quantity_errors').html("<%= escape_javascript render(partial: 'errors') %>");
+    $('#ticket_quantity_errors').html("<%= escape_javascript render(partial: 'quantity_errors') %>");
   <% end %>
 }
