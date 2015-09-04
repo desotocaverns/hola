@@ -1,4 +1,12 @@
-<h2><%= @package.title %></h2>
+<% content_for :head do %>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+<% end %>
+
+<h2><%= @package.name %></h2>
 
 <% if @package.description != '' %>
   <p><%= @package.description %></p>
@@ -8,15 +16,7 @@
   <tbody>
     <tr>
       <th>Price</th>
-      <td><%= @package.price / 100.00 %></td>
-    </tr>
-    <tr>
-      <th>Cavern Tours</th>
-      <td><%= @package.cavern_tours %></td>
-    </tr>
-    <tr>
-      <th>Attractions</th>
-      <td><%= @package.attractions %></td>
+      <td>$<%= @package.price / 100.00 %></td>
     </tr>
     <tr>
       <th>For Sale</th>
@@ -27,5 +27,33 @@
 
 <br>
 
+
+<h3>Tickets in this package</h3>
+<td>
+  <table>
+    <tbody>
+      <tr>
+        <th>Quantity</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>For Sale</th>
+        <th>Description</th>
+      </tr>
+      <% @package.package_tickets.each do |package_ticket| %>
+        <tr>
+          <td><%= package_ticket.quantity %></td>
+          <td><%= package_ticket.ticket.name %></td>
+          <td><%= package_ticket.ticket.price %></td>
+          <td><%= package_ticket.ticket.for_sale %></td>
+          <td><%= package_ticket.ticket.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</td>
+
+<br>
+
 <%= link_to 'Edit', edit_package_path(@package) %> |
+<%= link_to 'Destroy', @package, :method => 'delete', data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', packages_path %>

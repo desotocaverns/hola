@@ -2,10 +2,10 @@
 
 one:
   purchase_id: 1
-  quantity: 1
-  package_id: 1
+  code: MyString
+  claimed_on: 2015-09-03
 
 two:
   purchase_id: 1
-  quantity: 1
-  package_id: 1
+  code: MyString
+  claimed_on: 2015-09-03

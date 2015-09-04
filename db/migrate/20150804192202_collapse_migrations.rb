@@ -1,4 +1,4 @@
-class CreatePurchases < ActiveRecord::Migration
+class CollapseMigrations < ActiveRecord::Migration
   def change
     create_table "admins", force: :cascade do |t|
       t.string   "email",                  default: "",    null: false
@@ -35,42 +35,72 @@ class CreatePurchases < ActiveRecord::Migration
     add_index "admins", ["invited_by_id"], name: "index_admins_on_invited_by_id", using: :btree
     add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
-    create_table "packages", force: :cascade do |t|
-      t.string   "title",        limit: 100
-      t.text     "description"
-      t.integer  "price"
-      t.integer  "cavern_tours"
-      t.integer  "attractions"
-      t.datetime "created_at",                              null: false
-      t.datetime "updated_at",                              null: false
-      t.boolean  "for_sale",                 default: true
+    create_table :packages do |t|
+      t.string :name, null: false
+      t.integer :price, null: false, default: 0
+      t.boolean :for_sale, default: true
+      t.text :description
+      t.integer :version, null: false, default: 0
+      t.timestamps null: false
     end
 
-    create_table "purchased_packages", force: :cascade do |t|
-      t.integer  "quantity"
-      t.integer  "package_id"
-      t.datetime "created_at",  null: false
-      t.datetime "updated_at",  null: false
-      t.integer  "purchase_id"
+    create_table :package_tickets do |t|
+      t.integer :package_id, null: false
+      t.integer :ticket_id, null: false
+      t.integer :ticket_version, null: false
+      t.integer :quantity, default: 1
+      t.timestamps null: false
     end
 
-    add_index "purchased_packages", ["purchase_id"], name: "index_purchased_packages_on_purchase_id", using: :btree
+    add_index :package_tickets, [:package_id, :ticket_id], unique: true
 
-    create_table "purchases", force: :cascade do |t|
-      t.string   "name",               limit: 40
-      t.integer  "tax"
-      t.integer  "total_price"
-      t.datetime "created_at",                    null: false
-      t.datetime "updated_at",                    null: false
-      t.string   "charge_id"
-      t.string   "email"
-      t.string   "redemption_id"
-      t.date     "redeemed_on"
-      t.date     "expires_on"
-      t.string   "masked_cc_number"
-      t.string   "masked_cvc"
-      t.string   "cc_expiration_date"
-      t.string   "stripe_token"
+    create_table :purchases do |t|
+      t.string :type, null: false
+      t.integer :sale_id, null: false
+      t.date :redeemed_on
+      t.string :redemption_code, null: false
+      t.date :expires_on, null: false
+      t.integer :package_revision_id
+      t.integer :ticket_revision_id
+      t.integer :quantity, default: 1
+      t.timestamps null: false
     end
+
+    create_table :sales do |t|
+      t.string :name
+      t.string :email
+      t.integer :tax, null: false, default: 0
+      t.integer :total_price, null: false, default: 0
+      t.string :charge_id
+
+      t.timestamps null: false
+    end
+
+    create_table :tickets do |t|
+      t.string :name, null: false
+      t.integer :price, null: false, default: 0
+      t.boolean :for_sale, default: true
+      t.text :description
+      t.integer :version, null: false, default: 0
+
+      t.timestamps null: false
+    end
+
+    create_table :ticket_revisions do |t|
+      t.integer :version, null: false
+      t.integer :ticket_id, null: false
+      t.jsonb :ticket_data, null: false
+
+      t.timestamps null: false
+    end
+
+    create_table :package_revisions do |t|
+      t.integer :version, null: false
+      t.integer :package_id, null: false
+      t.jsonb :package_data, null: false
+
+      t.timestamps null: false
+    end
+
   end
 end

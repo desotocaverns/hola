@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814152607) do
+ActiveRecord::Schema.define(version: 20150904174152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,39 +51,70 @@ ActiveRecord::Schema.define(version: 20150814152607) do
   add_index "admins", ["invited_by_id"], name: "index_admins_on_invited_by_id", using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
+  create_table "package_revisions", force: :cascade do |t|
+    t.integer  "version",      null: false
+    t.integer  "package_id",   null: false
+    t.jsonb    "package_data", null: false
+    t.datetime "created_at",   null: false
+  end
+
+  create_table "package_tickets", force: :cascade do |t|
+    t.integer "package_id",                 null: false
+    t.integer "ticket_id",                  null: false
+    t.integer "ticket_version",             null: false
+    t.integer "quantity",       default: 1
+  end
+
+  add_index "package_tickets", ["package_id", "ticket_id"], name: "index_package_tickets_on_package_id_and_ticket_id", unique: true, using: :btree
+
   create_table "packages", force: :cascade do |t|
-    t.string   "title",        limit: 100
-    t.text     "description"
-    t.integer  "price"
-    t.integer  "cavern_tours"
-    t.integer  "attractions"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.boolean  "for_sale",                 default: true
+    t.string  "name",                       null: false
+    t.integer "price",       default: 0,    null: false
+    t.boolean "for_sale",    default: true
+    t.text    "description"
+    t.integer "version",     default: 0,    null: false
   end
-
-  create_table "purchased_packages", force: :cascade do |t|
-    t.integer  "quantity"
-    t.integer  "package_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "purchase_id"
-  end
-
-  add_index "purchased_packages", ["purchase_id"], name: "index_purchased_packages_on_purchase_id", using: :btree
 
   create_table "purchases", force: :cascade do |t|
-    t.string   "name",                limit: 40
-    t.integer  "tax"
-    t.integer  "total_price"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "charge_id"
+    t.string  "type",                            null: false
+    t.integer "sale_id",                         null: false
+    t.date    "expires_on",                      null: false
+    t.integer "package_revision_id"
+    t.integer "ticket_revision_id"
+    t.string  "token",                           null: false
+    t.integer "quantity",            default: 1, null: false
+  end
+
+  create_table "redemption_codes", force: :cascade do |t|
+    t.integer "purchase_id"
+    t.string  "code"
+    t.date    "claimed_on"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.string   "name"
     t.string   "email"
-    t.string   "redemption_id"
-    t.date     "redeemed_on"
-    t.date     "expires_on"
-    t.integer  "js_calculated_price"
+    t.integer  "tax",          default: 0, null: false
+    t.integer  "charge_total", default: 0, null: false
+    t.string   "charge_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "token"
+  end
+
+  create_table "ticket_revisions", force: :cascade do |t|
+    t.integer  "version",     null: false
+    t.integer  "ticket_id",   null: false
+    t.jsonb    "ticket_data", null: false
+    t.datetime "created_at",  null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string  "name",                       null: false
+    t.integer "price",       default: 0,    null: false
+    t.boolean "for_sale",    default: true
+    t.text    "description"
+    t.integer "version",     default: 0,    null: false
   end
 
 end

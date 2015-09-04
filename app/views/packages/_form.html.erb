@@ -1,4 +1,4 @@
-<%= form_for(@package) do |f| %>
+<%= form_for @package, :html => {:id => "package_form"} do |f| %>
   <% if @package.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@package.errors.count, "error") %> prohibited this package from being saved:</h2>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="form-row">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="form-row">
@@ -26,15 +26,19 @@
     <%= f.text_field :price %>
   </div>
 
-  <div class="form-row">
-    <%= f.label :cavern_tours %>
-    <%= f.text_field :cavern_tours, type: "number", size: 2, min: 0 %>
+  <br>
+
+  <div class="tickets">
+    <% @tickets.each do |ticket| %>
+      <% pt = @package.package_tickets.find_by(ticket_id: ticket.id) %>
+
+      <%= f.label ticket.name %>
+      <input type="text" name="package[package_tickets_attributes][][quantity]" <% if pt != nil %>value="<%= pt.quantity %>"<% end %>>
+      <input type="hidden" name="package[package_tickets_attributes][][ticket_id]" value="<%= ticket.id %>"><br>
+    <% end %>
   </div>
 
-  <div class="form-row">
-    <%= f.label :attractions %>
-    <%= f.text_field :attractions, type: "number", size: 2, min: 0 %>
-  </div>
+  <br>
 
   <div class="form-row">
     <%= f.label :for_sale %>

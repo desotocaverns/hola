@@ -1,15 +1,16 @@
 if ($('#accordion #personal_info_form').length == 0) {
-  <% if @purchase.errors.empty? %>
+  <% if @sale.errors.empty? %>
     $('#accordion').html("<%= escape_javascript render(partial: 'package_quantities') %>");
     $('#accordion').append("<%= escape_javascript render(partial: 'personal_info', status: :success) %>");
     $('#package_quantity_errors').hide();
 
     $( document ).ready( function() {
       $("#accordion").accordion({
-        heightStyle: "fill"
+        heightStyle: "content",
+        active: $('#accordion').index($('#personal_info_form'))
       });
     });
   <% else %>
-    $('#package_quantity_errors').html("<%= escape_javascript render(partial: 'errors') %>");
+    $('#ticket_quantity_errors').html("<%= escape_javascript render(partial: 'quantity_errors') %>");
   <% end %>
 }

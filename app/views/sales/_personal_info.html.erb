@@ -1,11 +1,11 @@
 <h2>Personal Information</h2>
-<%= form_for @purchase, :remote => true, :url => purchases_update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
+<%= form_for @sale, :remote => true, :url => sales_update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
   <span id="personal_info_errors"></span>
 
-  <% if @purchase.errors.any? %>
+  <% if @sale.errors.any? %>
     <div id="error_explanation">
       <ul>
-      <% @purchase.errors.full_messages.each do |msg| %>
+      <% @sale.errors.full_messages.each do |msg| %>
         <li style="color:red"><%= msg %></li>
       <% end %>
       </ul>
@@ -22,8 +22,8 @@
     <%= f.text_field :email %>
   </div>
 
-  <%= f.hidden_field :redemption_id %>
-  <%= f.hidden_field :collecting_quantity, value: false %>
+  <%= f.hidden_field :token %>
+  <%= f.hidden_field :finalizing, value: true %>
 
   <br>
 

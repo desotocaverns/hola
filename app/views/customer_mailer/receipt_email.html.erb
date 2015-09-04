@@ -4,17 +4,17 @@
     <meta charset="utf-8" content="text/html">
   </head>
   <body>
-    <h2>Thanks for investing in adventure, <%= @purchase.name %>!</h2>
+    <h2>Thanks for investing in adventure, <%= @sale.name %>!</h2>
 
     <p>When you visit us, just give the attendant your purchase ID or your handy-dandy QR code.</p>
 
-    <table>
-      <tbody>
-        <tr>
-          <th>Purchase ID:</th>
-          <td><%= @purchase.redemption_id %></td>
-        </tr>
-      </tbody>
-    </table>
+    <div><b>Your purchases:</b></div>
+    <ol>
+      <% @purchases.each do |purchase| %>
+        <% purchase.redemption_codes.each do |rc| %>
+          <li>ID: <%= rc %></li>
+        <% end %>
+      <% end %>
+    </ol>
   </body>
 </html>

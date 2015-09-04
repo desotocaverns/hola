@@ -1,0 +1,36 @@
+<h2>Tickets</h2>
+
+<%= form_for @sale, :remote => true, :url => collect_quantity_path, :method => collect_quantity_method, :html => {:id => "ticket_form"} do |f| %>
+  <span id="ticket_quantity_errors"></span>
+
+  <% @tickets.each do |current_ticket| %>
+    <% [current_ticket.revisions.last].each do |ticket_revision| %>
+      <%= f.fields_for ticket_revision do |ticket_fields| %>
+        <div class="form-row">
+          <% purchase = @sale.purchases.find_by(ticket_revision_id: ticket_revision.id) %>
+
+          <%= ticket_revision.ticket_data["name"] %>
+          <input type="text" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% @packages.each do |current_package| %>
+    <% [current_package.revisions.last].each do |package_revision| %>
+      <%= f.fields_for package_revision do |package_fields| %>
+        <div class="form-row">
+          <% purchase = @sale.purchases.find_by(package_revision_id: package_revision.id) %>
+
+          <%= package_revision.package_data["name"] %>
+          <input type="text" name="package[package_ids][<%= package_revision.package_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div>
+    <%= f.hidden_field :token, value: @sale.token %>
+    <%= f.submit "Continue" %>
+  </div>
+<% end %>

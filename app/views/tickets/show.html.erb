@@ -1,0 +1,24 @@
+<h2><%= @ticket.name %></h2>
+
+<% if @ticket.description != '' %>
+  <p><%= @ticket.description %></p>
+<% end %>
+
+<table>
+  <tbody>
+    <tr>
+      <th>Price</th>
+      <td>$<%= @ticket.price / 100.00 %></td>
+    </tr> 
+    <tr>
+      <th>For Sale</th>
+      <td><%= @ticket.for_sale %></td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Destroy', @ticket, :method => 'delete', data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', tickets_path %>

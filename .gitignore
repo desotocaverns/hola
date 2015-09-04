@@ -16,5 +16,11 @@
 !/log/.keep
 /tmp
 
+# Ignore real database
 config/database.yml
+
+# Ignore the secrets of the deep
 config/secrets.yml
+
+# Ignore the vim stuff
+*.swp

@@ -1,0 +1,2 @@
+class PackagePurchasesController < ApplicationController
+end

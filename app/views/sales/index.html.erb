@@ -1,0 +1,29 @@
+<% content_for :head do %>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+<% end %>
+
+<% Sale.complete.each do |sale| %>
+  <div>
+    Name: <%= sale.name %><br>
+    Total Price: <%= sale.charge_total %><br>
+    Tax: <%= sale.tax %><br>
+    Email: <%= sale.email %><br>
+    <ol>
+      <% sale.purchases.each do |purchase| %>
+        <% purchase.redemption_codes.each do |rc| %>
+          <li>Type: <%= purchase.type %>,<br>
+            Redemption Code: <%= rc.code %>,<br>
+            <% if rc.claimed_on != nil %><span style="color:red">Redeemed On: <%= rc.claimed_on %></span>,<br><% end %>
+            Expires On: <%= purchase.expires_on %><br>
+            <%= link_to "Show", "/sales/#{rc.code}" %></li>
+        <% end %>
+      <% end %>
+    </ol>
+  </div>
+<% end %>
+
+<hr>

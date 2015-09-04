@@ -1,0 +1,11 @@
+<% if @sale.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @sale.purchases.each do |purchase| %>
+      <% purchase.errors.full_messages.each do |msg| %>
+        <li style="color:red"><%= msg %></li>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
