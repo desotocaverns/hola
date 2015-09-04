@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class Purchase < ActiveRecord::Base
-  belongs_to :sales
+  belongs_to :sale, touch: true
   has_many :redemption_codes, dependent: :destroy
 
   before_create :generate_unique_token
