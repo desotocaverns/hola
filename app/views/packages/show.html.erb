@@ -55,4 +55,5 @@
 <br>
 
 <%= link_to 'Edit', edit_package_path(@package) %> |
-<%= link_to 'Back', packages_path %>
+<%= link_to 'Back', packages_path %> |
+<%= link_to 'Destroy', @package, :method => 'delete', data: { confirm: 'Are you sure?' } %>

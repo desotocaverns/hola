@@ -40,4 +40,7 @@
   <form method="post" action="/sales/<%= @redemption_code.code %>/redeem">
     <input type="submit" value="Redeem">
   </form>
+  <br>
 <% end %>
+
+<%= link_to 'Back', sales_path %>
