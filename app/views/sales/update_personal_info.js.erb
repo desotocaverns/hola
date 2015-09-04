@@ -1,6 +1,9 @@
 <% if @sale.errors.empty? %>
   $('#outer').append("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
 
+  <% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
+  <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
+
   $( document ).ready( function() {
     var handler = StripeCheckout.configure({
       key: 'pk_test_lgoJadzJlZSpLwrY1sJPinZK',
@@ -13,7 +16,7 @@
 
     handler.open({
       name: 'DeSoto Caverns',
-      description: '1 Ticket',
+      description: '<%= tp_quantity %> ticket<% if tp_quantity > 1 || tp_quantity == 0 %>s<% end %>, <%= pp_quantity %> package<% if pp_quantity > 1 || pp_quantity == 0 %>s<% end %>',
       email: "<%= @sale.email %>",
       amount: <%= @sale.charge_total %>,
       allowRememberMe: false
