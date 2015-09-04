@@ -23,6 +23,8 @@ class Package < ActiveRecord::Base
   after_save :save_revision
 
   validate :must_have_tickets
+  validates :name, presence: true
+  validates_numericality_of :price, greater_than: 0
 
   # Answers a PackageRevision which contains the current Package data. This will be the last
   # recorded revision if the Package is unchanged, otherwise it will be an unsaved PackageRevision

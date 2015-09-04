@@ -9,6 +9,9 @@ class Ticket < ActiveRecord::Base
   before_save :increment_version
   after_save :save_revision
 
+  validates :name, presence: true
+  validates_numericality_of :price, greater_than: 0
+
   # Answers a TicketRevision which contains the current Ticket data. This will be the last
   # recorded revision if the Ticket is unchanged, otherwise it will be an unsaved TicketRevision
   # reflecting the current state of the Ticket.

@@ -27,7 +27,15 @@ class PackagesController < ApplicationController
   # POST /packages
   # POST /packages.json
   def create
-    @package = Package.new(package_params)
+    filtered_params = package_params
+
+    filtered_params[:package_tickets_attributes].each do |hash|
+      if hash["quantity"] == ""
+        filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
+      end
+    end
+
+    @package = Package.new(filtered_params)
     @tickets = Ticket.all
 
     respond_to do |format|

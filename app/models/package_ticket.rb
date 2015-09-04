@@ -7,6 +7,9 @@ class PackageTicket < ActiveRecord::Base
 
   before_save :capture_versions
 
+  validates :quantity, presence: true
+  validates_numericality_of :quantity, greater_than_or_equal_to: 1
+
   private
 
   def capture_versions
