@@ -12,7 +12,7 @@
     <ol>
       <% @purchases.each do |purchase| %>
         <% purchase.redemption_codes.each do |rc| %>
-          <li>ID: <%= rc %></li>
+          <li>ID: <%= rc.code %></li>
         <% end %>
       <% end %>
     </ol>
