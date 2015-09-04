@@ -35,6 +35,8 @@ class PackagesController < ApplicationController
       end
     end
 
+    filtered_params[:price] = filtered_params[:price].to_f * 100
+
     @package = Package.new(filtered_params)
     @tickets = Ticket.all
 
@@ -56,8 +58,18 @@ class PackagesController < ApplicationController
       pt.delete
     end
 
+    filtered_params = package_params
+
+    filtered_params[:package_tickets_attributes].each do |hash|
+      if hash["quantity"] == ""
+        filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
+      end
+    end
+
+    filtered_params[:price] = filtered_params[:price].to_f * 100
+
     respond_to do |format|
-      if @package.update(package_params)
+      if @package.update(filtered_params)
         format.html { redirect_to @package, notice: 'Package was successfully updated.' }
         format.json { render :show, status: :ok, location: @package }
       else

@@ -23,7 +23,7 @@
 
   <div class="form-row">
     <%= f.label :price %>
-    <%= f.text_field :price %>
+    $<%= f.text_field :price, value: @package.price / 100.00 %>
   </div>
 
   <br>
@@ -33,8 +33,8 @@
       <% pt = @package.package_tickets.find_by(ticket_id: ticket.id) %>
 
       <%= f.label ticket.name %>
-      <input type="text" name="package[package_tickets_attributes][][quantity]" <% if pt != nil %>value="<%= pt.quantity %>"<% end %>>
-      <input type="hidden" name="package[package_tickets_attributes][][ticket_id]" value="<%= ticket.id %>"><br>
+      <input type="text" autocomplete="off" name="package[package_tickets_attributes][][quantity]" <% if pt != nil %>value="<%= pt.quantity %>"<% end %>>
+      <input type="hidden" autocomplete="off" name="package[package_tickets_attributes][][ticket_id]" value="<%= ticket.id %>"><br>
     <% end %>
   </div>
 

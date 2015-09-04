@@ -18,7 +18,9 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new(ticket_params)
+    fixed_params = ticket_params
+    fixed_params[:price] = fixed_params[:price].to_f * 100
+    @ticket = Ticket.new(fixed_params)
 
     respond_to do |format|
       if @ticket.save
@@ -33,9 +35,11 @@ class TicketsController < ApplicationController
 
   def update
     @ticket = Ticket.find_by(id: params[:id])
+    fixed_params = ticket_params
+    fixed_params[:price] = fixed_params[:price].to_f * 100
 
     respond_to do |format|
-      if @ticket.update(ticket_params)
+      if @ticket.update(fixed_params)
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
       else
