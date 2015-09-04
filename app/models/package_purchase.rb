@@ -5,6 +5,10 @@ class PackagePurchase < Purchase
     package_revision.package
   end
 
+  def package=(object)
+    self.package_revision = object.revision
+  end
+
   def price
     package.price
   end

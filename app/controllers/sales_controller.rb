@@ -2,6 +2,7 @@ class SalesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   before_action :assign_tickets, except: [:success]
+  before_action :assign_packages, except: [:success]
   before_action :assign_sale, only: [:success]
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
 
@@ -37,6 +38,13 @@ class SalesController < ApplicationController
       end
     end
 
+    package_params[:package_ids].each do |package_id, quantity|
+      unless quantity == ""
+        purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
+        @sale.purchases << purchase
+      end
+    end
+
     respond_to do |format|
       if @sale.save
         format.html { redirect_to personal_info_path(token: @sale.token) }
@@ -55,6 +63,13 @@ class SalesController < ApplicationController
     ticket_params[:ticket_ids].each do |ticket_id, quantity|
       unless quantity == ""
         purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
+        @sale.purchases << purchase
+      end
+    end
+
+    package_params[:package_ids].each do |package_id, quantity|
+      unless quantity == ""
+        purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
         @sale.purchases << purchase
       end
     end
@@ -124,9 +139,15 @@ class SalesController < ApplicationController
     @tickets = Ticket.for_sale.all
   end
 
+  def assign_packages
+    @packages = Package.for_sale.all
+  end
+
   def assign_sale
     @sale = Sale.find_by(token: params[:token])
   end
+
+  # PARAMS
 
   def sale_params
     params[:sale].permit(:token)
@@ -135,6 +156,12 @@ class SalesController < ApplicationController
   def ticket_params
     params[:ticket].permit().tap do |whitelisted|
       whitelisted[:ticket_ids] = params[:ticket][:ticket_ids]
+    end
+  end
+
+  def package_params
+    params[:package].permit().tap do |whitelisted|
+      whitelisted[:package_ids] = params[:package][:package_ids]
     end
   end
 

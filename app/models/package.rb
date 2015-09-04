@@ -26,6 +26,8 @@ class Package < ActiveRecord::Base
   validates :name, presence: true
   validates_numericality_of :price, greater_than: 0
 
+  scope :for_sale, -> { where for_sale: true }
+
   # Answers a PackageRevision which contains the current Package data. This will be the last
   # recorded revision if the Package is unchanged, otherwise it will be an unsaved PackageRevision
   # reflecting the current state of the Package.
@@ -44,11 +46,22 @@ class Package < ActiveRecord::Base
       package_id: id,
       version: version,
       package_data: {
+        name: name,
         description: description,
         price: price,
-        tickets: tickets
+        ticket_revision_ids: ticket_revision_ids
       }
     )
+  end
+
+  def ticket_revision_ids
+    ticket_revision_ids = []
+
+    tickets.each do |t|
+      ticket_revision_ids << t.revision.id
+    end
+
+    ticket_revision_ids
   end
 
   def save_revision

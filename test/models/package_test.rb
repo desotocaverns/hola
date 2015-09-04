@@ -25,6 +25,11 @@ class PackageTest < ActiveSupport::TestCase
     assert_equal @package.tickets.reload, revision.tickets
   end
 
+  test "loading record loads revisions" do
+    build_single_ticket_package
+    assert_nothing_raised { @package.revision.package }
+  end
+
   test "update record creates revision" do
     build_single_ticket_package
     @package.update!(price: 7300)
@@ -57,7 +62,7 @@ class PackageTest < ActiveSupport::TestCase
     @package.save!
 
     assert_equal 3, @package.revisions.count
-
+   
     assert_equal [@ticket], @package.revisions[0].tickets
     assert_equal [@ticket, ticket2, ticket3], @package.revisions[1].tickets
     assert_equal [ticket2], @package.revisions[2].tickets

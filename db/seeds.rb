@@ -20,15 +20,26 @@ attraction = Ticket.create!(
 	description: "Attraction"
 )
 
-package = Package.new(
+attraction_package = Package.new(
 	name: "Attraction 5 Pac",
 	price: 2249,
 	description: "Five attractions for less that 5 * Attraction!"
 )
 
-package.package_tickets << PackageTicket.new(ticket: attraction, quantity: 5)
+attraction_package.package_tickets << PackageTicket.new(ticket: attraction, quantity: 5)
 
-package.save!
+attraction_package.save!
+
+fun_pac = Package.new(
+  name: "Fun Pac",
+  price: 2999,
+  description: "All the fun!"
+)
+
+fun_pac.package_tickets << PackageTicket.new(ticket: attraction, quantity: 3)
+fun_pac.package_tickets << PackageTicket.new(ticket: adult_tour, quantity: 1)
+
+fun_pac.save!
 
 # Sales and Purchases
 sale = Sale.new(

@@ -4,13 +4,13 @@ class Ticket < ActiveRecord::Base
     class_name: "TicketRevision",
     dependent: :destroy
 
-  scope :for_sale, -> { where for_sale: true }
-
   before_save :increment_version
   after_save :save_revision
 
   validates :name, presence: true
   validates_numericality_of :price, greater_than: 0
+
+  scope :for_sale, -> { where for_sale: true }
 
   # Answers a TicketRevision which contains the current Ticket data. This will be the last
   # recorded revision if the Ticket is unchanged, otherwise it will be an unsaved TicketRevision

@@ -8,7 +8,18 @@
       <%= f.fields_for ticket_revision do |ticket_fields| %>
         <div class="form-row">
           <%= ticket_revision.ticket_data["name"] %>
-          <input type="text" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" class="quantity_select" type="number" size="2">
+          <input type="text" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" type="number" size="2">
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% @packages.each do |current_package| %>
+    <% [current_package.revisions.last].each do |package_revision| %>
+      <%= f.fields_for package_revision do |package_fields| %>
+        <div class="form-row">
+          <%= package_revision.package_data["name"] %>
+          <input type="text" name="package[package_ids][<%= package_revision.package_id %>]" type="number" size="2">
         </div>
       <% end %>
     <% end %>
