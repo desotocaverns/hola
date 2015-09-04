@@ -44,7 +44,8 @@ fun_pac.save!
 # Sales and Purchases
 sale = Sale.new(
   name: "Arnold",
-  email: "arnold@schwarzenegger.ws"
+  email: "arnold@schwarzenegger.ws",
+  charge_id: "ch_16ZSOgJiVRz9VXanvB8T1RG7"
 )
 
 sale.purchases << TicketPurchase.new(ticket: attraction, quantity: 2)

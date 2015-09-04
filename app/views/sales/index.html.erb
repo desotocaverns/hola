@@ -6,7 +6,7 @@
   </style>
 <% end %>
 
-<% Sale.all.each do |sale| %>
+<% Sale.complete.each do |sale| %>
   <div>
     Name: <%= sale.name %><br>
     Total Price: <%= sale.charge_total %><br>
