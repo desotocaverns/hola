@@ -10,7 +10,7 @@
           <% purchase = @sale.purchases.find_by(ticket_revision_id: ticket_revision.id) %>
 
           <%= ticket_revision.ticket_data["name"] %>
-          <input type="text" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+          <input type="text" autocomplete="off" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
         </div>
       <% end %>
     <% end %>
@@ -23,7 +23,7 @@
           <% purchase = @sale.purchases.find_by(package_revision_id: package_revision.id) %>
 
           <%= package_revision.package_data["name"] %>
-          <input type="text" name="package[package_ids][<%= package_revision.package_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+          <input type="text" autocomplete="off" name="package[package_ids][<%= package_revision.package_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
         </div>
       <% end %>
     <% end %>

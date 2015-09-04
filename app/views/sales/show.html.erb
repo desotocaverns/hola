@@ -38,7 +38,7 @@
 <% if @redemption_code.claimed_on == nil && @purchase.expires_on >= Time.now %>
   <br>
   <form method="post" action="/sales/<%= @redemption_code.code %>/redeem">
-    <input type="submit" value="Redeem">
+    <input type="submit" autocomplete="off" value="Redeem">
   </form>
   <br>
 <% end %>
