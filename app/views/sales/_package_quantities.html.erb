@@ -26,6 +26,7 @@
 
           <%= package_revision.package_data["name"] %>
           <input type="text" autocomplete="off" name="package[package_ids][<%= package_revision.package_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+          <span style="color:blue">You save: $<%= current_package.savings %></span>
         </div>
       <% end %>
     <% end %>
