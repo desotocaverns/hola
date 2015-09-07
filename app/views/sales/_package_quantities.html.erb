@@ -5,13 +5,15 @@
 
   <h3>Tickets</h3>
   <% @tickets.each do |current_ticket| %>
-    <% [current_ticket.revisions.last].each do |ticket_revision| %>
-      <%= f.fields_for ticket_revision do |ticket_fields| %>
+    <% [current_ticket.revisions.last].each do |revision| %>
+      <%= f.fields_for revision do |ticket_fields| %>
         <div class="form-row">
-          <% purchase = @sale.purchases.find_by(ticket_revision_id: ticket_revision.id) %>
+          <% purchase = @sale.purchases.find_by(ticket_revision_id: revision.id) %>
+          <% data = revision.ticket_data %>
 
-          <%= ticket_revision.ticket_data["name"] %>
-          <input type="text" autocomplete="off" name="ticket[ticket_ids][<%= ticket_revision.ticket_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+          <strong><%= data["name"] %></strong> - <%= price(data["price"]) %>
+          <% if data["description"] %><p><%= data["description"] %></p><% end %>
+          <input type="text" autocomplete="off" name="ticket[ticket_ids][<%= revision.ticket_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
         </div>
       <% end %>
     <% end %>
@@ -19,14 +21,17 @@
 
   <h3>Packages</h3>
   <% @packages.each do |current_package| %>
-    <% [current_package.revisions.last].each do |package_revision| %>
-      <%= f.fields_for package_revision do |package_fields| %>
+    <% [current_package.revisions.last].each do |revision| %>
+      <%= f.fields_for revision do |package_fields| %>
         <div class="form-row">
-          <% purchase = @sale.purchases.find_by(package_revision_id: package_revision.id) %>
+          <% purchase = @sale.purchases.find_by(package_revision_id: revision.id) %>
+          <% data = revision.package_data %>
 
-          <%= package_revision.package_data["name"] %>
-          <input type="text" autocomplete="off" name="package[package_ids][<%= package_revision.package_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
-          <span style="color:blue">You save: $<%= current_package.savings %></span>
+          <strong><%= data["name"] %></strong> - <%= price data["price"] %>
+          <input type="text" autocomplete="off" name="package[package_ids][<%= revision.package_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+          <% if data["description"] %>
+            <p><%= data["description"] %> - <span style="color:blue">Save <%= price(current_package.savings) %></span></p>
+          <% end %>
         </div>
       <% end %>
     <% end %>

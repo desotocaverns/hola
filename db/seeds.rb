@@ -4,26 +4,23 @@
 # Tickets and packages
 adult_tour = Ticket.create!(
 	name: "Adult Caverns Tour",
-	price: 2199,
-	description: "Adult Caverns Tour"
+	price: 2199
 )
 
 child_tour = Ticket.create!(
 	name: "Child Caverns Tour",
-	price: 1799,
-	description: "Children 2 and under tour free when accompanied by an adult."
+	price: 1799
 )
 
 attraction = Ticket.create!(
-	name: "Attraction",
-	price: 499,
-	description: "Attraction"
+	name: "Attraction Ticket",
+	price: 499
 )
 
 attraction_package = Package.new(
 	name: "Attraction 5 Pac",
 	price: 2249,
-	description: "Five attractions for less that 5 * Attraction!"
+	description: "Five attractions tickets"
 )
 
 attraction_package.package_tickets << PackageTicket.new(ticket: attraction, quantity: 5)
@@ -31,12 +28,12 @@ attraction_package.package_tickets << PackageTicket.new(ticket: attraction, quan
 attraction_package.save!
 
 fun_pac = Package.new(
-  name: "Fun Pac",
+  name: "Explorer Fun Pac",
   price: 2999,
-  description: "All the fun!"
+  description: "One caverns tour and 5 attraction tickets."
 )
 
-fun_pac.package_tickets << PackageTicket.new(ticket: attraction, quantity: 3)
+fun_pac.package_tickets << PackageTicket.new(ticket: attraction, quantity: 5)
 fun_pac.package_tickets << PackageTicket.new(ticket: adult_tour, quantity: 1)
 
 fun_pac.save!

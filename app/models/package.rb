@@ -37,7 +37,7 @@ class Package < ActiveRecord::Base
 
   def savings
     ticket_price = package_tickets.inject(0) { |acc, pt| acc + Ticket.find_by(id: pt.ticket_id).price * pt.quantity }
-    (ticket_price - price) / 100.00
+    (ticket_price - price)
   end
 
   private
