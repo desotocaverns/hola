@@ -12,6 +12,8 @@ class Sale < ActiveRecord::Base
 
   # Must be set to true when finalizing the Sale to ensure a valid Sale record.
   attr_accessor :finalizing
+  #validates_presence_of :purchases
+  validate :must_have_quantities
   validates :name, :tax, :charge_total, presence: true, if: :finalizing
   validates :email, email: true, presence: true, if: :finalizing
 
@@ -28,5 +30,11 @@ class Sale < ActiveRecord::Base
 
   def generate_unique_token
     self.token = SecureRandom.urlsafe_base64(10) + self.id.to_s
+  end
+
+  def must_have_quantities
+    if purchases.empty?
+      errors.add(:quantities, "cannot be blank")
+    end
   end
 end
