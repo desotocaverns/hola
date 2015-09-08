@@ -7,8 +7,7 @@ class SalesController < ApplicationController
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
 
   def index
-    @sales = Sale.complete
-    @searched_sales = params[:search] ? Sale.all.where(email: params[:search]) : Sale.find_by(email: "")
+    @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
   end
 
   def show
@@ -136,6 +135,8 @@ class SalesController < ApplicationController
 
   private
 
+  # ASSIGNMENTS
+
   def assign_tickets
     @tickets = Ticket.for_sale.all
   end
@@ -147,7 +148,7 @@ class SalesController < ApplicationController
   def assign_sale
     @sale = Sale.find_by(token: params[:token])
   end
-
+ 
   # PARAMS
 
   def sale_params
