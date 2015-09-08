@@ -6,11 +6,25 @@
   </style>
 <% end %>
 
-<% Sale.complete.each do |sale| %>
+<%= form_tag sales_path, :method => "get" do %>
+  <p>
+    <span>Email: </span>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<% if @searched_sales == nil || @searched_sales.empty? %>
+  <% sales = @sales %>
+<% else %>
+  <% sales = @searched_sales %>
+<% end %>
+
+<% sales.complete.each do |sale| %>
   <div>
     Name: <%= sale.name %><br>
-    Total Price: <%= sale.charge_total %><br>
-    Tax: <%= sale.tax %><br>
+    Total Price: $<%= sale.charge_total / 100.00 %><br>
+    Tax: $<%= sale.tax / 100.00 %><br>
     Email: <%= sale.email %><br>
     <ol>
       <% sale.purchases.each do |purchase| %>
@@ -24,6 +38,7 @@
       <% end %>
     </ol>
   </div>
+
+  <hr>
 <% end %>
 
-<hr>

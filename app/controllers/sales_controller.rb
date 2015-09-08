@@ -7,7 +7,8 @@ class SalesController < ApplicationController
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
 
   def index
-    @sales = Sale.all
+    @sales = Sale.complete
+    @searched_sales = params[:search] ? Sale.all.where(email: params[:search]) : Sale.find_by(email: "")
   end
 
   def show
