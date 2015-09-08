@@ -7,7 +7,7 @@ class SalesController < ApplicationController
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
 
   def index
-    @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
   end
 
   def show

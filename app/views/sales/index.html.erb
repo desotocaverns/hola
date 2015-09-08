@@ -13,13 +13,7 @@
   </p>
 <% end %>
 
-<% if @searched_sales == nil || @searched_sales.empty? %>
-  <% sales = @sales %>
-<% else %>
-  <% sales = @searched_sales %>
-<% end %>
-
-<% sales.complete.each do |sale| %>
+<% @sales.each do |sale| %>
   <div>
     Name: <%= sale.name %><br>
     Total Price: $<%= sale.charge_total / 100.00 %><br>
@@ -40,4 +34,6 @@
 
   <hr>
 <% end %>
+
+<%= will_paginate @sales %>
 
