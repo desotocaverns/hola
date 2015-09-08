@@ -13,7 +13,7 @@
 
           <strong><%= data["name"] %></strong> - <%= price(data["price"]) %>
           <% if data["description"] %><p><%= data["description"] %></p><% end %>
-          <input type="text" autocomplete="off" name="ticket[ticket_ids][<%= revision.ticket_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+          <%= select_tag "ticket[ticket_ids][#{revision.ticket_id}]", options_for_select((0..25).to_a) %>
         </div>
       <% end %>
     <% end %>
@@ -28,7 +28,7 @@
           <% data = revision.package_data %>
 
           <strong><%= data["name"] %></strong> - <%= price data["price"] %>
-          <input type="text" autocomplete="off" name="package[package_ids][<%= revision.package_id %>]" type="number" size="2" <% if purchase != nil %>value="<%= purchase.quantity %>"<% end %>>
+          <%= select_tag "package[package_ids][#{revision.package_id}]", options_for_select((0..25).to_a) %>
           <% if data["description"] %>
             <p><%= data["description"] %> - <span style="color:blue">Save <%= price(current_package.savings) %></span></p>
           <% end %>

@@ -1,4 +1,5 @@
 <h2>Personal Information</h2>
+<div id="personal-info">
 <%= form_for @sale, :remote => true, :url => sales_update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
   <span id="personal_info_errors"></span>
 
@@ -29,3 +30,4 @@
 
   <%= f.submit "Pay" %>
 <% end %>
+</div>
