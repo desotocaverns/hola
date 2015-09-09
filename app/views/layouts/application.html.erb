@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
   <title>DeSoto Billing</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
 </head>
 <body>
 <% if admin_signed_in? %>
@@ -18,10 +21,13 @@
   <%= link_to "Purchases", sales_path %>
 <% end %>
 
-<p class="notice" style="color:green"><%= notice %></p>
-<p class="alert" style="color:#FFCC00"><%= alert %></p>
-
-<%= yield %>
+<div class='site'>
+  <div class='site-content'>
+    <p class="notice" style="color:green"><%= notice %></p>
+    <p class="alert" style="color:#FFCC00"><%= alert %></p>
+    <%= yield %>
+  </div>
+</div>
 
 </body>
 </html>

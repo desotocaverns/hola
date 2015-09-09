@@ -1,5 +1,5 @@
 <div class='cart-content'>
-  <% if @sale %>
+  <% if @sale && @sale.charge_total > 0 %>
     <div class='total'><%= price(@sale.charge_total)%></div>
   <% else %>
     <div class='total'>$0.00</div>
