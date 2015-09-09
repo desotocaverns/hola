@@ -1,4 +1,4 @@
-$('#tickets').hide()//html("<%= escape_javascript render(partial: 'package_quantities') %>");
+$('#tickets').hide()//html("<%= escape_javascript render(partial: 'quantities') %>");
 <% if @sale.errors.empty? %>
   if($('#personal-info').length == 0) {
     $('#info').html("<%= escape_javascript render(partial: 'personal_info', status: :success) %>");
