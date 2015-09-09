@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   patch '/sales/update_quantities' => 'sales#update_quantities', 'as' => 'update_sale_quantities'
   patch '/sales/update_personal_info' => 'sales#update_personal_info'
+  patch '/sales/update_cart' => 'sales#update_cart', 'as' => 'update_cart_path'
   patch '/sales/charge' => 'sales#charge'
 
   get '/sales/:token/success' => 'sales#success', as: 'success'

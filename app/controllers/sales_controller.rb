@@ -58,7 +58,6 @@ class SalesController < ApplicationController
 
   def update_quantities
     @sale = Sale.find_by(token: params[:sale][:token])
-    @sale.purchases.destroy_all
 
     ticket_params[:ticket_ids].each do |ticket_id, quantity|
       unless quantity == ""
@@ -69,6 +68,28 @@ class SalesController < ApplicationController
 
     package_params[:package_ids].each do |package_id, quantity|
       unless quantity == ""
+        purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
+        @sale.purchases << purchase
+      end
+    end
+
+    @sale.update_attributes(sale_params)
+  end
+
+  def update_cart
+    @sale = Sale.find_by(token: params[:sale][:token])
+
+    if params[:ticket]
+      params[:ticket][:ticket_ids].each do |ticket_id, quantity|
+        @sale.purchases.where(ticket_revision_id: ticket_id).destroy_all
+        purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
+        @sale.purchases << purchase
+      end
+    end
+
+    if params[:package]
+      params[:package][:package_ids].each do |package_id, quantity|
+        @sale.purchases.where(package_revision_id: package_id).destroy_all
         purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
         @sale.purchases << purchase
       end
