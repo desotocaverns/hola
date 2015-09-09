@@ -1,5 +1,5 @@
 <% if @sale.errors.empty? %>
-  $('#outer').append("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
+  $(':root').append("<%= escape_javascript render(partial: 'collect_card', status: :success) %>");
 
   <% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
   <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
@@ -9,7 +9,7 @@
     token: function(token) {
       payment_form = $('#payment_form');
       payment_form.find('#stripe_token').val(token.id);
-      payment_form.submit()
+      payment_form.submit();
     }
   });
 

@@ -32,14 +32,14 @@ class SalesController < ApplicationController
     @sale = Sale.new(sale_params)
 
     ticket_params[:ticket_ids].each do |ticket_id, quantity|
-      unless quantity == ""
+      unless quantity == "0"
         purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
         @sale.purchases << purchase
       end
     end
 
     package_params[:package_ids].each do |package_id, quantity|
-      unless quantity == ""
+      unless quantity == "0"
         purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
         @sale.purchases << purchase
       end
