@@ -1,5 +1,20 @@
-<%= form_for @sale, :remote => true, :url => collect_quantity_path, :method => collect_quantity_method, :html => {id: "ticket_form", class: "ticket-form"} do |f| %>
-  <span id="ticket_quantity_errors"></span>
+<%= form_for @sale, :url => collect_quantity_path, :method => collect_quantity_method, :html => {id: "ticket_form", class: "ticket-form"} do |f| %>
+  <% if @sale.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% unless @sale.errors.include?(:purchases) %>
+        <% @sale.errors.full_messages.each do |msg| %>
+          <li style="color:red"><%= msg %></li>
+        <% end %>
+      <% end %>
+      <% @sale.purchases.each do |purchase| %>
+        <% purchase.errors.full_messages.each do |msg| %>
+          <li style="color:red"><%= msg %></li>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <h3>Tickets</h3>
   <div class='tickets'>
@@ -56,3 +71,5 @@
   </div>
 </div>
 <% end %>
+
+<%= render 'cart' %>

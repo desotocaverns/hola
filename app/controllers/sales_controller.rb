@@ -25,7 +25,11 @@ class SalesController < ApplicationController
   end
 
   def new
-    @sale = Sale.new
+    if params[:token]
+      @sale = Sale.find_by(token: params[:token])
+    else
+      @sale = Sale.new
+    end
   end
 
   def create
@@ -45,35 +49,31 @@ class SalesController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      if @sale.save
-        format.html { redirect_to personal_info_path(token: @sale.token) }
-        format.js { render }
-      else
-        format.html { redirect_to new_sale_path }
-        format.js { render }
-      end
-    end
+    @sale.save!
+
+    redirect_to personal_info_path(token: @sale.token)
   end
 
   def update_quantities
     @sale = Sale.find_by(token: params[:sale][:token])
 
     ticket_params[:ticket_ids].each do |ticket_id, quantity|
-      unless quantity == ""
+      unless quantity == "0"
         purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
         @sale.purchases << purchase
       end
     end
 
     package_params[:package_ids].each do |package_id, quantity|
-      unless quantity == ""
+      unless quantity == "0"
         purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
         @sale.purchases << purchase
       end
     end
 
     @sale.update_attributes(sale_params)
+
+    redirect_to personal_info_path(token: @sale.token)
   end
 
   def update_cart
@@ -98,18 +98,20 @@ class SalesController < ApplicationController
     @sale.update_attributes(sale_params)
   end
 
+  def personal_info
+    @sale = Sale.find_by(token: params[:token])
+  end
+
   def update_personal_info
-    @sale = Sale.find_by(token: params[:sale][:token])
+    @sale = Sale.find_by(token: params[:token])
 
     respond_to do |format|
-      if @sale.update(personal_info_params)
+      if @sale.update(update_personal_info_params)
         format.html { redirect_to collect_card_path(redemption_id: @sale.redemption_id) }
         format.js { render }
-        format.json { render action: "collect_card", status: :success, redemption_id: @sale.redemption_id }
       else
         format.html { render action: "personal_info" }
         format.js { render }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -188,7 +190,7 @@ class SalesController < ApplicationController
     end
   end
 
-  def personal_info_params
+  def update_personal_info_params
     params[:sale].permit(:name, :email, :token, :finalizing)
   end
 

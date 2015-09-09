@@ -1,9 +1,0 @@
-$('#tickets').hide()//html("<%= escape_javascript render(partial: 'quantities') %>");
-<% if @sale.errors.empty? %>
-  if($('#personal-info').length == 0) {
-    $('#info').html("<%= escape_javascript render(partial: 'personal_info', status: :success) %>");
-  }
-  $('#cart').html("<%= escape_javascript render(partial: 'cart') %>");
-<% else %>
-  $('#ticket_quantity_errors').html("<%= escape_javascript render(partial: 'quantity_errors') %>");
-<% end %>

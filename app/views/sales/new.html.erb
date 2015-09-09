@@ -1,7 +1,11 @@
-<% content_for :head do %>
-  <script src="https://checkout.stripe.com/checkout.js"></script>
+<div><b>Purchase Tickets</b> > <% unless @sale.purchases.empty? %>
+  <%= link_to 'Enter Personal Information', personal_info_path(token: @sale.token) %>
+<% else %>
+  Enter Personal Information
 <% end %>
+> Complete Purchase</div>
 
 <div id='tickets'><%= render partial: "quantities" %></div>
 <div id='info'></div>
 <div id='cart'></div>
+

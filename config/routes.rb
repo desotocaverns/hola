@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
   resources :sales, only: [:index, :new, :create, :show]
 
-  patch '/sales/update_quantities' => 'sales#update_quantities', 'as' => 'update_sale_quantities'
-  patch '/sales/update_personal_info' => 'sales#update_personal_info'
-  patch '/sales/update_cart' => 'sales#update_cart', 'as' => 'update_cart_path'
+  patch '/sales/update_quantities' => 'sales#update_quantities'
+  get '/sales/personal_info/:token' => 'sales#personal_info', as: 'personal_info'
+  patch '/sales/personal_info/:token' => 'sales#update_personal_info', as: 'update_personal_info'
+  patch '/sales/update_cart' => 'sales#update_cart'
   patch '/sales/charge' => 'sales#charge'
 
   get '/sales/:token/success' => 'sales#success', as: 'success'

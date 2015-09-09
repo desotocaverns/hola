@@ -1,7 +1,21 @@
+<% content_for :head do %>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+<% end %>
+
+<div><%= link_to 'Purchase Tickets', new_sale_path(token: @sale.token) %> > <b>Enter Personal Information</b> > Complete Purchase</div>
+
 <h2>Personal Information</h2>
 <div id="personal-info">
-<%= form_for @sale, :remote => true, :url => sales_update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
-  <span id="personal_info_errors"></span>
+<%= form_for @sale, :remote => true, :url => update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
+  <% if @sale.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @sale.errors.full_messages.each do |msg| %>
+        <li style="color:red"><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <% if @sale.errors.any? %>
     <div id="error_explanation">
@@ -31,3 +45,5 @@
   <%= f.submit "Purchase Tickets", class: "add-to-cart" %>
 <% end %>
 </div>
+
+<%= render 'cart' %>
