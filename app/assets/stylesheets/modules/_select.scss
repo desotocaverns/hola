@@ -1,0 +1,41 @@
+.select-box {
+  max-width: 100%;
+  background: #fff;
+  font-size: .8em;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+
+  &.fill {
+    display: block;
+    select { width: 100%; }
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: window;
+    appearance: none;
+    cursor: pointer;
+
+    @extend %text-input;
+    font-size: 1em;
+    padding: 0px 9px;
+    margin: 0;
+    padding-right: 1.5em;
+    &, &:focus {
+      background: transparent;
+    }
+    position: relative;
+    z-index: 1;
+  }
+
+  &:after {
+    content: "";
+    z-index: 0;
+    position: absolute;
+    right: .6em;
+    @include triangle(down, rgba(#000, .2), 4px);
+    bottom: 40%;
+  }
+}

@@ -2,7 +2,7 @@
   <script src="https://checkout.stripe.com/checkout.js"></script>
 <% end %>
 
-<div><%= link_to 'Purchase Tickets', new_sale_path(token: @sale.token) %> > <b>Enter Personal Information</b> > Complete Purchase</div>
+<div><%= link_to 'Choose Tickets', new_sale_path(token: @sale.token) %> > <strong>Contact Info</strong> > Complete Purchase</div>
 
 <h2>Personal Information</h2>
 <div id="personal-info">
@@ -28,21 +28,19 @@
   <% end %>
 
   <div class="form-row">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "big full", placeholder: "Full Name" %>
   </div>
 
   <div class="form-row">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, class: "big full", placeholder: "Email Address" %>
   </div>
 
   <%= f.hidden_field :token %>
   <%= f.hidden_field :finalizing, value: true %>
 
-  <br>
-
-  <%= f.submit "Purchase Tickets", class: "add-to-cart" %>
+  <div class='form-footer'>
+    <button class='continue' type='submit'>Continue to Purchase</button>
+  </div>
 <% end %>
 </div>
 

@@ -1,7 +1,7 @@
-<div><b>Purchase Tickets</b> > <% unless @sale.purchases.empty? %>
-  <%= link_to 'Enter Personal Information', personal_info_path(token: @sale.token) %>
+<div><strong>Choose Tickets</strong> > <% unless @sale.purchases.empty? %>
+  <%= link_to 'Contact Info', personal_info_path(token: @sale.token) %>
 <% else %>
-  Enter Personal Information
+  Contact Info
 <% end %>
 > Complete Purchase</div>
 

@@ -1,22 +1,24 @@
 <div class='cart-content'>
   <% if @sale && @sale.charge_total > 0 %>
     <%= form_for @sale, :remote => true, :url => sales_update_cart_path, :html => {id: "cart_form", class: "cart-form"} do |f| %>
-      <% @sale.purchases.where(type: TicketPurchase).each do |purchase| %>
+      <% cart_tickets.each do |purchase| %>
         <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
         <div><%= revision.ticket_data["name"] %></div>
 
-        <%= select_tag "ticket[ticket_ids][#{revision.ticket_id}]", options_for_select((0..25).to_a, purchase.quantity) %>
+        <input class='item-count' type="text" ticket[ticket_ids][<%= revision.ticket_id %> value="<%= purchase.quantity %>">
       <% end %>
 
-      <% @sale.purchases.where(type: PackagePurchase).each do |purchase| %>
+      <% cart_packages.each do |purchase| %>
         <% revision = PackageRevision.find_by(id: purchase.package_revision_id) %>
         <div><%= revision.package_data["name"] %></div>
 
-        <%= select_tag "package[package_ids][#{revision.package_id}]", options_for_select((0..25).to_a, purchase.quantity) %>
+        <input class='item-count' type="text" name="package[package_ids][<%= revision.package_id %>" value="<%= purchase.quantity %>">
       <% end %>
 
       <%= f.hidden_field :token, value: @sale.token %>
-      <%= f.submit "Update cart" %>
+      <div class='form-footer'>
+        <button class='continue' type='submit'>Update Cart</button>
+      </div>
     <% end %>
 
     <br>

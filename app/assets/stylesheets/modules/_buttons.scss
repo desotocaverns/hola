@@ -1,0 +1,22 @@
+button {
+  font-size: .8em;
+  background-image: none;
+  border: none;
+  padding: 1px 1em;
+  margin: 0;
+  background-color: $blue;
+  line-height: 1.65em;
+  vertical-align: middle;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(#3C99FB, 6);
+  }
+}
+
+.continue {
+  font-size: 1.2em;
+  padding: .6em 4em;
+  width: 100%;
+}

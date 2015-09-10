@@ -1,0 +1,9 @@
+<div class='quick-cart-content'>
+  <% if @sale && @sale.charge_total > 0 %>
+    <div class='cart-items'><%= pluralize(cart_items, 'item')%></div>
+    <div class='cart-total'>Total: <%= price(@sale.charge_total)%></div>
+  <% else %>
+    <div class='total'>$0.00</div>
+  <% end %>
+<div>
+

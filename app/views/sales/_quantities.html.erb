@@ -24,13 +24,14 @@
           <% purchase = @sale.purchases.find_by(ticket_revision_id: revision.id) %>
           <% data = revision.ticket_data %>
           <div class="ticket">
-            <div class="ticket-data">
-              <h4><%= data["name"] %></h4> - <%= price(data["price"]) %>
-              <% if data["description"] %><p><%= data["description"] %></p><% end %>
+            <div class="ticket-title">
+              <div class="ticket-count">
+                <div class='select-box'><%= select_tag "ticket[ticket_ids][#{revision.ticket_id}]", options_for_select((1..25).to_a) %></div>
+                <button type='submit' class='add-to-cart'>Add</button>
+              </div>
+              <h4><%= data["name"] %></h4> <span class='ticket-price'><%= price(data["price"]) %></span>
             </div>
-            <div class="ticket-count">
-              <%= select_tag "ticket[ticket_ids][#{revision.ticket_id}]", options_for_select((0..25).to_a) %>
-            </div>
+            <% if data["description"] %><p class="ticket-description"><%= data["description"] %></p><% end %>
           </div>
         <% end %>
       <% end %>
@@ -45,19 +46,15 @@
           <% purchase = @sale.purchases.find_by(package_revision_id: revision.id) %>
           <% data = revision.package_data %>
           <div class="ticket">
-            <div class="ticket-data">
-              <h4><%= data["name"] %></h4> - <%= price data["price"] %>
-              <p>
-                <% if data["description"] %>
-                  <%= data["description"] %> -
-                <% end %>
-                <span class='ticket-savings'>Save <%= price(current_package.savings) %></span>
-              </p>
+            <div class="ticket-title">
+              <div class="ticket-count">
+                <div class='select-box'><%= select_tag "package[package_ids][#{revision.package_id}]", options_for_select((1..25).to_a) %></div>
+                <button type='submit' class='add-to-cart'>Add</button>
+              </div>
+              <h4><%= data["name"] %></h4> <span class='ticket-price'><%= price(data["price"]) %></span>
             </div>
           
-            <div class="ticket-count">
-              <%= select_tag "package[package_ids][#{revision.package_id}]", options_for_select((0..25).to_a) %>
-            </div>
+            <% if data["description"] %><p class="ticket-description"><%= data["description"] %></p><% end %>
           </div>
         <% end %>
       <% end %>
@@ -67,9 +64,9 @@
   <div>
   <div class='form-footer'>
     <%= f.hidden_field :token, value: @sale.token %>
-    <button class='add-to-cart' type='submit'>Add to Cart</button>
+    <button class='continue' type='submit'>Checkout &rarr;</button>
   </div>
 </div>
 <% end %>
 
-<%= render 'cart' %>
+<%= render 'quick_cart' %>
