@@ -82,7 +82,9 @@ class SalesController < ApplicationController
           end
 
           if quantity == 0 || quantity == ""
-            purchase.destroy
+            unless purchase.destroy
+              flash[:alert] = "Cannot destroy every purchase"
+            end
           else
             purchase.update(:quantity => quantity)
           end
@@ -219,7 +221,7 @@ class SalesController < ApplicationController
   end
 
   def update_personal_info_params
-    params[:sale].permit(:name, :email, :token, :finalizing)
+    params[:sale].permit(:name, :email, :token, :is_info_form)
   end
 
   def charge_params

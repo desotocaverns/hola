@@ -10,15 +10,12 @@ class Sale < ActiveRecord::Base
 
   before_validation :calculate_prices
 
-  # Must be set to true when finalizing the Sale to ensure a valid Sale record.
-  attr_accessor :finalizing
-  #validates_presence_of :purchases
-  validate :must_have_quantities
-  validates :name, :tax, :charge_total, presence: true, if: :finalizing
-  validates :email, email: true, presence: true, if: :finalizing
+  attr_accessor :is_info_form
 
-  # validates :tax, numericality: { greater_than_or_equal_to: 0.20 }
-  # validates :charge_total, numericality: { greater_than_or_equal_to: 4.99 }
+  validates_presence_of :purchases
+  validate :must_have_quantities
+  validates :name, :tax, :charge_total, presence: true, if: :is_info_form
+  validates :email, email: true, presence: true, if: :is_info_form
 
   private
 

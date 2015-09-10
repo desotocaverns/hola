@@ -1,17 +1,9 @@
 <div id="personal-info">
   <h2>Personal Information</h2>
+
+  <div class="personal-info-errors"></div>
   
   <%= form_for @sale, :remote => true, :url => update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
-    <% if @sale.errors.any? %>
-      <div id="error_explanation">
-        <ul>
-        <% @sale.errors.full_messages.each do |msg| %>
-          <li style="color:red"><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <% if @sale.errors.any? %>
       <div id="error_explanation">
         <ul>
@@ -31,7 +23,7 @@
     </div>
 
     <%= f.hidden_field :token %>
-    <%= f.hidden_field :finalizing, value: true %>
+    <%= f.hidden_field :is_info_form, value: true %>
 
     <button class='update-personal-info' type='submit'>Submit</button>
   <% end %>

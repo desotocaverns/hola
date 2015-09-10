@@ -6,10 +6,15 @@ class Purchase < ActiveRecord::Base
 
   before_create :generate_unique_token
   before_save :generate_redemption_codes, :calculate_expiration_date
-
-  validates_numericality_of :quantity, message: "must be a number"
+  before_destroy :validate_one_or_more_purchases
 
   private
+
+  def validate_one_or_more_purchases
+    if sale.purchases.count <= 1
+      return false
+    end
+  end
 
   def calculate_expiration_date
     expiration_date = Time.now + 1.years

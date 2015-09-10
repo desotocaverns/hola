@@ -1,2 +1,6 @@
-$('#personal-info').hide();
-location.reload();
+<% if @sale.errors.empty? %>
+  $('#personal-info').hide();
+  location.reload();
+<% else %>
+  $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
+<% end %>
