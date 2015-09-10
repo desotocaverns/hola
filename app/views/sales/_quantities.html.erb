@@ -1,72 +1,58 @@
-<%= form_for @sale, :url => collect_quantity_path, :method => collect_quantity_method, :html => {id: "ticket_form", class: "ticket-form"} do |f| %>
-  <% if @sale.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-      <% unless @sale.errors.include?(:purchases) %>
-        <% @sale.errors.full_messages.each do |msg| %>
-          <li style="color:red"><%= msg %></li>
-        <% end %>
+<h3>Tickets</h3>
+<div class='tickets'>
+  <% @tickets.each do |current_ticket| %>
+    <% [current_ticket.revisions.last].each do |revision| %>
+      <% purchase = @sale.purchases.find_by(ticket_revision_id: revision.id) %>
+      <% data = revision.ticket_data %>
+      <%= form_tag collect_quantity_path, :remote => true, :method => collect_quantity_method do %>
+        <div class="ticket">
+          <div class="ticket-title">
+            <div class="ticket-count">
+              <div class="select-box"><%= select_tag "sale[ticket[ticket_ids][#{revision.ticket_id}]]", options_for_select((0..25).to_a) %></div>
+              <input type="hidden" name="sale[token]" value="<%= @sale.token %>">
+              <button class="add-to-cart" type="submit">Add</button>
+            </div>
+            <h4><%= data["name"] %></h4> <span class="ticket-price"><%= price(data["price"]) %></span>
+          </div>
+          <% if data["description"] %><p><%= data["description"] %></p><% end %>
+        </div>
       <% end %>
-      <% @sale.purchases.each do |purchase| %>
-        <% purchase.errors.full_messages.each do |msg| %>
-          <li style="color:red"><%= msg %></li>
-        <% end %>
-      <% end %>
-      </ul>
-    </div>
+    <% end %>
   <% end %>
+</div>
 
-  <h3>Tickets</h3>
-  <div class='tickets'>
-    <% @tickets.each do |current_ticket| %>
-      <% [current_ticket.revisions.last].each do |revision| %>
-        <%= f.fields_for revision do |ticket_fields| %>
-          <% purchase = @sale.purchases.find_by(ticket_revision_id: revision.id) %>
-          <% data = revision.ticket_data %>
-          <div class="ticket">
-            <div class="ticket-title">
-              <div class="ticket-count">
-                <div class='select-box'><%= select_tag "ticket[ticket_ids][#{revision.ticket_id}]", options_for_select((1..25).to_a) %></div>
-                <button type='submit' class='add-to-cart'>Add</button>
-              </div>
-              <h4><%= data["name"] %></h4> <span class='ticket-price'><%= price(data["price"]) %></span>
+<h3>Discount Packages</h3>
+<div class='tickets'>
+  <% @packages.each do |current_package| %>
+    <% [current_package.revisions.last].each do |revision| %>
+      <% purchase = @sale.purchases.find_by(package_revision_id: revision.id) %>
+      <% data = revision.package_data %>
+      <%= form_tag collect_quantity_path, :remote => true, :method => collect_quantity_method do %>
+        <div class="ticket">
+          <div class="ticket-title">
+            <div class="ticket-count">
+              <div class="select-box"><%= select_tag "sale[package[package_ids][#{revision.package_id}]]", options_for_select((0..25).to_a) %></div>
+              <input type="hidden" name="sale[token]" value="<%= @sale.token %>">
+              <button class="add-to-cart" type="submit">Add</button> 
             </div>
-            <% if data["description"] %><p class="ticket-description"><%= data["description"] %></p><% end %>
+            <h4><%= data["name"] %></h4> <span class="ticket-price"><%= price data["price"] %></span>
           </div>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <h3>Discount Packages</h3>
-  <div class='tickets'>
-    <% @packages.each do |current_package| %>
-      <% [current_package.revisions.last].each do |revision| %>
-        <%= f.fields_for revision do |package_fields| %>
-          <% purchase = @sale.purchases.find_by(package_revision_id: revision.id) %>
-          <% data = revision.package_data %>
-          <div class="ticket">
-            <div class="ticket-title">
-              <div class="ticket-count">
-                <div class='select-box'><%= select_tag "package[package_ids][#{revision.package_id}]", options_for_select((1..25).to_a) %></div>
-                <button type='submit' class='add-to-cart'>Add</button>
-              </div>
-              <h4><%= data["name"] %></h4> <span class='ticket-price'><%= price(data["price"]) %></span>
-            </div>
           
-            <% if data["description"] %><p class="ticket-description"><%= data["description"] %></p><% end %>
-          </div>
-        <% end %>
+          <% if data["description"] %><p class="ticket-description"><%= data["description"] %></p><% end %>
+        </div>    
       <% end %>
     <% end %>
-  </div>
+  <% end %>
+</div>
 
-  <div>
+<div>
   <div class='form-footer'>
-    <%= f.hidden_field :token, value: @sale.token %>
-    <button class='continue' type='submit'>Checkout &rarr;</button>
+    <% if @sale.token %>
+      <%= form_tag personal_info_path(token: @sale.token), method: :get do %>
+        <button class='continue' type='submit'>Checkout &rarr;</button>
+      <% end %>
+    <% end %>
   </div>
 </div>
-<% end %>
 
-<%= render 'quick_cart' %>
+<div id="quick-cart"><%= render 'quick_cart' %></div>

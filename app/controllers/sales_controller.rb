@@ -35,60 +35,53 @@ class SalesController < ApplicationController
   def create
     @sale = Sale.new(sale_params)
 
-    ticket_params[:ticket_ids].each do |ticket_id, quantity|
-      unless quantity == "0"
-        purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
-        @sale.purchases << purchase
+    if params[:sale].has_key?(:ticket)
+      ticket_params[:ticket_ids].each do |ticket_id, quantity|
+        unless quantity == "0"
+          purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
+          @sale.purchases << purchase
+        end
       end
     end
 
-    package_params[:package_ids].each do |package_id, quantity|
-      unless quantity == "0"
-        purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
-        @sale.purchases << purchase
+    if params[:sale].has_key?(:package)
+      package_params[:package_ids].each do |package_id, quantity|
+        unless quantity == "0"
+          purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
+          @sale.purchases << purchase
+        end
       end
     end
 
-    @sale.save!
-
-    redirect_to personal_info_path(token: @sale.token)
-  end
-
-  def update_quantities
-    @sale = Sale.find_by(token: params[:sale][:token])
-
-    ticket_params[:ticket_ids].each do |ticket_id, quantity|
-      unless quantity == "0"
-        purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
-        @sale.purchases << purchase
+    respond_to do |format|
+      if @sale.save
+        format.html { redirect_to new_sale_path }
+        format.js { render }
+      else
+        format.html { redirect_to new_sale_path }
+        format.js { render }
       end
     end
-
-    package_params[:package_ids].each do |package_id, quantity|
-      unless quantity == "0"
-        purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
-        @sale.purchases << purchase
-      end
-    end
-
-    @sale.update_attributes(sale_params)
-
-    redirect_to personal_info_path(token: @sale.token)
   end
 
   def update_cart
     @sale = Sale.find_by(token: params[:sale][:token])
 
-    if params[:ticket]
-      params[:ticket][:ticket_ids].each do |ticket_id, quantity|
-        @sale.purchases.where(ticket_revision_id: ticket_id).destroy_all
-        purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
-        @sale.purchases << purchase
+    if params[:sale][:ticket]
+      params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
+        if @sale.purchases.where(ticket_revision_id: ticket_id).any?
+          purchase = @sale.purchases.find_by(ticket_revision_id: ticket_id)
+          q = purchase.quantity + quantity.to_i
+          purchase.update(:quantity => q)
+        else
+          purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
+          @sale.purchases << purchase
+        end
       end
     end
 
-    if params[:package]
-      params[:package][:package_ids].each do |package_id, quantity|
+    if params[:sale][:package]
+      params[:sale][:package][:package_ids].each do |package_id, quantity|
         @sale.purchases.where(package_revision_id: package_id).destroy_all
         purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
         @sale.purchases << purchase
@@ -175,18 +168,18 @@ class SalesController < ApplicationController
   # PARAMS
 
   def sale_params
-    params[:sale].permit(:token)
+    params[:sale].permit(:ticket, :package, :token)
   end
 
   def ticket_params
-    params[:ticket].permit().tap do |whitelisted|
-      whitelisted[:ticket_ids] = params[:ticket][:ticket_ids]
+    params[:sale][:ticket].permit().tap do |whitelisted|
+      whitelisted[:ticket_ids] = params[:sale][:ticket][:ticket_ids]
     end
   end
 
   def package_params
-    params[:package].permit().tap do |whitelisted|
-      whitelisted[:package_ids] = params[:package][:package_ids]
+    params[:sale][:package].permit().tap do |whitelisted|
+      whitelisted[:package_ids] = params[:sale][:package][:package_ids]
     end
   end
 

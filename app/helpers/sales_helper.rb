@@ -1,6 +1,6 @@
 module SalesHelper
   def collect_quantity_path
-    @sale.new_record? ? sales_path : sales_update_quantities_path
+    @sale.new_record? ? sales_path : sales_update_cart_path
   end
 
   def collect_quantity_method
