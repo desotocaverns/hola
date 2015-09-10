@@ -1,0 +1,6 @@
+<div class="static-personal-info">
+  <div>Name: <%= @sale.name %></div>
+  <div>Email: <%= @sale.email %></div>
+
+  <%= link_to "Edit personal info", edit_personal_info_path(token: @sale.token), method: :patch, remote: true %>
+</div>

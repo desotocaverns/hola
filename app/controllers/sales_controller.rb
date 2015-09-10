@@ -112,6 +112,15 @@ class SalesController < ApplicationController
     @sale = Sale.find_by(token: params[:token])
   end
 
+  def edit_personal_info
+    @sale = Sale.find_by(token: params[:token])
+
+    respond_to do |format|
+      format.html { raise "format is HTML" }
+      format.js { render }
+    end
+  end
+
   def update_personal_info
     @sale = Sale.find_by(token: params[:token])
 
