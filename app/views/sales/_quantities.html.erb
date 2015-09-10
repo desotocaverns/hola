@@ -48,7 +48,7 @@
 <div>
   <div class='form-footer'>
     <% if @sale.token %>
-      <%= form_tag personal_info_path(token: @sale.token), method: :get do %>
+      <%= form_tag summary_path(token: @sale.token), method: :get do %>
         <button class='continue' type='submit'>Checkout &rarr;</button>
       <% end %>
     <% end %>

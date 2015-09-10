@@ -91,7 +91,7 @@ class SalesController < ApplicationController
     @sale.update_attributes(sale_params)
   end
 
-  def personal_info
+  def summary
     @sale = Sale.find_by(token: params[:token])
   end
 
@@ -106,6 +106,15 @@ class SalesController < ApplicationController
         format.html { render action: "personal_info" }
         format.js { render }
       end
+    end
+  end
+
+  def checkout
+    @sale = Sale.find_by(token: params["token"])
+
+    respond_to do |format|
+      format.html { raise "format is HTML" }
+      format.js { render }
     end
   end
 

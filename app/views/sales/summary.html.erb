@@ -1,0 +1,18 @@
+<% content_for :head do %>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+<% end %>
+
+<div><%= link_to 'Choose Tickets', new_sale_path(token: @sale.token) %> > <strong>Contact Info</strong> > Complete Purchase</div>
+
+<% unless @sale.email %>
+  <%= render 'personal_info_form' %>
+<% end %>
+
+<%= render 'cart' %>
+
+<% if @sale.email %>
+  <%= form_tag checkout_path, remote: true, method: :patch, class: "checkout-form" do %>
+    <input type="hidden" name="token" value="<%= @sale.token %>">
+    <button type="submit" class="continue">Checkout</button>
+  <% end %>
+<% end %>

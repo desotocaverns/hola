@@ -1,5 +1,5 @@
 <div><strong>Choose Tickets</strong> > <% unless @sale.purchases.empty? %>
-  <%= link_to 'Contact Info', personal_info_path(token: @sale.token) %>
+  <%= link_to 'Contact Info', summary_path(token: @sale.token) %>
 <% else %>
   Contact Info
 <% end %>
