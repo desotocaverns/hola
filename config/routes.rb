@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   patch '/sales/update_cart' => 'sales#update_cart'
   patch '/sales/checkout' => 'sales#checkout', as: 'checkout'
   patch '/sales/charge' => 'sales#charge'
+  
+  get '/sales/cart/:token' => 'sales#cart', as: 'cart'
 
   get '/sales/:token/success' => 'sales#success', as: 'success'
 

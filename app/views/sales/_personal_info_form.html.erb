@@ -1,38 +1,45 @@
-<div id="personal-info">
-  <h2>Personal Information</h2>
-  
-  <%= form_for @sale, :remote => true, :url => update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
-    <% if @sale.errors.any? %>
-      <div id="error_explanation">
-        <ul>
-        <% @sale.errors.full_messages.each do |msg| %>
-          <li style="color:red"><%= msg %></li>
-        <% end %>
-        </ul>
+<% unless @sale.email && @sale.name %>
+  <div id="personal-info">
+    <h2>Personal Information</h2>
+    
+    <%= form_for @sale, :remote => true, :url => update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
+      <% if @sale.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+          <% @sale.errors.full_messages.each do |msg| %>
+            <li style="color:red"><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @sale.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+          <% @sale.errors.full_messages.each do |msg| %>
+            <li style="color:red"><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-row">
+        <%= f.text_field :name, class: "big full", placeholder: "Full Name" %>
       </div>
-    <% end %>
 
-    <% if @sale.errors.any? %>
-      <div id="error_explanation">
-        <ul>
-        <% @sale.errors.full_messages.each do |msg| %>
-          <li style="color:red"><%= msg %></li>
-        <% end %>
-        </ul>
+      <div class="form-row">
+        <%= f.text_field :email, class: "big full", placeholder: "Email Address" %>
       </div>
+
+      <%= f.hidden_field :token %>
+      <%= f.hidden_field :finalizing, value: true %>
+
+      <button class='update-personal-info' type='submit'>Submit</button>
     <% end %>
-
-    <div class="form-row">
-      <%= f.text_field :name, class: "big full", placeholder: "Full Name" %>
-    </div>
-
-    <div class="form-row">
-      <%= f.text_field :email, class: "big full", placeholder: "Email Address" %>
-    </div>
-
-    <%= f.hidden_field :token %>
-    <%= f.hidden_field :finalizing, value: true %>
-
-    <button class='update-personal-info' type='submit'>Submit</button>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <div class="static-personal-info">
+    <div>Name: <%= @sale.name %></div>
+    <div>Email: <%= @sale.email %></div>
+  </div>
+<% end %>

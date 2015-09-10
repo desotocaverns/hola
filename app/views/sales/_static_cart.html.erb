@@ -23,4 +23,6 @@
   <br>
   <div class='tax'>Tax : <%= price(@sale.tax) %></div>
   <div class='total'>Total : <%= price(@sale.charge_total)%></div>
+
+  <%= link_to "Edit cart", cart_path(token: @sale.token) %>
 </div>

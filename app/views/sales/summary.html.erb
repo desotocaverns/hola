@@ -4,11 +4,9 @@
 
 <div><%= link_to 'Choose Tickets', new_sale_path(token: @sale.token) %> > <strong>Contact Info</strong> > Complete Purchase</div>
 
-<% unless @sale.email %>
-  <%= render 'personal_info_form' %>
-<% end %>
+<%= render 'personal_info_form' %>
 
-<%= render 'cart' %>
+<%= render 'static_cart' %>
 
 <% if @sale.email %>
   <%= form_tag checkout_path, remote: true, method: :patch, class: "checkout-form" do %>

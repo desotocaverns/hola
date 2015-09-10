@@ -8,8 +8,9 @@
         <div class="ticket">
           <div class="ticket-title">
             <div class="ticket-count">
-              <div class="select-box"><%= select_tag "sale[ticket[ticket_ids][#{revision.ticket_id}]]", options_for_select((0..25).to_a) %></div>
+              <div class="select-box"><%= select_tag "sale[ticket[ticket_ids][#{revision.ticket_id}]]", options_for_select((0..25).to_a, 1) %></div>
               <input type="hidden" name="sale[token]" value="<%= @sale.token %>">
+              <input type="hidden" name="adding" value="true">
               <button class="add-to-cart" type="submit">Add</button>
             </div>
             <h4><%= data["name"] %></h4> <span class="ticket-price"><%= price(data["price"]) %></span>
@@ -31,8 +32,9 @@
         <div class="ticket">
           <div class="ticket-title">
             <div class="ticket-count">
-              <div class="select-box"><%= select_tag "sale[package[package_ids][#{revision.package_id}]]", options_for_select((0..25).to_a) %></div>
+              <div class="select-box"><%= select_tag "sale[package[package_ids][#{revision.package_id}]]", options_for_select((0..25).to_a, 1) %></div>
               <input type="hidden" name="sale[token]" value="<%= @sale.token %>">
+              <input type="hidden" name="adding" value="true">
               <button class="add-to-cart" type="submit">Add</button> 
             </div>
             <h4><%= data["name"] %></h4> <span class="ticket-price"><%= price data["price"] %></span>

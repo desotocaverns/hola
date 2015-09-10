@@ -64,6 +64,10 @@ class SalesController < ApplicationController
     end
   end
 
+  def cart
+    @sale = Sale.find_by(token: params[:token])
+  end
+
   def update_cart
     @sale = Sale.find_by(token: params[:sale][:token])
 
@@ -71,8 +75,10 @@ class SalesController < ApplicationController
       params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
         if @sale.purchases.where(ticket_revision_id: ticket_id).any?
           purchase = @sale.purchases.find_by(ticket_revision_id: ticket_id)
-          q = purchase.quantity + quantity.to_i
-          purchase.update(:quantity => q)
+          if params[:adding] == "true"
+            quantity = purchase.quantity + quantity.to_i
+          end
+          purchase.update(:quantity => quantity)
         else
           purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
           @sale.purchases << purchase
@@ -89,6 +95,10 @@ class SalesController < ApplicationController
     end
 
     @sale.update_attributes(sale_params)
+
+    if params[:adding] == ""
+      redirect_to summary_path(token: @sale.token)
+    end
   end
 
   def summary
