@@ -75,10 +75,17 @@ class SalesController < ApplicationController
       params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
         if @sale.purchases.where(ticket_revision_id: ticket_id).any?
           purchase = @sale.purchases.find_by(ticket_revision_id: ticket_id)
+
+          quantity = quantity.to_i unless quantity == ""
           if params[:adding] == "true"
             quantity = purchase.quantity + quantity.to_i
           end
-          purchase.update(:quantity => quantity)
+
+          if quantity == 0 || quantity == ""
+            purchase.destroy
+          else
+            purchase.update(:quantity => quantity)
+          end
         else
           purchase = TicketPurchase.new(ticket: Ticket.find_by(id: ticket_id), quantity: quantity)
           @sale.purchases << purchase
