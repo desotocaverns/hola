@@ -1,9 +1,9 @@
 class TicketsController < ApplicationController
   before_action :authenticate_admin!
 
-	def index
-		@tickets = Ticket.all
-	end
+  def index
+      @tickets = Ticket.all
+  end
 
   def show
     @ticket = Ticket.find_by(id: params[:id])
@@ -61,7 +61,7 @@ class TicketsController < ApplicationController
 
   private
 
-    def ticket_params
-      params[:ticket].permit(:name, :description, :price, :for_sale)
-    end
+  def ticket_params
+    params[:ticket].permit(:name, :description, :price, :for_sale)
+  end
 end

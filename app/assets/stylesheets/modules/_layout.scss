@@ -1,11 +1,21 @@
+$max-width: 650px;
+$content-h-pad: 15px;
+$light-text: #777;
+
 * { box-sizing: border-box; }
 
 html {
   height: 100%;
   color: #444;
+  background: #fdfdfd;
+}
+body {
+  padding: 0; 
+  margin: 0;
 }
 
 .site-content {
-  max-width: 450px;
+  max-width: $max-width;
   margin: 0 auto;
+  padding: $content-h-pad 1em $content-h-pad * 4;
 }

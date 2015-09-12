@@ -66,6 +66,8 @@ GEM
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
+    esvg (2.0.2)
+      svg_optimizer (~> 0.0.2)
     execjs (2.5.2)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
@@ -79,8 +81,6 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.5)
-      railties (>= 3.2.16)
     json (1.8.3)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
@@ -153,6 +153,8 @@ GEM
     stripe (1.24.0)
       json (~> 1.8.1)
       rest-client (~> 1.4)
+    svg_optimizer (0.0.2)
+      nokogiri
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
@@ -183,12 +185,11 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  coffee-rails (~> 4.1.0)
   devise
   devise_invitable
+  esvg
   jbuilder (~> 2.0)
   jquery-rails
-  jquery-ui-rails
   pg
   rails (= 4.2.3)
   rqrcode
