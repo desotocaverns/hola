@@ -35,9 +35,16 @@ class Package < ActiveRecord::Base
     changed? ? current_revision : revisions.last
   end
 
+  def full_price
+    package_tickets.inject(0) { |acc, pt| acc + Ticket.find_by(id: pt.ticket_id).price * pt.quantity }
+  end
+
   def savings
-    ticket_price = package_tickets.inject(0) { |acc, pt| acc + Ticket.find_by(id: pt.ticket_id).price * pt.quantity }
-    (ticket_price - price)
+    (full_price - price)
+  end
+
+  def savings_percentage
+    "#{((1 - (price.to_f / full_price.to_f)) * 100).round}%"
   end
 
   private

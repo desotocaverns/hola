@@ -1,14 +1,17 @@
 <div class="ticket">
-  <div class="ticket-title">
-    <div class="ticket-count">
-      <%= form_tag collect_quantity_path, :remote => true, :method => collect_quantity_method, class: 'ticket-form' do %>
-        <div class="select-box"><%= select_tag "#{name}", options_for_select((1..25).to_a, 1) %></div>
-        <input type="hidden" name="sale[token]" value="<%= @sale.token %>">
-        <input type="hidden" name="adding" value="true">
-        <button class="add-to-cart" type="submit">Add</button>
-      <% end %>
-    </div>
-    <h4><%= data["name"] %></h4> <span class="ticket-price"><%= price(data["price"]) %></span>
+  <div class="ticket-count">
+    <div class="ticket-price"><%= price(data["price"]) %></div>
+    <%= form_tag collect_quantity_path, :remote => true, :method => collect_quantity_method, class: 'ticket-form' do %>
+      <div class="select-box"><%= select_tag "#{name}", options_for_select((1..25).to_a, 1) %></div>
+      <input type="hidden" name="sale[token]" value="<%= @sale.token %>">
+      <input type="hidden" name="adding" value="true">
+      <button class="add-to-cart" type="submit">Add</button>
+    <% end %>
   </div>
-  <% if data["description"] %><p class='ticket-description'><%= data["description"] %></p><% end %>
+  <div class="ticket-title">
+    <h4 class='ticket-name'><%= data["name"] %></h4>
+    <% if data["description"] %><p class='ticket-description'><%= data["description"] %>
+    <% if savings %> - <span class='ticket-savings'>Save <%= savings %><span><% end %>
+    </p><% end %>
+  </div>
 </div>

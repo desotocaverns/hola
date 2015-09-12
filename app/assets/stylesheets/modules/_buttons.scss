@@ -4,12 +4,12 @@ button {
   border: none;
   padding: 1px 1em;
   margin: 0;
-  background-color: $blue;
   line-height: 1.65em;
   vertical-align: middle;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
+  background-color: #444;
   &:hover {
     background-color: darken(#3C99FB, 6);
   }
@@ -19,4 +19,5 @@ button {
   font-size: 1.2em;
   padding: .6em 4em;
   width: 100%;
+  background-color: $blue;
 }

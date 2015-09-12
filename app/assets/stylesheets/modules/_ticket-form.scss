@@ -9,28 +9,23 @@
   padding: 1em 0;
 }
 
-.ticket-title {
-  h4 {
-    display: inline-block;
-    margin: 0;
-    font-size: 1.1em;
-  }
-  margin-bottom: .6em;
+.ticket-name {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.1em;
+  margin-bottom: .4em;
 }
 
 .ticket-price {
-  font-size: .9em;
-  color: #666;
-  display: inline-block;
-  &:before {
-    content: "-";
-    padding: 0 .4em 0 .2em;
-  }
+  display: block;
+  margin-bottom: .4em;
+  font-weight: 500;
 }
 
 .ticket-description {
   margin: 0;
   color: #888;
+  font-size: .95em;
 }
 
 .ticket-count {
@@ -38,6 +33,10 @@
   float: right;
   vertical-align: top;
   white-space: nowrap;
+}
+
+.ticket-savings {
+  font-weight: 500;
 }
 
 .ticket-form {
