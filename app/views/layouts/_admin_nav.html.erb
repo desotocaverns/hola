@@ -1,0 +1,12 @@
+<nav class='admin-nav'>
+  <a href="<%= sales_path %>"><%= svg_icon 'purchases', title: "Purchases" %></a>
+  <a href="<%= tickets_path %>"><%= svg_icon 'tickets', title: "Tickets" %></a>
+  <a href="<%= admins_path %>"><%= svg_icon 'user', title: "Users" %></a>
+  <a href="<%= destroy_admin_session_path %>"></a>
+  <%= link_to destroy_admin_session_path, method: :delete do 
+  svg_icon 'power', title: "Sign out"
+  end%>
+</nav>
+<div class='live'>
+<%= link_to "Purchase Ticket", root_path %> |
+</div>

@@ -1,11 +1,1 @@
-<div><strong>Choose Tickets</strong> > <% unless @sale.purchases.empty? %>
-  <%= link_to 'Contact Info', summary_path(token: @sale.token) %>
-<% else %>
-  Contact Info
-<% end %>
-> Complete Purchase</div>
-
 <div id='tickets'><%= render partial: "quantities" %></div>
-<div id='info'></div>
-<div id='cart'></div>
-

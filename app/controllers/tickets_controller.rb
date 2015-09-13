@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-      @tickets = Ticket.all
+    @tickets = Ticket.all
   end
 
   def show

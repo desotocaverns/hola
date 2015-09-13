@@ -6,6 +6,10 @@
   </style>
 <% end %>
 
+<% if !iphone? %>
+  <%= link_to "Scan Ticket", "workflow://run-workflow?name=Scan%20Ticket" %>
+<% end %>
+
 <%= form_tag sales_path, :method => "get" do %>
   <p>
     <%= text_field_tag :search, params[:search] %>

@@ -1,19 +1,19 @@
-<h3>Tickets</h3>
-<div class='tickets'>
-  <% @tickets.each do |current_ticket| %>
-    <% [current_ticket.revisions.last].each do |revision| %>
-      <% data = revision.ticket_data %>
-      <%= render partial: "ticket_form", locals: { name: "sale[ticket[ticket_ids][#{revision.ticket_id}]]", data: data, savings: false } %>
-    <% end %>
-  <% end %>
-</div>
-
-<h3>Discount Packages</h3>
+<h3 class='ticket-class'>Discount Packages</h3>
 <div class='tickets'>
   <% @packages.each do |current_package| %>
     <% [current_package.revisions.last].each do |revision| %>
       <% data = revision.package_data %>
       <%= render partial: "ticket_form", locals: { name: "sale[package[package_ids][#{revision.package_id}]]", data: data, savings: current_package.savings_percentage } %>
+    <% end %>
+  <% end %>
+</div>
+
+<h3 class='ticket-class'>Regular Tickets</h3>
+<div class='tickets'>
+  <% @tickets.each do |current_ticket| %>
+    <% [current_ticket.revisions.last].each do |revision| %>
+      <% data = revision.ticket_data %>
+      <%= render partial: "ticket_form", locals: { name: "sale[ticket[ticket_ids][#{revision.ticket_id}]]", data: data, savings: false } %>
     <% end %>
   <% end %>
 </div>

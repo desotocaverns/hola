@@ -12,13 +12,7 @@
 </head>
 <body>
 <% if admin_signed_in? %>
-  <span>You are currently signed in as: <%= current_admin.email %></span> |
-  <%= link_to "Sign Out", destroy_admin_session_path, method: :delete %> |
-  <%= link_to "Purchase Ticket", root_path %> |
-  <%= link_to "Admins", admins_path %> |
-  <%= link_to "Packages", packages_path %> |
-  <%= link_to "Tickets", tickets_path %> |
-  <%= link_to "Purchases", sales_path %>
+  <%= render partial: "layouts/admin_nav" %>
 <% end %>
 
 <div class='site'>
