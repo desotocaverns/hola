@@ -5,17 +5,13 @@
 <div><b>Your purchases:</b></div>
 <table>
   <tbody>
-    <% @sale.purchases.each do |purchase| %>
-      <% purchase.redemption_codes.each do |rc| %>
-        <tr>
-          <th>Purchase ID:</th>
-          <td><%= rc.code %></td>
-          <th>Purchase QR:</th>
-          <td><%= rc.redemption_qrcode.as_svg({module_size: 5}).html_safe %></td>
-        </tr>
-        <br>
-      <% end %>
-    <% end %>
+    <tr>
+      <th>Purchase ID:</th>
+      <td><%= @sale.redemption_code %></td>
+      <th>Purchase QR:</th>
+      <td><%= @sale.redemption_qrcode.as_svg({module_size: 5}).html_safe %></td>
+    </tr>
+    <br>
   </tbody>
 </table>
 

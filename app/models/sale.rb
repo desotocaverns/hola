@@ -8,6 +8,8 @@ class Sale < ActiveRecord::Base
 
   before_create :generate_unique_token
 
+  before_save :generate_redemption_code
+
   before_validation :calculate_prices
 
   attr_accessor :is_info_form
@@ -16,6 +18,10 @@ class Sale < ActiveRecord::Base
   validate :must_have_quantities
   validates :name, :tax, :charge_total, presence: true, if: :is_info_form
   validates :email, email: true, presence: true, if: :is_info_form
+
+  def redemption_qrcode
+    RQRCode::QRCode.new("http://localhost:3000/purchase/#{redemption_code}")
+  end
 
   private
 
@@ -27,6 +33,12 @@ class Sale < ActiveRecord::Base
 
   def generate_unique_token
     self.token = SecureRandom.urlsafe_base64(10) + self.id.to_s
+  end
+
+  def generate_redemption_code
+    expiration_date = Time.now + 1.years
+    expiration_date_string = expiration_date.strftime("%d%m%y")
+    self.redemption_code = expiration_date_string + SecureRandom.urlsafe_base64(10)
   end
 
   def must_have_quantities

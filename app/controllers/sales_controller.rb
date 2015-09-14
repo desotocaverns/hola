@@ -14,15 +14,13 @@ class SalesController < ApplicationController
   end
 
   def show
-    @redemption_code = RedemptionCode.find_by(code: params[:id])
-    @purchase = Purchase.find_by(id: @redemption_code.purchase_id)
-    @sale = Sale.find_by(id: @purchase.sale_id)
+    @sale = Sale.find_by(id: params[:id])
+    @purchase = Purchase.find_by(sale_id: @sale.id)
   end
 
   def redeem
-    @redemption_code = RedemptionCode.find_by(code: params[:redemption_code])
-    @purchase = Purchase.find_by(id: @redemption_code.purchase_id)
-    @redemption_code.update_attribute(:claimed_on, Date.today)
+    @sale = Sale.find_by(redemption_code: params[:redemption_code])
+    @sale.update_attribute(:claimed_on, Date.today)
 
     redirect_to "/sales/#{@redemption_code.code}"
   end

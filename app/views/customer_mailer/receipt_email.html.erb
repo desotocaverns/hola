@@ -10,11 +10,7 @@
 
     <div><b>Your purchases:</b></div>
     <ol>
-      <% @purchases.each do |purchase| %>
-        <% purchase.redemption_codes.each do |rc| %>
-          <li>ID: <%= rc.code %></li>
-        <% end %>
-      <% end %>
+      <li>ID: <%= @sale.redemption_code %></li>
     </ol>
   </body>
 </html>
