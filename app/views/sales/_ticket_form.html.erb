@@ -1,17 +1,17 @@
-<div class="ticket">
-  <div class="ticket-count">
-    <div class="ticket-price"><%= price(data["price"]) %></div>
+<div class="ticket grid no-gutter">
+  <div class="ticket-title grid-cell three-of-four">
+    <h4 class='ticket-name'><%= data["name"] %></h4>
+    <% if data["description"] %><p class='ticket-description'><%= data["description"] %>
+    <% if savings %> - <span class='ticket-savings'>Save <%= savings %><span><% end %>
+    </p><% end %>
+  </div>
+  <div class="ticket-count grid-cell one-of-four">
     <%= form_tag collect_quantity_path, :remote => true, :method => collect_quantity_method, class: 'ticket-form' do %>
+      <div class="ticket-price"><%= price(data["price"]) %></div>
       <div class="select-box"><%= select_tag "#{name}", options_for_select((1..25).to_a, 1) %></div>
       <input type="hidden" name="sale[token]" value="<%= @sale.token %>">
       <input type="hidden" name="adding" value="true">
       <button class="add-to-cart" type="submit">Add</button>
     <% end %>
-  </div>
-  <div class="ticket-title">
-    <h4 class='ticket-name'><%= data["name"] %></h4>
-    <% if data["description"] %><p class='ticket-description'><%= data["description"] %>
-    <% if savings %> - <span class='ticket-savings'>Save <%= savings %><span><% end %>
-    </p><% end %>
   </div>
 </div>

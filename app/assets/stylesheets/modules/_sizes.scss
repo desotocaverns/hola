@@ -1,0 +1,56 @@
+// global breakpoints
+$tiny: 320px;
+$small: 550px;
+$medium: 760px;
+$large: 900px;
+$max: 1080px;
+
+
+// item widths
+$main-sidebar-width: 300px;
+$main-content-max: 1080px;
+$content-pad: 20px;
+
+$h-pad-box: 5%, 40px;
+$v-pad-box: 5%, 30px;
+
+$base-font-size: 10px;
+$main-nav-font-size: 1.6rem;
+
+/* =====================================================================
+ * sizing
+ * ===================================================================== */
+
+$width-map: (1:one, 2:two, 3:three, 4:four, 5:five, 6:six);
+
+@mixin widths($num) {
+  @for $i from 1 to $num {
+    .#{map-get($width-map, $i)}-of-#{map-get($width-map, $num)} {
+      width: 100%*$i/$num; 
+    }
+    .small-#{map-get($width-map, $i)}-of-#{map-get($width-map, $num)} {
+      @include at-least($small) {
+        width: 100%*$i/$num; 
+      }
+    }
+    .medium-#{map-get($width-map, $i)}-of-#{map-get($width-map, $num)} {
+      @include at-least($medium) {
+        width: 100%*$i/$num; 
+      }
+    }
+    .large-#{map-get($width-map, $i)}-of-#{map-get($width-map, $num)} {
+      @include at-least($medium) {
+        width: 100%*$i/$num; 
+      }
+    }
+  }
+}
+
+@include widths(2);
+@include widths(3);
+@include widths(4);
+@include widths(5);
+@include widths(6);
+.small-golden { width: 38.2%; }
+.large-golden { width: 61.8%; }
+.full-width { width: 100%; }

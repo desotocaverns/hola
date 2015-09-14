@@ -1,3 +1,24 @@
+@mixin until($size) {
+  $size: $size - 1;
+  @media all and (max-width: $size) { @content; }
+}
+
+@mixin at-least($size) {
+  @media all and (min-width: $size) { @content; }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content; }
+  &:-moz-placeholder           { @content; }
+  &::-moz-placeholder          { @content; }
+  &:-ms-input-placeholder      { @content; }
+}
+
+@mixin between($small-width, $large-width) {
+  $large-width: $large-width - 1;
+  @media (max-width: $large-width) and (min-width: $small-width) { @content; }
+}
+
 @mixin triangle($direction, $color, $size) {
   @if $direction == left {
     border-bottom: $size solid transparent;
