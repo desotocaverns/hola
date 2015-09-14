@@ -5,6 +5,9 @@ class SalesController < ApplicationController
   before_action :assign_packages, except: [:success]
   before_action :assign_sale, only: [:success]
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
+  before_action :validate_token, except: [:index, :show, :redeem, :success]
+
+  before_filter :set_cache_buster
 
   def index
     @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
@@ -187,6 +190,22 @@ class SalesController < ApplicationController
   end
 
   private
+
+  def validate_token
+    @sale = Sale.find_by(token: params[:token])
+    
+    if @sale
+      if @sale.charge_id
+        redirect_to new_sale_path
+      end
+    end
+  end
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
 
   # ASSIGNMENTS
 

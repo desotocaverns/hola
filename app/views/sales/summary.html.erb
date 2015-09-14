@@ -1,5 +1,12 @@
 <% content_for :head do %>
   <script src="https://checkout.stripe.com/checkout.js"></script>
+  <script type="text/javascript">
+    $(window).bind("pageshow", function(event) {
+      if (event.originalEvent.persisted) {
+        window.location.reload() 
+      }
+    });
+  </script>
 <% end %>
 
 <div><%= link_to 'Choose Tickets', new_sale_path(token: @sale.token) %> > <strong>Contact Info</strong> > Complete Purchase</div>
