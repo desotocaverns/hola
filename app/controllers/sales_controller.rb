@@ -22,7 +22,7 @@ class SalesController < ApplicationController
     @sale = Sale.find_by(redemption_code: params[:redemption_code])
     @sale.update_attribute(:claimed_on, Date.today)
 
-    redirect_to "/sales/#{@redemption_code.code}"
+    redirect_to "/sales/#{@sale.redemption_code}"
   end
 
   def new
@@ -108,6 +108,21 @@ class SalesController < ApplicationController
 
     if params[:adding] == ""
       redirect_to summary_path(token: @sale.token)
+    end
+  end
+
+  def delete_cart_item
+    @sale = Sale.find_by(token: params[:token])
+    purchase = @sale.purchases.find_by(ticket_revision_id: params[:ticket_id])
+
+    respond_to do |format|
+      if @sale.purchases.destroy(purchase)
+        format.html { redirect_to new_sale_path }
+        format.js { render }
+      else
+        format.html { redirect_to new_sale_path }
+        format.js { render }
+      end
     end
   end
 

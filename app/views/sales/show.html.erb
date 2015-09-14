@@ -26,18 +26,18 @@
       <th>Expires on:</th>
       <td><%= @purchase.expires_on %></td>
     </tr>
-    <% if @redemption_code.claimed_on != nil %>
+    <% if @sale.claimed_on != nil %>
       <tr>
         <th>Claimed on:</th>
-        <td><%= @redemption_code.claimed_on %></td>
+        <td><%= @sale.claimed_on %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<% if @redemption_code.claimed_on == nil && @purchase.expires_on >= Time.now %>
+<% if @sale.claimed_on == nil && @purchase.expires_on >= Time.now %>
   <br>
-  <form method="post" action="/sales/<%= @redemption_code.code %>/redeem">
+  <form method="post" action="/sales/<%= @sale.redemption_code %>/redeem">
     <input type="submit" autocomplete="off" value="Redeem">
   </form>
   <br>

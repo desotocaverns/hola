@@ -7,6 +7,7 @@
         <% ticket = TicketRevision.find(tp.ticket_revision_id) %>
         <div class='cart-ticket'>
           <p><%= ticket.ticket_data["name"] %> x <%= tp.quantity %></p>
+          <p><%= link_to "delete", cart_delete_items_path(token: @sale.token, ticket_id: ticket.id), remote: true, method: :patch %></p>
         </div>
       <% end %>
     </div>

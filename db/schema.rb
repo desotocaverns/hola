@@ -85,12 +85,6 @@ ActiveRecord::Schema.define(version: 20150914182832) do
     t.integer "quantity",            default: 1, null: false
   end
 
-  create_table "redemption_codes", force: :cascade do |t|
-    t.integer "purchase_id"
-    t.string  "code"
-    t.date    "claimed_on"
-  end
-
   create_table "sales", force: :cascade do |t|
     t.string   "name"
     t.string   "email"

@@ -4,7 +4,7 @@ class Sale < ActiveRecord::Base
 
   scope :complete, -> { where("charge_id IS NOT NULL") }
 
-  has_many :purchases, dependent: :destroy
+  has_many :purchases, dependent: :destroy, after_remove: :purchase_removed
 
   before_create :generate_unique_token
 
@@ -29,6 +29,11 @@ class Sale < ActiveRecord::Base
     subtotal = purchases.inject(0) {|total, e| total + e.price * e.quantity }
     self.tax = subtotal * 0.04
     self.charge_total = subtotal + self.tax
+  end
+
+  def purchase_removed(purchase)
+    calculate_prices
+    save(validate: false)
   end
 
   def generate_unique_token
