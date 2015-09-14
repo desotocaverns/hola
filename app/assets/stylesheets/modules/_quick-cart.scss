@@ -1,12 +1,80 @@
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-5deg);
+  }
+
+  70% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes flash {
+  0% {
+    background-color: rgba(#fc0, 0);
+  }
+  25% {
+    background-color: rgba(#fc0, .1);
+  }
+  50% {
+    background-color: rgba(#fc0, .1);
+  }
+  75% {
+    background-color: rgba(#fc0, 0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1; 
+  }
+}
+
+@keyframes show-cart {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1; 
+    transform: translateY(0px);
+  }
+}
+
 [id=quick-cart]{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  background: rgba(#fff, .95);
-  z-index: 2;
-  border-top: 1px solid #f2f2f2;
+  animation: fade-in .3s ease-in;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+@include until($medium) {
+  [id=quick-cart]{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(#fff, .95);
+    z-index: 2;
+    border-top: 1px solid #f2f2f2;
+    display: none;
+    &.show {
+      animation: show-cart .4s ease-out;
+    }
+  }
 }
 
 .quick-cart {
@@ -14,13 +82,15 @@
     width: 100%;
     max-width: $max-width;
     margin: 0 auto;
-    display: table;
-    padding: 0 1em;
+    @include until($medium){
+      padding: 0 1em;
+    }
+    animation: flash .4s ease-out;
   }
 
   &-info, &-form {
-    display: table-cell;
     padding: $content-h-pad/2 0;
+    vertical-align: middle;
   }
 
   &-title {
@@ -46,7 +116,6 @@
 
   &-total {
     font-weight: bold;
-    padding-right: .4em;
   }
 
   &-icon {
@@ -54,6 +123,7 @@
     position: relative;
     top: -.03em;
     color: $blue;
+    animation: wiggle .4s ease-out;
   }
 }
 
