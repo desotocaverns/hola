@@ -14,7 +14,7 @@ class SalesController < ApplicationController
   end
 
   def show
-    @sale = Sale.find_by(id: params[:id])
+    @sale = Sale.find_by(redemption_code: params[:id])
     @purchase = Purchase.find_by(sale_id: @sale.id)
   end
 

@@ -24,14 +24,14 @@
     Tax: $<%= sale.tax / 100.00 %><br>
     Email: <%= sale.email %><br>
     Redemption Code: <%= sale.redemption_code %><br>
+    <% if sale.claimed_on != nil %><span style="color:red">Redeemed On: <%= sale.claimed_on %></span><br><% end %>
     <ol>
       <% sale.purchases.each do |purchase| %>
         <li>Type: <%= purchase.type %>,<br>
-          <% if sale.claimed_on != nil %><span style="color:red">Redeemed On: <%= sale.claimed_on %></span>,<br><% end %>
-          Expires On: <%= purchase.expires_on %><br>
-          <%= link_to "Show", "/sales/#{sale.redemption_code}" %></li>
+          Expires On: <%= purchase.expires_on %></li>
       <% end %>
     </ol>
+    <%= link_to "Show", "/sales/#{sale.redemption_code}" %>
   </div>
 
   <hr>
