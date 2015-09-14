@@ -54,14 +54,11 @@ class SalesController < ApplicationController
       end
     end
 
+    @sale.save
+    
     respond_to do |format|
-      if @sale.save
-        format.html { redirect_to new_sale_path }
-        format.js { render }
-      else
-        format.html { redirect_to new_sale_path }
-        format.js { render }
-      end
+      format.html { redirect_to new_sale_path }
+      format.js { render }
     end
   end
 
@@ -98,9 +95,25 @@ class SalesController < ApplicationController
 
     if params[:sale][:package]
       params[:sale][:package][:package_ids].each do |package_id, quantity|
-        @sale.purchases.where(package_revision_id: package_id).destroy_all
-        purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
-        @sale.purchases << purchase
+        if @sale.purchases.where(package_revision_id: package_id).any?
+          purchase = @sale.purchases.find_by(package_revision_id: package_id)
+
+          quantity = quantity.to_i unless quantity == ""
+          if params[:adding] == "true"
+            quantity = purchase.quantity + quantity.to_i
+          end
+
+          if quantity == 0 || quantity == ""
+            unless purchase.destroy
+              flash[:alert] = "Cannot destroy every purchase"
+            end
+          else
+            purchase.update(:quantity => quantity)
+          end
+        else
+          purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
+          @sale.purchases << purchase
+        end
       end
     end
 
