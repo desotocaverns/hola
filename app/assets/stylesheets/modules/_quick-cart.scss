@@ -85,7 +85,9 @@
     @include until($medium){
       padding: 0 1em;
     }
-    animation: flash .4s ease-out;
+    .updated & {
+      animation: flash .4s ease-out;
+    }
   }
 
   &-info, &-form {
@@ -123,7 +125,9 @@
     position: relative;
     top: -.03em;
     color: $blue;
-    animation: wiggle .4s ease-out;
+    .updated & {
+      animation: wiggle .4s ease-out;
+    }
   }
 }
 
