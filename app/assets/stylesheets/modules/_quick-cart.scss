@@ -53,11 +53,8 @@
 }
 
 [id=quick-cart]{
-  animation: fade-in .3s ease-in;
-  display: none;
-
   &.show {
-    display: block;
+    animation: fade-in .3s ease-in;
   }
 }
 
