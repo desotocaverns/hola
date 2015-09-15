@@ -46,6 +46,7 @@ $width-map: (1:one, 2:two, 3:three, 4:four, 5:five, 6:six);
   }
 }
 
+
 @include widths(2);
 @include widths(3);
 @include widths(4);
@@ -54,3 +55,22 @@ $width-map: (1:one, 2:two, 3:three, 4:four, 5:five, 6:six);
 .small-golden { width: 38.2%; }
 .large-golden { width: 61.8%; }
 .full-width { width: 100%; }
+
+@include at-least($small) {
+  .small-full-width {
+    width: 100%;
+    display: block;
+  }
+}
+
+@include at-least($medium) {
+  .medium-full-width {
+    width: 100%;
+  }
+}
+
+@include at-least($large) {
+  .large-full-width {
+    width: 100%;
+  }
+}

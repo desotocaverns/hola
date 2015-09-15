@@ -1,0 +1,41 @@
+.grid {
+
+  /* ==========================================================================
+   * Horizontal alignment
+   * ========================================================================== */
+
+
+  /* ==========================================================================
+   * Vertical alignment
+   * ========================================================================== */
+
+  &.align-top, &.align-middle, &.align-bottom {
+    &:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+    }
+  }
+
+  // Top-aligned cells
+  &.align-top {
+    .grid-cell, &:before { vertical-align: top; }
+  }
+
+  // Middle-aligned cells
+  &.align-middle {
+    .grid-cell, &:before { vertical-align: middle; }
+  }
+
+  // Bottom-aligned cells
+  &.align-bottom {
+    .grid-cell, &:before { vertical-align: bottom; }
+  }
+}
+
+.text-left,    .align-left   { text-align: left; }
+.text-center,  .align-center { text-align: center; }
+.text-right,   .align-right  { text-align: right; }
+.align-middle                { vertical-align: middle; }
+.align-top                   { vertical-align: top; }
+.align-bottom                { vertical-align: bottom; }

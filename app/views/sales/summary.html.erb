@@ -9,15 +9,15 @@
   </script>
 <% end %>
 
-<div><%= link_to 'Choose Tickets', new_sale_path(token: @sale.token) %> > <strong>Contact Info</strong> > Complete Purchase</div>
+<% if @sale.email %>
+  <div class='static-cart'><%= render 'static_cart' %></div>
+<% end %>
 
 <div class='personal-info'><%= personal_info %></div>
-
-<div class='static-cart'><%= render 'static_cart' %></div>
 
 <% if @sale.email %>
   <%= form_tag checkout_path, remote: true, method: :patch, class: "checkout-form" do %>
     <input type="hidden" name="token" value="<%= @sale.token %>">
-    <button type="submit" class="continue">Checkout</button>
+    <%= render partial: "checkout_form", locals: { button_text: "Complete Purchase" } %>
   <% end %>
 <% end %>

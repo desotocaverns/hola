@@ -7,8 +7,9 @@ $light-text: #777;
 html {
   height: 100%;
   color: #444;
-  background: #fdfdfd;
+  background: $site-bg;
 }
+
 body {
   padding: 0; 
   margin: 0;
@@ -17,5 +18,23 @@ body {
 .site-content {
   max-width: $max-width;
   margin: 0 auto;
-  padding: $content-h-pad 1em $content-h-pad * 4;
+  padding-bottom: $content-h-pad * 4;
+}
+
+.box-padding {
+  padding: $content-h-pad/2 .5em;
+
+  @include at-least($small) {
+    padding: $content-h-pad 1em;
+  }
+
+  @include at-least($medium) {
+    padding: $content-h-pad 1.5em;
+  }
+}
+
+.card {
+  @extend .box-padding;
+  background: #fff;
+  border: 1px solid rgba(#000, .15);
 }

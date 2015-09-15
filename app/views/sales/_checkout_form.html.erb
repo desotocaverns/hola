@@ -1,0 +1,8 @@
+<div class="form-footer grid align-middle no-gutter">
+  <div class="grid-cell one-of-two">
+    <%= link_to 'View Tickets', new_sale_path(token: @sale.token), class: 'back-link' %>
+  </div>
+  <div class="grid-cell one-of-two align-right">
+    <button type="submit" class="primary-button"><%= button_text %> &rarr;</button>
+  </div>
+</div>
