@@ -106,16 +106,20 @@ class SalesController < ApplicationController
     @sale.update_attributes(sale_params)
 
     if params[:adding].to_s == ""
-      redirect_to summarize_sale_path(@sale)
+      if @sale.purchases.empty?
+        redirect_to edit_sale_path(@sale)
+      else
+        redirect_to summarize_sale_path(@sale)
+      end
     end
   end
 
   def delete_purchase
-    begin
-      @sale.purchases.destroy(params[:purchase_id])
-      redirect_to cart_path(@sale)
-    rescue ActiveRecord::RecordNotDestroyed
-      flash[:alert] = "Cannot destroy every purchase"
+    @sale.purchases.destroy(params[:purchase_id])
+
+    if @sale.purchases.empty?
+      redirect_to edit_sale_path(@sale)
+    else
       redirect_to cart_path(@sale)
     end
   end

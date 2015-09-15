@@ -2,7 +2,9 @@
   <div class="grid-cell one-of-two">
     <%= link_to 'View Tickets', edit_sale_path(@sale), class: 'back-link' %>
   </div>
-  <div class="grid-cell one-of-two align-right">
-    <button type="submit" class="primary-button"><%= button_text %> &rarr;</button>
-  </div>
+  <% unless @sale.purchases.empty? %>
+    <div class="grid-cell one-of-two align-right">
+      <button type="submit" class="primary-button"><%= button_text %> &rarr;</button>
+    </div>
+  <% end %>
 </div>

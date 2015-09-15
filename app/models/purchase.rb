@@ -5,7 +5,6 @@ class Purchase < ActiveRecord::Base
 
   before_create :generate_unique_token
   before_save :calculate_expiration_date
-  before_destroy :validate_one_or_more_purchases
 
   # Answers the name of the Purchase item at the time the Purchase was created.
   def name
@@ -13,12 +12,6 @@ class Purchase < ActiveRecord::Base
   end
 
   private
-
-  def validate_one_or_more_purchases
-    if sale.purchases.count <= 1
-      return false
-    end
-  end
 
   def calculate_expiration_date
     expiration_date = Time.now + 1.years

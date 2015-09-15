@@ -1,4 +1,4 @@
-<% if @sale.persisted? && @sale.charge_total > 0 %>
+<% if @sale.persisted? && @sale.charge_total > 0 && @sale.purchases.any? %>
   <div class='quick-cart'>
     <%= form_tag summarize_sale_path(@sale), method: :get, class: 'form-footer' do %>
       <div class='quick-cart-content'>
