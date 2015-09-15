@@ -17,6 +17,7 @@
 @keyframes flash {
   0% {
     background-color: rgba(#fff, 0);
+    z-index: 1;
   }
   25% {
     background-color: rgba(#fff, .1);
@@ -26,6 +27,9 @@
   }
   75% {
     background-color: rgba(#fff, 0);
+  }
+  100% {
+    z-index: 0;
   }
 }
 
@@ -56,20 +60,26 @@
   &.show {
     animation: fade-in .3s ease-in;
   }
-}
-
-.quick-cart {
   @include until($medium) {
-    &.show {
+    &.show .form-footer {
       animation: show-cart .4s ease-out;
     }
   }
 
+  &.updated .quick-cart-content {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      animation: flash .4s ease-out;
+      z-index: -1;
+    }
+  }
+}
+
+.quick-cart {
   &-content {
     margin: 0 auto;
-    .updated & {
-      animation: flash .4s ease-out;
-    }
   }
 
   &-info, &-button {

@@ -27,13 +27,6 @@
       <%= f.hidden_field :is_info_form, value: true %>
     </div>
 
-    <div class="form-footer grid align-middle no-gutter">
-      <div class="grid-cell one-of-two">
-        <%= link_to 'Browse Tickets', new_sale_path(token: @sale.token), class: 'back-link' %>
-      </div>
-      <div class="grid-cell one-of-two align-right">
-        <button class='primary-button' type='submit'>Continue &rarr;</button>
-      </div>
-    </div>
+    <%= render partial: "checkout_form", locals: { button_text: "Continue" } %>
   <% end %>
 </div>

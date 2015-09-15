@@ -1,6 +1,6 @@
 <% if @sale.token && @sale.charge_total > 0 %>
-  <%= form_tag summary_path(token: @sale.token), method: :get, class: 'form-footer' do %>
-    <div class='quick-cart'>
+  <div class='quick-cart'>
+    <%= form_tag summary_path(token: @sale.token), method: :get, class: 'form-footer' do %>
       <div class='quick-cart-content'>
         <div class="grid">
           <div class='quick-cart-info grid-cell one-of-two'>
@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% end %>
 
