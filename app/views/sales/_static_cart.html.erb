@@ -6,7 +6,6 @@
       <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
         <div class='cart-ticket'>
           <p><%= purchase.name %> x <%= purchase.quantity %></p>
-          <p><%= link_to "delete", delete_purchase_sale_path(redemption_code: @sale.redemption_code, purchase_id: purchase.id), remote: true, method: :delete %></p>
         </div>
       <% end %>
     </div>
@@ -14,7 +13,6 @@
       <% @sale.purchases.where(type: "PackagePurchase").each do |purchase| %>
         <div class='cart-package'>
           <p><%= purchase.name %> x <%= purchase.quantity %></p>
-          <p><%= link_to "delete", delete_purchase_sale_path(redemption_code: @sale.redemption_code, purchase_id: purchase.id), remote: true, method: :delete %></p>
         </div>
       <% end %>
     </div>

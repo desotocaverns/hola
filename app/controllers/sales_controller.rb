@@ -111,9 +111,11 @@ class SalesController < ApplicationController
   end
 
   def delete_purchase
-    @sale.purchases.delete(params[:purchase_id])
-    respond_to do |format|
-      format.js { render }
+    if @sale.purchases.delete(params[:purchase_id])
+      redirect_to cart_path(@sale)
+    else
+      flash[:alert] = "Cannot destroy every purchase"
+      redirect_to cart_path(@sale)
     end
   end
 
