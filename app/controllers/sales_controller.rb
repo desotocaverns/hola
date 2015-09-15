@@ -111,9 +111,10 @@ class SalesController < ApplicationController
   end
 
   def delete_purchase
-    if @sale.purchases.delete(params[:purchase_id])
+    begin
+      @sale.purchases.destroy(params[:purchase_id])
       redirect_to cart_path(@sale)
-    else
+    rescue ActiveRecord::RecordNotDestroyed
       flash[:alert] = "Cannot destroy every purchase"
       redirect_to cart_path(@sale)
     end
