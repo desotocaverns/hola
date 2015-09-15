@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
   before_action :assign_admin, only: [:edit, :active_for_authentication?]
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, :only_autocrats
 
   def destroy
     @admin = Admin.find(params[:id])
@@ -17,5 +17,14 @@ class AdminsController < ApplicationController
 
     def admin_params
       params[:admin].permit(:email, :password)
+    end
+
+    def only_autocrats
+      if admin_signed_in?
+        unless current_admin.autocratic
+          flash[:alert] = "You are not authorized"
+          redirect_to new_sale_path
+        end
+      end
     end
 end

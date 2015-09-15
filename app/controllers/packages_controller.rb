@@ -1,6 +1,6 @@
 class PackagesController < ApplicationController
   before_action :set_package, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, :only_autocrats
 
   # GET /packages
   # GET /packages.json
@@ -98,6 +98,15 @@ class PackagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
       params[:package].permit(:name, :description, :price, :for_sale, :package_tickets_attributes => [:ticket_id, :quantity])
+    end
+
+    def only_autocrats
+      if admin_signed_in?
+        unless current_admin.autocratic
+          flash[:alert] = "You are not authorized"
+          redirect_to new_sale_path
+        end
+      end
     end
 end
 

@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, :only_autocrats
 
   def index
     @tickets = Ticket.all
@@ -63,5 +63,14 @@ class TicketsController < ApplicationController
 
   def ticket_params
     params[:ticket].permit(:name, :description, :price, :for_sale)
+  end
+
+  def only_autocrats
+    if admin_signed_in?
+      unless current_admin.autocratic
+        flash[:alert] = "You are not authorized"
+        redirect_to new_sale_path
+      end
+    end
   end
 end

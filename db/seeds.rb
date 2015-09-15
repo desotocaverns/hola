@@ -57,11 +57,22 @@ sale.save!
 Admin.create!(
   email: "brandon@desotocavernspark.com",
   password: "brandonspw",
-  activated: true
+  activated: true,
+  autocratic: true
 )
 
 Admin.create!(
   email: "isaac@thewilliams.ws",
   password: "isaacspw",
+  activated: true,
+  autocratic: true
+)
+
+Admin.create!(
+  email: "bob@randomemployee.com",
+  password: "nonautocraticpw",
   activated: true
 )
+
+
+
