@@ -15,9 +15,15 @@ button, .button {
   }
 }
 
-.continue {
+.continue-button {
   font-size: 1.2em;
   padding: .6em 4em;
   width: 100%;
   background-color: $blue;
+}
+
+.primary-button {
+  font-size: 1em;
+  line-height: 2.2em;
+  background: $blue;
 }

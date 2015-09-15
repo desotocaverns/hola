@@ -1,21 +1,32 @@
 <%= form_for @sale, :url => sales_update_cart_path(redemption_code: @sale.redemption_code), :html => {id: "cart_form", class: "cart-form"} do |f| %>
-  <% cart_tickets.each do |purchase| %>
-    <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
-    <div><%= revision.ticket_data["name"] %></div>
+  <div class='card'>
+    <% cart_tickets.each do |purchase| %>
+      <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
+      <div><%= revision.ticket_data["name"] %></div>
+      <input class='item-count' type="text" name="sale[ticket[ticket_ids][<%= revision.ticket_id %>]]" value="<%= purchase.quantity %>">
+    <% end %>
 
-    <input class='item-count' type="text" name="sale[ticket[ticket_ids][<%= revision.ticket_id %>]]" value="<%= purchase.quantity %>">
-  <% end %>
+    <% cart_packages.each do |purchase| %>
+      <% revision = PackageRevision.find_by(id: purchase.package_revision_id) %>
+      <div class='grid no-gutter align-middle'>
+        <div class='grid-cell one-of-two'>
+          <%= revision.package_data["name"] %>
+        </div>
 
-  <% cart_packages.each do |purchase| %>
-    <% revision = PackageRevision.find_by(id: purchase.package_revision_id) %>
-    <div><%= revision.package_data["name"] %></div>
-
-    <input class='item-count' type="text" name="sale[package[package_ids][<%= revision.package_id %>]]" value="<%= purchase.quantity %>">
-  <% end %>
+        <div class='grid-cell one-of-two align-right'>
+          <input class='item-count' type="text" name="sale[package[package_ids][<%= revision.package_id %>]]" value="<%= purchase.quantity %>">
+        </div>
+      </div>
+    <% end %>
+  </div>
 
   <input type="hidden" name="adding" value="">
-
-  <div class='form-footer'>
-    <button class='continue' type='submit'>Update Cart</button>
+  <div class="form-footer grid align-middle no-gutter">
+    <div class="grid-cell one-of-two">
+      <%= link_to 'Cancel', summarize_sale_path(@sale), class: 'back-link' %>
+    </div>
+    <div class="grid-cell one-of-two align-right">
+      <button type="submit" class="primary-button">Update Cart</button>
+    </div>
   </div>
 <% end %>

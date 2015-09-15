@@ -16,16 +16,20 @@
 
 @keyframes flash {
   0% {
-    background-color: rgba(#fc0, 0);
+    background-color: rgba(#fff, 0);
+    z-index: 1;
   }
   25% {
-    background-color: rgba(#fc0, .1);
+    background-color: rgba(#fff, .1);
   }
   50% {
-    background-color: rgba(#fc0, .1);
+    background-color: rgba(#fff, .1);
   }
   75% {
-    background-color: rgba(#fc0, 0);
+    background-color: rgba(#fff, 0);
+  }
+  100% {
+    z-index: 0;
   }
 }
 
@@ -56,39 +60,29 @@
   &.show {
     animation: fade-in .3s ease-in;
   }
-}
-
-@include until($medium) {
-  [id=quick-cart]{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(#fff, .95);
-    z-index: 2;
-    border-top: 1px solid #f2f2f2;
-    display: none;
-    &.show {
+  @include until($medium) {
+    &.show .form-footer {
       animation: show-cart .4s ease-out;
+    }
+  }
+
+  &.updated .quick-cart-content {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      animation: flash .4s ease-out;
+      z-index: -1;
     }
   }
 }
 
 .quick-cart {
   &-content {
-    width: 100%;
-    max-width: $max-width;
     margin: 0 auto;
-    @include until($medium){
-      padding: 0 1em;
-    }
-    .updated & {
-      animation: flash .4s ease-out;
-    }
   }
 
-  &-info, &-form {
-    padding: $content-h-pad/2 0;
+  &-info, &-button {
     vertical-align: middle;
   }
 
@@ -97,20 +91,14 @@
     margin: 0;
   }
 
-  &-form {
+  &-button {
     text-align: right;
   }
 
-  &-button {
-    @extend button;
-    font-size: 1em;
-    line-height: 2.2em;
-    background: $blue;
-  }
 
   &-items {
     font-size: .8em;
-    color: $light-text;
+    opacity: .7;
   }
 
   &-total {

@@ -1,5 +1,5 @@
-<h3 class='ticket-class'>Discount Packages</h3>
-<div class='tickets'>
+<h3 class='section-heading'>Discount Packages</h3>
+<div class='tickets card'>
   <% @packages.each do |current_package| %>
     <% [current_package.revisions.last].each do |revision| %>
       <% data = revision.package_data %>
@@ -8,8 +8,8 @@
   <% end %>
 </div>
 
-<h3 class='ticket-class'>Regular Tickets</h3>
-<div class='tickets'>
+<h3 class='section-heading'>Regular Tickets</h3>
+<div class='tickets card'>
   <% @tickets.each do |current_ticket| %>
     <% [current_ticket.revisions.last].each do |revision| %>
       <% data = revision.ticket_data %>

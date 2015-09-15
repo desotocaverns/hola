@@ -1,56 +1,50 @@
 .tickets {
   width: 100%;
   margin: 1em 0;
-  border-top: 1px solid #ddd;
-}
-
-.ticket-class {
-  text-align: center;
-  text-transform: uppercase;
 }
 
 .ticket {
-  border-bottom: 1px solid #ddd;
   padding: 1em 0;
+  + .ticket { border-top: 1px solid #ddd; }
+
+  &-name {
+    display: inline-block;
+    margin: 0;
+    font-size: 1.1em;
+    margin-bottom: .4em;
+  }
+
+  &-price {
+    display: block;
+    margin-bottom: .4em;
+    font-weight: 500;
+  }
+
+  &-description {
+    margin: 0;
+    color: #888;
+    font-size: .95em;
+  }
+
+  &-count {
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  &-savings {
+    font-weight: 500;
+  }
+
 }
 
-.ticket-name {
-  display: inline-block;
-  margin: 0;
-  font-size: 1.1em;
-  margin-bottom: .4em;
+@include at-least($small) {
+  .ticket-price {
+    text-align: right; 
+  }
 }
 
-.ticket-price {
-  /*display: block;*/
-  /*margin-bottom: .4em;*/
-  font-weight: 500;
+@include until($small) {
+  .price-grid {
+    margin-top: .4em;
+  }
 }
-
-.ticket-description {
-  margin: 0;
-  color: #888;
-  font-size: .95em;
-}
-
-.ticket-count {
-  text-align: right;
-  vertical-align: top;
-  white-space: nowrap;
-}
-
-.ticket-savings {
-  font-weight: 500;
-}
-
-.ticket-form {
-  margin: 0;
-  display: inline;
-}
-
-.form-footer {
-  text-align: center;
-  margin: 3em 0;
-}
-
-

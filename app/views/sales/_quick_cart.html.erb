@@ -1,12 +1,18 @@
 <% if @sale.persisted? && @sale.charge_total > 0 %>
-  <div class='quick-cart-content grid'>
-    <div class='quick-cart-info grid-cell one-of-two'>
-      <%= svg_icon 'cart', title: "Cart Subtotal", class: 'quick-cart-icon' %>
-      <span class='quick-cart-total'><%= price(@sale.charge_total - @sale.tax)%></span>
-      <span class='quick-cart-items'>(<%= pluralize(cart_items, 'item')%>)</span>
-    </div>
-    <%= form_tag summarize_sale_path(@sale), method: :get, class: 'quick-cart-form grid-cell one-of-two' do %>
-      <button class='quick-cart-button' type='submit'>Continue &rarr;</button>
+  <div class='quick-cart'>
+    <%= form_tag summarize_sale_path(@sale), method: :get, class: 'form-footer' do %>
+      <div class='quick-cart-content'>
+        <div class="grid">
+          <div class='quick-cart-info grid-cell one-of-two'>
+            <%= svg_icon 'cart', title: "Cart Subtotal", class: 'quick-cart-icon' %>
+            <span class='quick-cart-total'><%= price(@sale.charge_total - @sale.tax)%></span>
+            <span class='quick-cart-items'>(<%= pluralize(cart_items, 'item')%>)</span>
+          </div>
+          <div class="grid-cell one-of-two quick-cart-button">
+            <button class='primary-button' type='submit'>Continue &rarr;</button>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
 <% end %>

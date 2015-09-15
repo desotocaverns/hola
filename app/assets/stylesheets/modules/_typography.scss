@@ -1,0 +1,30 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.svg-icon {
+  fill: currentColor;
+  font-size: 1.2em;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+}
+h1 { font-size: 36px; }
+h2 { font-size: 24px; }
+h3 { font-size: 20px; }
+h4 { font-size: 18px; }
+h5 { font-size: 16px; }
+h6 { font-size: 14px; }
+
+.section-heading {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+hr {
+  border: none;
+  background: none;
+  width: 100%;
+  border-bottom: 1px solid $page-border;
+}

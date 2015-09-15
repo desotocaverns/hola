@@ -10,14 +10,14 @@
   </script>
 <% end %>
 
-<div><%= link_to 'Choose Tickets', edit_sale_path(@sale) %> > <strong>Contact Info</strong> > Complete Purchase</div>
+<% if @sale.email %>
+  <div class='static-cart'><%= render 'static_cart' %></div>
+<% end %>
 
 <div class='personal-info'><%= personal_info %></div>
 
-<div class='static-cart'><%= render 'static_cart' %></div>
-
 <% if @sale.email %>
   <%= form_tag checkout_path(redemption_code: @sale.redemption_code), remote: true, method: :patch, class: "checkout-form" do %>
-    <button type="submit" class="continue">Checkout</button>
+    <%= render partial: "checkout_form", locals: { button_text: "Complete Purchase" } %>
   <% end %>
 <% end %>
