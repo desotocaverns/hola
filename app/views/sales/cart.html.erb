@@ -1,9 +1,16 @@
 <%= form_for @sale, :url => sales_update_cart_path(redemption_code: @sale.redemption_code), :html => {id: "cart_form", class: "cart-form"} do |f| %>
+  <h3 class='section-heading'>Edit Cart</h3>
   <div class='card'>
     <% cart_tickets.each do |purchase| %>
       <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
-      <div><%= revision.ticket_data["name"] %></div>
-      <input class='item-count' type="text" name="sale[ticket[ticket_ids][<%= revision.ticket_id %>]]" value="<%= purchase.quantity %>">
+      <div class='grid no-gutter align-middle'>
+        <div class='grid-cell one-of-two'>
+          <%= revision.ticket_data["name"] %>
+        </div>
+        <div class='grid-cell one-of-two align-right'>
+          <input class='item-count' type="text" name="sale[ticket[ticket_ids][<%= revision.ticket_id %>]]" value="<%= purchase.quantity %>">
+        </div>
+      </div>
     <% end %>
 
     <% cart_packages.each do |purchase| %>
@@ -18,9 +25,16 @@
         </div>
       </div>
     <% end %>
+    <hr>
+    <div class='align-right'>
+      <div class='tax'>Tax : <%= price(@sale.tax) %></div>
+      <div class='total'>Total : <strong><%= price(@sale.charge_total)%></strong></div>
+    </div>
+
   </div>
 
   <input type="hidden" name="adding" value="">
+
   <div class="form-footer grid align-middle no-gutter">
     <div class="grid-cell one-of-two">
       <%= link_to 'Cancel', summarize_sale_path(@sale), class: 'back-link' %>
