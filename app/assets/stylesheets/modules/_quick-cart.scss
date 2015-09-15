@@ -42,7 +42,7 @@
   }
 }
 
-@keyframes show-cart {
+@keyframes show-quick-cart {
   0% {
     opacity: 0;
     transform: translateY(100px);
@@ -56,13 +56,37 @@
   }
 }
 
+@keyframes show-cart {
+  0%, 30% {
+    transform: translateX(-60px) rotate(-8deg);
+  }
+  70% {
+    transform: translateX(0px) rotate(-8deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 [id=quick-cart]{
+  .form-footer {
+    overflow: hidden;
+  }
   &.show {
     animation: fade-in .3s ease-in;
+    .quick-cart-icon {
+      animation: show-cart .8s ease-in;
+    }
   }
   @include until($medium) {
     &.show .form-footer {
-      animation: show-cart .4s ease-out;
+      animation: show-quick-cart .4s ease-out;
     }
   }
 
