@@ -7,6 +7,11 @@ class Purchase < ActiveRecord::Base
   before_save :calculate_expiration_date
   before_destroy :validate_one_or_more_purchases
 
+  # Answers the name of the Purchase item at the time the Purchase was created.
+  def name
+    revision_data["name"]
+  end
+
   private
 
   def validate_one_or_more_purchases

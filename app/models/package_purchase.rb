@@ -12,4 +12,8 @@ class PackagePurchase < Purchase
   def price
     package.price
   end
+
+  def revision_data
+    package_revision.package_data
+  end
 end

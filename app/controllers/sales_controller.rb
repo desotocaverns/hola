@@ -1,36 +1,19 @@
 class SalesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  before_action :assign_tickets, except: [:success]
-  before_action :assign_packages, except: [:success]
-  before_action :assign_sale, only: [:success]
+  before_action :set_cache_buster
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
-  before_action :validate_token, except: [:index, :show, :redeem, :success]
-
-  before_filter :set_cache_buster
+  
+  before_action :assign_tickets, :assign_packages, except: [:successful]
+  before_action :assign_sale, except: [:index, :new, :create]
+  before_action :check_completion, except: [:index, :new, :create, :show, :redeem, :successful]
 
   def index
     @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
   end
 
-  def show
-    @sale = Sale.find_by(redemption_code: params[:id])
-    @purchase = Purchase.find_by(sale_id: @sale.id)
-  end
-
-  def redeem
-    @sale = Sale.find_by(redemption_code: params[:redemption_code])
-    @sale.update_attribute(:claimed_on, Date.today)
-
-    redirect_to "/sales/#{@sale.redemption_code}"
-  end
-
   def new
-    if params[:token]
-      @sale = Sale.find_by(token: params[:token])
-    else
-      @sale = Sale.new
-    end
+    @sale = Sale.new
   end
 
   def create
@@ -62,13 +45,16 @@ class SalesController < ApplicationController
     end
   end
 
-  def cart
-    @sale = Sale.find_by(token: params[:token])
+  def show
+    @purchase = Purchase.find_by(sale_id: @sale.id)
+  end
+
+  def redeem
+    @sale.update_attribute(:claimed_on, Date.today)
+    redirect_to "/sales/#{@sale.redemption_code}"
   end
 
   def update_cart
-    @sale = Sale.find_by(token: params[:sale][:token])
-
     if params[:sale][:ticket]
       params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
         if @sale.purchases.where(ticket_revision_id: ticket_id).any?
@@ -119,65 +105,38 @@ class SalesController < ApplicationController
 
     @sale.update_attributes(sale_params)
 
-    if params[:adding] == ""
-      redirect_to summary_path(token: @sale.token)
+    if params[:adding].to_s == ""
+      redirect_to summarize_sale_path(@sale)
     end
   end
 
-  def delete_cart_item
-    @sale = Sale.find_by(token: params[:token])
-    purchase = @sale.purchases.find_by(ticket_revision_id: params[:ticket_id])
-
+  def delete_purchase
+    @sale.purchases.delete(params[:purchase_id])
     respond_to do |format|
-      if @sale.purchases.destroy(purchase)
-        format.html { redirect_to new_sale_path }
-        format.js { render }
-      else
-        format.html { redirect_to new_sale_path }
-        format.js { render }
-      end
+      format.js { render }
     end
-  end
-
-  def summary
-    @sale = Sale.find_by(token: params[:token])
   end
 
   def edit_personal_info
-    @sale = Sale.find_by(token: params[:token])
-
     respond_to do |format|
-      format.html { raise "format is HTML" }
       format.js { render }
     end
   end
 
   def update_personal_info
-    @sale = Sale.find_by(token: params[:token])
-
+    @sale.update(update_personal_info_params)
     respond_to do |format|
-      if @sale.update(update_personal_info_params)
-        format.html { redirect_to collect_card_path(redemption_id: @sale.redemption_id) }
-        format.js { render }
-      else
-        format.html { render action: "personal_info" }
-        format.js { render }
-      end
+      format.js { render }
     end
   end
 
   def checkout
-    @sale = Sale.find_by(token: params["token"])
-
     respond_to do |format|
-      format.html { raise "format is HTML" }
       format.js { render }
     end
   end
 
   def charge
-    @sale = Sale.find_by(token: sale_params[:token])
-
     begin
       charge = Stripe::Charge.create(
         :amount => @sale.charge_total,
@@ -190,7 +149,7 @@ class SalesController < ApplicationController
 
       CustomerMailer.receipt_email(@sale).deliver_now
 
-      redirect_to success_path(token: @sale.token)
+      redirect_to successful_sale_path(@sale)
 
     rescue Stripe::CardError => e
       body = e.json_body
@@ -217,13 +176,9 @@ class SalesController < ApplicationController
 
   private
 
-  def validate_token
-    @sale = Sale.find_by(token: params[:token])
-    
-    if @sale
-      if @sale.charge_id
-        redirect_to new_sale_path
-      end
+  def check_completion
+    if @sale && @sale.charge_id
+      redirect_to new_sale_path
     end
   end
 
@@ -244,13 +199,13 @@ class SalesController < ApplicationController
   end
 
   def assign_sale
-    @sale = Sale.find_by(token: params[:token])
+    @sale = Sale.find_by(redemption_code: params[:redemption_code])
   end
  
   # PARAMS
 
   def sale_params
-    params[:sale].permit(:ticket, :package, :token)
+    params[:sale].permit(:ticket, :package)
   end
 
   def ticket_params
@@ -266,10 +221,6 @@ class SalesController < ApplicationController
   end
 
   def update_personal_info_params
-    params[:sale].permit(:name, :email, :token, :is_info_form)
-  end
-
-  def charge_params
-    params[:sale].permit(:stripe_token, :js_calculated_price)
+    params[:sale].permit(:name, :email, :is_info_form)
   end
 end

@@ -6,9 +6,7 @@ class Sale < ActiveRecord::Base
 
   has_many :purchases, dependent: :destroy, after_remove: :purchase_removed
 
-  before_create :generate_unique_token
-
-  before_save :generate_redemption_code
+  before_create :generate_redemption_code
 
   before_validation :calculate_prices
 
@@ -20,7 +18,11 @@ class Sale < ActiveRecord::Base
   validates :email, email: true, presence: true, if: :is_info_form
 
   def redemption_qrcode
-    RQRCode::QRCode.new("http://localhost:3000/purchase/#{redemption_code}")
+    RQRCode::QRCode.new("http://localhost:3000/sales/#{redemption_code}")
+  end
+
+  def to_param
+    redemption_code
   end
 
   private
@@ -34,10 +36,6 @@ class Sale < ActiveRecord::Base
   def purchase_removed(purchase)
     calculate_prices
     save(validate: false)
-  end
-
-  def generate_unique_token
-    self.token = SecureRandom.urlsafe_base64(10) + self.id.to_s
   end
 
   def generate_redemption_code

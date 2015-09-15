@@ -3,19 +3,18 @@
 <div class='cart-content'>
   <div class='purchases'>
     <div class='cart-tickets'>
-      <% @sale.purchases.where(type: "TicketPurchase").each do |tp| %>
-        <% ticket = TicketRevision.find(tp.ticket_revision_id) %>
+      <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
         <div class='cart-ticket'>
-          <p><%= ticket.ticket_data["name"] %> x <%= tp.quantity %></p>
-          <p><%= link_to "delete", cart_delete_items_path(token: @sale.token, ticket_id: ticket.id), remote: true, method: :patch %></p>
+          <p><%= purchase.name %> x <%= purchase.quantity %></p>
+          <p><%= link_to "delete", delete_purchase_sale_path(redemption_code: @sale.redemption_code, purchase_id: purchase.id), remote: true, method: :delete %></p>
         </div>
       <% end %>
     </div>
     <div class='cart-packages'>
-      <% @sale.purchases.where(type: "PackagePurchase").each do |tp| %>
-        <% package = PackageRevision.find(tp.package_revision_id) %>
+      <% @sale.purchases.where(type: "PackagePurchase").each do |purchase| %>
         <div class='cart-package'>
-          <p><%= package.package_data["name"] %> x <%= tp.quantity %></p>
+          <p><%= purchase.name %> x <%= purchase.quantity %></p>
+          <p><%= link_to "delete", delete_purchase_sale_path(redemption_code: @sale.redemption_code, purchase_id: purchase.id), remote: true, method: :delete %></p>
         </div>
       <% end %>
     </div>
@@ -25,5 +24,5 @@
   <div class='tax'>Tax : <%= price(@sale.tax) %></div>
   <div class='total'>Total : <%= price(@sale.charge_total)%></div>
 
-  <%= link_to "Edit cart", cart_path(token: @sale.token) %>
+  <%= link_to "Edit cart", cart_path(redemption_code: @sale.redemption_code) %>
 </div>

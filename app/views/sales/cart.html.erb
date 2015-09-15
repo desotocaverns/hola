@@ -1,4 +1,4 @@
-<%= form_for @sale, :url => sales_update_cart_path, :html => {id: "cart_form", class: "cart-form"} do |f| %>
+<%= form_for @sale, :url => sales_update_cart_path(redemption_code: @sale.redemption_code), :html => {id: "cart_form", class: "cart-form"} do |f| %>
   <% cart_tickets.each do |purchase| %>
     <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
     <div><%= revision.ticket_data["name"] %></div>
@@ -14,7 +14,7 @@
   <% end %>
 
   <input type="hidden" name="adding" value="">
-  <%= f.hidden_field :token, value: @sale.token %>
+
   <div class='form-footer'>
     <button class='continue' type='submit'>Update Cart</button>
   </div>

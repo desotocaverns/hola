@@ -1,6 +1,7 @@
 <% content_for :head do %>
   <script src="https://checkout.stripe.com/checkout.js"></script>
   <script type="text/javascript">
+    // Handle Safari back/forward cache after checkout completed.
     $(window).bind("pageshow", function(event) {
       if (event.originalEvent.persisted) {
         window.location.reload() 
@@ -9,15 +10,14 @@
   </script>
 <% end %>
 
-<div><%= link_to 'Choose Tickets', new_sale_path(token: @sale.token) %> > <strong>Contact Info</strong> > Complete Purchase</div>
+<div><%= link_to 'Choose Tickets', edit_sale_path(@sale) %> > <strong>Contact Info</strong> > Complete Purchase</div>
 
 <div class='personal-info'><%= personal_info %></div>
 
 <div class='static-cart'><%= render 'static_cart' %></div>
 
 <% if @sale.email %>
-  <%= form_tag checkout_path, remote: true, method: :patch, class: "checkout-form" do %>
-    <input type="hidden" name="token" value="<%= @sale.token %>">
+  <%= form_tag checkout_path(redemption_code: @sale.redemption_code), remote: true, method: :patch, class: "checkout-form" do %>
     <button type="submit" class="continue">Checkout</button>
   <% end %>
 <% end %>
