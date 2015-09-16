@@ -12,28 +12,6 @@ class SalesController < ApplicationController
     @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
   end
 
-  def change_priority
-    params[:type] == "Package" ? model = Package : model = Ticket
-    @object = model.find_by(id: params[:id])
-    priority = @object.priority
-
-    if params.has_key?(:up)
-      unless priority.to_i == 1
-        updated_priority = priority - 1
-        model.where("priority = #{updated_priority}").update_all("priority = priority + 1")
-      end
-    else
-      unless priority.to_i == 3
-        updated_priority = priority + 1
-        model.where("priority = #{updated_priority}").update_all("priority = priority - 1")
-      end
-    end
-
-    @object.update_attribute(:priority, updated_priority) if updated_priority
-
-    redirect_to new_sale_path
-  end
-
   def new
     @sale = Sale.new
   end

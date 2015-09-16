@@ -2,30 +2,18 @@ class PackagesController < ApplicationController
   before_action :set_package, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, :only_autocrats
 
-  # GET /packages
-  # GET /packages.json
-  def index
-    @packages = Package.all
-  end
-
-  # GET /packages/1
-  # GET /packages/1.json
   def show
   end
 
-  # GET /packages/new
   def new
     @package = Package.new
     @tickets = Ticket.all
   end
 
-  # GET /packages/1/edit
   def edit
     @tickets = Ticket.all
   end
 
-  # POST /packages
-  # POST /packages.json
   def create
     filtered_params = package_params
 
@@ -51,8 +39,6 @@ class PackagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /packages/1
-  # PATCH/PUT /packages/1.json
   def update
     PackageTicket.where("package_id = #{@package.id}").find_each do |pt|
       pt.delete
@@ -79,23 +65,19 @@ class PackagesController < ApplicationController
     end
   end
 
-  # DELETE /packages/1
-  # DELETE /packages/1.json
   def destroy
     @package.destroy
     respond_to do |format|
-      format.html { redirect_to packages_url, notice: 'Package was successfully destroyed.' }
+      format.html { redirect_to tickets_url, notice: 'Package was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_package
       @package = Package.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
       params[:package].permit(:name, :description, :price, :for_sale, :package_tickets_attributes => [:ticket_id, :quantity])
     end

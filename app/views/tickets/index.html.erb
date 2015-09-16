@@ -1,20 +1,43 @@
-<h1>Listing Tickets</h1>
+<h1>Listing Tickets & Packages</h1>
 
-<table>
-  <tbody>
-    <% @tickets.each do |ticket| %>
-      <tr>
-        <th><%= ticket.name %></th>
-        <td>For sale: <%= ticket.for_sale %></td>
-        <td><%= link_to 'Show', ticket %></td>
-        <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-        <td><%= link_to 'Destroy', ticket, :method => 'delete', data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% @tickets.each do |ticket| %>
+  <strong><%= ticket.name %></strong> |
+  For sale: <%= ticket.for_sale %> |
+  <%= link_to 'Show', ticket %>
+  <%= link_to 'Edit', edit_ticket_path(ticket) %>
+  <%= link_to 'Destroy', ticket, :method => 'delete', data: { confirm: 'Are you sure?' } %>
+
+  <% if current_admin && current_admin.autocratic %>
+    <%= form_tag change_priority_path(priority: ticket.priority, id: ticket.id), :method => :patch do %>
+      <input type="hidden" name="type" value="Ticket">
+      <%= submit_tag "Up", name: "up" %>
+      <%= submit_tag "Down", name: "down" %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
+  <% end %>
+  <br>
+<% end %>
 
 <%= link_to 'New Ticket', new_ticket_path %>
+
+<% 3.times do %>
+  <br>
+<% end %>
+
+<% @packages.each do |package| %>
+  <strong><%= package.name %></strong> |
+  For sale: <%= package.for_sale %> |
+  <%= link_to 'Show', package %>
+  <%= link_to 'Edit', edit_package_path(package) %>
+  <%= link_to 'Destroy', package, :method => 'delete', data: { confirm: 'Are you sure?' } %>
+
+  <% if current_admin && current_admin.autocratic %>
+    <%= form_tag change_priority_path(priority: package.priority, id: package.id), :method => :patch do %>
+      <input type="hidden" name="type" value="Package">
+      <%= submit_tag "Up", name: "up" %>
+      <%= submit_tag "Down", name: "down" %>
+    <% end %>
+  <% end %>
+  <br>
+<% end %>
+
+<%= link_to 'New Package', new_package_path %>

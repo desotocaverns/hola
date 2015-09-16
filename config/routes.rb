@@ -11,8 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  patch '/sales/change_priority/:id/:priority' => 'sales#change_priority', as: 'change_priority'
-
   get '/sales/cart/:redemption_code' => 'sales#cart', as: 'cart'
   patch '/sales/update_cart' => 'sales#update_cart'
 
@@ -31,6 +29,7 @@ Rails.application.routes.draw do
   resources :packages
 
   resources :tickets
+  patch '/sales/change_priority/:id/:priority' => 'tickets#change_priority', as: 'change_priority'
 
   # Authentication
 

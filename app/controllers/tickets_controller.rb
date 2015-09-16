@@ -2,7 +2,30 @@ class TicketsController < ApplicationController
   before_action :authenticate_admin!, :only_autocrats
 
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.all.order(:priority)
+    @packages = Package.all.order(:priority)
+  end
+
+  def change_priority
+    params[:type] == "Package" ? model = Package : model = Ticket
+    @object = model.find_by(id: params[:id])
+    priority = @object.priority
+
+    if params.has_key?(:up)
+      unless priority.to_i == 1
+        updated_priority = priority - 1
+        model.where("priority = #{updated_priority}").update_all("priority = priority + 1")
+      end
+    else
+      unless priority.to_i == 3
+        updated_priority = priority + 1
+        model.where("priority = #{updated_priority}").update_all("priority = priority - 1")
+      end
+    end
+
+    @object.update_attribute(:priority, updated_priority) if updated_priority
+
+    redirect_to tickets_path
   end
 
   def show
