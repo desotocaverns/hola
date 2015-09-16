@@ -142,18 +142,21 @@
     position: relative;
     display: inline-block;
     z-index: 2;
-    .show & {
-      animation: show-cost .9s ease-out;
-    }
   }
 
   &-items {
     font-size: .8em;
     color: rgba(#fff, .7);
+    .show & {
+      animation: show-cost 1s ease-out;
+    }
   }
 
   &-total {
     font-weight: bold;
+    .show & {
+      animation: show-cost .9s ease-out;
+    }
   }
 
   &-icon {
@@ -166,7 +169,7 @@
       animation: wiggle .4s ease-out;
     }
     .show & {
-      animation: show-cart .8s ease-in;
+      animation: show-cart .7s ease-in;
     }
   }
 }
