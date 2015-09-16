@@ -11,6 +11,7 @@ class PackagesController < ApplicationController
   end
 
   def edit
+    @packages = Package.all
     @tickets = Ticket.all
   end
 
@@ -26,6 +27,8 @@ class PackagesController < ApplicationController
     filtered_params[:price] = filtered_params[:price].to_f * 100
 
     @package = Package.new(filtered_params)
+    assign_for_sale_on_date(filtered_params)
+    
     @tickets = Ticket.all
 
     respond_to do |format|
@@ -53,6 +56,8 @@ class PackagesController < ApplicationController
     end
 
     filtered_params[:price] = filtered_params[:price].to_f * 100
+    
+    assign_for_sale_on_date(filtered_params)
 
     respond_to do |format|
       if @package.update(filtered_params)
@@ -82,7 +87,7 @@ class PackagesController < ApplicationController
     end
 
     def package_params
-      params[:package].permit(:name, :description, :price, :for_sale, :package_tickets_attributes => [:ticket_id, :quantity])
+      params[:package].permit(:name, :description, :price, :for_sale_on, :package_tickets_attributes => [:ticket_id, :quantity])
     end
 
     def only_autocrats
@@ -92,6 +97,11 @@ class PackagesController < ApplicationController
           redirect_to new_sale_path
         end
       end
+    end
+
+    def assign_for_sale_on_date(params)
+      date = DateTime.new(params["for_sale_on(1i)"].to_i, params["for_sale_on(2i)"].to_i, params["for_sale_on(3i)"].to_i)
+      @package.update_attribute(:for_sale_on, date)
     end
 end
 

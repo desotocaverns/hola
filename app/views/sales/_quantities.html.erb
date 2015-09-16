@@ -1,6 +1,6 @@
 <h3 class='section-heading'>Discount Packages</h3>
 <div class='tickets card'>
-  <% @packages.each do |current_package| %>
+  <% @packages.for_sale.each do |current_package| %>
     <% [current_package.revisions.last].each do |revision| %>
       <% data = revision.package_data %>
       <%= render partial: "ticket_form", locals: { id: revision.package_id, priority: data["priority"], type: "Package", name: "sale[package[package_ids][#{revision.package_id}]]", data: data, savings: current_package.savings_percentage } %>
@@ -10,7 +10,7 @@
 
 <h3 class='section-heading'>Regular Tickets</h3>
 <div class='tickets card'>
-  <% @tickets.each do |current_ticket| %>
+  <% @tickets.for_sale.each do |current_ticket| %>
     <% [current_ticket.revisions.last].each do |revision| %>
       <% data = revision.ticket_data %>
       <%= render partial: "ticket_form", locals: { id: revision.ticket_id, priority: data["priority"], type: "Ticket", name: "sale[ticket[ticket_ids][#{revision.ticket_id}]]", data: data, savings: false } %>

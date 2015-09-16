@@ -2,7 +2,11 @@
 
 <% @tickets.each do |ticket| %>
   <strong><%= ticket.name %></strong> |
-  For sale: <%= ticket.for_sale %> |
+  <% if [Ticket.for_sale.find_by(:id => ticket.id)].any? %>
+    Currently up for sale |
+  <% else %>
+    For sale on: <%= ticket.for_sale_on %> |
+  <% end %>
   <%= link_to 'Show', ticket %>
   <%= link_to 'Edit', edit_ticket_path(ticket) %>
   <%= link_to 'Destroy', ticket, :method => 'delete', data: { confirm: 'Are you sure?' } %>
@@ -25,7 +29,11 @@
 
 <% @packages.each do |package| %>
   <strong><%= package.name %></strong> |
-  For sale: <%= package.for_sale %> |
+  <% if [Package.for_sale.find_by(:id => package.id)].any? %>
+    Currently up for sale |
+  <% else %>
+    For sale on: <%= package.for_sale_on %> |
+  <% end %>
   <%= link_to 'Show', package %>
   <%= link_to 'Edit', edit_package_path(package) %>
   <%= link_to 'Destroy', package, :method => 'delete', data: { confirm: 'Are you sure?' } %>

@@ -45,6 +45,9 @@ class TicketsController < ApplicationController
     fixed_params[:price] = fixed_params[:price].to_f * 100
     @ticket = Ticket.new(fixed_params)
 
+    date = DateTime.new(fixed_params["for_sale_on(1i)"].to_i, fixed_params["for_sale_on(2i)"].to_i, fixed_params["for_sale_on(3i)"].to_i)
+    @ticket.update_attribute(:for_sale_on, date)
+
     respond_to do |format|
       if @ticket.save
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
@@ -88,7 +91,7 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params[:ticket].permit(:name, :description, :price, :for_sale)
+    params[:ticket].permit(:name, :description, :price, :for_sale, :for_sale_on)
   end
 
   def only_autocrats

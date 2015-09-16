@@ -17,15 +17,15 @@ class Package < ActiveRecord::Base
   has_many :tickets,
     through: :package_tickets
 
+  before_create :assign_default_priority, :assign_default_for_sale_on
   before_save :increment_version
   after_save :save_revision
-  before_create :assign_default_priority
 
   validate :must_have_tickets
   validates :name, presence: true
   validates_numericality_of :price, greater_than: 0
 
-  scope :for_sale, -> { where for_sale: true }
+  scope :for_sale, -> { where("for_sale_on <= NOW()") }
 
   # Answers a PackageRevision which contains the current Package data. This will be the last
   # recorded revision if the Package is unchanged, otherwise it will be an unsaved PackageRevision
@@ -86,5 +86,11 @@ class Package < ActiveRecord::Base
 
   def assign_default_priority
     self.priority = (self.class.order(:priority).last.try(:priority) || 0) + 1
+  end
+
+  def assign_default_for_sale_on
+    if self.for_sale_on == nil
+      self.for_sale_on = Time.now
+    end
   end
 end

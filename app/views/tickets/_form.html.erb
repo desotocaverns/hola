@@ -26,10 +26,9 @@
     $<%= f.text_field :price, value: @ticket.price / 100.00  %>
   </div>
 
-  <div class="form-row">
-    <%= f.label :for_sale %>
-    Yes: <%= f.radio_button :for_sale, "true" %>
-    No: <%= f.radio_button :for_sale, "false" %>
+  <div>
+    <%= f.label :for_sale_on %>
+    <%= f.date_select :for_sale_on %>
   </div>
 
   <div class="actions">
