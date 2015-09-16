@@ -67,6 +67,9 @@ class PackagesController < ApplicationController
 
   def destroy
     @package.destroy
+
+    Package.all.order(:priority).last.priority = Package.all.order(:priority).last.priority - 1
+
     respond_to do |format|
       format.html { redirect_to tickets_url, notice: 'Package was successfully destroyed.' }
       format.json { head :no_content }

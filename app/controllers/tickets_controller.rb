@@ -17,7 +17,7 @@ class TicketsController < ApplicationController
         model.where("priority = #{updated_priority}").update_all("priority = priority + 1")
       end
     else
-      unless priority.to_i == 3
+      unless priority == model.all.order(:priority).last.priority
         updated_priority = priority + 1
         model.where("priority = #{updated_priority}").update_all("priority = priority - 1")
       end
@@ -76,6 +76,9 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by(id: params[:id])
 
     @ticket.destroy
+
+    Ticket.all.order(:priority).last.priority = Ticket.all.order(:priority).last.priority - 1
+
     respond_to do |format|
       format.html { redirect_to tickets_url, notice: 'Ticket was successfully destroyed.' }
       format.json { head :no_content }
