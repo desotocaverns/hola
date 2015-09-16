@@ -17,6 +17,14 @@
           <button class="add-to-cart" type="submit">Add</button>
         <% end %>
       </div>
+
+      <% if current_admin && current_admin.autocratic %>
+        <%= form_tag change_priority_path(priority: priority, id: id), :method => :patch do %>
+          <input type="hidden" name="type" value="<%= type %>">
+          <%= submit_tag "Up", name: "up" %>
+          <%= submit_tag "Down", name: "down" %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

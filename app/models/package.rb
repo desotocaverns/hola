@@ -21,6 +21,7 @@ class Package < ActiveRecord::Base
 
   before_save :increment_version
   after_save :save_revision
+  after_create :assign_default_priority
 
   validate :must_have_tickets
   validates :name, presence: true
@@ -61,7 +62,8 @@ class Package < ActiveRecord::Base
         name: name,
         description: description,
         price: price,
-        ticket_revision_ids: ticket_revision_ids
+        ticket_revision_ids: ticket_revision_ids,
+        priority: priority
       }
     )
   end
@@ -82,5 +84,9 @@ class Package < ActiveRecord::Base
 
   def must_have_tickets
     errors.add(:base, "Packages must have tickets assigned.") unless package_tickets.size > 0
+  end
+
+  def assign_default_priority
+    self.priority = (self.class.order(:priority).last.try(:priority) || 0) + 1
   end
 end

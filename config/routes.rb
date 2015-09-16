@@ -11,13 +11,16 @@ Rails.application.routes.draw do
     end
   end
 
-  patch '/sales/edit_personal_info/:redemption_code' => 'sales#edit_personal_info', as: 'edit_personal_info'
-  patch '/sales/personal_info/:redemption_code' => 'sales#update_personal_info', as: 'update_personal_info'
+  patch '/sales/change_priority/:id/:priority' => 'sales#change_priority', as: 'change_priority'
+
+  get '/sales/cart/:redemption_code' => 'sales#cart', as: 'cart'
   patch '/sales/update_cart' => 'sales#update_cart'
+
+  patch '/sales/personal_info/:redemption_code' => 'sales#update_personal_info', as: 'update_personal_info'
+  patch '/sales/edit_personal_info/:redemption_code' => 'sales#edit_personal_info', as: 'edit_personal_info'
+
   patch '/sales/checkout' => 'sales#checkout', as: 'checkout'
   patch '/sales/charge' => 'sales#charge'
-  
-  get '/sales/cart/:redemption_code' => 'sales#cart', as: 'cart'
 
   get '/sales/failure' => 'sales#failure', as: 'failure'
 

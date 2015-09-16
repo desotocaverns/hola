@@ -5,19 +5,19 @@
 adult_tour = Ticket.create!(
 	name: "Adult Caverns Tour",
 	price: 2199,
-    description: "A one-hour, guided tour through DeSoto Caverns"
+  description: "A one-hour, guided tour through DeSoto Caverns"
 )
 
 child_tour = Ticket.create!(
 	name: "Child Caverns Tour",
 	price: 1799,
-    description: "Ages 3-11 (Children 2 and under are free)"
+  description: "Ages 3-11 (Children 2 and under are free)"
 )
 
 attraction = Ticket.create!(
 	name: "Attraction Ticket",
 	price: 499,
-    description: "Admission to one of over 25 unique attractions"
+  description: "Admission to one of over 25 unique attractions"
 )
 
 fun_pac = Package.new(

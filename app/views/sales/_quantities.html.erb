@@ -3,7 +3,7 @@
   <% @packages.each do |current_package| %>
     <% [current_package.revisions.last].each do |revision| %>
       <% data = revision.package_data %>
-      <%= render partial: "ticket_form", locals: { name: "sale[package[package_ids][#{revision.package_id}]]", data: data, savings: current_package.savings_percentage } %>
+      <%= render partial: "ticket_form", locals: { id: revision.package_id, priority: data["priority"], type: "Package", name: "sale[package[package_ids][#{revision.package_id}]]", data: data, savings: current_package.savings_percentage } %>
     <% end %>
   <% end %>
 </div>
@@ -13,7 +13,7 @@
   <% @tickets.each do |current_ticket| %>
     <% [current_ticket.revisions.last].each do |revision| %>
       <% data = revision.ticket_data %>
-      <%= render partial: "ticket_form", locals: { name: "sale[ticket[ticket_ids][#{revision.ticket_id}]]", data: data, savings: false } %>
+      <%= render partial: "ticket_form", locals: { id: revision.ticket_id, priority: data["priority"], type: "Ticket", name: "sale[ticket[ticket_ids][#{revision.ticket_id}]]", data: data, savings: false } %>
     <% end %>
   <% end %>
 </div>

@@ -1,11 +1,11 @@
 class Ticket < ActiveRecord::Base
-
   has_many :revisions,
     class_name: "TicketRevision",
     dependent: :destroy
 
   before_save :increment_version
   after_save :save_revision
+  before_create :assign_default_priority
 
   validates :name, presence: true
   validates_numericality_of :price, greater_than: 0
@@ -32,12 +32,17 @@ class Ticket < ActiveRecord::Base
       ticket_data: {
         name: name,
         description: description,
-        price: price
+        price: price,
+        priority: priority
       }
     )
   end
 
   def save_revision
     current_revision.save!
+  end
+
+  def assign_default_priority
+    self.priority = (self.class.order(:priority).last.try(:priority) || 0) + 1
   end
 end
