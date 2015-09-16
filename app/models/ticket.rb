@@ -1,7 +1,6 @@
 class Ticket < ActiveRecord::Base
   has_many :revisions,
-    class_name: "TicketRevision",
-    dependent: :destroy
+    class_name: "TicketRevision"
 
   before_save :increment_version
   after_save :save_revision
