@@ -28,13 +28,13 @@
 
   <br>
 
-  <div class="packages">
-    <% @packages.each do |package| %>
-      <% pt = @package.package_tickets.find_by(ticket_id: package.id) %>
+  <div class="tickets">
+    <% @tickets.each do |ticket| %>
+      <% pt = @package.package_tickets.find_by(ticket_id: ticket.id) %>
 
-      <%= f.label package.name %>
+      <%= f.label ticket.name %>
       <input type="text" autocomplete="off" name="package[package_tickets_attributes][][quantity]" <% if pt != nil %>value="<%= pt.quantity %>"<% end %>>
-      <input type="hidden" autocomplete="off" name="package[package_tickets_attributes][][ticket_id]" value="<%= package.id %>"><br>
+      <input type="hidden" autocomplete="off" name="package[package_tickets_attributes][][ticket_id]" value="<%= ticket.id %>"><br>
     <% end %>
   </div>
 

@@ -27,17 +27,15 @@ class PackagesController < ApplicationController
     filtered_params[:price] = filtered_params[:price].to_f * 100
 
     @package = Package.new(filtered_params)
-    assign_for_sale_on_date(filtered_params)
+    assign_for_sale_on_date(filtered_params, @package)
     
     @tickets = Ticket.all
 
-    respond_to do |format|
+    if @package.errors.empty?
       if @package.save
-        format.html { redirect_to @package, notice: 'Package was successfully created.' }
-        format.json { render :show, status: :created, location: @package }
+        redirect_to @package, notice: 'Package was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @package.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -57,15 +55,13 @@ class PackagesController < ApplicationController
 
     filtered_params[:price] = filtered_params[:price].to_f * 100
     
-    assign_for_sale_on_date(filtered_params)
-
-    respond_to do |format|
+    assign_for_sale_on_date(filtered_params, @package)
+    
+    if @package.errors.empty?
       if @package.update(filtered_params)
-        format.html { redirect_to @package, notice: 'Package was successfully updated.' }
-        format.json { render :show, status: :ok, location: @package }
+        redirect_to @package, notice: 'Package was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @package.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -99,9 +95,15 @@ class PackagesController < ApplicationController
       end
     end
 
-    def assign_for_sale_on_date(params)
-      date = DateTime.new(params["for_sale_on(1i)"].to_i, params["for_sale_on(2i)"].to_i, params["for_sale_on(3i)"].to_i)
-      @package.update_attribute(:for_sale_on, date)
+    def assign_for_sale_on_date(params, package)
+      begin
+        date = DateTime.new(params["for_sale_on(1i)"].to_i, params["for_sale_on(2i)"].to_i, params["for_sale_on(3i)"].to_i)
+        package.update_attribute(:for_sale_on, date)
+      rescue ArgumentError
+        package.errors.add(:for_sale_on, "has an invalid date")
+        @tickets = Ticket.all
+        render action: 'new'
+      end
     end
 end
 

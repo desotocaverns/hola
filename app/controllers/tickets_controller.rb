@@ -45,16 +45,13 @@ class TicketsController < ApplicationController
     fixed_params[:price] = fixed_params[:price].to_f * 100
     @ticket = Ticket.new(fixed_params)
 
-    date = DateTime.new(fixed_params["for_sale_on(1i)"].to_i, fixed_params["for_sale_on(2i)"].to_i, fixed_params["for_sale_on(3i)"].to_i)
-    @ticket.update_attribute(:for_sale_on, date)
+    assign_for_sale_on_date(fixed_params, @ticket)
 
-    respond_to do |format|
+    if @ticket.errors.empty?
       if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
-        format.json { render :show, status: :created, location: @package }
+        redirect_to @ticket, notice: 'Ticket was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @package.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -64,13 +61,13 @@ class TicketsController < ApplicationController
     fixed_params = ticket_params
     fixed_params[:price] = fixed_params[:price].to_f * 100
 
-    respond_to do |format|
+    assign_for_sale_on_date(fixed_params, @ticket)
+
+    if @ticket.errors.empty?
       if @ticket.update(fixed_params)
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ticket }
+        redirect_to @ticket, notice: 'Ticket was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -100,6 +97,16 @@ class TicketsController < ApplicationController
         flash[:alert] = "You are not authorized"
         redirect_to new_sale_path
       end
+    end
+  end
+
+  def assign_for_sale_on_date(params, ticket)
+    begin
+      date = DateTime.new(params["for_sale_on(1i)"].to_i, params["for_sale_on(2i)"].to_i, params["for_sale_on(3i)"].to_i)
+      ticket.update_attribute(:for_sale_on, date)
+    rescue ArgumentError
+      ticket.errors.add(:for_sale_on, "has an invalid date")
+      render action: 'new'
     end
   end
 end
