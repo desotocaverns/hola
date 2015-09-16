@@ -7,7 +7,7 @@ form {
   color: #fff;
   @extend .box-padding;
   text-align: right;
-  margin: 2em 0;
+  margin: 0 0 2em;
 
   @include until($medium) {
     position: fixed;
@@ -34,7 +34,4 @@ form {
     opacity: .9;
   }
   transition: opacity .2s ease-in-out;
-  &:before {
-    content: "← ";
-  }
 }

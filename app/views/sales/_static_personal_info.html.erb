@@ -1,7 +1,8 @@
-<h3 class="section-heading">Contact Information</h3>
-<div class="card">
-  <div>Name: <%= @sale.name %></div>
-  <div>Email: <%= @sale.email %></div>
+<h4>Contact Info
+  <%= link_to "edit", edit_personal_info_path(redemption_code: @sale.redemption_code), method: :patch, remote: true, class: 'edit-info' %>
+</h4>
+<div>Name: <%= @sale.name %></div>
+<div>Email: <%= @sale.email %></div>
 
-  <%= link_to "Edit personal info", edit_personal_info_path(redemption_code: @sale.redemption_code), method: :patch, remote: true %>
-</div>
+<p>
+</p>

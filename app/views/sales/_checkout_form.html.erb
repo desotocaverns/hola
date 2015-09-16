@@ -1,6 +1,6 @@
 <div class="form-footer grid align-middle no-gutter">
   <div class="grid-cell one-of-two">
-    <%= link_to 'View Tickets', edit_sale_path(@sale), class: 'back-link' %>
+    <%= link_to '← Back', edit_sale_path(@sale), class: 'back-link' %>
   </div>
   <% unless @sale.purchases.empty? %>
     <div class="grid-cell one-of-two align-right">

@@ -1,0 +1,57 @@
+.cart-delete-item {
+  font-size: 0;
+  position: relative;
+  width: 20px;
+  height: 10px;
+  display: inline-block;
+  vertical-align: middle;
+
+  &:before, &:after {
+    content: "";
+    width: 15px;
+    height: 2px;
+    background: #ccc;
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    left: 0;
+  }
+  &:hover {
+    &:before, &:after {
+      background: $red;
+    }
+  }
+  &:before {
+    transform: rotate(-45deg);
+  }
+  &:after {
+    transform: rotate(45deg);
+  }
+}
+
+.cart-item {
+  margin: .8em 0;
+  &-name {
+    font-weight: 500;
+  }
+
+  &-count {
+    width: 3em;
+    text-align: right;
+    padding: .1em .5em;
+    font-size: .8em;
+    margin: 0;
+  }
+}
+
+.cart-totals {
+  margin: 1em 0;
+  border-top: 1px solid $page-border;
+  padding-top: 1em;
+}
+
+.times {
+  opacity: .8;
+  display: inline-block;
+  padding: 0 .3em;
+}

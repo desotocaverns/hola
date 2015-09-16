@@ -1,6 +1,7 @@
-<h3 class='section-heading'>Purchase Summary</h3>
-
-<div class='cart-content card'>
+<h4>Your Tickets
+<%= link_to "edit", cart_path(redemption_code: @sale.redemption_code) %>
+</h4>
+<div class='cart-content'>
   <div class='purchases'>
     <div class='cart-tickets'>
       <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
@@ -22,5 +23,4 @@
   <div class='tax'>Tax : <%= price(@sale.tax) %></div>
   <div class='total'>Total : <%= price(@sale.charge_total)%></div>
 
-  <%= link_to "Edit cart", cart_path(redemption_code: @sale.redemption_code) %>
 </div>
