@@ -21,7 +21,7 @@ class Package < ActiveRecord::Base
 
   before_save :increment_version
   after_save :save_revision
-  after_create :assign_default_priority
+  before_create :assign_default_priority
 
   validate :must_have_tickets
   validates :name, presence: true
