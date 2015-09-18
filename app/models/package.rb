@@ -1,7 +1,7 @@
 class Package < ActiveRecord::Base
   has_many :revisions,
     class_name: "PackageRevision"
-  
+
   # Associates Tickets to this Package.
   has_many :package_tickets,
     dependent: :destroy

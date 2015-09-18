@@ -36,6 +36,10 @@ Rails.application.routes.draw do
 
   devise_for :admins, :controllers => {:invitations => "admins/invitations"}
 
+  devise_scope :admin do
+    get '/login', to: 'devise/sessions#new'
+  end
+
   resources :admins, only: [:index, :destroy]
 
 end
