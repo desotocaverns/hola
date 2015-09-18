@@ -155,7 +155,7 @@ class SalesController < ApplicationController
 
       @sale.update_attribute(:charge_id, charge.id)
 
-      # CustomerMailer.receipt_email(@sale).deliver_now
+      CustomerMailer.receipt_email(@sale).deliver_now
 
       redirect_to successful_sale_path(@sale)
 
