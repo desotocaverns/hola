@@ -15,7 +15,7 @@ class Sale < ActiveRecord::Base
   validates_presence_of :purchases
   validate :must_have_quantities
   validates :name, :tax, :charge_total, presence: true, if: :is_info_form
-  validates :email, email: true, presence: true, if: :is_info_form
+  validates :email, email: true, if: :is_info_form
 
   def redemption_qrcode
     RQRCode::QRCode.new("http://localhost:3000/sales/#{redemption_code}")
