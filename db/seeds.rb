@@ -74,5 +74,4 @@ Admin.create!(
   activated: true
 )
 
-
-
+Settings.create!()
