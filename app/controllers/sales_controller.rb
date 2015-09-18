@@ -132,6 +132,7 @@ class SalesController < ApplicationController
 
   def update_personal_info
     @sale.update(update_personal_info_params)
+    logger.info(@sale.inspect)
     respond_to do |format|
       format.js { render }
     end
