@@ -6,11 +6,36 @@
   <body>
     <h2>Thanks for investing in adventure, <%= @sale.name %>!</h2>
 
-    <p>When you visit us, just give the attendant your purchase ID or your handy-dandy QR code.</p>
+    <p>When you visit us, just give the attendant your redemption code or your handy-dandy QR code.</p>
 
-    <div><b>Your purchases:</b></div>
-    <ol>
-      <li>ID: <%= @sale.redemption_code %></li>
-    </ol>
+    <p>Total Price: $<%= @sale.charge_total / 100.00 %></p>
+    <p>Tax: $<%= @sale.tax / 100.00 %></p>
+    <p>Redemption Code: <%= @sale.redemption_code %></p>
+
+    <% @sale.purchases.where(type: TicketPurchase).each do |purchase| %>
+      <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
+      <div>
+        <div>
+          <span><%= revision.ticket_data["name"] %></span>
+        </div>
+        <div>
+          <span>$<%= revision.ticket_data["price"].to_i / 100.00 %></span> <span>&times;</span>
+          <span><%= purchase.quantity %></span>
+        </div>
+      </div>
+    <% end %>
+
+    <% @sale.purchases.where(type: PackagePurchase).each do |purchase| %>
+      <% revision = PackageRevision.find_by(id: purchase.package_revision_id) %>
+      <div>
+        <div>
+          <span><%= revision.package_data["name"] %></span>
+        </div>
+        <div>
+          <span>$<%= revision.package_data["price"].to_i / 100.00 %></span> <span>&times;</span>
+          <span><%= purchase.quantity %></span>
+        </div>
+      </div>
+    <% end %>
   </body>
 </html>

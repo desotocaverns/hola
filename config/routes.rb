@@ -42,4 +42,9 @@ Rails.application.routes.draw do
 
   resources :admins, only: [:index, :destroy]
 
+  # Mailer previews
+  if Rails.env.development?
+    mount CustomerMailerPreview => 'mail_view'
+  end
+
 end
