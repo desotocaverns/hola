@@ -6,7 +6,7 @@ class SalesController < ApplicationController
   
   before_action :assign_tickets, :assign_packages, except: [:successful]
   before_action :assign_sale, except: [:index, :new, :create]
-  before_action :check_completion, except: [:index, :new, :create, :show, :redeem, :successful]
+  before_action :check_completion, only: [:update_cart, :delete_purchase, :edit_personal_info, :checkout, :charge]
 
   def index
     @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
@@ -132,7 +132,6 @@ class SalesController < ApplicationController
 
   def update_personal_info
     @sale.update(update_personal_info_params)
-    logger.info(@sale.inspect)
     respond_to do |format|
       format.js { render }
     end
@@ -180,6 +179,12 @@ class SalesController < ApplicationController
     rescue Stripe::StripeError => e
       puts "Something generic went wrong."
     end
+  end
+
+  def resend_email
+    @sale = Sale.find_by(redemption_code: params[:redemption_code])
+    CustomerMailer.receipt_email(@sale).deliver_now
+    redirect_to sale_path(@sale.redemption_code)
   end
 
   private

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get :summarize, :successful
       delete :delete_purchase
+      post :resend_email
     end
   end
 

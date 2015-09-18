@@ -37,10 +37,13 @@
 
 <% if @sale.claimed_on == nil && @purchase.expires_on >= Time.now %>
   <br>
-  <form method="post" action="/sales/<%= @sale.redemption_code %>/redeem">
-    <input type="submit" autocomplete="off" value="Redeem">
+  <form method="post" action="<%= redeem_path(@sale.redemption_code) %>">
+    <input type="submit" value="Redeem">
   </form>
   <br>
+  <form method="post" action="<%= resend_email_sale_path(@sale.redemption_code) %>">
+    <input type="submit" value="Resend Email">
+  </form>
 <% end %>
 
 <%= link_to 'Back', sales_path %>
