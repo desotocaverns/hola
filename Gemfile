@@ -41,7 +41,7 @@ gem 'devise'
 gem 'devise_invitable'
 
 # Email validation
-gem 'valid_email'
+gem 'email_validator'
 
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
