@@ -3,7 +3,7 @@ class Admin < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :invitable
   before_invitation_accepted :activate
-  
+
   scope :activated, -> { where(activated: true) }
 
   def active_for_authentication?
