@@ -9,7 +9,7 @@
       <th>Sale ID:</th>
       <td><%= @sale.redemption_code %></td>
       <th>Sale QR:</th>
-      <td><%= @sale.redemption_qrcode.as_svg({module_size: 5}).html_safe %></td>
+      <td><%= @sale.redemption_qrcode(root_url).as_svg({module_size: 5}).html_safe %></td>
     </tr>
     <br>
   </tbody>

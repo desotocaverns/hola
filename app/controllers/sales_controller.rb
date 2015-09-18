@@ -154,7 +154,7 @@ class SalesController < ApplicationController
 
       @sale.update_attribute(:charge_id, charge.id)
 
-      CustomerMailer.receipt_email(@sale).deliver_now
+      CustomerMailer.receipt_email(@sale, protohost).deliver_now
 
       redirect_to successful_sale_path(@sale)
 
@@ -183,7 +183,7 @@ class SalesController < ApplicationController
 
   def resend_email
     @sale = Sale.find_by(redemption_code: params[:redemption_code])
-    CustomerMailer.receipt_email(@sale).deliver_now
+    CustomerMailer.receipt_email(@sale, protohost).deliver_now
     redirect_to sale_path(@sale.redemption_code)
   end
 
@@ -199,6 +199,11 @@ class SalesController < ApplicationController
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
+
+  def protohost
+    return request.protocol + request.host unless request.local?
+    return "http://localhost"
   end
 
   # ASSIGNMENTS

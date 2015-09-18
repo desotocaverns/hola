@@ -17,8 +17,8 @@ class Sale < ActiveRecord::Base
   validates :name, :tax, :charge_total, presence: true, if: :is_info_form
   validates :email, email: true, if: :is_info_form
 
-  def redemption_qrcode
-    RQRCode::QRCode.new("http://localhost:3000/sales/#{redemption_code}")
+  def redemption_qrcode(protohost)
+    RQRCode::QRCode.new("#{protohost}sales/#{redemption_code}")
   end
 
   def to_param

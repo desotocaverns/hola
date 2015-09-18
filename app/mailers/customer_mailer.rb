@@ -1,10 +1,10 @@
 class CustomerMailer < ApplicationMailer
-  def receipt_email(sale)
+  def receipt_email(sale, protohost)
     # TODO: Where to store images on Heroku
     @sale = sale
 
     io = StringIO.new
-    @sale.redemption_qrcode.as_png.write(io)
+    @sale.redemption_qrcode(protohost).as_png.write(io)
     io.rewind
 
     attachments["#{@sale.redemption_code}.png"] = {
