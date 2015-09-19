@@ -42,6 +42,9 @@ attraction_package.package_tickets << PackageTicket.new(ticket: attraction, quan
 
 attraction_package.save!
 
+# Base settings
+Settings.create!()
+
 # Sales and Purchases
 sale = Sale.new(
   name: "Arnold",
@@ -73,5 +76,3 @@ Admin.create!(
   password: "nonautocraticpw",
   activated: true
 )
-
-Settings.create!()
