@@ -29,11 +29,13 @@
   }
 }
 
+.cart-items {
+  border: 1px solid $page-border { left: 0; right: 0 }
+  padding: .6em 0;
+}
+
 .cart-item {
-  margin: 1.2em 0;
-  .static-cart & {
-    margin: .4em 0;
-  }
+  margin: .2em 0;
   &-name {
     font-weight: 500;
   }
@@ -47,18 +49,26 @@
   }
 }
 
-.cart-totals {
-  margin: 1em 0;
-  border-top: 1px solid $page-border;
-  padding-top: .7em;
+.cart-edit {
+  font-size: .9em;
 }
-.cart-tax, .cart-total {
-  margin: .5em 0;
+
+.cart-totals {
+  margin-top: 1.2em;
+}
+
+.static-cart {
+  margin-top: 2em;
+}
+
+.cart-heading {
+  margin: 1.2em 0;
 }
 
 .cart-total {
   font-size: 1.2em;
   font-weight: 500;
+  line-height: 1.8em;
 }
 
 .times {

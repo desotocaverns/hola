@@ -19,7 +19,7 @@
   <div class='personal-info-summary'><%= personal_info %></div>
 
   <% if @sale.email %>
-    <div class='static-cart'><%= render 'static_cart' %></div>
+    <%= render 'static_cart' %>
     </div>
     <%= form_tag checkout_path(redemption_code: @sale.redemption_code), remote: true, method: :patch, class: "checkout-form" do %>
       <%= render partial: "checkout_form", locals: { button_text: "Purchase" } %>

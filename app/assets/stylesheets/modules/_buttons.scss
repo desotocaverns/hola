@@ -27,3 +27,17 @@ button, .button {
   line-height: 2.2em;
   background: $blue;
 }
+
+.cart-edit-button {
+  text-decoration: none;
+  padding: .3em 1em;
+  color: #222;
+  background: #fff;
+  border: 1px solid #bbb;
+
+  &:hover {
+    color: #fff;
+    background-color: #333;
+    border: 1px solid #333;
+  }
+}
