@@ -30,7 +30,10 @@
 }
 
 .cart-item {
-  margin: .8em 0;
+  margin: 1.2em 0;
+  .static-cart & {
+    margin: .4em 0;
+  }
   &-name {
     font-weight: 500;
   }
@@ -38,7 +41,7 @@
   &-count {
     width: 3em;
     text-align: right;
-    padding: .1em .5em;
+    padding: .1em .5em 0;
     font-size: .8em;
     margin: 0;
   }
@@ -47,11 +50,19 @@
 .cart-totals {
   margin: 1em 0;
   border-top: 1px solid $page-border;
-  padding-top: 1em;
+  padding-top: .7em;
+}
+.cart-tax, .cart-total {
+  margin: .5em 0;
+}
+
+.cart-total {
+  font-size: 1.2em;
+  font-weight: 500;
 }
 
 .times {
   opacity: .8;
   display: inline-block;
-  padding: 0 .3em;
+  padding: 0 .5em;
 }

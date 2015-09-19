@@ -9,8 +9,7 @@
           <span class='cart-item-name'><%= revision.ticket_data["name"] %></span>
         </div>
         <div class='grid-cell one-of-two align-right'>
-          <span class='cart-item-price'><%= price revision.ticket_data["price"] %></span> <span class='times'>&times;</span>
-          <input class='cart-item-count' type="text" name="sale[ticket[ticket_ids][<%= revision.ticket_id %>]]" value="<%= purchase.quantity %>">
+          <span class='cart-item-price'><%= price revision.ticket_data["price"] %></span><span class='times'>&times;</span><input class='cart-item-count' type="text" name="sale[ticket[ticket_ids][<%= revision.ticket_id %>]]" value="<%= purchase.quantity %>">
         </div>
       </div>
     <% end %>
@@ -24,8 +23,7 @@
         </div>
 
         <div class='grid-cell one-of-two align-right'>
-          <span class='cart-item-price'><%= price revision.package_data["price"] %></span> <span class='times'>&times;</span>
-          <input class='cart-item-count' type="text" name="sale[package[package_ids][<%= revision.package_id %>]]" value="<%= purchase.quantity %>">
+          <span class='cart-item-price'><%= price revision.package_data["price"] %></span><span class='times'>&times;</span><input class='cart-item-count' type="text" name="sale[package[package_ids][<%= revision.package_id %>]]" value="<%= purchase.quantity %>">
         </div>
       </div>
     <% end %>

@@ -1,26 +1,16 @@
 <h4>Your Tickets
 <%= link_to "edit", cart_path(redemption_code: @sale.redemption_code) %>
 </h4>
-<div class='cart-content'>
-  <div class='purchases'>
-    <div class='cart-tickets'>
-      <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
-        <div class='cart-ticket'>
-          <p><%= purchase.name %> x <%= purchase.quantity %></p>
-        </div>
-      <% end %>
-    </div>
-    <div class='cart-packages'>
-      <% @sale.purchases.where(type: "PackagePurchase").each do |purchase| %>
-        <div class='cart-package'>
-          <p><%= purchase.name %> x <%= purchase.quantity %></p>
-        </div>
-      <% end %>
-    </div>
+<div class='static-cart'>
+  <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
+    <%= render partial: "static_cart_item", locals: { purchase: purchase } %>
+  <% end %>
+  <% @sale.purchases.where(type: "PackagePurchase").each do |purchase| %>
+    <%= render partial: "static_cart_item", locals: { purchase: purchase } %>
+  <% end %>
+
+  <div class='cart-totals align-right'>
+    <div class='cart-tax'>Tax: <span class='cart-tax-amount'><%= price(@sale.tax) %></span></div>
+    <div class='cart-total'>Total: <span class='cart-total-amount'><%= price(@sale.charge_total)%></span></div>
   </div>
-
-  <br>
-  <div class='tax'>Tax : <%= price(@sale.tax) %></div>
-  <div class='total'>Total : <%= price(@sale.charge_total)%></div>
-
 </div>

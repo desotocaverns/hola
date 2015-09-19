@@ -1,8 +1,3 @@
-<h4>Contact Info
-  <%= link_to "edit", edit_personal_info_path(redemption_code: @sale.redemption_code), method: :patch, remote: true, class: 'edit-info' %>
-</h4>
+<div>Contact Info <%= link_to "edit", edit_personal_info_path(redemption_code: @sale.redemption_code), method: :patch, remote: true, class: 'edit-info' %></div>
 <div>Name: <%= @sale.name %></div>
 <div>Email: <%= @sale.email %></div>
-
-<p>
-</p>
