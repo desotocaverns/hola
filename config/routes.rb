@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/settings' => 'settings#edit'
+  patch '/settings/update' => 'settings#update'
+
   get '/sales/cart/:redemption_code' => 'sales#cart', as: 'cart'
   patch '/sales/update_cart' => 'sales#update_cart'
 

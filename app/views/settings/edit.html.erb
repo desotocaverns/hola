@@ -1,0 +1,15 @@
+<%= form_for @settings, method: :patch, url: settings_update_path do |f| %>
+  <div class="form-row">
+    <%= f.label :tax %>
+    <%= f.text_field :tax %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :company_email %>
+    <%= f.text_field :company_email %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
