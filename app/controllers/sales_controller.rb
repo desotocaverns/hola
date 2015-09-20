@@ -3,10 +3,10 @@ class SalesController < ApplicationController
 
   before_action :set_cache_buster
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
-  
+
   before_action :assign_tickets, :assign_packages, except: [:successful]
   before_action :assign_sale, except: [:index, :new, :create]
-  before_action :check_completion, only: [:update_cart, :delete_purchase, :edit_personal_info, :checkout, :charge]
+  before_action :check_completion, except: [:index, :show, :new, :successful, :redeem, :resend_email]
 
   def index
     @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
@@ -38,7 +38,7 @@ class SalesController < ApplicationController
     end
 
     @sale.save
-    
+
     respond_to do |format|
       format.html { redirect_to new_sale_path }
       format.js { render }
@@ -219,7 +219,7 @@ class SalesController < ApplicationController
   def assign_sale
     @sale = Sale.find_by(redemption_code: params[:redemption_code])
   end
- 
+
   # PARAMS
 
   def sale_params
