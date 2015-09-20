@@ -21,6 +21,15 @@ class Sale < ActiveRecord::Base
     RQRCode::QRCode.new("#{protohost}sales/#{redemption_code}")
   end
 
+  def qr_svg(url)
+    svg = redemption_qrcode(url).as_svg({module_size: 5})
+    svg.sub(/width="(.+?)"/, 'width="100%"').sub(/height="(.+?)"/, 'viewBox="0 0 \1 \1" class="qrcode"').html_safe
+  end
+
+  def complete?
+    !charge_id.nil?
+  end
+
   def to_param
     redemption_code
   end

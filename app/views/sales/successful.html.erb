@@ -1,17 +1,21 @@
-<h2>Success!</h2>
+<div class="ticket-receipt ">
+  <h1 class='section-heading'>Thank You!</h1>
 
-<p>Thanks for investing in adventure, <%= @sale.name %>.</p>
+  <p class='align-center help-text'>A copy of this ticket has been emailed to you.</p>
 
-<div><b>Your purchases:</b></div>
-<table>
-  <tbody>
-    <tr>
-      <th>Sale ID:</th>
-      <td><%= @sale.redemption_code %></td>
-      <th>Sale QR:</th>
-      <td><%= @sale.redemption_qrcode(root_url).as_svg({module_size: 5}).html_safe %></td>
-    </tr>
-    <br>
-  </tbody>
-</table>
+  <div class='card'>
+  <h2 class='section-heading'>Your Ticket</h2>
+  <div class='help-text align-center'>Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
+  <div class='receipt-qr'><%= @sale.qr_svg(root_url) %></div>
 
+  <div class='receipt-info align-center'>
+    <div class='receipt-name'><%= @sale.name %></div>
+    <div class='receipt-email'><%= @sale.email %></div>
+  </div>
+
+
+  <%= render partial: "static_cart" %>
+
+  </div>
+
+</div>

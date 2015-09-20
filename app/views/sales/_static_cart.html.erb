@@ -1,8 +1,10 @@
 <div class='static-cart grid no-gutter align-middle'>
-  <div class='grid-cell one-of-two'><h4 class='cart-heading'>Your Tickets</h5></div>
-  <div class='grid-cell align-right one-of-two'>
-  <%= link_to "edit cart", cart_path(redemption_code: @sale.redemption_code), class: 'button cart-edit-button' %>
-  </div>
+  <% unless @sale.complete? %>
+    <div class='grid-cell one-of-two'><h4 class='cart-heading'>Your Tickets</h5></div>
+    <div class='grid-cell align-right one-of-two'>
+    <%= link_to "edit cart", cart_path(redemption_code: @sale.redemption_code), class: 'button cart-edit-button' %>
+    </div>
+  <% end %>
   <div class='grid-cell'>
     <div class='cart-items'>
       <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>

@@ -1,0 +1,29 @@
+.ticket-receipt {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.receipt-info {
+  margin: 1.5em 0 0;
+}
+
+.receipt-qr {
+  padding: 1.5em;
+  margin: 1em auto;
+  border: 1px solid $page-border;
+}
+
+.receipt-name {
+  font-weight: 500;
+  font-size: 1.5em;
+  line-height: 1.3em;
+}
+
+.receipt-date {
+  margin-top: 1em;
+}
+
+.help-text {
+  font-size: .9em;
+  color: #777;
+}
