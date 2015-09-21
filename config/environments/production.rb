@@ -12,7 +12,6 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
-  config.force_ssl = true
   ActionMailer::Base.smtp_settings = {
     :port           => 587,
     :address        => "smtp.mailgun.org",
