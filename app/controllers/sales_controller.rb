@@ -4,9 +4,9 @@ class SalesController < ApplicationController
   before_action :set_cache_buster
   before_action :authenticate_admin!, only: [:show, :redeem, :index]
 
-  before_action :assign_tickets, :assign_packages, except: [:successful]
+  before_action :assign_tickets, :assign_packages, except: [:receipt]
   before_action :assign_sale, except: [:index, :new, :create]
-  before_action :check_completion, except: [:index, :show, :new, :successful, :redeem, :resend_email]
+  before_action :check_completion, except: [:index, :show, :new, :receipt, :redeem, :resend_email]
 
   def index
     @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
@@ -156,7 +156,7 @@ class SalesController < ApplicationController
 
       CustomerMailer.receipt_email(@sale, protohost).deliver_now
 
-      redirect_to successful_sale_path(@sale)
+      redirect_to receipt_sale_path(@sale)
 
     rescue Stripe::CardError => e
       body = e.json_body

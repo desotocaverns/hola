@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :sales, param: :redemption_code, only: [:index, :new, :create, :edit, :show] do
     member do
-      get :summarize, :successful
+      get :summarize, :receipt
       delete :delete_purchase
       post :resend_email
     end
