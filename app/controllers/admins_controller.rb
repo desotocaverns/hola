@@ -18,13 +18,4 @@ class AdminsController < ApplicationController
     def admin_params
       params[:admin].permit(:email, :password)
     end
-
-    def only_autocrats
-      if admin_signed_in?
-        unless current_admin.autocratic
-          flash[:alert] = "You are not authorized"
-          redirect_to new_sale_path
-        end
-      end
-    end
 end

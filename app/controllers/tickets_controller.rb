@@ -91,15 +91,6 @@ class TicketsController < ApplicationController
     params[:ticket].permit(:name, :description, :price, :for_sale, :for_sale_on)
   end
 
-  def only_autocrats
-    if admin_signed_in?
-      unless current_admin.autocratic
-        flash[:alert] = "You are not authorized"
-        redirect_to new_sale_path
-      end
-    end
-  end
-
   def assign_for_sale_on_date(params, ticket)
     begin
       date = DateTime.new(params["for_sale_on(1i)"].to_i, params["for_sale_on(2i)"].to_i, params["for_sale_on(3i)"].to_i)

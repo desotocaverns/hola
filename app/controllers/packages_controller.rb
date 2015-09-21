@@ -28,7 +28,7 @@ class PackagesController < ApplicationController
 
     @package = Package.new(filtered_params)
     assign_for_sale_on_date(filtered_params, @package)
-    
+
     @tickets = Ticket.all
 
     if @package.errors.empty?
@@ -54,9 +54,9 @@ class PackagesController < ApplicationController
     end
 
     filtered_params[:price] = filtered_params[:price].to_f * 100
-    
+
     assign_for_sale_on_date(filtered_params, @package)
-    
+
     if @package.errors.empty?
       if @package.update(filtered_params)
         redirect_to @package, notice: 'Package was successfully updated.'
@@ -86,15 +86,6 @@ class PackagesController < ApplicationController
       params[:package].permit(:name, :description, :price, :for_sale_on, :package_tickets_attributes => [:ticket_id, :quantity])
     end
 
-    def only_autocrats
-      if admin_signed_in?
-        unless current_admin.autocratic
-          flash[:alert] = "You are not authorized"
-          redirect_to new_sale_path
-        end
-      end
-    end
-
     def assign_for_sale_on_date(params, package)
       begin
         date = DateTime.new(params["for_sale_on(1i)"].to_i, params["for_sale_on(2i)"].to_i, params["for_sale_on(3i)"].to_i)
@@ -106,4 +97,3 @@ class PackagesController < ApplicationController
       end
     end
 end
-
