@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
   # Authentication
 
-  devise_for :admins, :controllers => {:invitations => "admins/invitations"}
+  devise_for :admins, :controllers => {:invitations => "admins/invitations", :registrations => "admins/registrations"}
 
   devise_scope :admin do
     get '/login', to: 'devise/sessions#new'
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   as :admin do
     get 'admins/edit' => 'devise/registrations#edit', :as => 'edit_admin_registration'
-    put 'admins' => 'devise/registrations#update', :as => 'admin_registration'
+    put 'admins' => 'admins/registrations#update', :as => 'admin_registration'
   end
 
   resources :admins, only: [:index, :destroy]
@@ -54,5 +54,4 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount CustomerMailerPreview => 'mail_view'
   end
-
 end
