@@ -1,4 +1,7 @@
 class Settings < ActiveRecord::Base
+  validates :company_email, presence: true
+  validates_numericality_of :tax, greater_than_or_equal_to: 0.01
+
   def self.[](k)
     (first || default_settings)[k]
   end
@@ -7,5 +10,3 @@ class Settings < ActiveRecord::Base
     Settings.create!
   end
 end
-
-def Settings; Settings.first; end

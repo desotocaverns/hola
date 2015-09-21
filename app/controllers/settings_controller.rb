@@ -7,8 +7,12 @@ class SettingsController < ApplicationController
 
   def update
     @settings = Settings()
-    @settings.update(settings_params)
-    flash[:notice] = "Settings succesfully changed"
+    if @settings.update(settings_params)
+      flash[:notice] = "Settings succesfully changed"
+    else
+      flash[:alert] = "Your settings could not be saved because they were invalid"
+    end
+    
     redirect_to settings_path
   end
 

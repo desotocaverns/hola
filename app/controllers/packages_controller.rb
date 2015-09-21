@@ -27,16 +27,12 @@ class PackagesController < ApplicationController
     filtered_params[:price] = filtered_params[:price].to_f * 100
 
     @package = Package.new(filtered_params)
-    assign_for_sale_on_date(filtered_params, @package)
-
     @tickets = Ticket.all
 
-    if @package.errors.empty?
-      if @package.save
-        redirect_to @package, notice: 'Package was successfully created.'
-      else
-        render :new
-      end
+    if @package.save
+      redirect_to @package, notice: 'Package was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -84,16 +80,5 @@ class PackagesController < ApplicationController
 
     def package_params
       params[:package].permit(:name, :description, :price, :for_sale_on, :package_tickets_attributes => [:ticket_id, :quantity])
-    end
-
-    def assign_for_sale_on_date(params, package)
-      begin
-        date = DateTime.new(params["for_sale_on(1i)"].to_i, params["for_sale_on(2i)"].to_i, params["for_sale_on(3i)"].to_i)
-        package.update_attribute(:for_sale_on, date)
-      rescue ArgumentError
-        package.errors.add(:for_sale_on, "has an invalid date")
-        @tickets = Ticket.all
-        render action: 'new'
-      end
     end
 end

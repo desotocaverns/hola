@@ -26,3 +26,5 @@ module DesotoBilling
     config.paths['app/views'] << "app/views/admins"
   end
 end
+
+def Settings; (Settings.first || Settings.default_settings); end

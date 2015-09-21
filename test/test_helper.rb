@@ -6,7 +6,20 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   # fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def create_admins
+    @admin = Admin.create!(
+      email: "bob@randomemployee.com",
+      password: "nonautocraticpw",
+      activated: true
+    )
+
+    @autocratic_admin = Admin.create!(
+      email: "isaac@thewilliams.ws",
+      password: "isaacspw",
+      activated: true,
+      autocratic: true
+    )
+  end
 end
 
 class ActionController::TestCase
