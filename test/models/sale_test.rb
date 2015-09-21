@@ -17,8 +17,8 @@ class SaleTest < ActiveSupport::TestCase
 
   	sale = Sale.new
     sale.purchases << TicketPurchase.new(ticket: @ticket)
-    sale.save!
-  	
+    sale.save
+
   	purchase = sale.purchases.first
     assert_equal 1, purchase.quantity
     assert_equal @ticket.revision, purchase.ticket_revision
