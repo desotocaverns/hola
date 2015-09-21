@@ -1,7 +1,9 @@
 class CustomerMailer < ApplicationMailer
+  default from: "desotocaverns@donotreply.com"
+
   def receipt_email(sale, protohost)
-    # TODO: Where to store images on Heroku
     @sale = sale
+    @settings = Settings.first
 
     io = StringIO.new
     @sale.redemption_qrcode(protohost).as_png.write(io)
@@ -12,6 +14,6 @@ class CustomerMailer < ApplicationMailer
       :content => io.read
     }
 
-    mail(to: @sale.email, subject: 'DeSoto Caverns receipt')
+    mail(to: @sale.email, from: @settings.company_email, subject: 'DeSoto Caverns receipt')
   end
 end
