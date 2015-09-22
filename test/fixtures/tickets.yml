@@ -1,0 +1,20 @@
+adult_tour:
+  id: 1
+	name: Adult Caverns Tour
+	price: 2199
+  description: A one-hour, guided tour through DeSoto Caverns
+	for_sale_on: <%= Time.now %>
+
+child_tour:
+  id: 2
+	name: Child Caverns Tour
+	price: 1799
+  description: Ages 3-11 (Children 2 and under are free)
+	for_sale_on: <%= Time.now %>
+
+attraction:
+  id: 3
+	name: Attraction Ticket
+	price: 499
+  description: Admission to one of over 25 unique attractions
+	for_sale_on: <%= Time.now %>

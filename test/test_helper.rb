@@ -20,6 +20,11 @@ class ActiveSupport::TestCase
       autocratic: true
     )
   end
+
+  def setup_admin(admin_type=:autocratic)
+    create_admins
+    admin_type == :autocratic ? sign_in(@autocratic_admin) : sign_in(@admin)
+  end
 end
 
 class ActionController::TestCase
