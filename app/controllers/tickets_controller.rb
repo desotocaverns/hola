@@ -45,7 +45,13 @@ class TicketsController < ApplicationController
   def create
     fixed_params = ticket_params
     fixed_params[:price] = fixed_params[:price].to_f * 100
+    for_sale = fixed_params[:for_sale] if fixed_params[:for_sale] != ""
+
+    fixed_params.except!("for_sale")
+    fixed_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
+
     @ticket = Ticket.new(fixed_params)
+    @ticket.for_sale_on = Time.now if for_sale == "true"
 
     if @ticket.save
       redirect_to @ticket, notice: 'Ticket was successfully created.'
@@ -58,15 +64,17 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by(id: params[:id])
     fixed_params = ticket_params
     fixed_params[:price] = fixed_params[:price].to_f * 100
+    for_sale = fixed_params[:for_sale] if fixed_params[:for_sale] != ""
 
-    assign_for_sale_on_date(fixed_params, @ticket)
+    fixed_params.except!("for_sale")
+    fixed_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
 
-    if @ticket.errors.empty?
-      if @ticket.update(fixed_params)
-        redirect_to @ticket, notice: 'Ticket was successfully updated.'
-      else
-        render :edit
-      end
+    if @ticket.update(fixed_params)
+      @ticket.update_attribute(:for_sale_on, Time.now) if for_sale == "true"
+      @ticket.update_attribute(:for_sale_on, nil) if for_sale == "false"
+      redirect_to @ticket, notice: 'Ticket was successfully updated.'
+    else
+      render :edit
     end
   end
 

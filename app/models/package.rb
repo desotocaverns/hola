@@ -17,7 +17,7 @@ class Package < ActiveRecord::Base
   has_many :tickets,
     through: :package_tickets
 
-  before_create :assign_default_priority, :assign_default_for_sale_on
+  before_create :assign_default_priority
   before_save :increment_version
   after_save :save_revision
 
@@ -86,11 +86,5 @@ class Package < ActiveRecord::Base
 
   def assign_default_priority
     self.priority = (self.class.order(:priority).last.try(:priority) || 0) + 1
-  end
-
-  def assign_default_for_sale_on
-    if self.for_sale_on == nil
-      self.for_sale_on = Time.now
-    end
   end
 end

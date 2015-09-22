@@ -18,10 +18,6 @@
       <th>Price</th>
       <td>$<%= @package.price / 100.00 %></td>
     </tr>
-    <tr>
-      <th>For Sale</th>
-      <td><%= @package.for_sale %></td>
-    </tr>
   </tbody>
 </table>
 
@@ -36,7 +32,6 @@
         <th>Quantity</th>
         <th>Name</th>
         <th>Price</th>
-        <th>For Sale</th>
         <th>Description</th>
       </tr>
       <% @package.package_tickets.each do |package_ticket| %>
@@ -44,7 +39,6 @@
           <td><%= package_ticket.quantity %></td>
           <td><%= package_ticket.ticket.name %></td>
           <td><%= package_ticket.ticket.price %></td>
-          <td><%= package_ticket.ticket.for_sale %></td>
           <td><%= package_ticket.ticket.description %></td>
         </tr>
       <% end %>

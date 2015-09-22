@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918200046) do
+ActiveRecord::Schema.define(version: 20150922161812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,11 +69,10 @@ ActiveRecord::Schema.define(version: 20150918200046) do
   add_index "package_tickets", ["package_id", "ticket_id"], name: "index_package_tickets_on_package_id_and_ticket_id", unique: true, using: :btree
 
   create_table "packages", force: :cascade do |t|
-    t.string  "name",                       null: false
-    t.integer "price",       default: 0,    null: false
-    t.boolean "for_sale",    default: true
+    t.string  "name",                    null: false
+    t.integer "price",       default: 0, null: false
     t.text    "description"
-    t.integer "version",     default: 0,    null: false
+    t.integer "version",     default: 0, null: false
     t.integer "priority"
     t.date    "for_sale_on"
   end
@@ -113,11 +112,10 @@ ActiveRecord::Schema.define(version: 20150918200046) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string  "name",                       null: false
-    t.integer "price",       default: 0,    null: false
-    t.boolean "for_sale",    default: true
+    t.string  "name",                    null: false
+    t.integer "price",       default: 0, null: false
     t.text    "description"
-    t.integer "version",     default: 0,    null: false
+    t.integer "version",     default: 0, null: false
     t.integer "priority"
     t.date    "for_sale_on"
   end

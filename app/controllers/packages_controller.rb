@@ -17,16 +17,19 @@ class PackagesController < ApplicationController
 
   def create
     filtered_params = package_params
+    filtered_params[:price] = filtered_params[:price].to_f * 100
+    for_sale = filtered_params[:for_sale] if filtered_params[:for_sale] != ""
 
     filtered_params[:package_tickets_attributes].each do |hash|
       if hash["quantity"] == ""
         filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
       end
     end
-
-    filtered_params[:price] = filtered_params[:price].to_f * 100
+    fixed_params.except!("for_sale")
+    filtered_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
 
     @package = Package.new(filtered_params)
+    @package.for_sale_on = Time.now if for_sale == "true"
     @tickets = Ticket.all
 
     if @package.save
@@ -42,23 +45,24 @@ class PackagesController < ApplicationController
     end
 
     filtered_params = package_params
+    filtered_params[:price] = filtered_params[:price].to_f * 100
+    for_sale = filtered_params[:for_sale] if filtered_params[:for_sale] != ""
 
     filtered_params[:package_tickets_attributes].each do |hash|
       if hash["quantity"] == ""
         filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
       end
     end
+    filtered_params.except!("for_sale")
+    filtered_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
+    byebug
 
-    filtered_params[:price] = filtered_params[:price].to_f * 100
-
-    assign_for_sale_on_date(filtered_params, @package)
-
-    if @package.errors.empty?
-      if @package.update(filtered_params)
-        redirect_to @package, notice: 'Package was successfully updated.'
-      else
-        render :edit
-      end
+    if @package.update(filtered_params)
+      @package.update_attribute(:for_sale_on, Time.now) if for_sale == "true"
+      @package.update_attribute(:for_sale_on, nil) if for_sale == "false"
+      redirect_to @package, notice: 'Package was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -79,6 +83,6 @@ class PackagesController < ApplicationController
     end
 
     def package_params
-      params[:package].permit(:name, :description, :price, :for_sale_on, :package_tickets_attributes => [:ticket_id, :quantity])
+      params[:package].permit(:name, :description, :price, :for_sale, :for_sale_on, :package_tickets_attributes => [:ticket_id, :quantity])
     end
 end

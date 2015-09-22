@@ -41,7 +41,10 @@
   <br>
 
   <div>
-    <%= f.label :for_sale_on %>
+    <%= f.label :for_sale_on, "For sale: " %>
+    <%= radio_button_tag "package[for_sale]", "true", checked: true %> Yes
+    <%= radio_button_tag "package[for_sale]", "false" %> No
+    <%= radio_button_tag "package[for_sale]", "after" %> After
     <%= f.date_select :for_sale_on %>
   </div>
 
