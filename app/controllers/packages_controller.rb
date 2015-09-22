@@ -25,7 +25,7 @@ class PackagesController < ApplicationController
         filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
       end
     end
-    fixed_params.except!("for_sale")
+    filtered_params.except!("for_sale")
     filtered_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
 
     @package = Package.new(filtered_params)
