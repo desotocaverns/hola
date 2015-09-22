@@ -1,3 +1,0 @@
-<%= form_for @sale, :url => {action: "charge", redemption_code: @sale.redemption_code}, :method => "patch", :html => {:id => "payment_form"} do |f| %>
-  <input type="hidden" autocomplete="off" name="sale[stripe_token]" id="stripe_token"/>
-<% end %>

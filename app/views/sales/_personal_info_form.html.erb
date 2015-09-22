@@ -2,7 +2,7 @@
   <h3 class='section-heading'>Contact Information</h3>
 
   <div class="personal-info-errors"></div>
-  
+
   <%= form_for @sale, :remote => true, :url => update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
     <div class='card'>
       <% if @sale.errors.any? %>

@@ -4,7 +4,7 @@
     // Handle Safari back/forward cache after checkout completed.
     $(window).bind("pageshow", function(event) {
       if (event.originalEvent.persisted) {
-        window.location.reload() 
+        window.location.reload()
       }
     });
   </script>
@@ -21,8 +21,37 @@
   <% if @sale.email %>
     <%= render 'static_cart' %>
     </div>
-    <%= form_tag checkout_path(redemption_code: @sale.redemption_code), remote: true, method: :patch, class: "checkout-form" do %>
-      <%= render partial: "checkout_form", locals: { button_text: "Purchase" } %>
+    <%= render partial: "checkout_form", locals: { button_text: "Purchase" } %>
+    <%= form_for @sale, :url => {action: "charge", redemption_code: @sale.redemption_code}, :method => "patch", :html => {:id => "payment_form"} do |f| %>
+      <input type="hidden" name="sale[stripe_token]" id="stripe_token"/>
     <% end %>
+    
+    <script type="text/javascript">
+      <% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
+      <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
+
+      var handler = StripeCheckout.configure({
+        key: 'pk_test_lgoJadzJlZSpLwrY1sJPinZK',
+        token: function(token) {
+          payment_form = $('#payment_form');
+          payment_form.find('#stripe_token').val(token.id);
+          payment_form.submit();
+        }
+      });
+
+      $(".primary-button").on("click", function() {
+        handler.open({
+          name: 'DeSoto Caverns',
+          description: '<%= tp_quantity %> ticket<% if tp_quantity > 1 || tp_quantity == 0 %>s<% end %>, <%= pp_quantity %> package<% if pp_quantity > 1 || pp_quantity == 0 %>s<% end %>',
+          email: "<%= @sale.email %>",
+          amount: <%= @sale.charge_total %>,
+          allowRememberMe: false
+        });
+      });
+
+      $(window).on('popstate', function() {
+        handler.close();
+      });
+    </script>
   <% end %>
 </div>
