@@ -13,6 +13,8 @@ button, .button {
   &:hover {
     background-color: darken(#3C99FB, 6);
   }
+  text-decoration: none;
+  display: inline-block;
 }
 
 .continue-button {
@@ -26,11 +28,13 @@ button, .button {
   font-size: 1em;
   line-height: 2.2em;
   background: $blue;
+  &.small {
+    font-size: .8em;
+    line-height: 1.65em;
+  }
 }
 
-.cart-edit-button {
-  text-decoration: none;
-  padding: .3em 1em;
+.alt-button {
   color: #222;
   background: #fff;
   border: 1px solid #bbb;
@@ -40,4 +44,9 @@ button, .button {
     background-color: #333;
     border: 1px solid #333;
   }
+}
+
+.cart-edit-button {
+  padding: .3em 1em;
+  @extend .alt-button;
 }

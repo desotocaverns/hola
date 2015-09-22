@@ -4,7 +4,8 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :invitable
   before_invitation_accepted :activate
 
-  scope :activated, -> { where(activated: true) }
+  scope :autocratic, -> { where(autocratic: true, activated: true) }
+  scope :standard, -> { where(autocratic: false, activated: true) }
 
   def active_for_authentication?
     super && self.activated

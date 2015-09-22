@@ -19,22 +19,10 @@
 
 <% @sales.each do |sale| %>
   <div>
-    Name: <%= sale.name %><br>
-    Total Price: $<%= sale.charge_total / 100.00 %><br>
-    Tax: $<%= sale.tax / 100.00 %><br>
-    Email: <%= sale.email %><br>
-    Redemption Code: <%= sale.redemption_code %><br>
-    <% if sale.claimed_on != nil %><span style="color:red">Redeemed On: <%= sale.claimed_on %></span><br><% end %>
-    <ol>
-      <% sale.purchases.each do |purchase| %>
-        <li>Type: <%= purchase.type %>,<br>
-          Expires On: <%= purchase.expires_on %></li>
-      <% end %>
-    </ol>
-    <%= link_to "Show", "/sales/#{sale.redemption_code}" %>
+    <%= link_to sale.name, "/sales/#{sale.redemption_code}" %> - <%= sale.email %>
+     - <%= price sale.charge_total %>
+    <% if sale.claimed_on != nil %><span style="color:red">Redeemed On: <%= sale.claimed_on %></span><% end %>
   </div>
-
-  <hr>
 <% end %>
 
 <%= will_paginate @sales %>

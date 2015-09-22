@@ -1,32 +1,37 @@
-<h2>Existing admins</h2>
+<h2>Admins</h2>
 
-<table>
-  <tbody>
-    <% Admin.activated.each do |admin| %>
-      <tr>
-        <th><%= admin.email %></th>
-        <td><%= link_to 'Deactivate', admin, :method => 'delete', data: { confirm: "Are you sure?" } unless admin == current_admin %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% if Admin.invitation_not_accepted.any? %>
-  <br>
-
-  <h2>Invited admins</h2>
-
-  <% Admin.invitation_not_accepted.each do |admin| %>
-    <table>
-      <tbody>
-        <tr>
-          <th><%= admin.email %></th>
-        </tr>
-      </tbody>
-    </table>
+<ul class='users'>
+  <% Admin.autocratic.each do |admin| %>
+    <li class='user'>
+      <%= admin.email %>
+      <%= link_to 'x', admin, :method => 'delete', data: { confirm: "Are you sure?" } unless admin == current_admin %>
+    </li>
   <% end %>
+</ul>
+
+<% if Admin.standard.size > 0 %>
+<h2>Users</h2>
+  <ul class='users'>
+  <% Admin.standard.each do |admin| %>
+    <li class='user'>
+      <%= admin.email %>
+      <%= link_to 'x', admin, :method => 'delete', data: { confirm: "Are you sure?" } unless admin == current_admin %>
+    </li>
+  <% end %>
+</ul>
 <% end %>
 
-<br>
+<% if Admin.invitation_not_accepted.any? %>
+  <h2>Invited Users</h2>
 
-<%= link_to 'New admin', new_admin_invitation_path %>
+  <ul class='users invited-users'>
+  <% Admin.invitation_not_accepted.each do |admin| %>
+    <li class='user invited-user'
+      <%= admin.email %>
+      <%= "admin" if admin.autocratic %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'Add user', new_admin_invitation_path, class: 'button' %>

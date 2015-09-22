@@ -1,49 +1,29 @@
+
 <% if @purchase.expires_on <= Time.now %>
   <span style="color:red; font-size:20px">Expired!</span>
-
-  <br><br>
 <% end %>
 
-<table>
-  <tbody>
-    <tr>
-      <th>Name:</th>
-      <td><%= @sale.name %></td>
-    </tr>
-    <tr>
-      <th>Total sale price:</th>
-      <td>$<%= @sale.charge_total.to_int / 100.00 %></td>
-    </tr>
-    <tr>
-      <th>Purchase type:</th>
-      <td><%= @purchase.type.to_s.gsub(/(?<!^)(?=[A-Z])/, " ") %></td>
-    </tr>
-    <tr>
-      <th>Email:</th>
-      <td><%= @sale.email %></td>
-    </tr>
-    <tr>
-      <th>Expires on:</th>
-      <td><%= @purchase.expires_on %></td>
-    </tr>
-    <% if @sale.claimed_on != nil %>
-      <tr>
-        <th>Claimed on:</th>
-        <td><%= @sale.claimed_on %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class='card'>
+  <div class='grid no-gutter'>
+    <div class='grid-cell one-of-two'>
+      <h5 class='ticket-name'><%= @sale.name %></h5>
+      <div class='ticket-email'><%= @sale.email %></div>
+    </div>
+    <div class='grid-cell one-of-two align-right'>
+      <% if @sale.claimed_on != nil %>
+        <div class='ticket-claimed'>Claimed on: <%= @sale.claimed_on %></div>
+      <% elsif @purchase.expires_on >= Time.now %>
+        <form class='inline-form' method="post" action="<%= resend_email_sale_path(@sale.redemption_code) %>">
+          <button class='alt-button' type="submit">Resend Email</button>
+        </form>
+        <form class='inline-form' method="post" action="<%= redeem_path(@sale.redemption_code) %>">
+          <button class='primary-button small' type="submit">Redeem</button>
+        </form>
+      <% else %>
+        Expired: <%= @purchase.expires_on %>
+      <% end %>
+    </div>
+  </div>
+  <%= render partial: 'static_cart' %>
+</div>
 
-<% if @sale.claimed_on == nil && @purchase.expires_on >= Time.now %>
-  <br>
-  <form method="post" action="<%= redeem_path(@sale.redemption_code) %>">
-    <input type="submit" value="Redeem">
-  </form>
-  <br>
-  <form method="post" action="<%= resend_email_sale_path(@sale.redemption_code) %>">
-    <input type="submit" value="Resend Email">
-  </form>
-<% end %>
-
-<%= link_to 'Back', sales_path %>

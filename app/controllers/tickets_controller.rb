@@ -4,6 +4,8 @@ class TicketsController < ApplicationController
   def index
     @tickets = Ticket.all.order(:priority)
     @packages = Package.all.order(:priority)
+    @current_tickets = Ticket.for_sale.order(:priority)
+    @current_packages = Package.for_sale.order(:priority)
   end
 
   def change_priority
