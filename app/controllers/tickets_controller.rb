@@ -2,10 +2,13 @@ class TicketsController < ApplicationController
   before_action :authenticate_admin!, :only_autocrats
 
   def index
-    @tickets = Ticket.all.order(:priority)
-    @packages = Package.all.order(:priority)
     @current_tickets = Ticket.for_sale.order(:priority)
     @current_packages = Package.for_sale.order(:priority)
+  end
+
+  def nfs_index
+    @nfs_tickets = Ticket.not_for_sale.order(:priority)
+    @nfs_packages = Package.not_for_sale.order(:priority)
   end
 
   def change_priority

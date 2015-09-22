@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   resources :tickets
   patch '/sales/change_priority/:id/:priority' => 'tickets#change_priority', as: 'change_priority'
+  get '/not_for_sale/tickets' => 'tickets#nfs_index', as: 'nfs_index'
 
   # Authentication
 

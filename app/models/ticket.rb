@@ -10,6 +10,7 @@ class Ticket < ActiveRecord::Base
   validates_numericality_of :price, greater_than: 0
 
   scope :for_sale, -> { where("for_sale_on <= NOW()") }
+  scope :not_for_sale, -> { where("for_sale_on >= NOW() OR for_sale_on = NULL") }
 
   # Answers a TicketRevision which contains the current Ticket data. This will be the last
   # recorded revision if the Ticket is unchanged, otherwise it will be an unsaved TicketRevision
