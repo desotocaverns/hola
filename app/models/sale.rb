@@ -26,6 +26,11 @@ class Sale < ActiveRecord::Base
     svg.sub(/width="(.+?)"/, 'width="100%"').sub(/height="(.+?)"/, 'viewBox="0 0 \1 \1" class="qrcode"').html_safe
   end
 
+  def qr_png(protohost, size=400)
+    png = self.redemption_qrcode(protohost).as_png(size: size)
+    png.to_data_url
+  end
+
   def complete?
     !charge_id.nil?
   end

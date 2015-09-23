@@ -13,6 +13,11 @@
   border: 1px solid $page-border;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 .receipt-name {
   font-weight: 500;
   font-size: 1.5em;

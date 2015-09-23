@@ -6,7 +6,7 @@
   <div class='card'>
   <h2 class='section-heading'>Your Ticket</h2>
   <div class='help-text align-center'>Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
-  <div class='receipt-qr'><%= @sale.qr_svg(root_url) %></div>
+  <div class='receipt-qr'><img src="<%= @sale.qr_png(root_url)%>"></div>
 
   <div class='receipt-info align-center'>
     <div class='receipt-name'><%= @sale.name %></div>
