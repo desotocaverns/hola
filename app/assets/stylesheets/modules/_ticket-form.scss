@@ -47,3 +47,19 @@
     margin-top: .4em;
   }
 }
+
+.ticket-item {
+  background: #fff;
+  + .ticket-item {
+    border-top: 1px solid $page-border;
+  }
+}
+
+.ticket-item-link {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  &:hover .ticket-name {
+    color: $blue;
+  }
+}

@@ -50,3 +50,27 @@ button, .button {
   padding: .3em 1em;
   @extend .alt-button;
 }
+
+.arrow-button {
+  cursor: pointer;
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 4px;
+  font-size: .8em;
+  line-height: 1em;
+  opacity: .2;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.order-buttons {
+  form {
+    margin: 0; padding: 0;
+    display: inline;
+  }
+  .arrow-button {
+    margin-left: 50%;
+  }
+}

@@ -1,43 +1,27 @@
-<h1>Listing Tickets & Packages</h1>
+<div class='ticket-title grid align-middle'>
+  <div class='grid-cell one-of-two'><h2>Packages</h2></div>
+  <div class='grid-cell one-of-two align-right'>
+    <%= link_to 'New Package', new_package_path, class: "button alt-button" %>
+  </div>
+</div>
 
-<% @current_tickets.each do |ticket| %>
-  <strong><%= ticket.name %></strong> |
-  <%= link_to 'Show', ticket %>
-  <%= link_to 'Edit', edit_ticket_path(ticket) %>
-  <%= link_to 'Destroy', ticket, :method => 'delete', data: { confirm: 'Are you sure?' } %>
-
-  <% if current_admin && current_admin.autocratic %>
-    <%= form_tag change_priority_path(priority: ticket.priority, id: ticket.id), :method => :patch do %>
-      <input type="hidden" name="type" value="Ticket">
-      <%= submit_tag "Up", name: "up" %>
-      <%= submit_tag "Down", name: "down" %>
-    <% end %>
+<div class='tickets card'>
+  <% @current_packages.each do |package| %>
+    <div class='ticket grid no-gutter'><%= render partial: "ticket_item", locals: { item: package, type: "Package" } %></div>
   <% end %>
-  <br>
-<% end %>
+</div>
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<div class='ticket-title grid align-middle'>
+  <div class='grid-cell one-of-two'><h2>Tickets</h2></div>
+  <div class='grid-cell one-of-two align-right'>
+    <%= link_to 'New Ticket', new_ticket_path, class: "button alt-button" %>
+  </div>
+</div>
 
-<% 3.times do %>
-  <br>
-<% end %>
-
-<% @current_packages.each do |package| %>
-  <strong><%= package.name %></strong> |
-  <%= link_to 'Show', package %>
-  <%= link_to 'Edit', edit_package_path(package) %>
-  <%= link_to 'Destroy', package, :method => 'delete', data: { confirm: 'Are you sure?' } %>
-
-  <% if current_admin && current_admin.autocratic %>
-    <%= form_tag change_priority_path(priority: package.priority, id: package.id), :method => :patch do %>
-      <input type="hidden" name="type" value="Package">
-      <%= submit_tag "Up", name: "up" %>
-      <%= submit_tag "Down", name: "down" %>
-    <% end %>
+<div class='tickets card'>
+  <% @current_tickets.each do |ticket| %>
+    <div class='ticket grid no-gutter'><%= render partial: "ticket_item", locals: { item: ticket, type: "Ticket" } %></div>
   <% end %>
-  <br>
-<% end %>
+</div>
 
-<%= link_to 'New Package', new_package_path %>
-<br>
 <%= link_to 'Not For Sale Tickets', nfs_index_path %>
