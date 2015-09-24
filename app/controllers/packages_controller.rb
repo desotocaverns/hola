@@ -1,4 +1,5 @@
 class PackagesController < ApplicationController
+  include ApplicationHelper
   before_action :set_package, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, :only_autocrats
 
@@ -72,7 +73,7 @@ class PackagesController < ApplicationController
     Package.all.order(:priority).last.priority = Package.all.order(:priority).last.priority - 1
 
     respond_to do |format|
-      format.html { redirect_to tickets_url, notice: 'Package was successfully destroyed.' }
+      format.html { redirect_to auto_tickets_path(@package), notice: 'Package was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

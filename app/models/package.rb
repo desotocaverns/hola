@@ -26,7 +26,7 @@ class Package < ActiveRecord::Base
   validates_numericality_of :price, greater_than: 0
 
   scope :for_sale, -> { where("for_sale_on <= NOW()") }
-  scope :not_for_sale, -> { where("for_sale_on >= NOW() OR for_sale_on = NULL") }
+  scope :not_for_sale, -> { where("for_sale_on >= NOW() OR for_sale_on IS NULL") }
 
   # Answers a PackageRevision which contains the current Package data. This will be the last
   # recorded revision if the Package is unchanged, otherwise it will be an unsaved PackageRevision

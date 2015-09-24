@@ -1,4 +1,6 @@
 class TicketsController < ApplicationController
+  include ApplicationHelper
+
   before_action :authenticate_admin!, :only_autocrats
 
   def index
@@ -89,7 +91,7 @@ class TicketsController < ApplicationController
     Ticket.all.order(:priority).last.priority = Ticket.all.order(:priority).last.priority - 1
 
     respond_to do |format|
-      format.html { redirect_to tickets_url, notice: 'Ticket was successfully destroyed.' }
+      format.html { redirect_to auto_tickets_path(@ticket), notice: 'Ticket was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,5 +1,7 @@
 <h2>Listing Tickets & Packages (not for sale)</h2>
 
+<h3>Tickets</h3>
+
 <% @nfs_tickets.each do |ticket| %>
   <strong><%= ticket.name %></strong> |
   <%= link_to 'Show', ticket %>
@@ -8,9 +10,7 @@
   <br>
 <% end %>
 
-<% 3.times do %>
-  <br>
-<% end %>
+<h3>Packages</h3>
 
 <% @nfs_packages.each do |package| %>
   <strong><%= package.name %></strong> |
@@ -18,3 +18,5 @@
   <%= link_to 'Edit', edit_package_path(package) %>
   <%= link_to 'Destroy', package, :method => 'delete', data: { confirm: 'Are you sure?' } %>
 <% end %>
+
+<%= link_to "For Sale Tickets", tickets_path %>
