@@ -2,6 +2,18 @@ form {
   margin: 0;
 }
 
+.field {
+  label {
+    margin-top: .8em;
+    display: block;
+    line-height: 1.8em;
+  }
+  label+input {
+    width: 100%;
+    margin-bottom: .8em;
+  }
+}
+
 .form-footer {
   background: rgba(#222, .95);
   color: #fff;

@@ -1,6 +1,8 @@
 module ApplicationHelper
   def price(num)
-    "$#{num.to_int / 100.00}"
+    p = "$#{num.to_int / 100.00}"
+    p += '0' if p =~ /\..$/
+    p
   end
 
   def iphone?
@@ -13,5 +15,9 @@ module ApplicationHelper
 
   def auto_tickets_path(item)
     item.for_sale_on == nil || item.for_sale_on >= Time.now ? nfs_index_path : tickets_path
+  end
+
+  def action_heading(heading, link_text, link_path)
+    render partial: "shared/action_heading", locals: { heading: heading, link_text: link_text, link_path: link_path }
   end
 end

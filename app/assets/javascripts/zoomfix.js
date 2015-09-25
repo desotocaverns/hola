@@ -1,8 +1,8 @@
 $(document).on('ready', function(){
-  $("input, textarea, select").on({ 'touchstart' : function() {
+  $("input, textarea, select, button").on({ 'touchstart' : function() {
       zoomDisable()
   }})
-  $("input, textarea, select").on({ 'touchend' : function() {
+  $("input, textarea, select, button").on({ 'touchend' : function() {
       setTimeout(zoomEnable, 1000)
   }})
 })

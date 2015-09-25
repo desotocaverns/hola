@@ -3,7 +3,9 @@ $(document).on('ready', function(){
 });
 
 function setupHandlers() {
-  $('body').on('change', '.number-input', function() {
-    console.log(Number(this.value) + 1)
+  $('body').on('click', '[data-toggle],[data-show],[data-hide]', function(event) {
+    Toggler.handle(this)
+    event.stopPropagation()
+    event.preventDefault()
   })
 }

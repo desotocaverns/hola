@@ -1,22 +1,20 @@
-<h2>Listing Tickets & Packages (not for sale)</h2>
+<span class='page-heading'>Not For Sale</span>
+<%= link_to '(For sale)', tickets_path, class: 'minor-link' %>
 
-<h3>Tickets</h3>
-
-<% @nfs_tickets.each do |ticket| %>
-  <strong><%= ticket.name %></strong> |
-  <%= link_to 'Show', ticket %>
-  <%= link_to 'Edit', edit_ticket_path(ticket) %>
-  <%= link_to 'Destroy', ticket, :method => 'delete', data: { confirm: 'Are you sure?' } %>
-  <br>
+<% if @nfs_packages.size > 0 %>
+  <ul class='card-list'>
+    <li class='card-heading'>Packages</li>
+    <% @nfs_packages.each do |package| %>
+      <li class='card-list-item grid no-gutter'><%= render partial: "ticket_item", locals: { item: package, type: "Package" } %></li>
+    <% end %>
+  </ul>
 <% end %>
 
-<h3>Packages</h3>
-
-<% @nfs_packages.each do |package| %>
-  <strong><%= package.name %></strong> |
-  <%= link_to 'Show', package %>
-  <%= link_to 'Edit', edit_package_path(package) %>
-  <%= link_to 'Destroy', package, :method => 'delete', data: { confirm: 'Are you sure?' } %>
+<% if @nfs_tickets.size > 0 %>
+  <ul class='card-list'>
+    <li class='card-heading'>Tickets</li>
+    <% @nfs_tickets.each do |ticket| %>
+      <li class='card-list-item grid no-gutter'><%= render partial: "ticket_item", locals: { item: ticket, type: "Ticket" } %></li>
+    <% end %>
+  </ul>
 <% end %>
-
-<%= link_to "For Sale Tickets", tickets_path %>

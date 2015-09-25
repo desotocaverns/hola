@@ -1,15 +1,18 @@
+<h2>Store Settings</h2>
 <%= form_for @settings, method: :patch, url: settings_update_path do |f| %>
-  <div class="form-row">
-    <%= f.label :tax %>
-    <%= f.text_field :tax %>
+  <div class='card'>
+    <div class="field">
+      <%= f.label :tax %>
+      <%= f.text_field :tax %>
+    </div>
+
+    <div class="field">
+      <%= f.label :company_email, "Reply to address on receipts" %>
+      <%= f.text_field :company_email %>
+    </div>
   </div>
 
-  <div class="form-row">
-    <%= f.label :company_email %>
-    <%= f.text_field :company_email %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-footer">
+    <button class='primary-button'>Save Changes</button>
   </div>
 <% end %>

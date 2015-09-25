@@ -1,0 +1,43 @@
+.card {
+  @extend .box-padding;
+  background: #fff;
+  border: 1px solid rgba(#000, .15);
+}
+
+.minor-card-heading {
+  font-size: .8em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  margin-top: 1em;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.card-list {
+  background: #fff;
+  border: 1px solid rgba(#000, .15);
+  list-style: none;
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+.card-heading {
+  padding: .5em 20px;
+  font-size: .8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+  background: rgba(#000, .03);
+}
+
+.card-list-item {
+  @extend .h-padding;
+  position: relative;
+  padding: {top: 1em; bottom: 1em; }
+  border-bottom: 1px solid #ddd;
+  &:last-child {
+    border-bottom: 0;
+  }
+}

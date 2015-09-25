@@ -1,27 +1,25 @@
-<div class='ticket-title grid align-middle'>
-  <div class='grid-cell one-of-two'><h2>Packages</h2></div>
+<div class='ticket-title grid align-middle heading-grid'>
+  <div class='grid-cell one-of-two'>
+    <span class='page-heading'>For Sale</span>
+    <%= link_to '(Not for sale)', nfs_index_path, class: 'minor-link' %>
+  </div>
   <div class='grid-cell one-of-two align-right'>
-    <%= link_to 'New Package', new_package_path, class: "button alt-button" %>
+    <%= link_to "New Package", new_package_path, class: "button alt-button" %>
+    <%= link_to "New Ticket", new_ticket_path, class: "button alt-button" %>
   </div>
 </div>
 
-<div class='tickets card'>
+<ul class='card-list'>
+  <li class='card-heading'>Packages</li>
   <% @current_packages.each do |package| %>
-    <div class='ticket grid no-gutter'><%= render partial: "ticket_item", locals: { item: package, type: "Package" } %></div>
+    <li class='card-list-item grid no-gutter'><%= render partial: "ticket_item", locals: { item: package, type: "Package" } %></li>
   <% end %>
-</div>
+</ul>
 
-<div class='ticket-title grid align-middle'>
-  <div class='grid-cell one-of-two'><h2>Tickets</h2></div>
-  <div class='grid-cell one-of-two align-right'>
-    <%= link_to 'New Ticket', new_ticket_path, class: "button alt-button" %>
-  </div>
-</div>
-
-<div class='tickets card'>
+<ul class='card-list'>
+  <li class='card-heading'>Tickets</li>
   <% @current_tickets.each do |ticket| %>
-    <div class='ticket grid no-gutter'><%= render partial: "ticket_item", locals: { item: ticket, type: "Ticket" } %></div>
+    <li class='card-list-item grid no-gutter'><%= render partial: "ticket_item", locals: { item: ticket, type: "Ticket" } %></li>
   <% end %>
-</div>
+</ul>
 
-<%= link_to 'Not For Sale Tickets', nfs_index_path %>

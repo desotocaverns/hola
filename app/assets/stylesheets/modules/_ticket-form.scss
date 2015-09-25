@@ -58,8 +58,31 @@
 .ticket-item-link {
   text-decoration: none;
   display: block;
+  color: inherit;
   width: 100%;
-  &:hover .ticket-name {
+  &:hover {
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      display: block;
+      background: rgba($blue, .1);
+      top: 0; left: 0; bottom: 0; right: 0;
+    }
+    .ticket-name {
+      color: $blue;
+    }
+  }
+}
+
+.minor-link {
+  font-size: .8em;
+  color: inherit;
+  opacity: .7;
+  display: inline-block;
+  padding-left: .5em;
+  &:hover {
     color: $blue;
+    opacity: 1;
   }
 }
