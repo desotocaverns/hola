@@ -8,7 +8,8 @@
 }
 
 .receipt-qr {
-  padding: 1.5em;
+  max-width: 400px;
+  padding: .2em;
   margin: 1em auto;
   border: 1px solid $page-border;
 }
