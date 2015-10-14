@@ -6,7 +6,7 @@
   <body>
     <h2>Thanks for investing in adventure, <%= @sale.name %>!</h2>
 
-    <p>When you visit us, just give the attendant your redemption code or your handy-dandy QR code.</p>
+    <p>If this email fails to display properly, <%= link_to "view your receipt online", @sale.receipt_url(root_url) %></p>
 
     <p>Total Price: $<%= @sale.charge_total / 100.00 %></p>
     <p>Tax: $<%= @sale.tax / 100.00 %></p>

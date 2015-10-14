@@ -39,6 +39,10 @@ class Sale < ActiveRecord::Base
     redemption_code
   end
 
+  def receipt_url(url)
+    "#{url}sales/#{redemption_code}/receipt"
+  end
+
   private
 
   def calculate_prices

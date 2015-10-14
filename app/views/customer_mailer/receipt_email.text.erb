@@ -1,6 +1,4 @@
 Thanks for investing in adventure, <%= @sale.name %>!
 =========================================================
 
-When you visit us, just give the attendant your purchase ID.
-
-Purchase ID: <%= @sale.redemption_code %>
+If this email fails to display properly, you may print your ticket here: <%= @sale.receipt_url(root_url) %>
