@@ -38,3 +38,10 @@ hr {
   width: 100%;
   border-bottom: 1px solid $page-border;
 }
+
+.legal-text {
+  font-size: .7em;
+  color: #aaa;
+  a { color: #888; }
+  line-height: 1.4em;
+}

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/privacy" => 'sales#privacy'
+
   get '/settings' => 'settings#edit'
   patch '/settings/update' => 'settings#update'
 

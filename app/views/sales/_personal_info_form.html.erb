@@ -25,6 +25,7 @@
 
       <%= f.hidden_field :redemption_code %>
       <%= f.hidden_field :is_info_form, value: true %>
+      <p class='legal-text'>Your information will only be used to contact you about your purchase. View our <a href="/privacy" target="_blank">privacy policy</a> for more detail.</p>
     </div>
 
     <% if @sale.email %>
@@ -41,3 +42,4 @@
     <% end %>
   <% end %>
 </div>
+
