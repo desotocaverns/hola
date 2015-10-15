@@ -28,8 +28,13 @@ h6 { font-size: 14px; }
   font-weight: 500;
 }
 
-.heading-grid {
+.block-margin {
   margin: 1.5em 0;
+}
+
+
+.text-center {
+  text-align: center;
 }
 
 hr {
@@ -41,7 +46,6 @@ hr {
 
 .legal-text {
   font-size: .7em;
-  color: #aaa;
-  a { color: #888; }
+  opacity: .5;
   line-height: 1.4em;
 }

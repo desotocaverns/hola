@@ -1,0 +1,59 @@
+@media print {
+/*.print-preview {*/
+  * {
+    color: #000 !important;
+    opacity: 1 !important;
+  }
+
+  body:after,
+  .sub-nav,
+  .thank-you-heading {
+    display: none;
+  }
+  .site {
+    border: 1px dashed rgba(#000, .15);
+    width: 400px;
+    margin: 0 auto;
+  }
+  .site-content {
+    padding: 0;
+  }
+
+  .site-header {
+    color: #444;
+    background: none;
+    margin: 0;
+    h1 {
+      margin-bottom: 0;
+      font-size: 25px;
+      max-width: 80%;
+      margin: { left: auto; right: auto; }
+      padding: 0;
+    }
+  }
+
+  .cart-items {
+    font-size: .85em;
+  }
+  .ticket-receipt {
+    .section-heading {
+      display: none;
+    }
+    .card {
+      border: none;
+      padding-top: 0;
+    }
+  }
+  .receipt-qr {
+    width: 160px;
+    padding: 0;
+    margin: 1em auto;
+    max-width: auto;
+    border: 1px solid #777;
+    line-height: 0;
+  }
+
+  .receipt-info {
+    margin: 1em auto;
+  }
+}

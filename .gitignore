@@ -25,3 +25,4 @@ config/secrets.yml
 # Ignore the vim stuff
 *.swp
 *.swo
+.DS_Store

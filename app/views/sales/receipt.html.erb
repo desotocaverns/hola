@@ -1,21 +1,22 @@
 <div class="ticket-receipt ">
-  <h1 class='section-heading'>Thank You!</h1>
-
-  <p class='align-center help-text'>A copy of this ticket has been emailed to you.</p>
 
   <div class='card'>
-  <h2 class='section-heading'>Your Ticket</h2>
-  <div class='help-text align-center'>Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
-  <div class='receipt-qr'><img src="<%= @sale.qr_png(root_url)%>"></div>
+    <div class='thank-you-heading align-center '>
+      <h1 class='section-heading'>Thank You!</h1>
+      <p class='help-text'>A copy of this ticket has been emailed to you.</p>
+      <button class='print-button' onclick="print();">Print Ticket</button>
+    </div>
 
-  <div class='receipt-info align-center'>
-    <div class='receipt-name'><%= @sale.name %></div>
-    <div class='receipt-email'><%= @sale.email %></div>
-  </div>
+    <div class='receipt-qr'><img src="<%= @sale.qr_png(root_url)%>"></div>
 
+    <div class='receipt-info align-center'>
+      <div class='receipt-name'><%= @sale.name %></div>
+      <div class='receipt-email'><%= @sale.email %></div>
 
-  <%= render partial: "static_cart" %>
+      <div class='help-text align-center'>Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
+    </div>
 
+    <%= render partial: "static_cart" %>
   </div>
 
 </div>

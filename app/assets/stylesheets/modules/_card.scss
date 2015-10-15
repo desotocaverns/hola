@@ -1,7 +1,8 @@
 .card {
   @extend .box-padding;
-  background: #fff;
+  background: rgba(#fff, .9);
   border: 1px solid rgba(#000, .15);
+  color: #444;
 }
 
 .minor-card-heading {
@@ -16,7 +17,8 @@
 }
 
 .card-list {
-  background: #fff;
+  color: #444;
+  background: rgba(#fff, .93);
   border: 1px solid rgba(#000, .15);
   list-style: none;
   margin: 1.5em 0;

@@ -6,13 +6,22 @@ $light-text: #777;
 
 html {
   height: 100%;
-  color: #444;
-  background: $site-bg;
+  color: #fff;
 }
 
 body {
   padding: 0; 
   margin: 0;
+  &:after {
+    content: "";
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    background: url('/images/cave-banner.jpg') no-repeat top center;
+    background-size: cover;
+  }
 }
 
 .hidden {
@@ -49,3 +58,29 @@ body {
   }
 }
 
+.site-header {
+  position: relative;
+  padding: 1px 0;
+  background: rgba(#000, .5);
+  margin-bottom: 3em;
+
+  @include at-least($large) {
+    margin-bottom: 5em;
+  }
+}
+
+.site-header-content {
+  text-align: center;
+  h1 {
+    margin: .8em 0;
+    line-height: 1.1em;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .wrap-text {
+    display: block;
+    font-size: .7em;
+  }
+}
