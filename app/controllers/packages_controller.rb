@@ -56,7 +56,6 @@ class PackagesController < ApplicationController
     end
     filtered_params.except!("for_sale")
     filtered_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
-    byebug
 
     if @package.update(filtered_params)
       @package.update_attribute(:for_sale_on, Time.now) if for_sale == "true"
