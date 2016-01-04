@@ -6,6 +6,11 @@ class CustomerMailerPreview < ActionMailer::Preview
     @sale.redemption_qrcode(protohost).as_png.write(io)
     io.rewind
 
+    attachments["#{@sale.redemption_code}.png"] = {
+      :mime_type => 'image/png',
+      :content => io.read
+    }
+
     CustomerMailer.receipt_email(@sale, "http://localhost:3000/").message
   end
 
