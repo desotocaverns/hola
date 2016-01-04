@@ -1,41 +1,88 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html style="background: #F4F8FC">
   <head>
-    <meta charset="utf-8" content="text/html">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Your Tickets to DeSoto Caverns Family Fun Park</title>
+    <style>
+@media only screen and (min-device-width: 451px) {
+  .content {
+    width: 450px;
+    max-width: 450px !important;
+  }
+}
+    </style>
   </head>
-  <body>
-    <h2>Thanks for investing in adventure, <%= @sale.name %>!</h2>
 
-    <p>If this email fails to display properly, <%= link_to "view your receipt online", @sale.receipt_url(root_url) %></p>
+  <body style="background: #F4F8FC">
 
-    <p>Total Price: $<%= @sale.charge_total / 100.00 %></p>
-    <p>Tax: $<%= @sale.tax / 100.00 %></p>
-    <p>Redemption Code: <%= @sale.redemption_code %></p>
+    <!--[if (gte mso 9)|(IE)]>
+      <table width="450" align="center" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+      <td>
+      <![endif]-->
 
-    <% @sale.purchases.where(type: TicketPurchase).each do |purchase| %>
-      <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
-      <div>
-        <div>
-          <span><%= revision.ticket_data["name"] %></span>
-        </div>
-        <div>
-          <span>$<%= revision.ticket_data["price"].to_i / 100.00 %></span> <span>&times;</span>
-          <span><%= purchase.quantity %></span>
-        </div>
-      </div>
-    <% end %>
+      <table class="content" align="center" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 450px; text-align: center; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"> 
+        <tr>
+          <td>
+            <p style="font-size: 14px">If this email doesn't display correctly, <%= link_to "view your ticket online", @sale.receipt_url(root_url), style: "color: #107AC9"  %></p>
+            <p>Show this email at the Gift Shop to receive your tickets.</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 1em; background: #fff">
 
-    <% @sale.purchases.where(type: PackagePurchase).each do |purchase| %>
-      <% revision = PackageRevision.find_by(id: purchase.package_revision_id) %>
-      <div>
-        <div>
-          <span><%= revision.package_data["name"] %></span>
-        </div>
-        <div>
-          <span>$<%= revision.package_data["price"].to_i / 100.00 %></span> <span>&times;</span>
-          <span><%= purchase.quantity %></span>
-        </div>
-      </div>
-    <% end %>
+            <h1>Your Ticket to Fun!</h1>
+
+            <div style="font-size: 28px;"><%= @sale.name %></div>
+            <div style="font-size: 16px; margin-bottom: 20px"><%= @sale.email %></div>
+
+            <p style="text-align: center;"><img style='width: 400px; max-width: 100%; margin: 0 auto' src="<%= @sale.qr_png(protohost) %>"/></p>
+
+            <div style="font-size: 12px">Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
+            <table class='cart-items' style="width: 100%; margin-top: 20px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 1em 0">
+              <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
+                <%= render partial: "static_cart_item", locals: { purchase: purchase } %>
+              <% end %>
+              <% @sale.purchases.where(type: "PackagePurchase").each do |purchase| %>
+                <%= render partial: "static_cart_item", locals: { purchase: purchase } %>
+              <% end %>
+            </table>
+            <table style="width: 100%">
+              <tr>
+                <td style="text-align: right">
+                  <p>Tax: <%= price @sale.tax %></p>
+                  <p>Total: <strong><%= price @sale.charge_total %></strong></p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div style="font-size: 14px">
+              <p>
+                If you have any questions please feel free to contact us.
+              </p>
+
+              <p>
+                <div>1 (256) 378-7252</div>
+                <div><a style="color: #107AC9" href="mailto:">info@desotocavernspark.com</a></div>
+              </p>
+
+              <p>
+                <div>5181 DeSoto Caverns Pkwy</div>
+                <div>Childersburg, AL 35044</div>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!--[if (gte mso 9)|(IE)]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
   </body>
 </html>

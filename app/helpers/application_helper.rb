@@ -1,8 +1,14 @@
 module ApplicationHelper
+
   def price(num)
     p = "$#{num.to_int / 100.00}"
     p += '0' if p =~ /\..$/
     p
+  end
+
+  def protohost
+    return request.protocol + request.host unless request.nil? || request.local?
+    return "http://localhost"
   end
 
   def iphone?

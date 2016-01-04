@@ -3,6 +3,6 @@
     <%= purchase.quantity %> <span class='cart-item-name'><%= purchase.name.pluralize(purchase.quantity) %></span>
   </div>
   <div class='grid-cell one-of-two align-right'>
-    <span class='cart-item-price'><%= price purchase.price %></span><span class='times'>&times;</span><%= purchase.quantity %>
+    <span class='cart-item-price'><%= price(purchase.price) %></span><span class='times'>&times;</span><%= purchase.quantity %>
   </div>
 </div>

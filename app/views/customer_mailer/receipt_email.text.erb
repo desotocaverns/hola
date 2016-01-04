@@ -1,4 +1,39 @@
-Thanks for investing in adventure, <%= @sale.name %>!
-=========================================================
+Thanks for your purchase!
 
-If this email fails to display properly, you may print your ticket here: <%= @sale.receipt_url(root_url) %>
+Bring this email or print your ticket here:
+<%= @sale.receipt_url(root_url) %>
+
+Here are your ticket purchase details:
+
+<%= "=" * 60 %>
+
+Name:  <%= @sale.name %>
+Email: <%= @sale.email %>
+
+<%= "-" * 60 %>
+<% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
+<%= purchase.quantity.to_s.rjust(2) %> x <%= purchase.name.pluralize(purchase.quantity).ljust(28) %> (<%= price(purchase.price)%>) <%= price(purchase.price * purchase.quantity).rjust(17) %>
+<% end %>
+<% @sale.purchases.where(type: "PackagePurchase").each do |purchase| %>
+<%= purchase.quantity.to_s.rjust(2) %> x <%= purchase.name.pluralize(purchase.quantity).ljust(28) %> (<%= price(purchase.price)%>) <%= price(purchase.price * purchase.quantity).rjust(17) %>
+<% end %>
+<%= "-" * 60 %>
+
+<%= "Tax: ".rjust(52) + price(@sale.tax).rjust(8) %>
+<%= "Total: ".rjust(52) + price(@sale.charge_total).rjust(8) %>
+
+<%= "=" * 60 %>
+
+Your ticket is valid <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %>
+
+We're excited to see you at DeSoto Caverns Family Fun Park!
+
+<%= "-" * 60 %>
+If you have any questions please feel free to contact us.
+
+1-256-378-7252
+info@desotocavernspark.com
+
+5181 DeSoto Caverns Pkwy
+Childersburg, AL 35044
+

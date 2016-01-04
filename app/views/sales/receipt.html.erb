@@ -16,7 +16,7 @@
       <div class='help-text align-center'>Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
     </div>
 
-    <%= render partial: "static_cart" %>
+    <%= render partial: "sales/static_cart" %>
   </div>
 
 </div>
