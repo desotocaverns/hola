@@ -42,6 +42,8 @@ gem 'devise_invitable'
 
 # Email validation
 gem 'email_validator'
+# Email previewing
+gem "letter_opener", :group => :development
 
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
