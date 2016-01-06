@@ -36,7 +36,8 @@
             <div style="font-size: 28px;"><%= @sale.name %></div>
             <div style="font-size: 16px; margin-bottom: 20px"><%= @sale.email %></div>
 
-            <p style="text-align: center;"><img style='width: 400px; max-width: 100%; margin: 0 auto' src="<%= @sale.qr_png(protohost) %>"/></p>
+            <!-- <p style="text-align: center;"><img style='width: 400px; max-width: 100%; margin: 0 auto' src="<%= @sale.qr_png(protohost) %>"/></p> -->
+            <p style="text-align: center;"><%= image_tag attachments['redemption_qrcode.png'].url, width: "400px" %></p>
 
             <div style="font-size: 12px">Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
             <table class='cart-items' style="width: 100%; margin-top: 20px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 1em 0">
