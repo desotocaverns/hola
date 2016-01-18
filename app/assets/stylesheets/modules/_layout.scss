@@ -34,8 +34,16 @@ body {
   padding-bottom: $content-h-pad * 5;
 }
 
+.force-wrap {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
 .box-padding {
-  padding: $content-h-pad/2 .5em;
+  padding: $content-h-pad .5em;
 
   @include at-least($small) {
     padding: $content-h-pad 1em;
@@ -82,5 +90,16 @@ body {
   .wrap-text {
     display: block;
     font-size: .7em;
+  }
+}
+
+.at-least-small.at-least-small {
+  @include until($small) {
+    display: none;
+  }
+}
+.at-least-tiny.at-least-tiny {
+  @include until($tiny) {
+    display: none;
   }
 }

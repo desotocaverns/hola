@@ -1,34 +1,40 @@
-<% content_for :head do %>
-  <style>
-    table, th, td {
-      border: 1px solid black;
-    }
-  </style>
-<% end %>
-
-<% if !iphone? %>
-  <div class='grid no-gutter'>
-    <div class='grid-cell auto'>
-      <%= link_to "workflow://run-workflow?name=Scan%20Ticket" do %>
-        <%= svg_icon 'qr' %>
-      <% end %>
-    </div>
-    <div class='grid-cell five-of-six'>
+<div class='card-list'>
+  <div class='card-heading'>
+    <% if iphone? %>
+      <div class='flex-row'>
+        <div class='scan-ticket'>
+          <%= link_to "workflow://run-workflow?name=Scan%20Ticket", class: "qr-code-link" do %>
+            <%= svg_icon 'qr' %>
+          <% end %>
+        </div>
+        <div class="flex-column-auto">
+          <%= render partial: 'search_tickets' %>
+        </div>
+      </div>
+    <% else %>
+      <div class="flex-column-auto">
       <%= render partial: 'search_tickets' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='table sales-table'>
+    <div class='card-list-item table-row'>
+      <span class='table-cell heading'>Name</span>
+      <span class='table-cell heading'>Email</span>
+      <span class='table-cell heading at-least-small'>Date</span>
+      <span class='table-cell heading text-right at-least-small'>Price</span>
     </div>
+    <% @sales.each do |sale| %>
+      <%= link_to "/sales/#{sale.redemption_code}", class: 'card-list-item table-row link bright' do %>
+        <span class='table-cell sale-name'><%= sale.name %></span>
+        <span class='table-cell'><span class='force-wrap'><%= sale.email %></span></span>
+        <span class='table-cell at-least-small'><%= sale.created_at.strftime('%b %d') %></span>
+        <span class='table-cell text-right at-least-small'><%= price sale.charge_total %></span>
+        <% if sale.claimed_on != nil %><span style="color:red">Redeemed On: <%= sale.claimed_on %></span><% end %>
+      <% end %>
+    <% end %>
   </div>
-<% else %>
-  <%= render partial: 'search_tickets' %>
-<% end %>
-
-
-<% @sales.each do |sale| %>
-  <div>
-    <%= link_to sale.name, "/sales/#{sale.redemption_code}" %> - <%= sale.email %>
-     - <%= price sale.charge_total %>
-    <% if sale.claimed_on != nil %><span style="color:red">Redeemed On: <%= sale.claimed_on %></span><% end %>
-  </div>
-<% end %>
+</div>
 
 <%= will_paginate @sales %>
-

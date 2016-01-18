@@ -1,14 +1,14 @@
 <nav class='admin-nav'>
-  <a href="<%= sales_path %>"><%= svg_icon 'purchases', title: "Purchases" %></a>
-  <a href="<%= tickets_path %>"><%= svg_icon 'tickets', title: "Tickets" %></a>
-  <a href="<%= admins_path %>"><%= svg_icon 'user', title: "Users" %></a>
-  <a href="<%= destroy_admin_session_path %>"></a>
-  <%= link_to destroy_admin_session_path, method: :delete do
-  svg_icon 'power', title: "Sign out"
-  end%>
+  <a href="<%= sales_path %>">
+    <%=svg_icon 'search', title: "search" %> <span class="at-least-small">Search</span>
+  </a>
+
+  <div class='flex-row'>
+    <%= link_to "Tickets", tickets_path %>
+    <%= link_to "Users", admins_path %>
+    <%= link_to "Store", root_path %>
+    <%= link_to "Store Settings", settings_path %>
+    <%= link_to "Your account", edit_admin_registration_path %>
+    <%= link_to "Sign out", destroy_admin_session_path, method: :delete %>
+  </div>
 </nav>
-<div class='live'>
-<%= link_to "Purchase Ticket", root_path %> |
-<%= link_to "Edit your account", edit_admin_registration_path %> |
-<%= link_to "Settings", settings_path %>
-</div>

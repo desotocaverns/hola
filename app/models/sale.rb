@@ -43,6 +43,10 @@ class Sale < ActiveRecord::Base
     "#{url}sales/#{redemption_code}/receipt"
   end
 
+  def claimed?
+    !self.claimed_on.nil? 
+  end
+
   private
 
   def calculate_prices

@@ -112,11 +112,11 @@
       z-index: -1;
     }
   }
-  @include until($medium) {
+  /*@include until($medium) {*/
     &.show .form-footer {
       animation: show-quick-cart .4s ease-out;
     }
-  }
+  /*}*/
 
 }
 

@@ -36,16 +36,8 @@
 
 }
 
-@include at-least($small) {
-  .ticket-price {
-    text-align: right; 
-  }
-}
-
-@include until($small) {
-  .price-grid {
-    margin-top: .4em;
-  }
+.ticket-price {
+  text-align: right; 
 }
 
 .ticket-item {

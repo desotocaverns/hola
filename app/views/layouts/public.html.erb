@@ -16,12 +16,27 @@
 <% end %>
 
 <div class='site'>
+  <% if !%w(index show).include?(action_name) %>
+    <div class='site-header'>
+      <div class='site-header-content'>
+        <h1>
+          <a href="/"><span class='top-text'>DeSoto Caverns</span> <span class='wrap-text'>Family Fun Park</span></a>
+        </h1>
+      </div>
+    </div>
+  <% end %>
   <div class='site-content'>
     <% if !notice.nil? %><p class="notice" style="color:green"><%= notice %></p><% end %>
     <% if !alert.nil? %><p class="alert" style="color:#FFCC00"><%= alert %></p><% end %>
     <%= yield %>
+    <% if !%w(index show).include?(action_name) %>
+      <nav class='sub-nav text-center block-margin'>
+        <a href="/privacy" target="_blank">Privacy Policy</a> <a href="mailto:info@desotocavernspark.com">Support</a>
+      </nav>
+    <% end %>
   </div>
 </div>
 
 </body>
 </html>
+

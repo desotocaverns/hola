@@ -1,4 +1,8 @@
-<%= form_tag sales_path, :method => "get", class: 'search-tickets' do %>
-  <%= text_field_tag :search, params[:search] %>
-  <button type='submit'>Search</button>
+<%= form_tag sales_path, :method => "get", class: 'search-form flex-column-auto' do %>
+  <div class='flex-row'>
+    <%= text_field_tag :search, params[:search], placeholder: "Search", class: 'search-text flex-column-auto' %>
+    <div class="search-button">
+      <button type='submit' class="">Go</button>
+    </div>
+  </div>
 <% end %>

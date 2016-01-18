@@ -32,6 +32,11 @@ button, .button {
     font-size: .8em;
     line-height: 1.65em;
   }
+  &.wide {
+    @include until($small) {
+      width: 100%;
+    }
+  }
 }
 
 .alt-button {
@@ -83,5 +88,15 @@ button, .button {
   }
   .arrow-button {
     margin-left: 50%;
+  }
+}
+
+.text-button {
+  display: inline-block;
+  color: #444;
+  text-decoration: none;
+  margin: 0 1em;
+  &:hover {
+    text-decoration: underline;
   }
 }

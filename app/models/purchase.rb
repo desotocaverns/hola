@@ -11,6 +11,10 @@ class Purchase < ActiveRecord::Base
     revision_data["name"]
   end
 
+  def expired?
+    self.expires_on <= Time.now
+  end
+
   private
 
   def calculate_expiration_date

@@ -1,0 +1,82 @@
+.qr-code-link {
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  color: #444;
+}
+
+.search-tickets {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.flex-column-auto {
+  flex: 1 0 auto;
+}
+.scan-ticket {
+  flex: 0 0 40px;
+}
+
+.search-button {
+  vertical-align: middle;
+  flex: 0 0 auto;
+  button {
+    font-size: 16px;
+    line-height: 2em;
+  }
+}
+
+.sales-table {
+  .table-cell {
+    padding: .4em 0;
+    &:first-child { padding-left: 1em; }
+    &:last-child  { padding-right: 1em; }
+  }
+  .table-row + .table-row .table-cell {
+    border-top: 1px solid #ddd;
+  }
+}
+
+.sale-name {
+  font-weight: bold;
+}
+
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  > * {
+    flex: 1 0 auto;
+  }
+}
+
+.admin-nav {
+  background: #222;
+  font-size: 14px;
+  width: 100%;
+
+  a { 
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 5px;
+    &:hover {
+      background: #444;
+    }
+  }
+
+  .svg-icon {
+    font-size: 18px;
+  }
+
+}
+
+.help-text {
+  font-size: .8em;
+  color: #666;
+}
