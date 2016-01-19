@@ -10,7 +10,7 @@ class SalesController < ApplicationController
   before_action :check_completion, except: [:index, :show, :new, :receipt, :redeem, :resend_email]
 
   def index
-    @sales = Sale.complete.where("lower(name) LIKE ? OR lower(email) LIKE ?", "%#{(params[:search] || '').downcase}%", "%#{(params[:search] || '').downcase}%").paginate(:page => params[:page], :per_page => 20)
+    @sales = Sale.complete.where("lower(name) LIKE ? OR lower(email) LIKE ?", "%#{(params[:search] || '').downcase}%", "%#{(params[:search] || '').downcase}%").order('created_at DESC').paginate(:page => params[:page], :per_page => 20)
   end
 
   def new
