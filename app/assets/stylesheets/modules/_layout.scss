@@ -24,8 +24,14 @@ body {
   }
 }
 
-.hidden {
+.hidden.hidden {
   display: none;
+}
+
+.hidden-until-small.hidden-until-small {
+  @include until($small) {
+    display: none;
+  }
 }
 
 .site-content {
@@ -100,6 +106,12 @@ body {
 }
 .at-least-tiny.at-least-tiny {
   @include until($tiny) {
+    display: none;
+  }
+}
+
+.until-small.until-small {
+  @include at-least($small) {
     display: none;
   }
 }

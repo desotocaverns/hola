@@ -50,8 +50,29 @@
 .flex-row {
   display: flex;
   flex-flow: row nowrap;
+}
+
+.auto-width-columns {
   > * {
     flex: 1 0 auto;
+  }
+}
+
+.alt-nav {
+  display: block;
+}
+
+.flex-row-spacer {
+  flex: 1 0 auto;
+}
+
+.flex-after-small {
+  @include until($small) {
+    display: block;
+    flex-flow: none;
+    > * {
+      display: block;
+    }
   }
 }
 

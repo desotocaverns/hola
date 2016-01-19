@@ -1,4 +1,5 @@
 <%= form_for @package, :html => {:id => "package_form"} do |f| %>
+<div class='card'>
   <% if @package.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@package.errors.count, "error") %> prohibited this package from being saved:</h2>
@@ -48,7 +49,9 @@
     <%= f.date_select :for_sale_on %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+<footer class="form-footer">
+  <%= link_to 'Cancel', tickets_path, class: 'text-button' %>
+  <button class='primary-button' type="submit" name="commit">Create Package</button>
+</footer>
 <% end %>

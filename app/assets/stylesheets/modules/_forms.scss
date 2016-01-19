@@ -12,6 +12,9 @@ form {
     width: 100%;
     margin-bottom: .8em;
   }
+  [type=text],[type=email],[type=password] {
+    width: 100%;
+  }
 }
 
 .form-footer {

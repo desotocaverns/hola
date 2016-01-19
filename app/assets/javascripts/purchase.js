@@ -3,7 +3,7 @@ $(document).on('ready', function(){
 });
 
 function setupHandlers() {
-  $('body').on('click', '[data-toggle],[data-show],[data-hide]', function(event) {
+  $('body').on('click', '[data-toggle],[data-show],[data-hide],[data-toggle-class]', function(event) {
     Toggler.handle(this)
     event.stopPropagation()
     event.preventDefault()

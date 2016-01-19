@@ -6,7 +6,7 @@
 
     <div class="field">
       <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocorrect:"off", autocapitalize:"off", spellcheck:"false" %>
+      <%= f.email_field :email, autocorrect:"off", autocapitalize:"off", spellcheck:"false" %>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>

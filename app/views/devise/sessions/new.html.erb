@@ -1,25 +1,23 @@
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocorrect:"off", autocapitalize:"off", spellcheck:"false" %>
-  </div>
+  <div class='card'>
+  <p class="field">
+    <%= f.email_field :email, autofocus: true, autocorrect:"off", autocapitalize:"off", spellcheck:"false", placeholder: "Email Address" %>
+  </p>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+  <p class="field">
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
+  </p>
 
   <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
+    <%= f.check_box :remember_me %>
+    <%= f.label :remember_me %>
   <% end -%>
+  </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="form-footer">
+    <button class='primary-button' type="submit" name="commit">Log in</button>
   </div>
 <% end %>
 

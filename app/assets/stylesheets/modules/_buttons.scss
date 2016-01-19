@@ -96,7 +96,17 @@ button, .button {
   color: #444;
   text-decoration: none;
   margin: 0 1em;
+  color: inherit;
+  opacity: .7;
   &:hover {
+    opacity: .9;
     text-decoration: underline;
   }
+  transition: opacity .2s ease-in-out;
+}
+
+button.toggle {
+  width: auto;
+  background: none;
+  line-height: inherit;
 }

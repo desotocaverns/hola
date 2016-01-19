@@ -1,5 +1,7 @@
-<span class='page-heading'>Not For Sale</span>
-<%= link_to '(For sale)', tickets_path, class: 'minor-link' %>
+<div class='ticket-title align-middle block-margin'>
+  <span class='page-heading'>Not For Sale</span>
+  <%= link_to '(For sale)', tickets_path, class: 'minor-link' %>
+</div>
 
 <% if @nfs_packages.size > 0 %>
   <ul class='card-list'>

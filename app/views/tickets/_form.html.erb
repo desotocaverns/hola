@@ -1,4 +1,5 @@
 <%= form_for(@ticket) do |f| %>
+<div class='card'>
   <% if @ticket.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
@@ -34,7 +35,9 @@
     <%= f.date_select :for_sale_on %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+<footer class="form-footer">
+  <%= link_to 'Cancel', tickets_path, class: 'text-button' %>
+  <button class='primary-button' type="submit" name="commit">Create Package</button>
+</footer>
 <% end %>
