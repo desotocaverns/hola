@@ -15,6 +15,6 @@ class CustomerMailerPreview < ActionMailer::Preview
   end
 
   def protohost
-    return "http://localhost"
+    return "http://localhost:3000/"
   end
 end

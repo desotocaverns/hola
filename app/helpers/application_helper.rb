@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def protohost
     return request.protocol + request.host unless request.nil? || request.local?
-    return "http://localhost"
+    return "http://localhost:3000"
   end
 
   def iphone?

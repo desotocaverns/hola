@@ -18,7 +18,7 @@ class Sale < ActiveRecord::Base
   validates :email, email: true, if: :is_info_form
 
   def redemption_qrcode(protohost)
-    RQRCode::QRCode.new("#{protohost}sales/#{redemption_code}")
+    RQRCode::QRCode.new("#{File.join(protohost, 'sales' redemption_code)}")
   end
 
   def qr_svg(url)
@@ -40,7 +40,7 @@ class Sale < ActiveRecord::Base
   end
 
   def receipt_url(url)
-    "#{url}/sales/#{redemption_code}/receipt"
+    File.join(url, 'sales', redemption_code, 'receipt')
   end
 
   def claimed?
