@@ -40,7 +40,7 @@ class Sale < ActiveRecord::Base
   end
 
   def receipt_url(url)
-    "#{url}sales/#{redemption_code}/receipt"
+    "#{url}/sales/#{redemption_code}/receipt"
   end
 
   def claimed?

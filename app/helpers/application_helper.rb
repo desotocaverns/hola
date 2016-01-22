@@ -26,4 +26,8 @@ module ApplicationHelper
   def action_heading(heading, link_text, link_path)
     render partial: "shared/action_heading", locals: { heading: heading, link_text: link_text, link_path: link_path }
   end
+
+  def is_admin?
+    admin_signed_in? && current_admin.autocratic
+  end
 end

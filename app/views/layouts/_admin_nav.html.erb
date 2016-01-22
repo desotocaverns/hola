@@ -15,10 +15,10 @@
       <%=svg_icon 'search', title: "search" %> Purchases
     </a>
 
-    <%= link_to "Tickets", tickets_path, class: 'alt-nav' %>
+    <%= link_to "Tickets", tickets_path, class: 'alt-nav' if is_admin? %>
     <%= link_to "Store", root_path, class: 'alt-nav' %>
-    <%= link_to "Store settings", settings_path, class: 'alt-nav' %>
-    <%= link_to "Users", admins_path, class: 'alt-nav' %>
+    <%= link_to "Store settings", settings_path, class: 'alt-nav' if is_admin? %>
+    <%= link_to "Users", admins_path, class: 'alt-nav' if is_admin? %>
     <%= link_to "Your account", edit_admin_registration_path, class: 'alt-nav' %>
     <%= link_to "Sign out", destroy_admin_session_path, method: :delete, class: 'alt-nav' %>
   </div>
