@@ -1,37 +1,32 @@
 <div class='card-list'>
   <div class='card-heading'>
-    <% if iphone? %>
-      <div class='flex-row'>
-        <div class='scan-ticket'>
-          <%= link_to "workflow://run-workflow?name=Scan%20Ticket", class: "qr-code-link" do %>
-            <%= svg_icon 'qr' %>
-          <% end %>
-        </div>
-        <div class="flex-column-auto">
-          <%= render partial: 'search_tickets' %>
-        </div>
-      </div>
-    <% else %>
-      <div class="flex-column-auto">
-      <%= render partial: 'search_tickets' %>
-      </div>
-    <% end %>
+    <div class="flex-column-auto">
+    <%= render partial: 'search_tickets' %>
+    </div>
   </div>
 
   <div class='table sales-table'>
-    <div class='card-list-item table-row'>
+    <div class='card-list-item table-row sales-table-head'>
       <span class='table-cell heading'>Name</span>
       <span class='table-cell heading'>Email</span>
       <span class='table-cell heading at-least-small'>Date</span>
       <span class='table-cell heading text-right at-least-small'>Price</span>
     </div>
     <% @sales.each do |sale| %>
-      <%= link_to "/sales/#{sale.redemption_code}", class: 'card-list-item table-row link bright' do %>
+      <%= link_to "/sales/#{sale.redemption_code}", class: "card-list-item ticket-purchase table-row link bright #{sale.claimed_on != nil ? 'ticket-redemed' : 'ticket-not-redemed' }" do %>
         <span class='table-cell sale-name'><%= sale.name %></span>
-        <span class='table-cell'><span class='force-wrap'><%= sale.email %></span></span>
-        <span class='table-cell at-least-small'><%= sale.created_at.strftime('%b %d') %></span>
+        <span class='table-cell sale-email ellipsis'><%= sale.email %></span>
+        <span class='table-cell sale-date'>
+          <% if sale.claimed_on != nil %>
+            <span class='until-small'>Redemed:</span>
+            <%= sale.claimed_on.strftime('%b %d') %>
+            <span class='redemed-mark at-least-small'>&check;</span>
+          <% else %>
+            <span class='until-small'>Purchased:</span>
+            <%= sale.created_at.strftime('%b %d') %>
+          <% end %>
+        </span>
         <span class='table-cell text-right at-least-small'><%= price sale.charge_total %></span>
-        <% if sale.claimed_on != nil %><span style="color:red">Redeemed On: <%= sale.claimed_on %></span><% end %>
       <% end %>
     <% end %>
   </div>

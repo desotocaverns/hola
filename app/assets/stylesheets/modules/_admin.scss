@@ -43,10 +43,6 @@
   }
 }
 
-.sale-name {
-  font-weight: bold;
-}
-
 .flex-row {
   display: flex;
   flex-flow: row nowrap;
@@ -100,4 +96,69 @@
 .help-text {
   font-size: .8em;
   color: #666;
+}
+
+.ticket-redemed {
+  * { color: #888; }
+}
+
+.table-cell.redemed-mark {
+  color: $blue;
+  font-weight: bold;
+}
+.ticket-not-redemed {
+  .sale-name {
+    font-weight: bold;
+  }
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sales-table {
+
+  .sale-email {
+    max-width: 150px;
+  }
+
+  @include until($small) {
+    display: block;
+    line-height: 1.3em;
+
+    .table-cell.redemed-mark {
+      width: auto;
+      padding-left: 0;
+    }
+
+    .sale-date {
+      font-size: .8em;
+    }
+
+    .sales-table-head {
+      display: none;
+    }
+    .ticket-purchase {
+      display: block;
+    }
+    .table-cell.table-cell {
+      padding: 0;
+    }
+    .at-least-small {
+      display: none;
+    }
+    .sale-email {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+    .table-row + .table-row .table-cell {
+      border: none;
+    }
+    .table-row + .table-row {
+      /*border-top: 1px solid #ddd;*/
+    }
+  }
 }
