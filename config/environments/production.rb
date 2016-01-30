@@ -12,7 +12,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
-  routes.default_url_options[:host] = 'hola-app.herokuapp.com'
+  routes.default_url_options[:host] = 'tickets.desotocavernspark.com'
   ActionMailer::Base.smtp_settings = {
     :port           => 587,
     :address        => "smtp.mailgun.org",

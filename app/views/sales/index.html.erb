@@ -13,20 +13,22 @@
       <span class='table-cell heading text-right at-least-small'>Price</span>
     </div>
     <% @sales.each do |sale| %>
-      <%= link_to "/sales/#{sale.redemption_code}", class: "card-list-item ticket-purchase table-row link bright #{sale.claimed_on != nil ? 'ticket-redemed' : 'ticket-not-redemed' }" do %>
+      <%= link_to "/sales/#{sale.redemption_code}", class: "card-list-item ticket-purchase table-row link #{sale.claimed_on != nil ? 'ticket-redemed' : 'ticket-not-redemed' }" do %>
         <span class='table-cell sale-name'><%= sale.name %></span>
         <span class='table-cell sale-email ellipsis'><%= sale.email %></span>
         <span class='table-cell sale-date'>
           <% if sale.claimed_on != nil %>
             <span class='until-small'>Redemed:</span>
             <%= sale.claimed_on.strftime('%b %d') %>
-            <span class='redemed-mark at-least-small'>&check;</span>
           <% else %>
             <span class='until-small'>Purchased:</span>
             <%= sale.created_at.strftime('%b %d') %>
           <% end %>
         </span>
-        <span class='table-cell text-right at-least-small'><%= price sale.charge_total %></span>
+        <span class='table-cell text-right at-least-small'>
+          <% if sale.claimed_on != nil %><span class='redemed-mark at-least-small'>&check;</span><% end %>
+          <%= price sale.charge_total %>
+        </span>
       <% end %>
     <% end %>
   </div>

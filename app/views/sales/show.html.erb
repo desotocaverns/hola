@@ -15,11 +15,6 @@
       <%= @sale.email %><br>
       Purchased: <%= @sale.created_at.strftime('%B %d, %Y') %>
     </p>
-    <% if @purchase.expired? %>
-      <p style='color: red'>Ticket Expired on: <%= @purchase.expires_on.strftime('%b %d, %Y') %></p>
-    <% elsif @sale.claimed? %>
-      <p class='ticket-claimed'>Already redemed: <%= @sale.claimed_on.strftime('%b %d, %Y') %></p>
-    <% end %>
     <%= render partial: 'static_cart' %>
     <% if !@sale.claimed? && !@purchase.expired? %>
       <form class='align-right' method="post" action="<%= redeem_path(@sale.redemption_code) %>">
@@ -27,6 +22,11 @@
           <button class='primary-button wide' type="submit">Redeem Ticket</button>
         </p>
       </form>
+    <% end %>
+    <% if @purchase.expired? %>
+      <p class='ticket-expired'>Ticket Expired on: <%= @purchase.expires_on.strftime('%b %d, %Y') %></p>
+    <% elsif @sale.claimed? %>
+      <p class='ticket-claimed'>Already redemed: <%= @sale.claimed_on.strftime('%b %d, %Y') %></p>
     <% end %>
   </div>
 </div>
