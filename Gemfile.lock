@@ -38,8 +38,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (6.0.2)
-    autoprefixer-rails (2.2.0.20140804)
+    autoprefixer-rails (6.3.1)
       execjs
+      json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -72,7 +73,7 @@ GEM
       activemodel
     erubis (2.7.0)
     esvg (2.8.5)
-    execjs (2.5.2)
+    execjs (2.6.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     http-cookie (1.0.2)

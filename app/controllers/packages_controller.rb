@@ -34,7 +34,7 @@ class PackagesController < ApplicationController
     @tickets = Ticket.all
 
     if @package.save
-      redirect_to @package, notice: 'Package was successfully created.'
+      redirect_to tickets_path, notice: 'Package was successfully created.'
     else
       render :new
     end
@@ -50,7 +50,7 @@ class PackagesController < ApplicationController
     for_sale = filtered_params[:for_sale] if filtered_params[:for_sale] != ""
 
     filtered_params[:package_tickets_attributes].each do |hash|
-      if hash["quantity"] == ""
+      if hash["quantity"] == "0"
         filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
       end
     end
@@ -60,7 +60,7 @@ class PackagesController < ApplicationController
     if @package.update(filtered_params)
       @package.update_attribute(:for_sale_on, Time.now) if for_sale == "true"
       @package.update_attribute(:for_sale_on, nil) if for_sale == "false"
-      redirect_to @package, notice: 'Package was successfully updated.'
+      redirect_to tickets_path, notice: 'Package was successfully updated.'
     else
       render :edit
     end

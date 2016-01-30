@@ -105,6 +105,15 @@ button, .button {
   transition: opacity .2s ease-in-out;
 }
 
+.destroy-button {
+  font-size: 1em;
+  line-height: 2.2em;
+  background: $red;
+  &:hover {
+    background-color: darken($red, 6);
+  }
+}
+
 button.toggle {
   width: auto;
   background: none;

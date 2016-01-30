@@ -59,7 +59,7 @@ class TicketsController < ApplicationController
     @ticket.for_sale_on = Time.now if for_sale == "true"
 
     if @ticket.save
-      redirect_to @ticket, notice: 'Ticket was successfully created.'
+      redirect_to tickets_path, notice: 'Ticket was successfully created.'
     else
       render :new
     end
@@ -77,7 +77,7 @@ class TicketsController < ApplicationController
     if @ticket.update(fixed_params)
       @ticket.update_attribute(:for_sale_on, Time.now) if for_sale == "true"
       @ticket.update_attribute(:for_sale_on, nil) if for_sale == "false"
-      redirect_to @ticket, notice: 'Ticket was successfully updated.'
+      redirect_to tickets_path, notice: 'Ticket was successfully updated.'
     else
       render :edit
     end

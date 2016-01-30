@@ -1,7 +1,11 @@
 module ApplicationHelper
 
   def price(num)
-    p = "$#{num.to_int / 100.00}"
+    "$#{price_number(num)}"
+  end
+
+  def price_number(num)
+    p = "#{num.to_int / 100.00}"
     p += '0' if p =~ /\..$/
     p
   end

@@ -2,7 +2,7 @@ $max-width: 650px;
 $content-h-pad: 15px;
 $light-text: #777;
 
-* { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: border-box; }
 
 html {
   height: 100%;

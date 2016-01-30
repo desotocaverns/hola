@@ -14,44 +14,57 @@
 
   <div class="form-row">
     <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="form-row">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_field :name, class: 'full' %>
   </div>
 
   <div class="form-row">
     <%= f.label :price %>
-    $<%= f.text_field :price, value: @package.price / 100.00 %>
+    <div><%= f.text_field :price, value: price_number(@package.price) %></div>
   </div>
 
-  <br>
 
-  <div class="tickets">
-    <% @tickets.each do |ticket| %>
-      <% pt = @package.package_tickets.find_by(ticket_id: ticket.id) %>
-
-      <%= f.label ticket.name %>
-      <input type="text" autocomplete="off" name="package[package_tickets_attributes][][quantity]" <% if pt != nil %>value="<%= pt.quantity %>"<% end %>>
-      <input type="hidden" autocomplete="off" name="package[package_tickets_attributes][][ticket_id]" value="<%= ticket.id %>"><br>
-    <% end %>
+  <div class="form-row">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
   </div>
 
-  <br>
-
-  <div>
-    <%= f.label :for_sale_on, "For sale: " %>
-    <%= radio_button_tag "package[for_sale]", "true", checked: true %> Yes
-    <%= radio_button_tag "package[for_sale]", "false" %> No
-    <%= radio_button_tag "package[for_sale]", "after" %> After
-    <%= f.date_select :for_sale_on %>
+  <div class='form-row'>
+    <div>
+      <label><%= radio_button_tag "package[for_sale]", "true", checked: true %> For sale now</label>
+    </div>
+    <div>
+      <label><%= radio_button_tag "package[for_sale]", "false" %> Not for sale</label>
+    </div>
+    <div>
+      <label><%= radio_button_tag "package[for_sale]", "after" %> Sell after:</label>
+      <%= f.date_select :for_sale_on %>
+    </div>
   </div>
+
+
+  <h3>Package contents</h3>
+  <p>Select the number of tickets this package represents. This will be used to generate a savings percentage and is used for keeping records.</p>
+
+  <% 
+    set = %w(0 1 2 3 4 5 6 7 8 9 10 15 20 30 40 50) 
+    labels = set.join(';')
+    values = set.join(',')
+    mark = %w(1 6 11 16).join(',')
+  %>
+
+  <% @tickets.each do |ticket| %>
+    <% pt = @package.package_tickets.find_by(ticket_id: ticket.id) %>
+    <div class='package-ticket-count'>
+      <strong><%= f.label ticket.name.pluralize %>:</strong> <span data-range-label='count-<%= ticket.id %>'></span>
+      <input type="range" min='0' max='<%= set.size - 1 %>' data-mark='<%= mark %>' data-external-label-count-<%= ticket.id %>='<%= labels %>' data-input='#ticket_<%= ticket.id %>_quantity' value="<%= (pt.nil? ? 0 : pt.quantity) %>" data-label="<%= labels %>" data-values="<%= values %>">
+      <input type="hidden" id='ticket_<%= ticket.id %>_quantity' autocomplete="off" name="package[package_tickets_attributes][][quantity]" <% if pt != nil %>value="<%= pt.quantity %>"<% end %>>
+      <input type="hidden" autocomplete="off" name="package[package_tickets_attributes][][ticket_id]" value="<%= ticket.id %>">
+    </div>
+  <% end %>
 
 </div>
 <footer class="form-footer">
   <%= link_to 'Cancel', tickets_path, class: 'text-button' %>
-  <button class='primary-button' type="submit" name="commit">Create Package</button>
+  <button class='primary-button' type="submit" name="commit">Save Package</button>
 </footer>
 <% end %>

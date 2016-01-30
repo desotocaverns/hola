@@ -1,3 +1,10 @@
-<h2>Editing Ticket</h2>
+<div class='ticket-title grid align-middle block-margin'>
+  <div class='grid-cell one-of-two'>
+    <h2><%= @ticket.name %></h2>
+  </div>
+  <div class='grid-cell one-of-two align-right'>
+    <%= link_to 'Delete Ticket', @ticket, :method => 'delete', class: 'destroy-button button', data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
 
 <%= render 'form' %>

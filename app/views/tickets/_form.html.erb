@@ -14,30 +14,35 @@
 
   <div class="form-row">
     <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="form-row">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_field :name, class: 'full' %>
   </div>
 
   <div class="form-row">
     <%= f.label :price %>
-    $<%= f.text_field :price, value: @ticket.price / 100.00  %>
+    <div><%= f.text_field :price, value: price_number(@ticket.price) %></div>
   </div>
 
-  <div>
-    <%= f.label :for_sale_on, "For sale: " %>
-    <%= radio_button_tag "ticket[for_sale]", "true", checked: true %> Yes
-    <%= radio_button_tag "ticket[for_sale]", "false" %> No
-    <%= radio_button_tag "ticket[for_sale]", "" %> After
-    <%= f.date_select :for_sale_on %>
+  <div class="form-row">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class='form-row'>
+    <div>
+      <label><%= radio_button_tag "ticket[for_sale]", "true", checked: true %> For sale now</label>
+    </div>
+    <div>
+      <label><%= radio_button_tag "ticket[for_sale]", "false" %> Not for sale</label>
+    </div>
+    <div>
+      <label><%= radio_button_tag "ticket[for_sale]", "after" %> Sell after:</label>
+      <%= f.date_select :for_sale_on %>
+    </div>
   </div>
 
 </div>
 <footer class="form-footer">
   <%= link_to 'Cancel', tickets_path, class: 'text-button' %>
-  <button class='primary-button' type="submit" name="commit">Create Package</button>
+  <button class='primary-button' type="submit" name="commit">Save Ticket</button>
 </footer>
 <% end %>

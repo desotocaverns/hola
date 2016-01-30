@@ -48,6 +48,12 @@
 
   &.full {
     width: 100%;
+    display: block;
   }
 }
 
+textarea {
+  @extend %text-input;
+  width: 100%;
+  min-height: 5em;
+}
