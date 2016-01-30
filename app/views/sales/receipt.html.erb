@@ -13,6 +13,7 @@
       <div class='receipt-name'><%= @sale.name %></div>
       <div class='receipt-email'><%= @sale.email %></div>
 
+      <p class='align-center'>Show at Gift Shop to redeem your ticket.</p>
       <div class='help-text align-center'>Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
     </div>
 

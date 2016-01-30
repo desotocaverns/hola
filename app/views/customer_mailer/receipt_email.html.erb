@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W4C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html style="background: #F4F8FC">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,15 +25,18 @@
         <tr>
           <td>
             <p style="font-size: 14px">If this email doesn't display correctly, <%= link_to "view your ticket online", @sale.receipt_url(root_url), style: "color: #107AC9"  %></p>
-            <p>Show this email at the Gift Shop to receive your tickets.</p>
+            <p>Show this email at the Gift Shop to redeem your tickets.</p>
           </td>
         </tr>
         <tr>
           <td style="border: 1px solid #ddd; padding: 1em; background: #fff">
 
-            <h1>Your Ticket to Fun!</h1>
+            <h4 style='margin-bottom: 0; font-weight: normal;'>Your Tickets to fun at</h4>
+            <h1 style='margin: 10px 0; font-size: 40px; font-weight: normal;'>DeSoto Caverns</h1>
+            <h2 style='margin-top: 0; font-size: 24px; font-weight: normal;'>Family Fun Park</h2>
+            <div style="border-top: 1px solid #ddd;"></div>
 
-            <div style="font-size: 28px;"><%= @sale.name %></div>
+            <div style="font-size: 28px; margin-top: 20px;"><%= @sale.name %></div>
             <div style="font-size: 16px; margin-bottom: 20px"><%= @sale.email %></div>
 
             <!-- <p style="text-align: center;"><img style='width: 400px; max-width: 100%; margin: 0 auto' src="<%= @sale.qr_png(protohost) %>"/></p> -->
@@ -68,10 +71,11 @@
 
               <p>
                 <div>1 (256) 378-7252</div>
-                <div><a style="color: #107AC9" href="mailto:">info@desotocavernspark.com</a></div>
+                <div><a style="color: #107AC9" href="mailto:">store@desotocavernspark.com</a></div>
               </p>
 
               <p>
+                <div style='font-weight: bold'>DeSoto Caverns Family Fun Park</div>
                 <div>5181 DeSoto Caverns Pkwy</div>
                 <div>Childersburg, AL 35044</div>
               </p>
