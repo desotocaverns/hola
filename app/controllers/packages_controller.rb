@@ -22,7 +22,7 @@ class PackagesController < ApplicationController
     for_sale = filtered_params[:for_sale] if filtered_params[:for_sale] != ""
 
     filtered_params[:package_tickets_attributes].each do |hash|
-      if hash["quantity"] == ""
+      if hash["quantity"] == "0"
         filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
       end
     end
