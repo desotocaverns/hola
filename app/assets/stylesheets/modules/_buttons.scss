@@ -15,6 +15,14 @@ button, .button {
   }
   text-decoration: none;
   display: inline-block;
+
+  &[disabled] {
+    opacity: .8;
+    cursor: default;
+    &:hover {
+      background-color: #444;
+    }
+  }
 }
 
 .continue-button {

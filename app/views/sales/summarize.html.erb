@@ -40,6 +40,7 @@
       });
 
       $(".primary-button").on("click", function() {
+        this.attr('disabled', 'disabled')
         handler.open({
           name: 'DeSoto Caverns',
           description: '<%= tp_quantity %> ticket<% if tp_quantity > 1 || tp_quantity == 0 %>s<% end %>, <%= pp_quantity %> package<% if pp_quantity > 1 || pp_quantity == 0 %>s<% end %>',
