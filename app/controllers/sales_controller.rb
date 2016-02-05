@@ -240,6 +240,6 @@ class SalesController < ApplicationController
   end
 
   def update_personal_info_params
-    params[:sale].permit(:name, :email, :is_info_form)
+    params[:sale].permit(:name, :email, :is_info_form, :mailing_list)
   end
 end

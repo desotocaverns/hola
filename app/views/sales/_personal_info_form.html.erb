@@ -24,7 +24,7 @@
       </div>
 
       <div class='form-row'>
-        <%= check_box_tag :mailinglist, true, true %>
+        <%= f.check_box :mailing_list, {checked: true} %>
         <%= label_tag :mailinglist, "Receive email about discount and events." %>
       </div>
 
@@ -46,4 +46,3 @@
     <% end %>
   <% end %>
 </div>
-
