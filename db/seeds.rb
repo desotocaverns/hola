@@ -54,7 +54,8 @@ Settings.create!()
 sale = Sale.new(
   name: "Arnold",
   email: "arnold@schwarzenegger.ws",
-  charge_id: "ch_16ZSOgJiVRz9VXanvB8T1RG7"
+  charge_id: "ch_16ZSOgJiVRz9VXanvB8T1RG7",
+  mailing_list: true
 )
 
 sale.purchases << TicketPurchase.new(ticket: attraction, quantity: 2)

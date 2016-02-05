@@ -13,7 +13,12 @@
     </div>
     <p class='ticket-info'>
       <%= @sale.email %><br>
-      Purchased: <%= @sale.created_at.strftime('%B %d, %Y') %>
+      Purchased: <%= @sale.created_at.strftime('%B %d, %Y') %><br>
+      <% if @sale.mailing_list %>
+        Opted in to the mailing list
+      <% else %>
+        Opted out of the mailing list
+      <% end %>
     </p>
     <%= render partial: 'static_cart' %>
     <% if !@sale.claimed? && !@purchase.expired? %>
