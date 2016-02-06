@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20160205213340) do
 
   create_table "settings", primary_key: "settings", force: :cascade do |t|
     t.float  "tax",           default: 0.07
-    t.string "company_email", default: "desotocaverns@donotreply.com"
+    t.string "company_email", default: "store@desotocaverns.com"
   end
 
   create_table "ticket_revisions", force: :cascade do |t|

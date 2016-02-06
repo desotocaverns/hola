@@ -25,7 +25,7 @@ attraction = Ticket.create!(
 
 fun_pac = Package.new(
   name: "Explorer Fun Pac",
-  price: 2999,
+  price: 2899,
   description: "One caverns tour and 5 attraction tickets",
   for_sale_on: Time.now
 )
@@ -64,14 +64,7 @@ sale.save!
 
 # Admins
 Admin.create!(
-  email: "brandon@desotocaverns.com",
-  password: "testpass",
-  activated: true,
-  autocratic: true
-)
-
-Admin.create!(
-  email: "isaac@thewilliams.ws",
+  email: "test@desotocaverns.com",
   password: "testpass",
   activated: true,
   autocratic: true
