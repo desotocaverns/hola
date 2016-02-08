@@ -73,10 +73,10 @@ class TicketsController < ApplicationController
 
     fixed_params.except!("for_sale")
     fixed_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
+    fixed_params[:for_sale_on] = Time.now if for_sale == "true"
+    fixed_params[:for_sale_on] = nil if for_sale == "false"
 
     if @ticket.update(fixed_params)
-      @ticket.update_attribute(:for_sale_on, Time.now) if for_sale == "true"
-      @ticket.update_attribute(:for_sale_on, nil) if for_sale == "false"
       redirect_to tickets_path, notice: 'Ticket was successfully updated.'
     else
       render :edit

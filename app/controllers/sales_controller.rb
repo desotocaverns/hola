@@ -58,8 +58,9 @@ class SalesController < ApplicationController
   def update_cart
     if params[:sale][:ticket]
       params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
-        if @sale.purchases.where(ticket_revision_id: ticket_id).any?
-          purchase = @sale.purchases.find_by(ticket_revision_id: ticket_id)
+        revision_id = Ticket.find_by(id: ticket_id).revisions.last.id
+        if @sale.purchases.where(ticket_revision_id: revision_id).any?
+          purchase = @sale.purchases.find_by(ticket_revision_id: revision_id)
 
           quantity = quantity.to_i unless quantity == ""
           if params[:adding] == "true"
@@ -82,8 +83,9 @@ class SalesController < ApplicationController
 
     if params[:sale][:package]
       params[:sale][:package][:package_ids].each do |package_id, quantity|
-        if @sale.purchases.where(package_revision_id: package_id).any?
-          purchase = @sale.purchases.find_by(package_revision_id: package_id)
+        revision_id = Package.find_by(id: package_id).revisions.last.id
+        if @sale.purchases.where(package_revision_id: revision_id).any?
+          purchase = @sale.purchases.find_by(package_revision_id: revision_id)
 
           quantity = quantity.to_i unless quantity == ""
           if params[:adding] == "true"
