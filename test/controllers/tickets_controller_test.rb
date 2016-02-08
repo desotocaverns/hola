@@ -5,7 +5,7 @@ class TicketsControllerTest < ActionController::TestCase
     setup_admin(:basic)
 
     get :index
-    assert_redirected_to new_sale_path, {'message' => 'You are not authorized'}
+    assert_redirected_to sales_path, {'message' => 'You are not authorized'}
   end
 
   test "creating without name results in failure" do
@@ -20,7 +20,7 @@ class TicketsControllerTest < ActionController::TestCase
     setup_admin()
 
     post :create, {"ticket"=>{"name"=>"YoYo", "description"=>"YoYo's are fun", "price"=>"20.00", "for_sale"=>"true", "for_sale_on(1i)"=>"2015", "for_sale_on(2i)"=>"9", "for_sale_on(3i)"=>"21"}}
-    assert_redirected_to ticket_path(Ticket.last.id), {'message' => 'Ticket was successfully created.'}
+    assert_redirected_to tickets_path, {'message' => 'Ticket was successfully created.'}
     assert_equal Ticket.last.for_sale_on, Date.today
   end
 
@@ -28,7 +28,7 @@ class TicketsControllerTest < ActionController::TestCase
     setup_admin()
 
     post :create, {"ticket"=>{"name"=>"YoYo", "description"=>"YoYo's are fun", "price"=>"20.00", "for_sale"=>"false", "for_sale_on(1i)"=>"2015", "for_sale_on(2i)"=>"9", "for_sale_on(3i)"=>"21"}}
-    assert_redirected_to ticket_path(Ticket.last.id), {'message' => 'Ticket was successfully created.'}
+    assert_redirected_to tickets_path, {'message' => 'Ticket was successfully created.'}
     assert_equal Ticket.last.for_sale_on, nil
   end
 end

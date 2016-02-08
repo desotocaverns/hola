@@ -6,7 +6,7 @@ class SettingsControllerTest < ActionController::TestCase
     sign_in(@admin)
 
     get :edit
-    assert_redirected_to new_sale_path, {'message' => 'You are not authorized'}
+    assert_redirected_to sales_path, {'message' => 'You are not authorized'}
   end
 
   test "trying to update with empty tax results in failure" do
