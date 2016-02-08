@@ -155,7 +155,16 @@ class SalesController < ApplicationController
 
       @sale.update_attribute(:charge_id, charge.id)
 
-      CustomerMailer.receipt_email(@sale, protohost).deliver_now
+      recipients = [@sale.email]
+
+      admin_emails = Settings[:sale_notification_list].gsub(/\s+/, "").split(",")
+      for email in admin_emails
+        recipients << email
+      end
+
+      for recipient in recipients
+        CustomerMailer.receipt_email(@sale, recipient, protohost).deliver_now
+      end
 
       redirect_to receipt_sale_path(@sale)
 

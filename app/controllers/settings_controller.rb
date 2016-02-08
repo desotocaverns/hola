@@ -12,13 +12,13 @@ class SettingsController < ApplicationController
     else
       flash[:alert] = "Your settings could not be saved because they were invalid"
     end
-    
+
     redirect_to settings_path
   end
 
   private
 
   def settings_params
-    params[:settings].permit(:tax, :company_email)
+    params[:settings].permit(:tax, :company_email, :sale_notification_list)
   end
 end

@@ -3,7 +3,7 @@ class CustomerMailer < ApplicationMailer
 
   add_template_helper(ApplicationHelper)
 
-  def receipt_email(sale, protohost)
+  def receipt_email(sale, email, protohost)
     @sale = sale
 
     io = StringIO.new
@@ -15,6 +15,6 @@ class CustomerMailer < ApplicationMailer
       :content => io.read
     }
 
-    mail(to: @sale.email, from: Settings[:company_email], subject: 'DeSoto Caverns receipt')
+    mail(to: email, from: Settings[:company_email], subject: 'DeSoto Caverns receipt')
   end
 end
