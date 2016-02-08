@@ -1,6 +1,13 @@
-<% if @sale.errors.empty? %>
-  $('#personal-info').hide();
-  location.reload();
+<% if params[:update_cart] == 'false' %>
+  <% if !@sale.errors.empty? %>
+    $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
+  <% else %>
+    $('#checkout-button').attr('disabled', 'disabled')
+    $('#checkout-form').html('<%= escape_javascript render(partial: 'checkout_form', locals: { button_text: "Checkout" } ) %>');
+    $('.personal-info-errors').html('');
+    ticketCheckout()
+  <% end %>
 <% else %>
-  $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
+  TicketStore.showMessage({text: 'Your cart has been updated.', icon: 'cart'})
 <% end %>
+$('#edit-cart').html('<%= escape_javascript render(partial: 'edit_cart') %>');

@@ -5,11 +5,11 @@
         <div class="grid">
           <div class='quick-cart-info grid-cell one-of-two'>
             <%= svg_icon 'cart', title: "Cart Subtotal", class: 'quick-cart-icon' %>
-            <span class='quick-cart-total'><%= price(@sale.charge_total - @sale.tax)%></span>
-            <span class='quick-cart-items'>(<%= pluralize(cart_items, 'item')%>)</span>
+            <span id='cart-price' data-value='<%= price(@sale.charge_total - @sale.tax) %>' class='quick-cart-total'><%= price(@sale.charge_total - @sale.tax)%></span>
+            <span id='cart-size' data-value='<%= cart_items %>' class='quick-cart-items'>(<%= pluralize(cart_items, 'ticket')%>)</span>
           </div>
           <div class="grid-cell one-of-two quick-cart-button">
-            <button class='primary-button' type='submit'>Continue &rarr;</button>
+            <button class='primary-button' type='submit'>Checkout &rarr;</button>
           </div>
         </div>
       </div>

@@ -25,12 +25,18 @@ form {
   margin: 0 0 2em;
 
   &.cart-form {
-    position: fixed;
-    bottom: 0;
+    position: relative;
     left: 0;
     right: 0;
     z-index: 2;
     margin: 0;
+  }
+}
+
+@include until($medium) {
+  .form-footer.cart-form {
+    position: fixed;
+    bottom: 0;
   }
 }
 

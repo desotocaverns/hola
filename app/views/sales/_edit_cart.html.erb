@@ -1,0 +1,7 @@
+<%= render 'cart_items' %>
+<div class='cart-totals align-right'>
+  <p><button id='update-cart' type="submit" class="cart-edit-button">Update Cart</button></p>
+  <input type='hidden' name='update_cart' value='false'>
+  <div class='cart-tax'>Tax: <span class='cart-tax-amount'><%= price(@sale.tax) %></span></div>
+  <div class='cart-total'>Total: <span class='cart-total-amount'><%= price(@sale.charge_total)%></span></div>
+</div>

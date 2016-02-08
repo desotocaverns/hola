@@ -1,4 +1,5 @@
-$("#tickets").html("<%= escape_javascript render(partial: 'quantities', status: :success) %>")
-$("#quick-cart").html("<%= escape_javascript render(partial: 'quick_cart', status: :success) %>");
+// Add js for nice notice (ticket has been added)
+TicketStore.updateTicketForms("<%= escape_javascript render(partial: 'quantities', status: :success) %>")
+$("#quick-cart").html("<%= escape_javascript render(partial: 'quick_cart', status: :success) %>")
 $("#quick-cart").removeClass("show")
 $("#quick-cart").addClass("updated")

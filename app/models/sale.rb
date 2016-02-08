@@ -21,6 +21,10 @@ class Sale < ActiveRecord::Base
     RQRCode::QRCode.new("#{File.join(protohost, 'sales', redemption_code)}")
   end
 
+  def ready_for_checkout?
+    !self.email.nil? && !self.name.nil?
+  end
+
   def qr_svg(url)
     svg = redemption_qrcode(url).as_svg({module_size: 5})
     svg.sub(/width="(.+?)"/, 'width="100%"').sub(/height="(.+?)"/, 'viewBox="0 0 \1 \1" class="qrcode"').html_safe

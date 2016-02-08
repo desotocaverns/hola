@@ -56,6 +56,26 @@ class SalesController < ApplicationController
   end
 
   def update_cart
+    update_cart_items
+
+    @sale.update_attributes(sale_params)
+
+    if params[:adding].to_s == ""
+      if @sale.purchases.empty?
+        redirect_to edit_sale_path(@sale)
+      else
+        redirect_to summarize_sale_path(@sale)
+      end
+    end
+  end
+
+  def summarize
+    if @sale.purchases.empty?
+      redirect_to edit_sale_path(@sale)
+    end
+  end
+
+  def update_cart_items
     if params[:sale][:ticket]
       params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
         revision_id = Ticket.find_by(id: ticket_id).revisions.last.id
@@ -105,16 +125,6 @@ class SalesController < ApplicationController
         end
       end
     end
-
-    @sale.update_attributes(sale_params)
-
-    if params[:adding].to_s == ""
-      if @sale.purchases.empty?
-        redirect_to edit_sale_path(@sale)
-      else
-        redirect_to summarize_sale_path(@sale)
-      end
-    end
   end
 
   def delete_purchase
@@ -123,7 +133,7 @@ class SalesController < ApplicationController
     if @sale.purchases.empty?
       redirect_to edit_sale_path(@sale)
     else
-      redirect_to cart_path(@sale)
+      redirect_to summarize_sale_path(@sale)
     end
   end
 
@@ -134,7 +144,9 @@ class SalesController < ApplicationController
   end
 
   def update_personal_info
-    @sale.update(update_personal_info_params)
+    update_cart_items
+    @sale.update(all_params)
+
     respond_to do |format|
       format.js { render }
     end
@@ -236,6 +248,10 @@ class SalesController < ApplicationController
 
   def sale_params
     params[:sale].permit(:ticket, :package)
+  end
+
+  def all_params
+    params[:sale].permit(:ticket, :package, :name, :email, :is_info_form, :mailing_list)
   end
 
   def ticket_params
