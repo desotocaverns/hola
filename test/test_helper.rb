@@ -9,14 +9,12 @@ class ActiveSupport::TestCase
   def create_admins
     @admin = Admin.create!(
       email: "bob@randomemployee.com",
-      password: "nonautocraticpw",
-      activated: true
+      password: "nonautocraticpw"
     )
 
     @autocratic_admin = Admin.create!(
       email: "isaac@thewilliams.ws",
       password: "isaacspw",
-      activated: true,
       autocratic: true
     )
   end

@@ -66,12 +66,10 @@ sale.save!
 Admin.create!(
   email: "test@desotocaverns.com",
   password: "testpass",
-  activated: true,
   autocratic: true
 )
 
 Admin.create!(
   email: "scanner@desotocaverns.com",
-  password: "testpass",
-  activated: true
+  password: "testpass"
 )

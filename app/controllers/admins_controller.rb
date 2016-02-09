@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin = Admin.find(params[:id])
-    @admin.update_attribute(:activated, false)
+    @admin.destroy
 
     redirect_to admins_path
   end
