@@ -64,7 +64,9 @@ class SalesController < ApplicationController
       if @sale.purchases.empty?
         redirect_to edit_sale_path(@sale)
       else
-        redirect_to summarize_sale_path(@sale)
+        respond_to do |format|
+          format.js { render }
+        end
       end
     end
   end
