@@ -161,9 +161,11 @@ class SalesController < ApplicationController
 
       recipients = [@sale.email]
 
-      admin_emails = Settings[:sale_notification_list].gsub(/\s+/, "").split(",")
-      for email in admin_emails
-        recipients << email
+      if Settings[:sale_notification_list] != nil
+        admin_emails = Settings[:sale_notification_list].gsub(/\s+/, "").split(",")
+        for email in admin_emails
+          recipients << email
+        end
       end
 
       for recipient in recipients
