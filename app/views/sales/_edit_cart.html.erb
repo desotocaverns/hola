@@ -1,7 +1,41 @@
-<%= render 'cart_items' %>
-<div class='cart-totals align-right'>
-  <p><button id='update-cart' type="submit" class="cart-edit-button">Update Cart</button></p>
-  <input type='hidden' name='update_cart' value='false'>
-  <div class='cart-tax'>Tax: <span class='cart-tax-amount'><%= price(@sale.tax) %></span></div>
-  <div class='cart-total'>Total: <span class='cart-total-amount'><%= price(@sale.charge_total)%></span></div>
-</div>
+<%= form_tag sales_update_cart_path, :remote => true, :method => 'patch' do %>
+  <div class='cart-items'>
+    <% cart_tickets.each do |purchase| %>
+      <% revision = TicketRevision.find_by(id: purchase.ticket_revision_id) %>
+      <div class='grid no-gutter align-middle cart-item'>
+        <div class='grid-cell one-of-two'>
+          <%= link_to "delete", delete_purchase_sale_path(redemption_code: @sale.redemption_code, purchase_id: purchase.id), method: :delete, class: 'cart-delete-item', title: "remove from cart" %>
+          <span class='cart-item-name'><%= revision.ticket_data["name"] %></span>
+        </div>
+        <div class='grid-cell one-of-two align-right'>
+          <span class='cart-item-price'><%= price revision.ticket_data["price"] %></span><span class='times'>&times;</span>
+          <%= select_tag "sale[ticket[ticket_ids][#{revision.ticket_id}]]", options_for_select((0..25).to_a, purchase.quantity), class: 'cart-item-count' %>
+        </div>
+      </div>
+    <% end %>
+
+    <% cart_packages.each do |purchase| %>
+      <% revision = PackageRevision.find_by(id: purchase.package_revision_id) %>
+      <div class='grid no-gutter align-middle cart-item'>
+        <div class='grid-cell one-of-two'>
+          <%= link_to "delete", delete_purchase_sale_path(redemption_code: @sale.redemption_code, purchase_id: purchase.id), method: :delete, class: 'cart-delete-item', title: "remove from cart" %>
+          <span class='cart-item-name'><%= revision.package_data["name"] %></span>
+        </div>
+
+        <div class='grid-cell one-of-two align-right'>
+          <span class='cart-item-price'><%= price revision.package_data["price"] %></span><span class='times'>&times;</span>
+          <%= select_tag "sale[package[package_ids][#{revision.package_id}]]", options_for_select((0..25).to_a, purchase.quantity), class: 'cart-item-count' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <input type="hidden" name="redemption_code" value="<%= @sale.redemption_code %>">
+
+  <div class='cart-totals align-right'>
+    <p><button id='update-cart' type="submit" class="cart-edit-button">Update Cart</button></p>
+    <input type='hidden' name='quantities_page' value='false'>
+    <div class='cart-tax'>Tax: <span class='cart-tax-amount'><%= price(@sale.tax) %></span></div>
+    <div class='cart-total'>Total: <span class='cart-total-amount'><%= price(@sale.charge_total)%></span></div>
+  </div>
+<% end %>

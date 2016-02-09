@@ -10,6 +10,7 @@
       <span class="ticket-price"><%= price(data["price"]) %></span>
       <div class="select-box"><%= select_tag "#{name}", options_for_select((0..25).to_a, 0), class: 'ticket-quantity', data: { id: item_id } %></div>
       <input type="hidden" name="adding" value="true">
+      <input type="hidden" name="quantities_page" value="true">
       <span class='button-wrapper hidden' data-id="<%= item_id %>">
         <button class="add-to-cart" type="submit">Add to cart</button>
       </span>

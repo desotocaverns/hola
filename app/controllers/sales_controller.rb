@@ -69,12 +69,6 @@ class SalesController < ApplicationController
     end
   end
 
-  def summarize
-    if @sale.purchases.empty?
-      redirect_to edit_sale_path(@sale)
-    end
-  end
-
   def update_cart_items
     if params[:sale][:ticket]
       params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
@@ -134,12 +128,6 @@ class SalesController < ApplicationController
       redirect_to edit_sale_path(@sale)
     else
       redirect_to summarize_sale_path(@sale)
-    end
-  end
-
-  def edit_personal_info
-    respond_to do |format|
-      format.js { render }
     end
   end
 

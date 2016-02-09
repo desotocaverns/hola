@@ -1,4 +1,4 @@
-<% if params[:update_cart] == 'false' %>
+<% if params[:quantities_page] != 'true' %>
   <% if !@sale.errors.empty? %>
     $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
   <% else %>
