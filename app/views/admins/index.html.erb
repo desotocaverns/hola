@@ -6,14 +6,16 @@
     <span class='help-text'>(can modify tickets and invite more users)</span>
   </li>
   <% Admin.autocratic.each do |user| %>
-    <li class='card-list-item'>
-      <div class='flex-row auto-width-columns'>
-        <span class='email'><%= user.email %></span>
-        <span class='text-right'>
-          <%= button_to 'delete', user, :method => 'delete', class: 'button', data: { confirm: "are you sure?" } unless user == current_admin %>
-        </span>
-      </div>
-    </li>
+    <% if user.invitation_accepted_at != nil %>
+      <li class='card-list-item'>
+        <div class='flex-row auto-width-columns'>
+          <span class='email'><%= user.email %></span>
+          <span class='text-right'>
+            <%= button_to 'delete', user, :method => 'delete', class: 'button', data: { confirm: "are you sure?" } unless user == current_admin %>
+          </span>
+        </div>
+      </li>
+    <% end %>
   <% end %>
 
   <% if Admin.standard.size > 0 %>
