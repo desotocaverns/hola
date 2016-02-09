@@ -12,6 +12,9 @@
       payment_form = $('#payment_form');
       payment_form.find('#stripe_token').val(token.id);
       payment_form.submit();
+    },
+    closed: function() {
+      $('#checkout-button').prop("disabled", false);
     }
   });
 
@@ -24,8 +27,4 @@
       allowRememberMe: false
     });
   }
-
-  $(window).on('popstate', function() {
-    handler.close();
-  });
 </script>

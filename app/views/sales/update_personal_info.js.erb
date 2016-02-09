@@ -2,7 +2,7 @@
   <% if !@sale.errors.empty? %>
     $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
   <% else %>
-    $('#checkout-button').attr('disabled', 'disabled')
+    $('#checkout-button').prop('disabled', true)
     $('#checkout-form').html('<%= escape_javascript render(partial: 'checkout_form', locals: { button_text: "Checkout" } ) %>');
     $('.personal-info-errors').html('');
     ticketCheckout()
