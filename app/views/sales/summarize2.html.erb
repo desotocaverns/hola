@@ -25,7 +25,7 @@
     <%= form_for @sale, :url => {action: "charge", redemption_code: @sale.redemption_code}, :method => "patch", :html => {:id => "payment_form"} do |f| %>
       <input type="hidden" name="sale[stripe_token]" id="stripe_token"/>
     <% end %>
-    
+
     <script type="text/javascript">
       <% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
       <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
