@@ -36,7 +36,7 @@ var TicketStore = {
   },
 
   updateTicketForms: function(content) {
-    $("body").append("<div class='hidden ticket-template'>"+content+"</div")
+    $("body").append("<div class='hidden ticket-template'>"+content+"</div>")
     var action = $('.ticket-template .add-ticket-form').attr('action')
 
     $('.added-to-cart').each(function() {
