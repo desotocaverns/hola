@@ -174,18 +174,23 @@ class SalesController < ApplicationController
       puts "Code is: #{error[:code]}"
       puts "Param is: #{error[:param]}"
       puts "Message is: #{error[:message]}"
+      redirect_to failure_path
 
     rescue Stripe::InvalidRequestError => e
       puts "Invalid parameters were sent to Stripe. Invalid currency, maybe?"
+      redirect_to failure_path
 
     rescue Stripe::AuthenticationError => e
       puts "Stripe authentication failed. Check the API key, maybe?"
+      redirect_to failure_path
 
     rescue Stripe::APIConnectionError => e
       puts "Network communication with Stripe failed. Do you have a stable internet connection?"
+      redirect_to failure_path
 
     rescue Stripe::StripeError => e
       puts "Something generic went wrong."
+      redirect_to failure_path
     end
   end
 
