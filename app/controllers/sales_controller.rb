@@ -52,7 +52,7 @@ class SalesController < ApplicationController
 
   def redeem
     @sale.update_attribute(:claimed_on, Date.today)
-    CustomerMailer.redemption_email(@sale, protohost).deliver_now
+    CustomerMailer.redemption_email(@sale).deliver_now
     redirect_to "/sales/#{@sale.redemption_code}"
   end
 
@@ -152,17 +152,13 @@ class SalesController < ApplicationController
 
       @sale.update_attribute(:charge_id, charge.id)
 
-      recipients = [@sale.email]
+      CustomerMailer.receipt_email(@sale, protohost).deliver_now
 
       if Settings[:sale_notification_list] != nil
         admin_emails = Settings[:sale_notification_list].gsub(/\s+/, "").split(",")
         for email in admin_emails
-          recipients << email
+          CustomerMailer.admin_receipt_email(@sale, email).deliver_now
         end
-      end
-
-      for recipient in recipients
-        CustomerMailer.receipt_email(@sale, recipient, protohost).deliver_now
       end
 
       redirect_to receipt_sale_path(@sale)

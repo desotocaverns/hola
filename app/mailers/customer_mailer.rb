@@ -3,7 +3,7 @@ class CustomerMailer < ApplicationMailer
 
   add_template_helper(ApplicationHelper)
 
-  def receipt_email(sale, email, protohost)
+  def receipt_email(sale, protohost)
     @sale = sale
 
     io = StringIO.new
@@ -15,10 +15,15 @@ class CustomerMailer < ApplicationMailer
       :content => io.read
     }
 
-    mail(to: email, from: Settings[:company_email], subject: 'DeSoto Caverns receipt')
+    mail(to: @sale.email, from: Settings[:company_email], subject: 'DeSoto Caverns receipt')
   end
 
-  def redemption_email(sale, protohost)
+  def admin_receipt_email(sale, admin_email)
+    @sale = sale
+    mail(to: admin_email, from: Settings[:company_email], subject: 'DeSoto Caverns receipt')
+  end
+
+  def redemption_email(sale)
     @sale = sale
     mail(to: @sale.email, from: Settings[:company_email], subject: 'Thanks for visiting!')
   end
