@@ -9,7 +9,7 @@
         </div>
         <div class='grid-cell one-of-two align-right'>
           <span class='cart-item-price'><%= price revision.ticket_data["price"] %></span><span class='times'>&times;</span>
-          <%= select_tag "sale[ticket[ticket_ids][#{revision.ticket_id}]]", options_for_select((0..25).to_a, purchase.quantity), class: 'cart-item-count' %>
+          <input type="text" name="sale[ticket[ticket_ids][<%= revision.ticket_id %>]]" value="<%= purchase.quantity %>" class="cart-item-count">
         </div>
       </div>
     <% end %>
@@ -24,7 +24,7 @@
 
         <div class='grid-cell one-of-two align-right'>
           <span class='cart-item-price'><%= price revision.package_data["price"] %></span><span class='times'>&times;</span>
-          <%= select_tag "sale[package[package_ids][#{revision.package_id}]]", options_for_select((0..25).to_a, purchase.quantity), class: 'cart-item-count' %>
+          <input type="text" name="sale[package[package_ids][<%= revision.package_id %>]]" value="<%= purchase.quantity %>" class="cart-item-count">
         </div>
       </div>
     <% end %>

@@ -78,16 +78,12 @@ class SalesController < ApplicationController
         if @sale.purchases.where(ticket_revision_id: revision_id).any?
           purchase = @sale.purchases.find_by(ticket_revision_id: revision_id)
 
-          quantity = quantity.to_i unless quantity == ""
-          if params[:adding] == "true"
-            quantity = purchase.quantity + quantity.to_i
-          end
-
-          if quantity == 0 || quantity == ""
-            unless purchase.destroy
-              flash[:alert] = "Cannot destroy every purchase"
+          if quantity =~ /^\d+$/i
+            quantity = quantity.to_i
+            if params[:adding] == "true"
+              quantity = purchase.quantity + quantity.to_i
             end
-          else
+
             purchase.update(:quantity => quantity)
           end
         else
@@ -103,16 +99,12 @@ class SalesController < ApplicationController
         if @sale.purchases.where(package_revision_id: revision_id).any?
           purchase = @sale.purchases.find_by(package_revision_id: revision_id)
 
-          quantity = quantity.to_i unless quantity == ""
-          if params[:adding] == "true"
-            quantity = purchase.quantity + quantity.to_i
-          end
-
-          if quantity == 0 || quantity == ""
-            unless purchase.destroy
-              flash[:alert] = "Cannot destroy every purchase"
+          if quantity =~ /^\d+$/i
+            quantity = quantity.to_i
+            if params[:adding] == "true"
+              quantity = purchase.quantity + quantity.to_i
             end
-          else
+
             purchase.update(:quantity => quantity)
           end
         else

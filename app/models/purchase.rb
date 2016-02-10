@@ -21,7 +21,7 @@ class Purchase < ActiveRecord::Base
     expiration_date = Time.now + 1.years
     self.expires_on = expiration_date
   end
-  
+
   def generate_unique_token
     self.token = SecureRandom.urlsafe_base64(10) + self.id.to_s
   end
