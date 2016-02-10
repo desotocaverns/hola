@@ -52,6 +52,7 @@ class SalesController < ApplicationController
 
   def redeem
     @sale.update_attribute(:claimed_on, Date.today)
+    CustomerMailer.redemption_email(@sale, protohost).deliver_now
     redirect_to "/sales/#{@sale.redemption_code}"
   end
 

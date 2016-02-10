@@ -17,4 +17,9 @@ class CustomerMailer < ApplicationMailer
 
     mail(to: email, from: Settings[:company_email], subject: 'DeSoto Caverns receipt')
   end
+
+  def redemption_email(sale, protohost)
+    @sale = sale
+    mail(to: @sale.email, from: Settings[:company_email], subject: 'Thanks for visiting!')
+  end
 end
