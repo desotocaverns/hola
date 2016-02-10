@@ -191,7 +191,7 @@ class SalesController < ApplicationController
 
   def resend_email
     @sale = Sale.find_by(redemption_code: params[:redemption_code])
-    CustomerMailer.receipt_email(@sale, protohost).deliver_now
+    CustomerMailer.receipt_email(@sale, @sale.email, protohost).deliver_now
     redirect_to sale_path(@sale.redemption_code)
   end
 

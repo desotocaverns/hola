@@ -26,3 +26,5 @@ config/secrets.yml
 *.swp
 *.swo
 .DS_Store
+
+config/secrets.yml
