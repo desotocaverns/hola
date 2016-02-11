@@ -1,3 +1,5 @@
+require "constantcontact"
+
 class SalesController < ApplicationController
   layout 'public'
   skip_before_action :verify_authenticity_token
@@ -158,6 +160,18 @@ class SalesController < ApplicationController
         admin_emails = Settings[:sale_notification_list].gsub(/\s+/, "").split(",")
         for email in admin_emails
           CustomerMailer.admin_receipt_email(@sale, email).deliver_now
+        end
+      end
+
+      if @sale.mailing_list
+        constant_contact = ConstantContact::Api.new(ENV["CONSTANT_CONTACT_API_KEY"], ENV["CONSTANT_CONTACT_OAUTH_TOKEN"])
+
+        json = "{\"lists\": [{\"id\": \"1798215372\"}],\"email_addresses\": [{\"email_address\": \"#{@sale.email}\"}]}".to_json
+
+        begin
+          constant_contact.add_contact(json)
+        rescue RestClient::BadRequest => e
+          puts "#{e.http_code} - #{e.http_body}"
         end
       end
 
