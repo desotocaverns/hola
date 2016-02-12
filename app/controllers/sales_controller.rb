@@ -163,26 +163,28 @@ class SalesController < ApplicationController
         end
       end
 
-      if @sale.mailing_list
-        constant_contact = ConstantContact::Api.new(ENV["CONSTANT_CONTACT_API_KEY"], ENV["CONSTANT_CONTACT_OAUTH_TOKEN"])
+      if Rails.env == "production"
+        if @sale.mailing_list
+          constant_contact = ConstantContact::Api.new(ENV["CONSTANT_CONTACT_API_KEY"], ENV["CONSTANT_CONTACT_OAUTH_TOKEN"])
 
-        json = {
-          "lists": [
-              {"id": "1798215372"}
-            ],
-          "email_addresses": [
-            {"email_address": "#{@sale.email}"}
-          ]
-        }
+          json = {
+            "lists": [
+                {"id": "1798215372"}
+              ],
+            "email_addresses": [
+              {"email_address": "#{@sale.email}"}
+            ]
+          }
 
-        begin
-          constant_contact.add_contact(json, true)
-        rescue RestClient::BadRequest => e
-          puts "#{e.http_code} - #{e.http_body}"
-        rescue RestClient::Conflict => e
-          puts "This email address already exists in ConstantContact."
-        rescue
-          puts "ERROR: An unknown problem was encountered while trying to add this email address to ConstantContact."
+          begin
+            constant_contact.add_contact(json, true)
+          rescue RestClient::BadRequest => e
+            puts "#{e.http_code} - #{e.http_body}"
+          rescue RestClient::Conflict => e
+            puts "This email address already exists in ConstantContact."
+          rescue
+            puts "ERROR: An unknown problem was encountered while trying to add this email address to ConstantContact."
+          end
         end
       end
 
