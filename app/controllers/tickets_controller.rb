@@ -68,7 +68,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find_by(id: params[:id])
     fixed_params = ticket_params
-    fixed_params[:price] = fixed_params[:price].to_f * 100
+    fixed_params[:price] = (fixed_params[:price].to_f * 100).round
     for_sale = fixed_params[:for_sale] if fixed_params[:for_sale] != ""
 
     fixed_params.except!("for_sale")
