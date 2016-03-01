@@ -30,13 +30,13 @@
 
   <div class='form-row'>
     <div>
-      <label><%= radio_button_tag "package[for_sale]", "true", @package.for_sale_on && Time.now < @package.for_sale_on %> For sale now</label>
+      <label><%= radio_button_tag "package[for_sale]", "true", @package.for_sale_on && @package.for_sale_on <= Time.now %> For sale now</label>
     </div>
     <div>
       <label><%= radio_button_tag "package[for_sale]", "false", @package.for_sale_on.nil? %> Not for sale</label>
     </div>
     <div>
-      <label><%= radio_button_tag "package[for_sale]", "after", @package.for_sale_on && @package.for_sale_on < Time.now %> Sell after:</label>
+      <label><%= radio_button_tag "package[for_sale]", "after", @package.for_sale_on && Time.now < @package.for_sale_on %> Sell after:</label>
       <%= f.date_select :for_sale_on %>
     </div>
   </div>
