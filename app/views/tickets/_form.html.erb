@@ -29,13 +29,13 @@
 
   <div class='form-row'>
     <div>
-      <label><%= radio_button_tag "ticket[for_sale]", "true", checked: true %> For sale now</label>
+      <label><%= radio_button_tag "ticket[for_sale]", "true", @ticket.for_sale_on && @ticket.for_sale_on <= Time.now %> For sale now</label>
     </div>
     <div>
-      <label><%= radio_button_tag "ticket[for_sale]", "false" %> Not for sale</label>
+      <label><%= radio_button_tag "ticket[for_sale]", "false", @ticket.for_sale_on.nil? %> Not for sale</label>
     </div>
     <div>
-      <label><%= radio_button_tag "ticket[for_sale]", "after" %> Sell after:</label>
+      <label><%= radio_button_tag "ticket[for_sale]", "after", @ticket.for_sale_on && Time.now < @ticket.for_sale_on %> Sell after:</label>
       <%= f.date_select :for_sale_on %>
     </div>
   </div>
