@@ -46,7 +46,7 @@ class PackagesController < ApplicationController
     end
 
     fixed_params = package_params
-    fixed_params[:price] = fixed_params[:price].to_f * 100
+    fixed_params[:price] = (fixed_params[:price].to_f * 100).round
     for_sale = fixed_params[:for_sale] if fixed_params[:for_sale] != ""
 
     fixed_params[:package_tickets_attributes].each do |hash|
