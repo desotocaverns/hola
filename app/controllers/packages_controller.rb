@@ -55,10 +55,12 @@ class PackagesController < ApplicationController
       end
     end
 
-    fixed_params.except!("for_sale")
-    fixed_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
     fixed_params[:for_sale_on] = Time.now if for_sale == "true"
     fixed_params[:for_sale_on] = nil if for_sale == "false"
+    fixed_params[:for_sale_on] = Date.new(fixed_params["for_sale_on(1i)"].to_i, fixed_params["for_sale_on(2i)"].to_i, fixed_params["for_sale_on(3i)"].to_i) if for_sale == "after"
+
+    fixed_params.except!("for_sale")
+    fixed_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
 
     if @package.update(fixed_params)
       redirect_to tickets_path, notice: 'Package was successfully updated.'
