@@ -7,7 +7,7 @@
   <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
 
   var handler = StripeCheckout.configure({
-    key: 'pk_test_1E89hNXMZYx4QpJPN297vKur',
+    key: '<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>',
     token: function(token) {
       payment_form = $('#payment_form');
       payment_form.find('#stripe_token').val(token.id);
