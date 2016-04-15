@@ -30,11 +30,7 @@
       <%= f.text_field :email, class: "big full", placeholder: "Email Address" %>
     </div>
 
-    <div class='form-row'>
-      <%= f.check_box :mailing_list, {checked: true} %>
-      <%= label_tag :mailinglist, "Receive email about discounts and events.", class: 'help-text' %>
-    </div>
-
+    <%= f.hidden_field :mailing_list, value: true %>
     <%= f.hidden_field :redemption_code %>
     <%= f.hidden_field :is_info_form, value: true %>
     </div>
