@@ -25,17 +25,13 @@ form {
   margin: 0 0 2em;
 
   &.cart-form {
-    position: relative;
+    position: fixed;
+    bottom: 0;
     left: 0;
     right: 0;
     z-index: 2;
     margin: 0;
   }
-}
-
-.form-footer.cart-form {
-  position: fixed;
-  bottom: 0;
 }
 
 .form-row {
