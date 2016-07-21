@@ -33,11 +33,9 @@ form {
   }
 }
 
-@include until($medium) {
-  .form-footer.cart-form {
-    position: fixed;
-    bottom: 0;
-  }
+.form-footer.cart-form {
+  position: fixed;
+  bottom: 0;
 }
 
 .form-row {
