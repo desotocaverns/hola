@@ -52,7 +52,7 @@ var TicketStore = {
     $('.add-ticket-form input[name=_method]').attr('value', 'patch')
   },
 
-  showMessage(options) {
+  showMessage: function(options) {
     $('#app-message-text').html(options.text || '')
     var icon = $('#app-message-icon')
     icon.find('.svg-icon').addClass('hidden')
