@@ -149,7 +149,7 @@ class SalesController < ApplicationController
         :amount => @sale.charge_total,
         :currency => "usd",
         :source => params[:sale][:stripe_token],
-        :description => "test card charge"
+        :description => "DeSoto Cavern's event ticket"
       )
 
       @sale.update_attribute(:charge_id, charge.id)
