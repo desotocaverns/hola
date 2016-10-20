@@ -11,47 +11,73 @@
 <% end %>
 
 <div id='summary'>
-  <% if @sale.email %>
-    <h3 class='section-heading'>Purchase Summary</h3>
-      <div class='card'>
-  <% end %>
+  <div class='card'>
 
-  <div class='personal-info-summary'><%= personal_info %></div>
+  <h4 class='cart-heading'>Tickets</h4>
+  <div id="edit-cart"><%= render 'edit_cart' %></div>
 
-  <% if @sale.email %>
-    <%= render 'static_cart' %>
+  <h3 class='section-heading'>Purchase Summary</h3>
+
+  <%= form_for @sale, :remote => true, :url => update_personal_info_path, :method => 'patch', :html => {:id => "personal_info_form"} do |f| %>
+    <h4 class='cart-heading'>Your Contact Info</h4>
+    <div class="personal-info-errors"></div>
+
+    <div class='form-row'>
+      <%= f.text_field :name, class: "big full", placeholder: "Full Name" %>
     </div>
-    <%= render partial: "checkout_form", locals: { button_text: "Purchase" } %>
-    <%= form_for @sale, :url => {action: "charge", redemption_code: @sale.redemption_code}, :method => "patch", :html => {:id => "payment_form"} do |f| %>
-      <input type="hidden" name="sale[stripe_token]" id="stripe_token"/>
-    <% end %>
-    
-    <script type="text/javascript">
-      <% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
-      <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
 
-      var handler = StripeCheckout.configure({
-        key: 'pk_test_1E89hNXMZYx4QpJPN297vKur',
-        token: function(token) {
-          payment_form = $('#payment_form');
-          payment_form.find('#stripe_token').val(token.id);
-          payment_form.submit();
-        }
-      });
+    <div class='form-row'>
+      <%= f.text_field :email, class: "big full", placeholder: "Email Address" %>
+    </div>
 
-      $(".primary-button").on("click", function() {
-        handler.open({
-          name: 'DeSoto Caverns',
-          description: '<%= tp_quantity %> ticket<% if tp_quantity > 1 || tp_quantity == 0 %>s<% end %>, <%= pp_quantity %> package<% if pp_quantity > 1 || pp_quantity == 0 %>s<% end %>',
-          email: "<%= @sale.email %>",
-          amount: <%= @sale.charge_total %>,
-          allowRememberMe: false
-        });
-      });
+    <%= f.hidden_field :mailing_list, value: true %>
+    <%= f.hidden_field :redemption_code %>
+    <%= f.hidden_field :is_info_form, value: true %>
+    </div>
 
-      $(window).on('popstate', function() {
-        handler.close();
-      });
-    </script>
+    <div class="form-footer grid align-middle no-gutter">
+      <div class="grid-cell one-of-two">
+        <%= link_to edit_sale_path(@sale), class: 'back-link' do %>
+          &larr; Tickets
+        <% end %>
+      </div>
+      <div class="grid-cell one-of-two align-right">
+        <button id='checkout-button' type="submit" class="primary-button">Enter Payment &rarr;</button>
+      </div>
+    </div>
   <% end %>
+
+  <!-- Keep this div around! It is replaced by the Stripe iframe later on. -->
+  <div id="checkout-form"></div>
 </div>
+
+<%= form_for @sale, :url => {action: "charge", redemption_code: @sale.redemption_code}, :method => "patch", :html => {:id => "payment_form"} do |f| %>
+  <input type="hidden" name="sale[stripe_token]" id="stripe_token"/>
+<% end %>
+
+<script type="text/javascript">
+  <% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
+  <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
+
+  var handler = StripeCheckout.configure({
+    key: '<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>',
+    token: function(token) {
+      payment_form = $('#payment_form');
+      payment_form.find('#stripe_token').val(token.id);
+      payment_form.submit();
+    },
+    closed: function() {
+      $('#checkout-button').prop("disabled", false);
+    }
+  });
+
+  $("#checkout-button").on("click", function () {
+    handler.open({
+      name: 'DeSoto Caverns',
+      description: '<%= tp_quantity %> ticket<% if tp_quantity > 1 || tp_quantity == 0 %>s<% end %>, <%= pp_quantity %> package<% if pp_quantity > 1 || pp_quantity == 0 %>s<% end %>',
+      email: "<%= @sale.email %>",
+      amount: <%= @sale.charge_total %>,
+      allowRememberMe: false
+    }); 
+  });
+</script>

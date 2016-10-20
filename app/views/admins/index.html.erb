@@ -1,26 +1,41 @@
 <%= action_heading "Users", "Add user", new_admin_invitation_path %>
 
 <ul class='card-list'>
-  <li class='card-heading'>Admin Users</li>
-  <% Admin.autocratic.each do |admin| %>
-    <li class='card-list-item'>
-      <%= admin.email %>
-      <%= link_to 'x', admin, :method => 'delete', data: { confirm: "Are you sure?" } unless admin == current_admin %>
-    </li>
-  <% end %>
-</ul>
-
-<% if Admin.standard.size > 0 %>
-  <ul class='card-list'>
-    <li class='card-heading'>Standard Users</li>
-    <% Admin.standard.each do |admin| %>
+  <li class='card-heading'>
+    Admin Users
+    <span class='help-text'>(can modify tickets and invite more users)</span>
+  </li>
+  <% Admin.autocratic.each do |user| %>
+    <% if user.invitation_accepted_at != nil %>
       <li class='card-list-item'>
-        <%= admin.email %>
-        <%= link_to 'x', admin, :method => 'delete', data: { confirm: "Are you sure?" } unless admin == current_admin %>
+        <div class='flex-row auto-width-columns'>
+          <span class='email'><%= user.email %></span>
+          <span class='text-right'>
+            <%= button_to 'delete', user, :method => 'delete', class: 'button', data: { confirm: "are you sure?" } unless user == current_admin %>
+          </span>
+        </div>
       </li>
     <% end %>
-  </ul>
-<% end %>
+  <% end %>
+
+  <% if Admin.standard.size > 0 %>
+    <% if Admin.standard.any? { |admin| admin.invitation_accepted_at != nil } %>
+      <li class='card-heading'>Standard Users</li>
+      <% Admin.standard.each do |user| %>
+        <% if user.invitation_accepted_at != nil %>
+          <li class='card-list-item'>
+            <div class='flex-row auto-width-columns'>
+              <span class='email'><%= user.email %></span>
+              <span class='text-right'>
+                <%= button_to 'delete', user, :method => 'delete', class: 'button', data: { confirm: "are you sure?" } unless user == current_admin %>
+              </span>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
 
 <% if Admin.invitation_not_accepted.any? %>
   <ul class='card-list'>

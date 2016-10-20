@@ -1,0 +1,12 @@
+.table {
+  display: table;
+  width: 100%;
+  &-row { display: table-row; }
+  &-cell { display: table-cell; }
+
+  .heading {
+    font-size: .75em;
+    text-transform: uppercase;
+    color: #666;
+  }
+}

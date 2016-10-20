@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if admin_signed_in?
       unless current_admin.autocratic
         flash[:alert] = "You are not authorized"
-        redirect_to new_sale_path
+        redirect_to sales_path
       end
     end
   end

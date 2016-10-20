@@ -15,6 +15,14 @@ button, .button {
   }
   text-decoration: none;
   display: inline-block;
+
+  &[disabled] {
+    opacity: .8;
+    cursor: default;
+    &:hover {
+      background-color: #444;
+    }
+  }
 }
 
 .continue-button {
@@ -31,6 +39,11 @@ button, .button {
   &.small {
     font-size: .8em;
     line-height: 1.65em;
+  }
+  &.wide {
+    @include until($small) {
+      width: 100%;
+    }
   }
 }
 
@@ -84,4 +97,33 @@ button, .button {
   .arrow-button {
     margin-left: 50%;
   }
+}
+
+.text-button {
+  display: inline-block;
+  color: #444;
+  text-decoration: none;
+  margin: 0 1em;
+  color: inherit;
+  opacity: .7;
+  &:hover {
+    opacity: .9;
+    text-decoration: underline;
+  }
+  transition: opacity .2s ease-in-out;
+}
+
+.destroy-button {
+  font-size: 1em;
+  line-height: 2.2em;
+  background: $red;
+  &:hover {
+    background-color: darken($red, 6);
+  }
+}
+
+button.toggle {
+  width: auto;
+  background: none;
+  line-height: inherit;
 }

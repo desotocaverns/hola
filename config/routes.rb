@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   # Purchase routes
 
+  get '/sales/failure' => 'sales#failure', as: 'failure'
+
   resources :sales, param: :redemption_code, only: [:index, :new, :create, :edit, :show] do
     member do
       get :summarize, :receipt
@@ -25,8 +27,6 @@ Rails.application.routes.draw do
 
   patch '/sales/checkout' => 'sales#checkout', as: 'checkout'
   patch '/sales/charge' => 'sales#charge'
-
-  get '/sales/failure' => 'sales#failure', as: 'failure'
 
   post '/sales/:redemption_code/redeem' => 'sales#redeem', as: 'redeem'
 

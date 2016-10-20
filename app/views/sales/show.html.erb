@@ -1,29 +1,37 @@
-
-<% if @purchase.expires_on <= Time.now %>
-  <span style="color:red; font-size:20px">Expired!</span>
-<% end %>
-
-<div class='card'>
-  <div class='grid no-gutter'>
-    <div class='grid-cell one-of-two'>
-      <h5 class='ticket-name'><%= @sale.name %></h5>
-      <div class='ticket-email'><%= @sale.email %></div>
+<div class='card-list'>
+  <a class="card-heading link" href="<%= sales_path %>">&larr; All tickets</a>
+  <div class="card">
+    <div class='grid no-gutter'>
+      <div class='grid-cell one-of-two'>
+        <h5 class='ticket-name'><%= @sale.name %></h5>
+      </div>
+      <div class='grid-cell one-of-two align-right'>
+        <form method="post" action="<%= resend_email_sale_path(@sale.redemption_code) %>">
+          <button class='alt-button' type="submit">Resend receipt</button>
+        </form>
+      </div>
     </div>
-    <div class='grid-cell one-of-two align-right'>
-      <% if @sale.claimed_on != nil %>
-        <div class='ticket-claimed'>Claimed on: <%= @sale.claimed_on %></div>
-      <% elsif @purchase.expires_on >= Time.now %>
-        <form class='inline-form' method="post" action="<%= resend_email_sale_path(@sale.redemption_code) %>">
-          <button class='alt-button' type="submit">Resend Email</button>
-        </form>
-        <form class='inline-form' method="post" action="<%= redeem_path(@sale.redemption_code) %>">
-          <button class='primary-button small' type="submit">Redeem</button>
-        </form>
+    <p class='ticket-info'>
+      <%= @sale.email %><br>
+      Purchased: <%= @sale.created_at.strftime('%B %d, %Y') %><br>
+      <% if @sale.mailing_list %>
+        Opted in to the mailing list
       <% else %>
-        Expired: <%= @purchase.expires_on %>
+        Opted out of the mailing list
       <% end %>
-    </div>
+    </p>
+    <%= render partial: 'static_cart' %>
+    <% if !@sale.claimed? && !@purchase.expired? %>
+      <form class='align-right' method="post" action="<%= redeem_path(@sale.redemption_code) %>">
+        <p>
+          <button class='primary-button wide' type="submit">Redeem Ticket</button>
+        </p>
+      </form>
+    <% end %>
+    <% if @purchase.expired? %>
+      <p class='ticket-expired'>Ticket Expired on: <%= @purchase.expires_on.strftime('%b %d, %Y') %></p>
+    <% elsif @sale.claimed? %>
+      <p class='ticket-claimed'>Already redemed: <%= @sale.claimed_on.strftime('%b %d, %Y') %></p>
+    <% end %>
   </div>
-  <%= render partial: 'static_cart' %>
 </div>
-

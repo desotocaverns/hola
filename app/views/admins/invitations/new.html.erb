@@ -1,18 +1,19 @@
 <h2><%= t "devise.invitations.new.header" %></h2>
-
 <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+  <div class='card'>
+
   <%= devise_error_messages! %>
 
-<% resource.class.invite_key_fields.each do |field| -%>
-  <p><%= f.label field %><br />
-  <%= f.text_field field %></p>
-<% end -%>
+  <p><%= f.text_field :email, placeholder: "Email Address" %></p>
 
-<div class="autocratic">
-    <h2>Autocratic</h2>
-    Yes: <%= f.radio_button :autocratic, "yes" %>
-    No: <%= f.radio_button :autocratic, "no" %>
-</div>
+  <p>
+    <%= f.check_box :autocratic %> <%= f.label :autocratic, 'Admin privileges' %>
+    <span class='help-text'>(can modify tickets and invite more users)</span>
+  </p>
 
-  <p><%= f.submit t("devise.invitations.new.submit_button") %></p>
+  </div>
+  <footer class='form-footer'>
+    <%= link_to "Cancel", admins_path, class: 'text-button' %>
+    <%= f.button t("devise.invitations.new.submit_button"), type: 'submit', class: 'primary-button' %>
+  </footer>
 <% end %>

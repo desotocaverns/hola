@@ -43,13 +43,17 @@ gem 'devise_invitable'
 # Email validation
 gem 'email_validator'
 # Email previewing
-gem "letter_opener", :group => :development
+gem "letter_opener", group: :development
+gem "pry-byebug", group: :development
 
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
 
 # Heroku
 gem 'rails_12factor', group: :production
+
+# Mailing list
+gem 'constantcontact', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

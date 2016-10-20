@@ -5,7 +5,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.assets.js_compressor = :uglifier
-  config.assets.compile = false
+  config.assets.compile = true
   config.assets.digest = true
   config.log_level = :debug
   config.log_tags = [ :request_id ]
@@ -13,7 +13,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
-  routes.default_url_options[:host] = 'hola-app.herokuapp.com'
+  routes.default_url_options[:host] = 'tickets.desotocavernspark.com'
   ActionMailer::Base.smtp_settings = {
     :port           => 587,
     :address        => "smtp.mailgun.org",

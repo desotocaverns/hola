@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>Ticket Store - DeSoto Caverns Family Fun Park</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <%= yield :head %>
+  <meta charset="utf-8">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+</head>
+<body>
+<% if admin_signed_in? %>
+  <%= render partial: "layouts/admin_nav" %>
+<% end %>
+
+<div class='site'>
+  <% if !%w(index show).include?(action_name) %>
+    <div class='site-header'>
+      <div class='site-header-content'>
+        <h1>
+          <a href="/"><span class='top-text'>DeSoto Caverns</span> <span class='wrap-text'>Family Fun Park</span></a>
+        </h1>
+      </div>
+    </div>
+  <% end %>
+  <div class='site-content'>
+    <% if !notice.nil? %><p class="notice" style="color:green"><%= notice %></p><% end %>
+    <% if !alert.nil? %><p class="alert" style="color:#FFCC00"><%= alert %></p><% end %>
+    <%= yield %>
+    <% if !%w(index show).include?(action_name) %>
+      <nav class='sub-nav text-center block-margin'>
+        <a href="/privacy" target="_blank">Privacy Policy</a> <a href="mailto:help@desotocavernspark.com">Support</a>
+      </nav>
+    <% end %>
+  </div>
+</div>
+
+<div id='app-message' class=''>
+  <div id='app-message-content'>
+    <div id='app-message-icon'>
+      <%= svg_icon 'cart', title: "Cart Subtotal", class: 'cart-icon' %>
+    </div>
+    <div id='app-message-text'>
+      21 Tickets are in your cart
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

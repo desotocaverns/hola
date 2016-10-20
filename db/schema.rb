@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922161812) do
+ActiveRecord::Schema.define(version: 20160208231419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20150922161812) do
     t.string   "recoverable"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.boolean  "activated",              default: false
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -97,11 +96,13 @@ ActiveRecord::Schema.define(version: 20150922161812) do
     t.datetime "updated_at",                  null: false
     t.string   "redemption_code"
     t.date     "claimed_on"
+    t.boolean  "mailing_list"
   end
 
   create_table "settings", primary_key: "settings", force: :cascade do |t|
-    t.float  "tax",           default: 0.07
-    t.string "company_email", default: "desotocaverns@donotreply.com"
+    t.float  "tax",                    default: 0.07
+    t.string "company_email",          default: "store@desotocaverns.com"
+    t.text   "sale_notification_list"
   end
 
   create_table "ticket_revisions", force: :cascade do |t|

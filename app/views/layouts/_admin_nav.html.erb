@@ -1,14 +1,25 @@
 <nav class='admin-nav'>
-  <a href="<%= sales_path %>"><%= svg_icon 'purchases', title: "Purchases" %></a>
-  <a href="<%= tickets_path %>"><%= svg_icon 'tickets', title: "Tickets" %></a>
-  <a href="<%= admins_path %>"><%= svg_icon 'user', title: "Users" %></a>
-  <a href="<%= destroy_admin_session_path %>"></a>
-  <%= link_to destroy_admin_session_path, method: :delete do
-  svg_icon 'power', title: "Sign out"
-  end%>
+  <div class='mobile-nav auto-width-columns flex-row until-small'>
+    <a href="<%= sales_path %>">
+      <%=svg_icon 'search', title: "search" %> Purchases
+    </a>
+    <span class='flex-row-spacer'></span>
+    <span class='flex-row-spacer'></span>
+    <a href='#' data-toggle-class='#main-nav; hidden-until-small'>
+      <%=svg_icon 'menu', title: "Navigation" %>
+    </a>
+  </div>
+
+  <div id='main-nav' class='flex-row auto-width-columns flex-after-small hidden-until-small'>
+    <a href="<%= sales_path %>" class='at-least-small'>
+      <%=svg_icon 'search', title: "search" %> Purchases
+    </a>
+
+    <%= link_to "Tickets", tickets_path, class: 'alt-nav' if is_admin? %>
+    <%= link_to "Store", root_path, class: 'alt-nav' %>
+    <%= link_to "Store settings", settings_path, class: 'alt-nav' if is_admin? %>
+    <%= link_to "Users", admins_path, class: 'alt-nav' if is_admin? %>
+    <%= link_to "Your account", edit_admin_registration_path, class: 'alt-nav' %>
+    <%= link_to "Sign out", destroy_admin_session_path, method: :delete, class: 'alt-nav' %>
+  </div>
 </nav>
-<div class='live'>
-<%= link_to "Purchase Ticket", root_path %> |
-<%= link_to "Edit your account", edit_admin_registration_path %> |
-<%= link_to "Settings", settings_path %>
-</div>

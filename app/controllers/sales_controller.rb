@@ -1,4 +1,7 @@
+require "constantcontact"
+
 class SalesController < ApplicationController
+  layout 'public'
   skip_before_action :verify_authenticity_token
 
   before_action :set_cache_buster
@@ -9,7 +12,7 @@ class SalesController < ApplicationController
   before_action :check_completion, except: [:index, :show, :new, :receipt, :redeem, :resend_email]
 
   def index
-    @sales = Sale.complete.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 20)
+    @sales = Sale.complete.where("lower(name) LIKE ? OR lower(email) LIKE ?", "%#{(params[:search] || '').downcase}%", "%#{(params[:search] || '').downcase}%").order('created_at DESC').paginate(:page => params[:page], :per_page => 20)
   end
 
   def new
@@ -51,25 +54,39 @@ class SalesController < ApplicationController
 
   def redeem
     @sale.update_attribute(:claimed_on, Date.today)
+    CustomerMailer.redemption_email(@sale).deliver_now
     redirect_to "/sales/#{@sale.redemption_code}"
   end
 
   def update_cart
+    update_cart_items
+
+    @sale.update_attributes(sale_params)
+
+    if params[:adding].to_s == ""
+      if @sale.purchases.empty?
+        redirect_to edit_sale_path(@sale)
+      else
+        respond_to do |format|
+          format.js { render }
+        end
+      end
+    end
+  end
+
+  def update_cart_items
     if params[:sale][:ticket]
       params[:sale][:ticket][:ticket_ids].each do |ticket_id, quantity|
-        if @sale.purchases.where(ticket_revision_id: ticket_id).any?
-          purchase = @sale.purchases.find_by(ticket_revision_id: ticket_id)
+        revision_id = Ticket.find_by(id: ticket_id).revisions.last.id
+        if @sale.purchases.where(ticket_revision_id: revision_id).any?
+          purchase = @sale.purchases.find_by(ticket_revision_id: revision_id)
 
-          quantity = quantity.to_i unless quantity == ""
-          if params[:adding] == "true"
-            quantity = purchase.quantity + quantity.to_i
-          end
-
-          if quantity == 0 || quantity == ""
-            unless purchase.destroy
-              flash[:alert] = "Cannot destroy every purchase"
+          if quantity =~ /^\d+$/i
+            quantity = quantity.to_i
+            if params[:adding] == "true"
+              quantity = purchase.quantity + quantity.to_i
             end
-          else
+
             purchase.update(:quantity => quantity)
           end
         else
@@ -81,35 +98,22 @@ class SalesController < ApplicationController
 
     if params[:sale][:package]
       params[:sale][:package][:package_ids].each do |package_id, quantity|
-        if @sale.purchases.where(package_revision_id: package_id).any?
-          purchase = @sale.purchases.find_by(package_revision_id: package_id)
+        revision_id = Package.find_by(id: package_id).revisions.last.id
+        if @sale.purchases.where(package_revision_id: revision_id).any?
+          purchase = @sale.purchases.find_by(package_revision_id: revision_id)
 
-          quantity = quantity.to_i unless quantity == ""
-          if params[:adding] == "true"
-            quantity = purchase.quantity + quantity.to_i
-          end
-
-          if quantity == 0 || quantity == ""
-            unless purchase.destroy
-              flash[:alert] = "Cannot destroy every purchase"
+          if quantity =~ /^\d+$/i
+            quantity = quantity.to_i
+            if params[:adding] == "true"
+              quantity = purchase.quantity + quantity.to_i
             end
-          else
+
             purchase.update(:quantity => quantity)
           end
         else
           purchase = PackagePurchase.new(package: Package.find_by(id: package_id), quantity: quantity)
           @sale.purchases << purchase
         end
-      end
-    end
-
-    @sale.update_attributes(sale_params)
-
-    if params[:adding].to_s == ""
-      if @sale.purchases.empty?
-        redirect_to edit_sale_path(@sale)
-      else
-        redirect_to summarize_sale_path(@sale)
       end
     end
   end
@@ -120,18 +124,14 @@ class SalesController < ApplicationController
     if @sale.purchases.empty?
       redirect_to edit_sale_path(@sale)
     else
-      redirect_to cart_path(@sale)
-    end
-  end
-
-  def edit_personal_info
-    respond_to do |format|
-      format.js { render }
+      redirect_to summarize_sale_path(@sale)
     end
   end
 
   def update_personal_info
-    @sale.update(update_personal_info_params)
+    update_cart_items
+    @sale.update(all_params)
+
     respond_to do |format|
       format.js { render }
     end
@@ -156,6 +156,38 @@ class SalesController < ApplicationController
 
       CustomerMailer.receipt_email(@sale, protohost).deliver_now
 
+      if Settings[:sale_notification_list] != nil
+        admin_emails = Settings[:sale_notification_list].gsub(/\s+/, "").split(",")
+        for email in admin_emails
+          CustomerMailer.admin_receipt_email(@sale, email).deliver_now
+        end
+      end
+
+      if Rails.env == "production"
+        if @sale.mailing_list
+          constant_contact = ConstantContact::Api.new(ENV["CONSTANT_CONTACT_API_KEY"], ENV["CONSTANT_CONTACT_OAUTH_TOKEN"])
+
+          json = {
+            "lists": [
+                {"id": "1798215372"}
+              ],
+            "email_addresses": [
+              {"email_address": "#{@sale.email}"}
+            ]
+          }
+
+          begin
+            constant_contact.add_contact(json, true)
+          rescue RestClient::BadRequest => e
+            puts "#{e.http_code} - #{e.http_body}"
+          rescue RestClient::Conflict => e
+            puts "This email address already exists in ConstantContact."
+          rescue
+            puts "ERROR: An unknown problem was encountered while trying to add this email address to ConstantContact."
+          end
+        end
+      end
+
       redirect_to receipt_sale_path(@sale)
 
     rescue Stripe::CardError => e
@@ -166,24 +198,29 @@ class SalesController < ApplicationController
       puts "Code is: #{error[:code]}"
       puts "Param is: #{error[:param]}"
       puts "Message is: #{error[:message]}"
+      redirect_to failure_path
 
     rescue Stripe::InvalidRequestError => e
       puts "Invalid parameters were sent to Stripe. Invalid currency, maybe?"
+      redirect_to failure_path
 
     rescue Stripe::AuthenticationError => e
       puts "Stripe authentication failed. Check the API key, maybe?"
+      redirect_to failure_path
 
     rescue Stripe::APIConnectionError => e
       puts "Network communication with Stripe failed. Do you have a stable internet connection?"
+      redirect_to failure_path
 
     rescue Stripe::StripeError => e
       puts "Something generic went wrong."
+      redirect_to failure_path
     end
   end
 
   def resend_email
     @sale = Sale.find_by(redemption_code: params[:redemption_code])
-    CustomerMailer.receipt_email(@sale, protohost).deliver_now
+    CustomerMailer.receipt_email(@sale, @sale.email, protohost).deliver_now
     redirect_to sale_path(@sale.redemption_code)
   end
 
@@ -226,6 +263,10 @@ class SalesController < ApplicationController
     params[:sale].permit(:ticket, :package)
   end
 
+  def all_params
+    params[:sale].permit(:ticket, :package, :name, :email, :is_info_form, :mailing_list)
+  end
+
   def ticket_params
     params[:sale][:ticket].permit().tap do |whitelisted|
       whitelisted[:ticket_ids] = params[:sale][:ticket][:ticket_ids]
@@ -239,6 +280,6 @@ class SalesController < ApplicationController
   end
 
   def update_personal_info_params
-    params[:sale].permit(:name, :email, :is_info_form)
+    params[:sale].permit(:name, :email, :is_info_form, :mailing_list)
   end
 end

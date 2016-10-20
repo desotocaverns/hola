@@ -14,14 +14,14 @@
   }
 
   &-price {
-    display: block;
-    margin-bottom: .4em;
     font-weight: 500;
+    display: inline-block;
+    padding-right: .5em;
   }
 
   &-description {
     margin: 0;
-    color: #888;
+    color: #666;
     font-size: .95em;
   }
 
@@ -36,22 +36,18 @@
 
 }
 
-@include at-least($small) {
-  .ticket-price {
-    text-align: right; 
-  }
-}
-
-@include until($small) {
-  .price-grid {
-    margin-top: .4em;
-  }
-}
-
 .ticket-item {
   background: rgba(#fff, .9);
   + .ticket-item {
     border-top: 1px solid $page-border;
+  }
+}
+
+.button-wrapper {
+  margin-top: .3em;
+  text-align: right;
+  @include at-least($small) {
+    display: block;
   }
 }
 

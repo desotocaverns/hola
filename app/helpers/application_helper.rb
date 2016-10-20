@@ -1,14 +1,18 @@
 module ApplicationHelper
 
   def price(num)
-    p = "$#{num.to_int / 100.00}"
+    "$#{price_number(num)}"
+  end
+
+  def price_number(num)
+    p = "#{num.to_int / 100.00}"
     p += '0' if p =~ /\..$/
     p
   end
 
   def protohost
     return request.protocol + request.host unless request.nil? || request.local?
-    return "http://localhost"
+    return "http://localhost:3000"
   end
 
   def iphone?
@@ -25,5 +29,9 @@ module ApplicationHelper
 
   def action_heading(heading, link_text, link_path)
     render partial: "shared/action_heading", locals: { heading: heading, link_text: link_text, link_path: link_path }
+  end
+
+  def is_admin?
+    admin_signed_in? && current_admin.autocratic
   end
 end

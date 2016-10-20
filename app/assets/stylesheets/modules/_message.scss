@@ -1,0 +1,69 @@
+@keyframes pop-in {
+  0% {
+    transform: scale(.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pop-in-late {
+  0%, 70% {
+    opacity: 0;
+    transform: scale(.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+[id=app-message] {
+  z-index: 100;
+  position: absolute;
+  width: 0;
+  opacity: 0;
+  transform: translate3d(0,0,0);
+}
+
+[id=app-message-content] {
+  width: $max-width;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: .6em .6em;
+  color: #444;
+  overflow: hidden;
+}
+[id=app-message-text] {
+  font-weight: 700;
+  display: inline-block;
+}
+[id=app-message-icon] {
+  text-align: center;
+  display: inline-block;
+  margin-right: .4em;
+  .svg-icon {
+    font-size: 1.8em;
+    color: $blue;
+  }
+}
+
+
+[id=app-message] {
+  &.visible {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 1;
+    animation: fade-in .3s ease-in;
+  }
+  &.hiding {
+    animation: fade-out .3s ease-in;
+  }
+}
+

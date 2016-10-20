@@ -22,7 +22,7 @@ class PackagesController < ApplicationController
     for_sale = filtered_params[:for_sale] if filtered_params[:for_sale] != ""
 
     filtered_params[:package_tickets_attributes].each do |hash|
-      if hash["quantity"] == ""
+      if hash["quantity"] == "0"
         filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
       end
     end
@@ -34,7 +34,7 @@ class PackagesController < ApplicationController
     @tickets = Ticket.all
 
     if @package.save
-      redirect_to @package, notice: 'Package was successfully created.'
+      redirect_to tickets_path, notice: 'Package was successfully created.'
     else
       render :new
     end
@@ -45,22 +45,25 @@ class PackagesController < ApplicationController
       pt.delete
     end
 
-    filtered_params = package_params
-    filtered_params[:price] = filtered_params[:price].to_f * 100
-    for_sale = filtered_params[:for_sale] if filtered_params[:for_sale] != ""
+    fixed_params = package_params
+    fixed_params[:price] = (fixed_params[:price].to_f * 100).round
+    for_sale = fixed_params[:for_sale] if fixed_params[:for_sale] != ""
 
-    filtered_params[:package_tickets_attributes].each do |hash|
-      if hash["quantity"] == ""
-        filtered_params[:package_tickets_attributes] = filtered_params[:package_tickets_attributes] - [hash]
+    fixed_params[:package_tickets_attributes].each do |hash|
+      if hash["quantity"] == "0"
+        fixed_params[:package_tickets_attributes] = fixed_params[:package_tickets_attributes] - [hash]
       end
     end
-    filtered_params.except!("for_sale")
-    filtered_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
 
-    if @package.update(filtered_params)
-      @package.update_attribute(:for_sale_on, Time.now) if for_sale == "true"
-      @package.update_attribute(:for_sale_on, nil) if for_sale == "false"
-      redirect_to @package, notice: 'Package was successfully updated.'
+    fixed_params[:for_sale_on] = Time.now if for_sale == "true"
+    fixed_params[:for_sale_on] = nil if for_sale == "false"
+    fixed_params[:for_sale_on] = Date.new(fixed_params["for_sale_on(1i)"].to_i, fixed_params["for_sale_on(2i)"].to_i, fixed_params["for_sale_on(3i)"].to_i) if for_sale == "after"
+
+    fixed_params.except!("for_sale")
+    fixed_params.except!("for_sale_on(1i)", "for_sale_on(2i)", "for_sale_on(3i)") if for_sale
+
+    if @package.update(fixed_params)
+      redirect_to tickets_path, notice: 'Package was successfully updated.'
     else
       render :edit
     end

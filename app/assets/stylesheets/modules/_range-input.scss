@@ -1,0 +1,284 @@
+$range-track: #ddd;
+$range-track-line: #aaa;
+$range-mark: #fff;
+
+@mixin reset-range {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+  &:focus { outline: none; }
+  &::-webkit-slider-thumb { -webkit-appearance: none; }
+  &::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  &::-moz-focus-outer { 
+    border: 0;
+  }
+}
+
+@mixin range-thumb {
+  &::-moz-range-thumb     { @content; }
+  &::-webkit-slider-thumb { @content; }
+  &::-ms-thumb            { @content; }
+}
+
+@mixin range-track {
+  @content;
+  &::-moz-range-track {
+    @content;
+  }
+  &::-ms-track {
+    @content;
+  }
+}
+
+input[type=range] {
+  @include reset-range;
+  position: relative;
+  z-index: 2;
+  margin: 15px 0;
+  
+  @include range-thumb {
+    box-shadow: rgba(#000, .4) 0 0 0 1px, rgba(#000, .4) 0 1px 1px inset;
+    border: 6px solid #fff;
+    background: $range-track-line;
+    box-sizing: border-box;
+    height: 19px;
+    width: 19px;
+    border-radius: 100%;
+    position: relative;
+    top: 1px;
+    transition: all .15s ease-in;
+    &:after {
+      content: "";
+      position: absolute;
+      left: -15px; right: -15px; top: -15px; bottom: -15px;
+      
+    }
+    &:active {
+      background: #409bd9;
+      box-shadow: 0 0 2px 2px hsl(203, 47%, 65%), rgba(#000, .4) 0 1px 1px inset;
+    }
+  }
+  
+  &:focus {
+    @include range-thumb {
+      background: #409bd9;
+      box-shadow: 0 0 2px 2px hsl(203, 47%, 65%), rgba(#000, .4) 0 1px 1px inset;
+    }
+  }
+  
+  @include range-track {
+    height: 16px;
+    background: transparent;
+
+    &:after {
+      position: absolute;
+      content: "";
+      left: 4px; right: 4px; top: 6px;
+      height: 5px;
+      background: $range-track;
+      z-index: -1;
+      border-radius: 4px;
+      box-shadow: $range-track-line 0 0 0 1px;
+    }
+  }
+
+  &.range-input-slider {
+    margin: 0;
+
+    @include range-track {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
+}
+
+.slider-container {
+  position: relative;
+  padding: .2em 0;
+
+  @include at-least($x-small){
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    &.with-label {
+      max-width: 300px;
+    }
+  }
+
+  &.line-labels {
+    padding: .5em 0;
+  }
+}
+
+.range-input-container {
+  position: relative;
+  flex: 1 0 auto;
+  margin: .6em 0;
+}
+
+.range-track {
+  height: 0px;
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 0 10px 0 9px;
+  position: relative;
+  top: -12px;
+}
+
+.range-track-bg {
+  flex: none;
+  border-radius: 5px;
+  box-shadow: $range-track-line 0 0 0 1px;
+  background: $range-track;
+  height: 5px;
+  position: absolute;
+  left: 9px;
+  right: 10px;
+  top: 9px;
+}
+
+.range-segment {
+  position: relative;
+  flex: none;
+}
+
+.range-segment-mark {
+  &:before, &:after {
+    position: absolute;
+    content: "";
+    width: 13px;
+    height: 13px;
+    top: -7px;
+    left: -5px;
+    box-sizing: border-box;
+    border-radius: 100%;
+  }
+  &:before {
+    background: $range-mark;
+    border: $range-track 3px solid;
+    box-shadow: $range-track-line 0 0 0 1px inset;
+    z-index: 1;
+  }
+  &:after {
+    box-shadow: $range-track-line 0 0 0 1px;
+    z-index: 0;
+  }
+}
+
+.range-line-label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 2;
+  height: 1.25;
+  top: -30px;
+  right: -25px;
+  left: -24px;
+  text-align: center;
+  &:before {
+    content: "|";
+    position: absolute;
+    left: -26px;
+    right: -25px;
+    text-align: inherit;
+    bottom: -6px;
+    height: 6px;
+    color: rgba(#000, .5);
+    overflow: hidden;
+  }
+}
+
+.range-segment:first-child .range-line-label {
+  left: -9px;
+  right: auto;
+  text-align: left;
+  &:before {
+    left: 8px;
+  }
+}
+
+.range-segment:last-child .range-line-label {
+  right: -11px;
+  left: auto;
+  text-align: right;
+  &:before {
+    right: 9px;
+  }
+}
+
+.range-label {
+  background: $range-mark;
+  border-radius: 3px;
+  box-shadow: $range-track-line 0 0 0 1px;
+  font-size: 14px;
+  padding: 4px 8px;
+  position: relative;
+  text-align: center;
+
+  @include at-least($x-small){
+    white-space: nowrap;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-style: preserve-3d;
+    margin-left: 10px;
+    &:after, &:before {
+      content: "";
+    }
+  }
+  
+  &:after, &:before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-style: preserve-3d;
+    left: -7px;
+    border-top: 7px solid transparent;
+    border-right: 7px solid $range-track-line;
+    border-bottom: 7px solid transparent;
+  }
+  &:after {
+    border-right-color: $range-mark;
+    left: -6px;
+  }
+
+  > * + * {
+    &:before { content: " — " }
+
+    @include at-least($x-small) {
+      display: block;
+      &:before { content: ""; }
+    }
+  }
+
+  [class*=big] {
+    font-size: 1.15em;
+  }
+
+  [class*=small] {
+    font-size: .8em;
+  }
+}
+
+[data-range-label] {
+  &:after { content: attr(data-after); }
+  &:before { content: attr(data-before); }
+}
+

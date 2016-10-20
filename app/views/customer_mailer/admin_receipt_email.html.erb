@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W4C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html style="background: #F4F8FC">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= @sale.name %>'s Tickets to DeSoto Caverns Family Fun Park</title>
+    <style>
+@media only screen and (min-device-width: 451px) {
+  .content {
+    width: 450px;
+    max-width: 450px !important;
+  }
+}
+    </style>
+  </head>
+
+  <body style="background: #F4F8FC">
+
+    <!--[if (gte mso 9)|(IE)]>
+      <table width="450" align="center" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+      <td>
+      <![endif]-->
+
+      <table class="content" align="center" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 450px; text-align: center; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+        <tr>
+          <td>
+            <p style="font-size: 14px">If this email doesn't display correctly, <%= link_to "view your ticket online", @sale.receipt_url(root_url), style: "color: #107AC9"  %></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 1em; background: #fff">
+
+            <h4 style='margin-bottom: 0; font-weight: normal;'><%= @sale.name %>'s Tickets to fun at</h4>
+            <h1 style='margin: 10px 0; font-size: 40px; font-weight: normal;'>DeSoto Caverns</h1>
+            <h2 style='margin-top: 0; font-size: 24px; font-weight: normal;'>Family Fun Park</h2>
+            <div style="border-top: 1px solid #ddd;"></div>
+
+            <div style="font-size: 28px; margin-top: 20px;"><%= @sale.name %></div>
+            <div style="font-size: 16px; margin-bottom: 20px"><%= @sale.email %></div>
+
+            <!-- <p style="text-align: center;"><img style='width: 400px; max-width: 100%; margin: 0 auto' src="<%= @sale.qr_png(protohost) %>"/></p> -->
+
+            <div style="font-size: 12px">Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
+            <table class='cart-items' style="width: 100%; margin-top: 20px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 1em 0">
+              <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
+                <%= render partial: "static_cart_item", locals: { purchase: purchase } %>
+              <% end %>
+              <% @sale.purchases.where(type: "PackagePurchase").each do |purchase| %>
+                <%= render partial: "static_cart_item", locals: { purchase: purchase } %>
+              <% end %>
+            </table>
+            <table style="width: 100%">
+              <tr>
+                <td style="text-align: right">
+                  <p>Tax: <%= price @sale.tax %></p>
+                  <p>Total: <strong><%= price @sale.charge_total %></strong></p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+
+      <!--[if (gte mso 9)|(IE)]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+  </body>
+</html>

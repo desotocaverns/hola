@@ -9,5 +9,9 @@ var Toggler = {
     if (show = $(el).data('show')){
       $(show).removeClass('hidden')
     }
+    if (toggleClass = $(el).data('toggleClass')){
+      tc = toggleClass.split(';')
+      $(tc[0]).toggleClass(tc[1])
+    }
   }
 }
