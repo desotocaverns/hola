@@ -56,9 +56,6 @@
 <% end %>
 
 <script type="text/javascript">
-  <% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
-  <% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
-
   var handler = StripeCheckout.configure({
     key: '<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>',
     token: function(token) {
@@ -70,14 +67,4 @@
       $('#checkout-button').prop("disabled", false);
     }
   });
-
-  var ticketCheckout = function(){
-    handler.open({
-      name: 'DeSoto Caverns',
-      description: '<%= tp_quantity %> ticket<% if tp_quantity > 1 || tp_quantity == 0 %>s<% end %>, <%= pp_quantity %> package<% if pp_quantity > 1 || pp_quantity == 0 %>s<% end %>',
-      email: "<%= @sale.email %>",
-      amount: <%= @sale.charge_total %>,
-      allowRememberMe: false
-    });
-  };
 </script>

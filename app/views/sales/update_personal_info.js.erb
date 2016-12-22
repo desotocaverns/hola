@@ -1,3 +1,16 @@
+<% tp_quantity = @sale.purchases.where(type: 'TicketPurchase').inject(0) { |total, tp| total + tp.quantity } %>
+<% pp_quantity = @sale.purchases.where(type: 'PackagePurchase').inject(0) { |total, tp| total + tp.quantity } %>
+
+var ticketCheckout = function(){
+  handler.open({
+    name: 'DeSoto Caverns',
+    description: '<%= tp_quantity %> ticket<% if tp_quantity > 1 || tp_quantity == 0 %>s<% end %>, <%= pp_quantity %> package<% if pp_quantity > 1 || pp_quantity == 0 %>s<% end %>',
+    email: "<%= @sale.email %>",
+    amount: <%= @sale.charge_total %>,
+    allowRememberMe: false
+  });
+};
+
 <% if params[:quantities_page] != 'true' %>
   <% if !@sale.errors.empty? %>
     $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
