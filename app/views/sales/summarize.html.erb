@@ -68,7 +68,7 @@
     }
   });
 
-  $('#sale_name').on('input propertychange paste', function() {
+  $('#sale_name, #sale_email').on('input propertychange paste', function() {
     $('#personal_info_form').submit();
     if (document.getElementById('save')) {
       return;
