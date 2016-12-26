@@ -22,10 +22,14 @@
     <div><%= f.text_field :price, value: price_number(@package.price) %></div>
   </div>
 
-
   <div class="form-row">
     <%= f.label :description %>
     <%= f.text_area :description %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :validity_interval %>
+    <div><%= f.text_field :validity_interval %></div>
   </div>
 
   <div class='form-row'>

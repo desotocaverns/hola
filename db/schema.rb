@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208231419) do
+ActiveRecord::Schema.define(version: 20161226135447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,12 +68,13 @@ ActiveRecord::Schema.define(version: 20160208231419) do
   add_index "package_tickets", ["package_id", "ticket_id"], name: "index_package_tickets_on_package_id_and_ticket_id", unique: true, using: :btree
 
   create_table "packages", force: :cascade do |t|
-    t.string  "name",                    null: false
-    t.integer "price",       default: 0, null: false
+    t.string  "name",                           null: false
+    t.integer "price",             default: 0,  null: false
     t.text    "description"
-    t.integer "version",     default: 0, null: false
+    t.integer "version",           default: 0,  null: false
     t.integer "priority"
     t.date    "for_sale_on"
+    t.integer "validity_interval", default: 90
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -113,12 +114,13 @@ ActiveRecord::Schema.define(version: 20160208231419) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string  "name",                    null: false
-    t.integer "price",       default: 0, null: false
+    t.string  "name",                           null: false
+    t.integer "price",             default: 0,  null: false
     t.text    "description"
-    t.integer "version",     default: 0, null: false
+    t.integer "version",           default: 0,  null: false
     t.integer "priority"
     t.date    "for_sale_on"
+    t.integer "validity_interval", default: 90
   end
 
 end

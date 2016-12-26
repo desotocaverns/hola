@@ -86,6 +86,6 @@ class PackagesController < ApplicationController
     end
 
     def package_params
-      params[:package].permit(:name, :description, :price, :for_sale, :for_sale_on, :package_tickets_attributes => [:ticket_id, :quantity])
+      params[:package].permit(:name, :description, :price, :for_sale, :for_sale_on, :validity_interval, :package_tickets_attributes => [:ticket_id, :quantity])
     end
 end

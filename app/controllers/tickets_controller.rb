@@ -101,6 +101,6 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params[:ticket].permit(:name, :description, :price, :for_sale, :for_sale_on)
+    params[:ticket].permit(:name, :description, :price, :for_sale, :for_sale_on, :validity_interval)
   end
 end

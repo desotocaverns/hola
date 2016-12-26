@@ -4,7 +4,7 @@ class Purchase < ActiveRecord::Base
   belongs_to :sale, touch: true
 
   before_create :generate_unique_token
-  before_save :calculate_expiration_date
+  before_save :calculate_expiration_date # Defined by children
 
   # Answers the name of the Purchase item at the time the Purchase was created.
   def name
@@ -12,15 +12,10 @@ class Purchase < ActiveRecord::Base
   end
 
   def expired?
-    self.expires_on <= Time.now
+    self.expires_on <= Date.today
   end
 
   private
-
-  def calculate_expiration_date
-    expiration_date = Time.now + 1.years
-    self.expires_on = expiration_date
-  end
 
   def generate_unique_token
     self.token = SecureRandom.urlsafe_base64(10) + self.id.to_s

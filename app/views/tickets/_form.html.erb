@@ -27,6 +27,11 @@
     <%= f.text_area :description %>
   </div>
 
+  <div class="form-row">
+    <%= f.label :validity_interval %>
+    <div><%= f.text_field :validity_interval %></div>
+  </div>
+
   <div class='form-row'>
     <div>
       <label><%= radio_button_tag "ticket[for_sale]", "true", @ticket.for_sale_on && @ticket.for_sale_on <= Time.now %> For sale now</label>
