@@ -67,4 +67,20 @@
       $('#checkout-button').prop("disabled", false);
     }
   });
+
+  $('#sale_name').on('input propertychange paste', function() {
+    $('#personal_info_form').submit();
+    if (document.getElementById('save')) {
+      return;
+    }
+
+    $('<input>').attr({
+      type: 'hidden',
+      id: 'save'
+    }).appendTo('#personal_info_form')
+  });
+
+  $('#checkout-button').click(function () {
+    $('#save').remove();
+  });
 </script>

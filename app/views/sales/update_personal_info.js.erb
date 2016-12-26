@@ -11,16 +11,18 @@ var ticketCheckout = function(){
   });
 };
 
-<% if params[:quantities_page] != 'true' %>
-  <% if !@sale.errors.empty? %>
-    $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
+if (!document.getElementById('save')) {
+  <% if params[:quantities_page] != 'true' %>
+    <% if !@sale.errors.empty? %>
+      $('.personal-info-errors').html('<%= escape_javascript render(partial: 'sale_errors') %>');
+    <% else %>
+      $('#checkout-button').prop('disabled', true)
+      $('#checkout-form').html('<%= escape_javascript render(partial: 'checkout_form', locals: { button_text: "Checkout" } ) %>');
+      $('.personal-info-errors').html('');
+      ticketCheckout()
+    <% end %>
   <% else %>
-    $('#checkout-button').prop('disabled', true)
-    $('#checkout-form').html('<%= escape_javascript render(partial: 'checkout_form', locals: { button_text: "Checkout" } ) %>');
-    $('.personal-info-errors').html('');
-    ticketCheckout()
+    TicketStore.showMessage({text: 'Your cart has been updated.', icon: 'cart'})
   <% end %>
-<% else %>
-  TicketStore.showMessage({text: 'Your cart has been updated.', icon: 'cart'})
-<% end %>
-$('#edit-cart').html('<%= escape_javascript render(partial: 'edit_cart') %>');
+  $('#edit-cart').html('<%= escape_javascript render(partial: 'edit_cart') %>');
+}
