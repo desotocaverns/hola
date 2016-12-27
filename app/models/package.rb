@@ -62,7 +62,8 @@ class Package < ActiveRecord::Base
         description: description,
         price: price,
         ticket_revision_ids: ticket_revision_ids,
-        priority: priority
+        priority: priority,
+        validity_interval: validity_interval
       }
     )
   end

@@ -33,7 +33,8 @@ class Ticket < ActiveRecord::Base
         name: name,
         description: description,
         price: price,
-        priority: priority
+        priority: priority,
+        validity_interval: validity_interval
       }
     )
   end

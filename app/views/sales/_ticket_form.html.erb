@@ -1,6 +1,7 @@
 <li data-ticket-id="<%= item_id %>" class="card-list-item grid no-gutter">
   <div class="ticket-title grid-cell small-three-of-four">
     <h4 class='ticket-name'><%= data["name"] %></h4>
+    <span class='ticket-validity-interval'>Valid for <%= data["validity_interval"] %> days</span>
     <% if data["description"] %><p class='ticket-description'><%= data["description"] %>
     <% if savings %> - <span class='ticket-savings'>Save <%= savings %><span><% end %>
     </p><% end %>

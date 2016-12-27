@@ -19,6 +19,13 @@
     padding-right: .5em;
   }
 
+  &-validity-interval {
+    font-weight: 500;
+    display: inline-block;
+    padding-right: .5em;
+    font-size: .8em;
+  }
+
   &-description {
     margin: 0;
     color: #666;

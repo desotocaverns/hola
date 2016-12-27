@@ -3,6 +3,7 @@
   <% @packages.for_sale.each do |current_package| %>
     <% [current_package.revisions.last].each do |revision| %>
       <% data = revision.package_data %>
+      <% data["validity_interval"] = current_package.validity_interval if data["validity_interval"] == nil %>
       <%= render partial: "ticket_form", locals: { id: revision.package_id, priority: data["priority"], type: "Package", name: "sale[package[package_ids][#{revision.package_id}]]", data: data, savings: current_package.savings_percentage, item_id: "package-#{revision.package_id}" } %>
     <% end %>
   <% end %>
@@ -13,6 +14,7 @@
   <% @tickets.for_sale.each do |current_ticket| %>
     <% [current_ticket.revisions.last].each do |revision| %>
       <% data = revision.ticket_data %>
+      <% data["validity_interval"] = current_ticket.validity_interval if data["validity_interval"] == nil %>
       <%= render partial: "ticket_form", locals: { id: revision.ticket_id, priority: data["priority"], type: "Ticket", name: "sale[ticket[ticket_ids][#{revision.ticket_id}]]", data: data, savings: false, item_id: "ticket-#{revision.ticket_id}" } %>
     <% end %>
   <% end %>
