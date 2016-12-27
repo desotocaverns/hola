@@ -1,0 +1,2795 @@
+@charset "UTF-8";
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+/* line 8, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_colors.scss */
+.green-text {
+  color: #18b800;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+/* line 7, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+.svg-icon {
+  fill: currentColor;
+  font-size: 1.2em;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+}
+
+/* line 14, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+h1 {
+  font-size: 36px;
+}
+
+/* line 15, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+h2 {
+  font-size: 24px;
+}
+
+/* line 16, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+h3 {
+  font-size: 20px;
+}
+
+/* line 17, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+h4 {
+  font-size: 18px;
+}
+
+/* line 18, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+h5 {
+  font-size: 16px;
+}
+
+/* line 19, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+h6 {
+  font-size: 14px;
+}
+
+/* line 21, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+.section-heading {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* line 26, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+.page-heading {
+  font-size: 1.8em;
+  font-weight: 500;
+}
+
+/* line 31, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+.block-margin {
+  margin: 1.5em 0;
+}
+
+/* line 36, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+.text-center {
+  text-align: center;
+}
+
+/* line 40, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+hr {
+  border: none;
+  background: none;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* line 47, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_typography.scss */
+.legal-text {
+  font-size: .7em;
+  opacity: .5;
+  line-height: 1.4em;
+}
+
+/* line 7, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.match-gutters > .grid-cell > :first-child,
+.grid.match-gutters > .grid-cell > :first-child > :first-child,
+.grid.match-gutters > .grid-cell > :first-child > :first-child > :first-child {
+  margin-top: 0;
+}
+/* line 13, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.match-gutters > .grid-cell > :last-child,
+.grid.match-gutters > .grid-cell > :last-child > :last-child,
+.grid.match-gutters > .grid-cell > :last-child > :last-child > :last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+ * Grid core
+ * ========================================================================== */
+/* line 34, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid {
+  display: block;
+  padding: 0;
+  margin-left: -2%;
+  margin-right: -2%;
+  letter-spacing: -5px;
+  text-rendering: optimizespeed;
+  /* ==========================================================================
+   * Gutter sizing
+   * ========================================================================== */
+  /* ==========================================================================
+   * Adhere to set gutter spacing & ignore inner elements' margin
+   * ========================================================================== */
+}
+/* line 43, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid > .grid {
+  overflow: hidden;
+  margin-right: 0;
+  margin-left: 0;
+}
+/* line 54, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* line 57, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.no-gutter > .grid-cell {
+  padding: 0 0;
+}
+/* line 62, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.no-gutter.match-gutters > .grid-cell {
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+/* line 70, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.small-gutter {
+  margin-left: -1%;
+  margin-right: -1%;
+}
+/* line 73, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.small-gutter > .grid-cell {
+  padding: 0 1%;
+}
+/* line 78, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.small-gutter.match-gutters > .grid-cell {
+  padding: 0 1%;
+  margin-bottom: 2%;
+}
+/* line 86, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.large-gutter {
+  margin-left: -4%;
+  margin-right: -4%;
+}
+/* line 89, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.large-gutter > .grid-cell {
+  padding: 0 4%;
+}
+/* line 94, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.large-gutter.match-gutters > .grid-cell {
+  padding: 0 4%;
+  margin-bottom: 8%;
+}
+/* line 107, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid.match-gutters > .grid-cell {
+  padding: 2%;
+}
+
+/* line 116, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid-cell {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 0 2%;
+  text-align: left;
+  vertical-align: top;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-rendering: auto;
+}
+/* line 126, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_grid.scss */
+.grid-cell.auto {
+  width: auto;
+}
+
+/* =====================================================================
+ * sizing
+ * ===================================================================== */
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.one-of-two {
+  width: 50%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-one-of-two {
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-one-of-two {
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-one-of-two {
+    width: 50%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.one-of-three {
+  width: 33.33333%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-one-of-three {
+    width: 33.33333%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-one-of-three {
+    width: 33.33333%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-one-of-three {
+    width: 33.33333%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.two-of-three {
+  width: 66.66667%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-two-of-three {
+    width: 66.66667%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-two-of-three {
+    width: 66.66667%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-two-of-three {
+    width: 66.66667%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.one-of-four {
+  width: 25%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-one-of-four {
+    width: 25%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-one-of-four {
+    width: 25%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-one-of-four {
+    width: 25%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.two-of-four {
+  width: 50%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-two-of-four {
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-two-of-four {
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-two-of-four {
+    width: 50%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.three-of-four {
+  width: 75%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-three-of-four {
+    width: 75%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-three-of-four {
+    width: 75%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-three-of-four {
+    width: 75%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.one-of-five {
+  width: 20%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-one-of-five {
+    width: 20%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-one-of-five {
+    width: 20%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-one-of-five {
+    width: 20%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.two-of-five {
+  width: 40%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-two-of-five {
+    width: 40%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-two-of-five {
+    width: 40%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-two-of-five {
+    width: 40%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.three-of-five {
+  width: 60%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-three-of-five {
+    width: 60%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-three-of-five {
+    width: 60%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-three-of-five {
+    width: 60%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.four-of-five {
+  width: 80%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-four-of-five {
+    width: 80%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-four-of-five {
+    width: 80%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-four-of-five {
+    width: 80%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.one-of-six {
+  width: 16.66667%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-one-of-six {
+    width: 16.66667%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-one-of-six {
+    width: 16.66667%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-one-of-six {
+    width: 16.66667%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.two-of-six {
+  width: 33.33333%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-two-of-six {
+    width: 33.33333%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-two-of-six {
+    width: 33.33333%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-two-of-six {
+    width: 33.33333%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.three-of-six {
+  width: 50%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-three-of-six {
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-three-of-six {
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-three-of-six {
+    width: 50%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.four-of-six {
+  width: 66.66667%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-four-of-six {
+    width: 66.66667%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-four-of-six {
+    width: 66.66667%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-four-of-six {
+    width: 66.66667%;
+  }
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.five-of-six {
+  width: 83.33333%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-five-of-six {
+    width: 83.33333%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-five-of-six {
+    width: 83.33333%;
+  }
+}
+
+@media all and (min-width: 760px) {
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-five-of-six {
+    width: 83.33333%;
+  }
+}
+
+/* line 56, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.small-golden {
+  width: 38.2%;
+}
+
+/* line 57, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.large-golden {
+  width: 61.8%;
+}
+
+/* line 58, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+.full-width {
+  width: 100%;
+}
+
+@media all and (min-width: 550px) {
+  /* line 61, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .small-full-width {
+    width: 100%;
+    display: block;
+  }
+}
+@media all and (min-width: 760px) {
+  /* line 68, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .medium-full-width {
+    width: 100%;
+  }
+}
+@media all and (min-width: 900px) {
+  /* line 74, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_sizes.scss */
+  .large-full-width {
+    width: 100%;
+  }
+}
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.grid {
+  /* ==========================================================================
+   * Horizontal alignment
+   * ========================================================================== */
+  /* ==========================================================================
+   * Vertical alignment
+   * ========================================================================== */
+}
+/* line 13, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.grid.align-top:before, .grid.align-middle:before, .grid.align-bottom:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+}
+/* line 22, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.grid.align-top .grid-cell, .grid.align-top:before {
+  vertical-align: top;
+}
+/* line 27, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.grid.align-middle .grid-cell, .grid.align-middle:before {
+  vertical-align: middle;
+}
+/* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.grid.align-bottom .grid-cell, .grid.align-bottom:before {
+  vertical-align: bottom;
+}
+
+/* line 36, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.text-left, .align-left {
+  text-align: left;
+}
+
+/* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.text-center, .align-center {
+  text-align: center;
+}
+
+/* line 38, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.text-right, .align-right {
+  text-align: right;
+}
+
+/* line 39, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.align-middle {
+  vertical-align: middle;
+}
+
+/* line 40, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.align-top {
+  vertical-align: top;
+}
+
+/* line 41, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_alignment.scss */
+.align-bottom {
+  vertical-align: bottom;
+}
+
+/* line 5, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+/* line 7, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+html {
+  height: 100%;
+  color: #fff;
+}
+
+/* line 12, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+body {
+  padding: 0;
+  margin: 0;
+}
+/* line 15, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+body:after {
+  content: "";
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  background: url("/images/cave-banner.jpg") no-repeat top center;
+  background-size: cover;
+}
+
+/* line 27, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.hidden.hidden {
+  display: none;
+}
+
+@media all and (max-width: 549px) {
+  /* line 31, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .hidden-until-small.hidden-until-small {
+    display: none;
+  }
+}
+
+/* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.site-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-bottom: 75px;
+}
+
+/* line 43, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.force-wrap {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 51, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.box-padding, .card, .form-footer {
+  padding: 15px 0.5em;
+}
+@media all and (min-width: 550px) {
+  /* line 51, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .box-padding, .card, .form-footer {
+    padding: 15px 1em;
+  }
+}
+@media all and (min-width: 760px) {
+  /* line 51, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .box-padding, .card, .form-footer {
+    padding: 15px 1.5em;
+  }
+}
+
+/* line 63, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.h-padding, .card-list-item {
+  padding-left: .5em;
+  padding-right: 0.5em;
+}
+@media all and (min-width: 550px) {
+  /* line 63, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .h-padding, .card-list-item {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+@media all and (min-width: 760px) {
+  /* line 63, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .h-padding, .card-list-item {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+}
+
+/* line 75, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.site-header {
+  position: relative;
+  padding: 1px 0;
+  background: rgba(0, 0, 0, 0.5);
+  margin-bottom: 3em;
+}
+@media all and (min-width: 900px) {
+  /* line 75, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .site-header {
+    margin-bottom: 5em;
+  }
+}
+
+/* line 86, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.site-header-content {
+  text-align: center;
+}
+/* line 88, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.site-header-content h1 {
+  margin: .8em 0;
+  line-height: 1.1em;
+}
+/* line 92, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.site-header-content a {
+  color: inherit;
+  text-decoration: none;
+}
+/* line 96, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+.site-header-content .wrap-text {
+  display: block;
+  font-size: .7em;
+}
+
+@media all and (max-width: 549px) {
+  /* line 102, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .at-least-small.at-least-small {
+    display: none;
+  }
+}
+
+@media all and (max-width: 319px) {
+  /* line 107, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .at-least-tiny.at-least-tiny {
+    display: none;
+  }
+}
+
+@media all and (min-width: 550px) {
+  /* line 113, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_layout.scss */
+  .until-small.until-small {
+    display: none;
+  }
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #444;
+}
+
+/* line 8, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.minor-card-heading {
+  font-size: .8em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  margin-top: 1em;
+}
+/* line 14, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.minor-card-heading:first-child {
+  margin-top: 0;
+}
+
+/* line 19, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-list {
+  color: #444;
+  background: rgba(255, 255, 255, 0.93);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  list-style: none;
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+/* line 28, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-heading {
+  padding: .5em 10px;
+  font-size: .8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+  background: rgba(0, 0, 0, 0.03);
+}
+@media all and (min-width: 550px) {
+  /* line 28, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+  .card-heading {
+    padding: .5em 20px;
+  }
+}
+/* line 38, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-heading.link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+/* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-heading.link:hover {
+  background: #fff;
+  color: #3C99FB;
+}
+
+/* line 49, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-list-item {
+  display: block;
+  position: relative;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ddd;
+}
+/* line 55, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-list-item:last-child {
+  border-bottom: 0;
+}
+/* line 58, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-list-item.link {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  color: inherit;
+  text-decoration: none;
+}
+/* line 62, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-list-item.link:hover {
+  background: #fff;
+}
+/* line 66, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_card.scss */
+.card-list-item.bright {
+  background: #f8f8f8;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+form {
+  margin: 0;
+}
+
+/* line 6, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.field label {
+  margin-top: .8em;
+  display: block;
+  line-height: 1.8em;
+}
+/* line 11, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.field label + input {
+  width: 100%;
+  margin-bottom: .8em;
+}
+/* line 15, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.field [type=text], .field [type=email], .field [type=password] {
+  width: 100%;
+}
+
+/* line 20, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.form-footer {
+  background: rgba(34, 34, 34, 0.95);
+  color: #fff;
+  text-align: right;
+  margin: 0 0 2em;
+}
+/* line 27, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.form-footer.cart-form {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+}
+
+/* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.form-row {
+  margin: .5em 0;
+}
+/* line 39, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.form-row + .form-row {
+  margin-top: 1em;
+}
+
+/* line 44, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.back-link {
+  color: inherit;
+  text-decoration: none;
+  opacity: .7;
+  -webkit-transition: opacity .2s ease-in-out;
+  transition: opacity .2s ease-in-out;
+}
+/* line 48, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.back-link:hover {
+  opacity: .9;
+}
+
+/* line 54, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_forms.scss */
+.inline-form {
+  display: inline;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+[type=email], [type=text], [type=search], [type=password], textarea, .select-box select {
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+  padding: .4em .9em;
+  line-height: 1.65em;
+  box-shadow: transparent 0 0 0 2px inset;
+  -webkit-transition: background-color .3s ease-out, box-shadow .15s ease, border-color .15s ease;
+  transition: background-color .3s ease-out, box-shadow .15s ease, border-color .15s ease;
+  color: #666;
+  font-size: 14px;
+}
+/* line 11, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+[type=email]:focus, [type=text]:focus, [type=search]:focus, [type=password]:focus, textarea:focus, .select-box select:focus {
+  box-shadow: 0 0 0 2px #7cb0d0 inset;
+  border-color: #7cb0d0;
+  background-color: #fff;
+  outline: none;
+}
+/* line 18, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+.error[type=email], .error[type=text], .error[type=search], .error[type=password], textarea.error, .select-box select.error {
+  border-color: #cf9696;
+  background-color: #fcf8f8;
+}
+/* line 21, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+.error[type=email]:focus, .error[type=text]:focus, .error[type=search]:focus, .error[type=password]:focus, textarea.error:focus, .select-box select.error:focus {
+  border-color: #d07c7c;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(203, 65, 58, 0.8) inset;
+}
+/* line 28, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+.dark[type=email], .dark[type=text], .dark[type=search], .dark[type=password], textarea.dark, .select-box select.dark {
+  background-color: #424242;
+  color: #eee;
+  text-shadow: #000 0 1px;
+}
+/* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+.dark[type=email]:focus, .dark[type=text]:focus, .dark[type=search]:focus, .dark[type=password]:focus, textarea.dark:focus, .select-box select.dark:focus {
+  background-color: #333;
+}
+
+/* line 38, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+[type=email], [type=text], [type=search], [type=password] {
+  vertical-align: middle;
+  margin-right: .5em;
+}
+/* line 43, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+[type=email].big, [type=text].big, [type=search].big, [type=password].big {
+  font-size: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: .8em;
+}
+/* line 49, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+[type=email].full, [type=text].full, [type=search].full, [type=password].full {
+  width: 100%;
+  display: block;
+}
+
+/* line 55, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_text-input.scss */
+textarea {
+  width: 100%;
+  min-height: 5em;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_select.scss */
+.select-box {
+  max-width: 100%;
+  background: #fff;
+  font-size: .8em;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+/* line 10, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_select.scss */
+.select-box.fill {
+  display: block;
+}
+/* line 12, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_select.scss */
+.select-box.fill select {
+  width: 100%;
+}
+/* line 15, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_select.scss */
+.select-box select {
+  -webkit-appearance: none;
+  -moz-appearance: window;
+  appearance: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0px 9px;
+  margin: 0;
+  padding-right: 1.5em;
+  position: relative;
+  z-index: 1;
+}
+/* line 26, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_select.scss */
+.select-box select, .select-box select:focus {
+  background: transparent;
+}
+/* line 33, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_select.scss */
+.select-box:after {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  right: .6em;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  border-top: 4px solid rgba(0, 0, 0, 0.2);
+  height: 0;
+  width: 0;
+  bottom: 40%;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+button, .button {
+  font-size: .8em;
+  background-image: none;
+  border: none;
+  padding: 1px 1em;
+  margin: 0;
+  line-height: 1.65em;
+  vertical-align: middle;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #444;
+  text-decoration: none;
+  display: inline-block;
+}
+/* line 13, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+button:hover, .button:hover {
+  background-color: #1e89fa;
+}
+/* line 19, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+button[disabled], .button[disabled] {
+  opacity: .8;
+  cursor: default;
+}
+/* line 22, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+button[disabled]:hover, .button[disabled]:hover {
+  background-color: #444;
+}
+
+/* line 28, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.continue-button {
+  font-size: 1.2em;
+  padding: .6em 4em;
+  width: 100%;
+  background-color: #3C99FB;
+}
+
+/* line 35, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.primary-button {
+  font-size: 1em;
+  line-height: 2.2em;
+  background: #3C99FB;
+}
+/* line 39, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.primary-button.small {
+  font-size: .8em;
+  line-height: 1.65em;
+}
+@media all and (max-width: 549px) {
+  /* line 43, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+  .primary-button.wide {
+    width: 100%;
+  }
+}
+
+/* line 50, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.alt-button, .cart-edit-button {
+  color: #222;
+  background: #fff;
+  border: 1px solid #bbb;
+}
+/* line 55, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.alt-button:hover, .cart-edit-button:hover {
+  color: #fff;
+  background-color: #333;
+  border: 1px solid #333;
+}
+
+/* line 62, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.cart-edit-button {
+  padding: .3em 1em;
+}
+
+/* line 67, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.arrow-button {
+  cursor: pointer;
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 4px;
+  font-size: .8em;
+  line-height: 1em;
+  opacity: .2;
+}
+/* line 76, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.arrow-button:hover {
+  opacity: 1;
+}
+
+/* line 81, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.print-button {
+  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  font-size: 1.3em;
+}
+/* line 86, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.print-button:hover {
+  background: #3C99FB;
+  color: #fff;
+}
+
+/* line 93, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.order-buttons form {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+/* line 97, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.order-buttons .arrow-button {
+  margin-left: 50%;
+}
+
+/* line 102, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.text-button {
+  display: inline-block;
+  color: #444;
+  text-decoration: none;
+  margin: 0 1em;
+  color: inherit;
+  opacity: .7;
+  -webkit-transition: opacity .2s ease-in-out;
+  transition: opacity .2s ease-in-out;
+}
+/* line 109, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.text-button:hover {
+  opacity: .9;
+  text-decoration: underline;
+}
+
+/* line 116, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.destroy-button {
+  font-size: 1em;
+  line-height: 2.2em;
+  background: #cb413a;
+}
+/* line 120, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+.destroy-button:hover {
+  background-color: #b63730;
+}
+
+/* line 125, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_buttons.scss */
+button.toggle {
+  width: auto;
+  background: none;
+  line-height: inherit;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.tickets {
+  width: 100%;
+}
+
+/* line 5, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket {
+  padding: 1em 0;
+}
+/* line 7, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket + .ticket {
+  border-top: 1px solid #ddd;
+}
+/* line 9, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-name {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.1em;
+  margin-bottom: .4em;
+}
+/* line 16, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-price {
+  font-weight: 500;
+  display: inline-block;
+  padding-right: .5em;
+}
+/* line 22, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-description {
+  margin: 0;
+  color: #666;
+  font-size: .95em;
+}
+/* line 28, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-count {
+  vertical-align: top;
+  white-space: nowrap;
+}
+/* line 33, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-savings {
+  font-weight: 500;
+}
+
+/* line 39, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-item {
+  background: rgba(255, 255, 255, 0.9);
+}
+/* line 41, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-item + .ticket-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* line 46, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.button-wrapper {
+  margin-top: .3em;
+  text-align: right;
+}
+@media all and (min-width: 550px) {
+  /* line 46, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+  .button-wrapper {
+    display: block;
+  }
+}
+
+/* line 54, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-item-link {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+  width: 100%;
+}
+/* line 60, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-item-link:hover:after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  display: block;
+  background: rgba(60, 153, 251, 0.1);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+/* line 68, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.ticket-item-link:hover .ticket-name {
+  color: #3C99FB;
+}
+
+/* line 74, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.minor-link {
+  font-size: .8em;
+  color: inherit;
+  opacity: .7;
+  display: inline-block;
+  padding-left: .5em;
+}
+/* line 80, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket-form.scss */
+.minor-link:hover {
+  color: #3C99FB;
+  opacity: 1;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_summary.scss */
+.static-personal-info {
+  margin: 20px 0 0 0;
+}
+
+/* line 5, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_summary.scss */
+.update-personal-info {
+  padding: 5px 10px 5px 10px;
+}
+
+@-webkit-keyframes wiggle {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translateY(2px) scale(1, 0.8);
+            transform: translateY(2px) scale(1, 0.8);
+  }
+  30% {
+    -webkit-transform: translateY(-4px) rotate(-8deg) scale(1, 1);
+            transform: translateY(-4px) rotate(-8deg) scale(1, 1);
+  }
+  60% {
+    -webkit-transform: translateY(-2px) rotate(-3deg);
+            transform: translateY(-2px) rotate(-3deg);
+  }
+  70% {
+    -webkit-transform: translateY(0px) rotate(8deg);
+            transform: translateY(0px) rotate(8deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translateY(2px) scale(1, 0.8);
+            transform: translateY(2px) scale(1, 0.8);
+  }
+  30% {
+    -webkit-transform: translateY(-4px) rotate(-8deg) scale(1, 1);
+            transform: translateY(-4px) rotate(-8deg) scale(1, 1);
+  }
+  60% {
+    -webkit-transform: translateY(-2px) rotate(-3deg);
+            transform: translateY(-2px) rotate(-3deg);
+  }
+  70% {
+    -webkit-transform: translateY(0px) rotate(8deg);
+            transform: translateY(0px) rotate(8deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes show-cost {
+  0%, 70% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+            transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+@keyframes show-cost {
+  0%, 70% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+            transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+@-webkit-keyframes flash {
+  0% {
+    background-color: rgba(255, 255, 255, 0);
+    z-index: 1;
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    z-index: 0;
+  }
+}
+@keyframes flash {
+  0% {
+    background-color: rgba(255, 255, 255, 0);
+    z-index: 1;
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    z-index: 0;
+  }
+}
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes show-quick-cart {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+@keyframes show-quick-cart {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+@-webkit-keyframes show-cart {
+  0%, 30% {
+    -webkit-transform: translateX(-60px) rotate(-8deg);
+            transform: translateX(-60px) rotate(-8deg);
+  }
+  70% {
+    -webkit-transform: translateX(-20px) rotate(-8deg);
+            transform: translateX(-20px) rotate(-8deg);
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  90% {
+    -webkit-transform: translateX(0px) rotate(8deg);
+            transform: translateX(0px) rotate(8deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes show-cart {
+  0%, 30% {
+    -webkit-transform: translateX(-60px) rotate(-8deg);
+            transform: translateX(-60px) rotate(-8deg);
+  }
+  70% {
+    -webkit-transform: translateX(-20px) rotate(-8deg);
+            transform: translateX(-20px) rotate(-8deg);
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  90% {
+    -webkit-transform: translateX(0px) rotate(8deg);
+            transform: translateX(0px) rotate(8deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes cart-leave {
+  0%, 30% {
+    -webkit-transform: translateX(0px) rotate(-8deg);
+            transform: translateX(0px) rotate(-8deg);
+  }
+  70% {
+    -webkit-transform: translateX(20px) rotate(-8deg);
+            transform: translateX(20px) rotate(-8deg);
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  90% {
+    -webkit-transform: translateX(60px) rotate(8deg);
+            transform: translateX(60px) rotate(8deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes cart-leave {
+  0%, 30% {
+    -webkit-transform: translateX(0px) rotate(-8deg);
+            transform: translateX(0px) rotate(-8deg);
+  }
+  70% {
+    -webkit-transform: translateX(20px) rotate(-8deg);
+            transform: translateX(20px) rotate(-8deg);
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  90% {
+    -webkit-transform: translateX(60px) rotate(8deg);
+            transform: translateX(60px) rotate(8deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+/* line 123, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+[id=quick-cart] .form-footer {
+  overflow: hidden;
+}
+/* line 126, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+[id=quick-cart].show {
+  -webkit-animation: fade-in .3s ease-in;
+          animation: fade-in .3s ease-in;
+}
+/* line 128, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+[id=quick-cart].show .quick-cart-icon {
+  -webkit-animation: show-cart .8s ease-in;
+          animation: show-cart .8s ease-in;
+}
+/* line 134, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+[id=quick-cart].updated .quick-cart-content:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-animation: flash .4s ease-out;
+          animation: flash .4s ease-out;
+  z-index: -1;
+}
+/* line 142, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+[id=quick-cart].show .form-footer {
+  -webkit-animation: show-quick-cart .4s ease-out;
+          animation: show-quick-cart .4s ease-out;
+}
+
+/* line 148, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-content {
+  margin: 0 auto;
+}
+/* line 152, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-info, .quick-cart-button {
+  vertical-align: middle;
+}
+/* line 156, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-title {
+  display: inline;
+  margin: 0;
+}
+/* line 161, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-button {
+  text-align: right;
+}
+/* line 165, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-total, .quick-cart-items {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+}
+/* line 171, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-items {
+  font-size: .8em;
+  color: rgba(255, 255, 255, 0.7);
+}
+/* line 174, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.show .quick-cart-items {
+  -webkit-animation: show-cost 1s ease-out;
+          animation: show-cost 1s ease-out;
+}
+/* line 179, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-total {
+  font-weight: bold;
+}
+/* line 181, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.show .quick-cart-total {
+  -webkit-animation: show-cost .9s ease-out;
+          animation: show-cost .9s ease-out;
+}
+/* line 186, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.quick-cart-icon {
+  font-size: 1.8em;
+  position: relative;
+  top: -.03em;
+  color: #3C99FB;
+  margin-right: .2em;
+}
+/* line 192, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.updated .quick-cart-icon {
+  -webkit-animation: wiggle .4s ease-out;
+          animation: wiggle .4s ease-out;
+}
+/* line 195, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_quick-cart.scss */
+.show .quick-cart-icon {
+  -webkit-animation: show-cart .7s ease-in;
+          animation: show-cart .7s ease-in;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-delete-item {
+  font-size: 0;
+  position: relative;
+  width: 20px;
+  height: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 9, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-delete-item:before, .cart-delete-item:after {
+  content: "";
+  width: 15px;
+  height: 2px;
+  background: #ccc;
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: 0;
+}
+/* line 20, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-delete-item:hover:before, .cart-delete-item:hover:after {
+  background: #cb413a;
+}
+/* line 24, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-delete-item:before {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+/* line 27, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-delete-item:after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+/* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-items {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 0;
+  border-right: 0;
+  padding: .6em 0;
+}
+
+/* line 37, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-item {
+  margin: .2em 0;
+}
+/* line 39, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-item-name {
+  font-weight: 500;
+}
+/* line 43, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-item-count {
+  width: 3em;
+  text-align: right;
+  padding: .1em .5em 0;
+  font-size: .8em;
+  margin: 0;
+}
+
+/* line 52, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-edit {
+  font-size: .9em;
+}
+
+/* line 56, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-totals {
+  margin-top: 1.2em;
+}
+
+/* line 60, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.static-cart {
+  margin-top: 1em;
+}
+
+/* line 64, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-heading {
+  margin: 1.2em 0;
+}
+
+/* line 68, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.cart-total {
+  font-size: 1.2em;
+  font-weight: 500;
+  line-height: 1.8em;
+}
+
+/* line 74, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_cart.scss */
+.times {
+  opacity: .8;
+  display: inline-block;
+  padding: 0 .5em;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_contact-info.scss */
+.static-info {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 0;
+  border-right: 0;
+  padding: 1em 0;
+}
+
+/* line 6, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_contact-info.scss */
+.contact-name, .contact-email {
+  font-weight: 500;
+}
+
+/* line 10, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_contact-info.scss */
+.contact-item {
+  line-height: 1.4em;
+}
+
+/* line 14, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_contact-info.scss */
+.resend-email {
+  margin: .5em 0;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.ticket-receipt {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* line 6, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.receipt-info {
+  margin: 1.5em 0 0;
+}
+
+/* line 10, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.receipt-qr {
+  max-width: 400px;
+  padding: .2em;
+  margin: 1em auto;
+}
+
+/* line 16, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.thank-you-heading {
+  margin: 3em 0;
+}
+/* line 18, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.thank-you-heading h1 {
+  margin: 0;
+}
+
+/* line 23, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* line 28, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.receipt-name {
+  font-weight: 500;
+  font-size: 1.8em;
+  line-height: 1.3em;
+}
+
+/* line 34, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.receipt-date {
+  margin-top: 1em;
+}
+
+/* line 38, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.help-text {
+  font-size: .9em;
+  opacity: .8;
+}
+
+/* line 44, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.sub-nav a {
+  color: inherit;
+  opacity: .8;
+  font-size: .8em;
+  display: inline-block;
+  line-height: 1.2em;
+  text-decoration: none;
+  padding: 0 10px;
+}
+/* line 53, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.sub-nav a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+/* line 58, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_ticket.scss */
+.sub-nav a + a {
+  border-left: 1px solid;
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_tables.scss */
+.table {
+  display: table;
+  width: 100%;
+}
+/* line 4, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_tables.scss */
+.table-row {
+  display: table-row;
+}
+/* line 5, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_tables.scss */
+.table-cell {
+  display: table-cell;
+}
+/* line 7, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_tables.scss */
+.table .heading {
+  font-size: .75em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+/* line 40, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  margin: 15px 0;
+  height: 16px;
+  background: transparent;
+}
+/* line 10, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]:focus {
+  outline: none;
+}
+/* line 11, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+/* line 12, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+/* line 19, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-moz-focus-outer {
+  border: 0;
+}
+/* line 25, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-moz-range-thumb {
+  box-shadow: rgba(0, 0, 0, 0.4) 0 0 0 1px, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+  border: 6px solid #fff;
+  background: #aaa;
+  box-sizing: border-box;
+  height: 19px;
+  width: 19px;
+  border-radius: 100%;
+  position: relative;
+  top: 1px;
+  -webkit-transition: all .15s ease-in;
+  transition: all .15s ease-in;
+}
+/* line 57, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-moz-range-thumb:after {
+  content: "";
+  position: absolute;
+  left: -15px;
+  right: -15px;
+  top: -15px;
+  bottom: -15px;
+}
+/* line 63, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-moz-range-thumb:active {
+  background: #409bd9;
+  box-shadow: 0 0 2px 2px #7cb0d0, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+}
+/* line 26, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: rgba(0, 0, 0, 0.4) 0 0 0 1px, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+  border: 6px solid #fff;
+  background: #aaa;
+  box-sizing: border-box;
+  height: 19px;
+  width: 19px;
+  border-radius: 100%;
+  position: relative;
+  top: 1px;
+  -webkit-transition: all .15s ease-in;
+  transition: all .15s ease-in;
+}
+/* line 57, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-webkit-slider-thumb:after {
+  content: "";
+  position: absolute;
+  left: -15px;
+  right: -15px;
+  top: -15px;
+  bottom: -15px;
+}
+/* line 63, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-webkit-slider-thumb:active {
+  background: #409bd9;
+  box-shadow: 0 0 2px 2px #7cb0d0, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+}
+/* line 27, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-ms-thumb {
+  box-shadow: rgba(0, 0, 0, 0.4) 0 0 0 1px, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+  border: 6px solid #fff;
+  background: #aaa;
+  box-sizing: border-box;
+  height: 19px;
+  width: 19px;
+  border-radius: 100%;
+  position: relative;
+  top: 1px;
+  -webkit-transition: all .15s ease-in;
+  transition: all .15s ease-in;
+}
+/* line 57, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-ms-thumb:after {
+  content: "";
+  position: absolute;
+  left: -15px;
+  right: -15px;
+  top: -15px;
+  bottom: -15px;
+}
+/* line 63, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-ms-thumb:active {
+  background: #409bd9;
+  box-shadow: 0 0 2px 2px #7cb0d0, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+}
+/* line 25, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]:focus::-moz-range-thumb {
+  background: #409bd9;
+  box-shadow: 0 0 2px 2px #7cb0d0, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+}
+/* line 26, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]:focus::-webkit-slider-thumb {
+  background: #409bd9;
+  box-shadow: 0 0 2px 2px #7cb0d0, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+}
+/* line 27, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]:focus::-ms-thumb {
+  background: #409bd9;
+  box-shadow: 0 0 2px 2px #7cb0d0, rgba(0, 0, 0, 0.4) 0 1px 1px inset;
+}
+/* line 80, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]:after {
+  position: absolute;
+  content: "";
+  left: 4px;
+  right: 4px;
+  top: 6px;
+  height: 5px;
+  background: #ddd;
+  z-index: -1;
+  border-radius: 4px;
+  box-shadow: #aaa 0 0 0 1px;
+}
+/* line 32, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-moz-range-track {
+  height: 16px;
+  background: transparent;
+}
+/* line 80, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-moz-range-track:after {
+  position: absolute;
+  content: "";
+  left: 4px;
+  right: 4px;
+  top: 6px;
+  height: 5px;
+  background: #ddd;
+  z-index: -1;
+  border-radius: 4px;
+  box-shadow: #aaa 0 0 0 1px;
+}
+/* line 35, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-ms-track {
+  height: 16px;
+  background: transparent;
+}
+/* line 80, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range]::-ms-track:after {
+  position: absolute;
+  content: "";
+  left: 4px;
+  right: 4px;
+  top: 6px;
+  height: 5px;
+  background: #ddd;
+  z-index: -1;
+  border-radius: 4px;
+  box-shadow: #aaa 0 0 0 1px;
+}
+/* line 92, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range].range-input-slider {
+  margin: 0;
+}
+/* line 96, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range].range-input-slider:after {
+  display: none;
+}
+/* line 96, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range].range-input-slider::-moz-range-track:after {
+  display: none;
+}
+/* line 96, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input[type=range].range-input-slider::-ms-track:after {
+  display: none;
+}
+
+/* line 103, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+input::-moz-focus-inner {
+  border: 0;
+}
+
+/* line 107, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.slider-container {
+  position: relative;
+  padding: .2em 0;
+}
+@media all and (min-width: 450px) {
+  /* line 107, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+  .slider-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  /* line 115, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+  .slider-container.with-label {
+    max-width: 300px;
+  }
+}
+/* line 120, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.slider-container.line-labels {
+  padding: .5em 0;
+}
+
+/* line 125, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-input-container {
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  margin: .6em 0;
+}
+
+/* line 131, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-track {
+  height: 0px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 10px 0 9px;
+  position: relative;
+  top: -12px;
+}
+
+/* line 142, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-track-bg {
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+  border-radius: 5px;
+  box-shadow: #aaa 0 0 0 1px;
+  background: #ddd;
+  height: 5px;
+  position: absolute;
+  left: 9px;
+  right: 10px;
+  top: 9px;
+}
+
+/* line 154, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment {
+  position: relative;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+}
+
+/* line 160, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment-mark:before, .range-segment-mark:after {
+  position: absolute;
+  content: "";
+  width: 13px;
+  height: 13px;
+  top: -7px;
+  left: -5px;
+  box-sizing: border-box;
+  border-radius: 100%;
+}
+/* line 170, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment-mark:before {
+  background: #fff;
+  border: #ddd 3px solid;
+  box-shadow: #aaa 0 0 0 1px inset;
+  z-index: 1;
+}
+/* line 176, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment-mark:after {
+  box-shadow: #aaa 0 0 0 1px;
+  z-index: 0;
+}
+
+/* line 182, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-line-label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 2;
+  height: 1.25;
+  top: -30px;
+  right: -25px;
+  left: -24px;
+  text-align: center;
+}
+/* line 192, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-line-label:before {
+  content: "|";
+  position: absolute;
+  left: -26px;
+  right: -25px;
+  text-align: inherit;
+  bottom: -6px;
+  height: 6px;
+  color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* line 205, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment:first-child .range-line-label {
+  left: -9px;
+  right: auto;
+  text-align: left;
+}
+/* line 209, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment:first-child .range-line-label:before {
+  left: 8px;
+}
+
+/* line 214, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment:last-child .range-line-label {
+  right: -11px;
+  left: auto;
+  text-align: right;
+}
+/* line 218, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-segment:last-child .range-line-label:before {
+  right: 9px;
+}
+
+/* line 223, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-label {
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: #aaa 0 0 0 1px;
+  font-size: 14px;
+  padding: 4px 8px;
+  position: relative;
+  text-align: center;
+}
+@media all and (min-width: 450px) {
+  /* line 223, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+  .range-label {
+    white-space: nowrap;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    margin-left: 10px;
+  }
+  /* line 240, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+  .range-label:after, .range-label:before {
+    content: "";
+  }
+}
+/* line 245, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-label:after, .range-label:before {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  left: -7px;
+  border-top: 7px solid transparent;
+  border-right: 7px solid #aaa;
+  border-bottom: 7px solid transparent;
+}
+/* line 257, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-label:after {
+  border-right-color: #fff;
+  left: -6px;
+}
+/* line 263, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-label > * + *:before {
+  content: " — ";
+}
+@media all and (min-width: 450px) {
+  /* line 262, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+  .range-label > * + * {
+    display: block;
+  }
+  /* line 267, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+  .range-label > * + *:before {
+    content: "";
+  }
+}
+/* line 271, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-label [class*=big] {
+  font-size: 1.15em;
+}
+/* line 275, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+.range-label [class*=small] {
+  font-size: .8em;
+}
+
+/* line 281, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+[data-range-label]:after {
+  content: attr(data-after);
+}
+/* line 282, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_range-input.scss */
+[data-range-label]:before {
+  content: attr(data-before);
+}
+
+/* line 1, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.qr-code-link {
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  color: #444;
+}
+
+/* line 9, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.search-tickets {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+}
+
+/* line 14, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.flex-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 19, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.flex-column-auto {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+/* line 22, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.scan-ticket {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 40px;
+      -ms-flex: 0 0 40px;
+          flex: 0 0 40px;
+}
+
+/* line 26, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.search-button {
+  vertical-align: middle;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.search-button button {
+  font-size: 16px;
+  line-height: 2em;
+}
+
+/* line 36, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.sales-table .table-cell {
+  padding: .8em 0;
+}
+/* line 38, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.sales-table .table-cell.heading {
+  padding: .3em 0;
+}
+/* line 41, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.sales-table .table-cell:first-child {
+  padding-left: 15px;
+}
+/* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.sales-table .table-cell:last-child {
+  padding-right: 15px;
+}
+/* line 44, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.sales-table .table-row + .table-row .table-cell {
+  border-top: 1px solid #ddd;
+}
+
+/* line 49, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.flex-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+}
+
+/* line 55, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.auto-width-columns > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+/* line 60, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.alt-nav {
+  display: block;
+}
+
+/* line 64, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.flex-row-spacer {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+@media all and (max-width: 549px) {
+  /* line 68, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .flex-after-small {
+    display: block;
+    -webkit-flex-flow: none;
+        -ms-flex-flow: none;
+            flex-flow: none;
+  }
+  /* line 72, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .flex-after-small > * {
+    display: block;
+  }
+}
+
+/* line 78, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.admin-nav {
+  background: #222;
+  font-size: 14px;
+  width: 100%;
+}
+/* line 83, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.admin-nav a {
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 5px;
+}
+/* line 88, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.admin-nav a:hover {
+  background: #444;
+}
+/* line 93, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.admin-nav .svg-icon {
+  font-size: 18px;
+}
+
+/* line 99, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.link.ticket-redemed {
+  background: #f8f8f8;
+  color: #888;
+}
+
+/* line 104, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.link.ticket-redemed .redemed-mark.redemed-mark {
+  font-weight: bold;
+}
+
+/* line 109, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.ticket-not-redemed {
+  background: #ebf4ff;
+}
+/* line 111, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.ticket-not-redemed .sale-name {
+  font-weight: bold;
+  color: #3C99FB;
+}
+
+/* line 117, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.ticket-expired {
+  background: #ff530f;
+  color: #fff;
+  text-shadow: #db3e00 1px 0;
+  padding: 1em .5em;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+/* line 126, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.ticket-claimed {
+  background: #18b800;
+  color: #fff;
+  text-shadow: #118500 0 1px 1px;
+  padding: 1em .5em;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+/* line 135, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 142, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+.sales-table .sale-email {
+  max-width: 150px;
+}
+@media all and (max-width: 549px) {
+  /* line 141, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table {
+    display: block;
+    line-height: 1.3em;
+  }
+  /* line 150, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .table-cell.redemed-mark {
+    width: auto;
+    padding-left: 0;
+  }
+  /* line 155, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .sale-date {
+    font-size: .8em;
+  }
+  /* line 159, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .sales-table-head {
+    display: none;
+  }
+  /* line 162, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .ticket-purchase {
+    display: block;
+  }
+  /* line 165, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .table-cell.table-cell {
+    padding: 0;
+  }
+  /* line 168, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .at-least-small {
+    display: none;
+  }
+  /* line 171, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .sale-email {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+  /* line 176, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .table-row + .table-row .table-cell {
+    border: none;
+  }
+  /* line 179, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_admin.scss */
+  .sales-table .table-row + .table-row {
+    /*border-top: 1px solid #ddd;*/
+  }
+}
+
+@-webkit-keyframes pop-in {
+  0% {
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@-webkit-keyframes pop-in-late {
+  0%, 70% {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes pop-in-late {
+  0%, 70% {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+/* line 21, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_message.scss */
+[id=app-message] {
+  z-index: 100;
+  position: absolute;
+  width: 0;
+  opacity: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+/* line 29, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_message.scss */
+[id=app-message-content] {
+  width: 760px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: .6em .6em;
+  color: #444;
+  overflow: hidden;
+}
+
+/* line 40, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_message.scss */
+[id=app-message-text] {
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* line 44, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_message.scss */
+[id=app-message-icon] {
+  text-align: center;
+  display: inline-block;
+  margin-right: .4em;
+}
+/* line 48, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_message.scss */
+[id=app-message-icon] .svg-icon {
+  font-size: 1.8em;
+  color: #3C99FB;
+}
+
+/* line 56, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_message.scss */
+[id=app-message].visible {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  opacity: 1;
+  -webkit-animation: fade-in .3s ease-in;
+          animation: fade-in .3s ease-in;
+}
+/* line 65, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_message.scss */
+[id=app-message].hiding {
+  -webkit-animation: fade-out .3s ease-in;
+          animation: fade-out .3s ease-in;
+}
+
+@media print {
+  /*.print-preview {*/
+  /* line 3, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  * {
+    color: #000 !important;
+    opacity: 1 !important;
+  }
+
+  /* line 8, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  body:after,
+  .sub-nav,
+  .thank-you-heading {
+    display: none;
+  }
+
+  /* line 13, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .site {
+    border: 1px dashed rgba(0, 0, 0, 0.15);
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  /* line 18, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .site-content {
+    padding: 0;
+  }
+
+  /* line 22, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .site-header {
+    color: #444;
+    background: none;
+    margin: 0;
+  }
+  /* line 26, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .site-header h1 {
+    margin-bottom: 0;
+    font-size: 25px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+  }
+
+  /* line 35, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .cart-items {
+    font-size: .85em;
+  }
+
+  /* line 39, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .ticket-receipt .section-heading {
+    display: none;
+  }
+  /* line 42, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .ticket-receipt .card {
+    border: none;
+    padding-top: 0;
+  }
+
+  /* line 47, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .receipt-qr {
+    width: 160px;
+    padding: 0;
+    margin: 1em auto;
+    max-width: auto;
+    border: 1px solid #777;
+    line-height: 0;
+  }
+
+  /* line 56, C:/Users/Isaac/Documents/Programming/hola/app/assets/stylesheets/modules/_print.scss */
+  .receipt-info {
+    margin: 1em auto;
+  }
+}
