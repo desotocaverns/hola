@@ -21,7 +21,6 @@ config/database.yml
 config/local_env.yml
 
 # Ignore the secrets of the deep
-config/secrets.yml
 config/application.yml
 
 # Ignore the vim stuff
