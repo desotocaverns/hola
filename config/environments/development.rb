@@ -45,6 +45,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  ENV.update YAML.load_file('config/application.yml')[Rails.env]
+
   # Configure this with your Gmail settings if you want to actually deliver emails.
   # config.action_mailer.smtp_settings = {
   #   :address              => "smtp.gmail.com",
