@@ -1,18 +1,18 @@
 <nav class='admin-nav'>
   <div class='mobile-nav auto-width-columns flex-row until-small'>
     <a href="<%= sales_path %>">
-      <%=svg_icon 'search', title: "search" %> Purchases
+      <%= use_svg 'search', title: "search" %> Purchases
     </a>
     <span class='flex-row-spacer'></span>
     <span class='flex-row-spacer'></span>
     <a href='#' data-toggle-class='#main-nav; hidden-until-small'>
-      <%=svg_icon 'menu', title: "Navigation" %>
+      <%= use_svg 'menu', title: "Navigation" %>
     </a>
   </div>
 
   <div id='main-nav' class='flex-row auto-width-columns flex-after-small hidden-until-small'>
     <a href="<%= sales_path %>" class='at-least-small'>
-      <%=svg_icon 'search', title: "search" %> Purchases
+      <%= use_svg 'search', title: "search" %> Purchases
     </a>
 
     <%= link_to "Tickets", tickets_path, class: 'alt-nav' if is_admin? %>
