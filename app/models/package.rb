@@ -44,6 +44,8 @@ class Package < ActiveRecord::Base
   end
 
   def savings_percentage
+    return "%" if full_price <= 0
+
     "#{((1 - (price.to_f / full_price.to_f)) * 100).round}%"
   end
 
