@@ -154,7 +154,7 @@ class SalesController < ApplicationController
 
       @sale.update_attribute(:charge_id, charge.id)
 
-      CustomerMailer.receipt_email(@sale, protohost).deliver_now
+      CustomerMailer.receipt_email(@sale, Purchase.find_by(sale_id: @sale.id), protohost).deliver_now
 
       if Settings[:sale_notification_list] != nil
         admin_emails = Settings[:sale_notification_list].gsub(/\s+/, "").split(",")

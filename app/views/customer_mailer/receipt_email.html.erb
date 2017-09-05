@@ -42,7 +42,7 @@
             <!-- <p style="text-align: center;"><img style='width: 400px; max-width: 100%; margin: 0 auto' src="<%= @sale.qr_png(protohost) %>"/></p> -->
             <p style="text-align: center;"><%= image_tag attachments['redemption_qrcode.png'].url, width: "400px" %></p>
 
-            <div style="font-size: 12px">Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @sale.created_at.advance(years: 1).strftime("%b %d, %Y") %></div>
+            <div style="font-size: 12px">Valid: <%= @sale.created_at.strftime("%b %d, %Y") %> through <%= @purchase.expires_on.strftime("%b %d, %Y") %></div>
             <table class='cart-items' style="width: 100%; margin-top: 20px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 1em 0">
               <% @sale.purchases.where(type: "TicketPurchase").each do |purchase| %>
                 <%= render partial: "static_cart_item", locals: { purchase: purchase } %>

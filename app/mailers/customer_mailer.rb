@@ -3,8 +3,9 @@ class CustomerMailer < ApplicationMailer
 
   add_template_helper(ApplicationHelper)
 
-  def receipt_email(sale, protohost)
+  def receipt_email(sale, purchase, protohost)
     @sale = sale
+    @purchase = purchase
 
     io = StringIO.new
     @sale.redemption_qrcode(protohost).as_png(size: 800, border_modules: 2).write(io)
