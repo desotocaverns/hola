@@ -44,7 +44,7 @@ gem 'devise_invitable'
 gem 'email_validator'
 # Email previewing
 gem "letter_opener", group: :development
-gem "pry-byebug", group: :development
+gem "pry-byebug"
 
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
